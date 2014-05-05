@@ -44,13 +44,13 @@ public class HomeScreenActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_home_screen);
+		setContentView(R.layout.list);
 		mListView = (ListView) findViewById(R.id.list);
 		List<? extends Map<String, ?>> data = (List<? extends Map<String, ?>>) GetSampleData();
 		SimpleAdapter adapter = new SimpleAdapter(this, data,
-				R.layout.fragment_home_screen, new String[] { "RestaurantIcon",
-						"RestaurantName" }, new int[] { R.id.RestaurantIcon,
-						R.id.RestaurantName });
+				R.layout.menu_item, new String[] { "MenuIcon",
+						"MenuName" }, new int[] { R.id.MenuIcon,
+						R.id.MenuName });
 
 		mListView.setAdapter(adapter);
 		mListView.setOnItemClickListener(listener);
@@ -65,14 +65,14 @@ public class HomeScreenActivity extends Activity {
 		List<Map> list = new ArrayList<Map>();
 
 		Map map = new HashMap();
-		map.put("RestaurantIcon", R.drawable.logo);
-		map.put("RestaurantName", "Bistro");
+		map.put("MenuIcon", R.drawable.logo);
+		map.put("MenuName", "Bistro");
 		list.add(map);
 
 		for (int i = 0; i < 10; i++) {
 			map = new HashMap();
-			map.put("RestaurantIcon", R.drawable.ic_launcher);
-			map.put("RestaurantName", "Fake Restaurant" + i);
+			map.put("MenuIcon", R.drawable.ic_launcher);
+			map.put("MenuName", "Fake Restaurant" + i);
 			list.add(map);
 		}
 		return list;
@@ -109,7 +109,7 @@ public class HomeScreenActivity extends Activity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_home_screen,
+			View rootView = inflater.inflate(R.layout.menu_item,
 					container, false);
 			return rootView;
 		}

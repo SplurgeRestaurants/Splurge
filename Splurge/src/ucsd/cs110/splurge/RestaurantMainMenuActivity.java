@@ -14,16 +14,19 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class RestaurantMainMenuActivity extends Activity implements OnClickListener {
+public class RestaurantMainMenuActivity extends Activity implements
+		OnClickListener {
 	TextView mTextView;
+	static String CATEGORY;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.activity_restaurant_view);
-		setContentView(R.layout.fragment_main_vertical);
+		setContentView(R.layout.main_menu);
 		Intent intent = getIntent();
-		String chosenRestaurant = intent.getStringExtra(HomeScreenActivity.RESTAURANT);
+		String chosenRestaurant = intent
+				.getStringExtra(HomeScreenActivity.RESTAURANT);
 		mTextView = (TextView) findViewById(R.id.textView1);
 		mTextView.setText(chosenRestaurant);
 		View locationButton = findViewById(R.id.location);
@@ -56,23 +59,6 @@ public class RestaurantMainMenuActivity extends Activity implements OnClickListe
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {								
-			View rootView = inflater.inflate(R.layout.activity_restaurant_view,
-					container, false);
-			return rootView;
-		}
-	}
-
 	public static class LocationFragment extends Fragment {
 		public LocationFragment() {
 		}
@@ -80,8 +66,7 @@ public class RestaurantMainMenuActivity extends Activity implements OnClickListe
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.map,
-					container, false);
+			View rootView = inflater.inflate(R.layout.map, container, false);
 			return rootView;
 		}
 	}
@@ -98,7 +83,7 @@ public class RestaurantMainMenuActivity extends Activity implements OnClickListe
 			openReserveDialog();
 			break;
 		case R.id.menu:
-			openMenuDialog();
+			openFoodMenuDialog();
 			break;
 		case R.id.diningout:
 			openDiningOutDialog();
@@ -118,11 +103,15 @@ public class RestaurantMainMenuActivity extends Activity implements OnClickListe
 						}).show();
 	}
 
-	private void openMenuDialog() {
+	private void openFoodMenuDialog() {
 		new AlertDialog.Builder(this).setTitle(R.string.menu_title)
 				.setItems(R.array.menus, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialoginterface, int i) {
-						// do something
+						Intent intent = new Intent(
+								RestaurantMainMenuActivity.this,
+								FoodMenuActivity.class);
+						intent.putExtra(CATEGORY, i);
+						startActivity(intent);
 					}
 				}).show();
 	}
@@ -134,16 +123,22 @@ public class RestaurantMainMenuActivity extends Activity implements OnClickListe
 						new DialogInterface.OnClickListener() {
 							public void onClick(
 									DialogInterface dialoginterface, int i) {
-								switch(i){
+								switch (i) {
 								case 0:
-									getFragmentManager().beginTransaction()
-									.add(R.id.container, new LocationFragment()).commit();
-									//take out
+									getFragmentManager()
+											.beginTransaction()
+											.add(R.id.container,
+													new LocationFragment())
+											.commit();
+									// take out
 									break;
 								case 1:
-									getFragmentManager().beginTransaction()
-									.add(R.id.container, new PlaceholderFragment()).commit();
-									//delivery
+									getFragmentManager()
+											.beginTransaction()
+											.add(R.id.container,
+													new LocationFragment())
+											.commit();
+									// delivery
 									break;
 								default:
 									break;
