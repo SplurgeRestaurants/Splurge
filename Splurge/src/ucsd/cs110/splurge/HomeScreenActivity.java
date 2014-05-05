@@ -7,6 +7,7 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,58 +25,41 @@ public class HomeScreenActivity extends Activity {
 
 	protected ListView mListView;
 	public static String RESTAURANT;
+	private RestaurantListFragment fragment;
+	
 	public OnItemClickListener listener = new OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
 			String chosenRestaurant = mListView.getItemAtPosition(position)
 					.toString();
-			chosenRestaurant = chosenRestaurant.substring(16, chosenRestaurant.indexOf(","));
+			chosenRestaurant = chosenRestaurant.substring(16,
+					chosenRestaurant.indexOf(","));
 			// RESTAURANT = chosenRestaurant;
 			// RestaurantMainMenuActivity.mTextView.setText(chosenRestaurant);
 			Log.e("ListView", "restuarant: " + chosenRestaurant);
-			Intent intent = new Intent(HomeScreenActivity.this, RestaurantMainMenuActivity.class);
+			Intent intent = new Intent(HomeScreenActivity.this,
+					RestaurantMainMenuActivity.class);
 			intent.putExtra(RESTAURANT, chosenRestaurant);
-			//add intent for restaurant id?
+			// add intent for restaurant id?
 			startActivity(intent);
 		}
 	};
 
-	@SuppressWarnings({ "unchecked" })
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		setContentView(R.layout.home_screen_activity);
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+		fragment = new RestaurantListFragment();
+		ft.replace(R.id.restaurant_list_fragment_placeholder, fragment);
+		ft.commit();
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_home_screen);
-		mListView = (ListView) findViewById(R.id.list);
-		List<? extends Map<String, ?>> data = (List<? extends Map<String, ?>>) GetSampleData();
-		SimpleAdapter adapter = new SimpleAdapter(this, data,
-				R.layout.fragment_home_screen, new String[] { "RestaurantIcon",
-						"RestaurantName" }, new int[] { R.id.RestaurantIcon,
-						R.id.RestaurantName });
-
-		mListView.setAdapter(adapter);
-		mListView.setOnItemClickListener(listener);
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
 	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	List<Map> GetSampleData() {
-		List<Map> list = new ArrayList<Map>();
-
-		Map map = new HashMap();
-		map.put("RestaurantIcon", R.drawable.logo);
-		map.put("RestaurantName", "Bistro");
-		list.add(map);
-
-		for (int i = 0; i < 10; i++) {
-			map = new HashMap();
-			map.put("RestaurantIcon", R.drawable.ic_launcher);
-			map.put("RestaurantName", "Fake Restaurant" + i);
-			list.add(map);
-		}
-		return list;
+	
+	@Override
+	protected void onStart() {
+		fragment.setListListener(listener);
+		super.onStart();
 	}
 
 	@Override
