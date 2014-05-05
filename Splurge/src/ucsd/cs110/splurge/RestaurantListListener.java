@@ -15,7 +15,8 @@ public class RestaurantListListener implements OnItemClickListener {
 	 * Create a new RestaurantListListener, designed to listen to a
 	 * RestaurantListFragment.
 	 * 
-	 * @param context Context used for spawning a new Activity
+	 * @param context
+	 *            Context used for spawning a new Activity
 	 */
 	public RestaurantListListener(Context context) {
 		mContext = context;
