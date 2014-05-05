@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ! Excerpted from "Hello, Android",
+ ! published by The Pragmatic Bookshelf.
+ ! Copyrights apply to this code. It may not be used to create training material, 
+ ! courses, books, articles, and the like. Contact us if you are in doubt.
+ ! We make no guarantees that this code is fit for any purpose. 
+ ! Visit http://www.pragmaticprogrammer.com/titles/eband3 for more book information.
+-->
+<resources>
+
+    <array name="reservations">
+        <item>@string/make_label</item>
+        <item>@string/change_label</item>
+        <item>@string/cancel_label</item>
+    </array>
+    <array name="menus">
+        <item>@string/breakfast</item>
+        <item>@string/lunch</item>
+        <item>@string/dinner</item>
+    </array>
+    <array name="dining_out">
+        <item>@string/take_out</item>
+        <item>@string/delivery</item>
+    </array>
+
+</resources>

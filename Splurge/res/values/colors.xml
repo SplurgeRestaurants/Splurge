@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ! Excerpted from "Hello, Android",
+ ! published by The Pragmatic Bookshelf.
+ ! Copyrights apply to this code. It may not be used to create training material, 
+ ! courses, books, articles, and the like. Contact us if you are in doubt.
+ ! We make no guarantees that this code is fit for any purpose. 
+ ! Visit http://www.pragmaticprogrammer.com/titles/eband3 for more book information.
+-->
+<resources>
+   <color name="gold">#ffffd700</color>
+   <color name="background">#336600</color>
+   <color name="red">#8A2D1B</color>
+   <color name="white">#FFFFFF</color>
+   <color name="black">#000000</color>
+</resources>
+
+
