@@ -26,36 +26,20 @@ public class HomeScreenActivity extends Activity {
 	protected ListView mListView;
 	public static String RESTAURANT;
 	private RestaurantListFragment fragment;
-	
-	public OnItemClickListener listener = new OnItemClickListener() {
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-			String chosenRestaurant = mListView.getItemAtPosition(position)
-					.toString();
-			chosenRestaurant = chosenRestaurant.substring(16,
-					chosenRestaurant.indexOf(","));
-			// RESTAURANT = chosenRestaurant;
-			// RestaurantMainMenuActivity.mTextView.setText(chosenRestaurant);
-			Log.e("ListView", "restuarant: " + chosenRestaurant);
-			Intent intent = new Intent(HomeScreenActivity.this,
-					RestaurantMainMenuActivity.class);
-			intent.putExtra(RESTAURANT, chosenRestaurant);
-			// add intent for restaurant id?
-			startActivity(intent);
-		}
-	};
 
+	public OnItemClickListener listener;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.home_screen_activity);
+		listener = new RestaurantListListener(this);
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		fragment = new RestaurantListFragment();
 		ft.replace(R.id.restaurant_list_fragment_placeholder, fragment);
 		ft.commit();
 		super.onCreate(savedInstanceState);
 	}
-	
+
 	@Override
 	protected void onStart() {
 		fragment.setListListener(listener);
@@ -81,22 +65,4 @@ public class HomeScreenActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_home_screen,
-					container, false);
-			return rootView;
-		}
-	}
-
 }
