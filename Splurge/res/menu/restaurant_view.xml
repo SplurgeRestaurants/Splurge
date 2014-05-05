@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ucsd.cs110.splurge.RestaurantView" >
+    tools:context="ucsd.cs110.splurge.RestaurantMainMenuActivity" >
 
     <item
         android:id="@+id/action_settings"

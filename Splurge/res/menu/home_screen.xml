@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ucsd.cs110.splurge.HomeScreen" >
+    tools:context="ucsd.cs110.splurge.HomeScreenActivity" >
 
     <item
         android:id="@+id/action_settings"

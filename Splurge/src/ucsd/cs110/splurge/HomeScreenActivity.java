@@ -20,7 +20,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-public class HomeScreen extends Activity {
+public class HomeScreenActivity extends Activity {
 
 	protected ListView mListView;
 	public static String RESTAURANT;
@@ -31,9 +31,9 @@ public class HomeScreen extends Activity {
 					.toString();
 			chosenRestaurant = chosenRestaurant.substring(16, chosenRestaurant.indexOf(","));
 			// RESTAURANT = chosenRestaurant;
-			// RestaurantView.mTextView.setText(chosenRestaurant);
+			// RestaurantMainMenuActivity.mTextView.setText(chosenRestaurant);
 			Log.e("ListView", "restuarant: " + chosenRestaurant);
-			Intent intent = new Intent(HomeScreen.this, RestaurantView.class);
+			Intent intent = new Intent(HomeScreenActivity.this, RestaurantMainMenuActivity.class);
 			intent.putExtra(RESTAURANT, chosenRestaurant);
 			//add intent for restaurant id?
 			startActivity(intent);

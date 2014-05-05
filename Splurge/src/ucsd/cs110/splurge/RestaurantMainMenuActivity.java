@@ -14,7 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class RestaurantView extends Activity implements OnClickListener {
+public class RestaurantMainMenuActivity extends Activity implements OnClickListener {
 	TextView mTextView;
 
 	@Override
@@ -23,7 +23,7 @@ public class RestaurantView extends Activity implements OnClickListener {
 		// setContentView(R.layout.activity_restaurant_view);
 		setContentView(R.layout.fragment_main_vertical);
 		Intent intent = getIntent();
-		String chosenRestaurant = intent.getStringExtra(HomeScreen.RESTAURANT);
+		String chosenRestaurant = intent.getStringExtra(HomeScreenActivity.RESTAURANT);
 		mTextView = (TextView) findViewById(R.id.textView1);
 		mTextView.setText(chosenRestaurant);
 		View locationButton = findViewById(R.id.location);
