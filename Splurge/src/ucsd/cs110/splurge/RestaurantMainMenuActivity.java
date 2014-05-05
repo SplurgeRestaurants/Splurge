@@ -2,7 +2,9 @@ package ucsd.cs110.splurge;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -92,58 +94,56 @@ public class RestaurantMainMenuActivity extends Activity implements
 	}
 
 	private void openReserveDialog() {
-		new AlertDialog.Builder(this)
-				.setTitle(R.string.new_reserv_title)
-				.setItems(R.array.reservations,
-						new DialogInterface.OnClickListener() {
-							public void onClick(
-									DialogInterface dialoginterface, int i) {
-								// do something
-							}
-						}).show();
+		Builder dialog = new AlertDialog.Builder(this);
+		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialoginterface, int i) {
+				// do something
+			}
+		};
+		dialog.setTitle(R.string.new_reserv_title);
+		dialog.setItems(R.array.reservations, diaIn);
+		dialog.show();
 	}
 
 	private void openFoodMenuDialog() {
-		new AlertDialog.Builder(this).setTitle(R.string.menu_title)
-				.setItems(R.array.menus, new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialoginterface, int i) {
-						Intent intent = new Intent(
-								RestaurantMainMenuActivity.this,
-								FoodMenuActivity.class);
-						intent.putExtra(CATEGORY, i);
-						startActivity(intent);
-					}
-				}).show();
+		Builder dialog = new AlertDialog.Builder(this);
+		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialoginterface, int i) {
+				Intent intent = new Intent(RestaurantMainMenuActivity.this,
+						FoodMenuActivity.class);
+				intent.putExtra(CATEGORY, i);
+				startActivity(intent);
+			}
+		};
+		dialog.setTitle(R.string.menu_title);
+		dialog.setItems(R.array.menus, diaIn);
+		dialog.show();
 	}
 
 	private void openDiningOutDialog() {
-		new AlertDialog.Builder(this)
-				.setTitle(R.string.dining_out_title)
-				.setItems(R.array.dining_out,
-						new DialogInterface.OnClickListener() {
-							public void onClick(
-									DialogInterface dialoginterface, int i) {
-								switch (i) {
-								case 0:
-									getFragmentManager()
-											.beginTransaction()
-											.add(R.id.container,
-													new LocationFragment())
-											.commit();
-									// take out
-									break;
-								case 1:
-									getFragmentManager()
-											.beginTransaction()
-											.add(R.id.container,
-													new LocationFragment())
-											.commit();
-									// delivery
-									break;
-								default:
-									break;
-								}
-							}
-						}).show();
+		Builder dialog = new AlertDialog.Builder(this);
+		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialoginterface, int i) {
+				FragmentTransaction ft = getFragmentManager()
+						.beginTransaction();
+				switch (i) {
+				case 0:
+					ft.add(R.id.container, new LocationFragment());
+					ft.commit();
+					// take out
+					break;
+				case 1:
+					ft.add(R.id.container, new LocationFragment());
+					ft.commit();
+					// delivery
+					break;
+				default:
+					break;
+				}
+			}
+		};
+		dialog.setTitle(R.string.dining_out_title);
+		dialog.setItems(R.array.dining_out, diaIn);
+		dialog.show();
 	}
 }

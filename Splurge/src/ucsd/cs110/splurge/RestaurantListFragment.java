@@ -18,6 +18,7 @@ public class RestaurantListFragment extends Fragment {
 
 	ListView mListView;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -31,7 +32,6 @@ public class RestaurantListFragment extends Fragment {
 				R.layout.fragment_home_screen, new String[] { "RestaurantIcon",
 						"RestaurantName" }, new int[] { R.id.RestaurantIcon,
 						R.id.RestaurantName });
-
 		mListView.setAdapter(adapter);
 		return ret;
 	}
