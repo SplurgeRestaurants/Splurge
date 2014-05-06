@@ -13,7 +13,7 @@ public class FoodMenuActivity extends Activity {
 	public OnItemClickListener listener;
 
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.food_menu_list_fragment_placeholder);
+		setContentView(R.layout.food_menu_activity);
 		listener = new FoodMenuListListener(this);
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		fragment = new FoodMenuListFragment();
