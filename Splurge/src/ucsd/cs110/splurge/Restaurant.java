@@ -45,12 +45,7 @@ public class Restaurant {
 		mMenus = new ArrayList<FoodMenu>();
 		mUnavailableTimes = new ArrayList<Timeslot>();
 
-		// Temporary values to avoid NullPointerExceptions
 		mOpenHours = new Timeslot[7];
-		for (int i = 0; i < mOpenHours.length; i++) {
-			mOpenHours[i] = new Timeslot(Calendar.getInstance(),
-					Calendar.getInstance());
-		}
 	}
 
 	/**
@@ -135,5 +130,23 @@ public class Restaurant {
 		default:
 			throw new IllegalArgumentException("Illegal day of week: " + day);
 		}
+	}
+
+	/**
+	 * Adds a FoodMenu to the restaurant listing.
+	 *
+	 * @param menu
+	 *            The Menu to add.
+	 * @return <code>true</code> on successful add.
+	 * @throws IllegalArgumentException
+	 *             if a menu exists sharing the same name.
+	 */
+	public boolean addFoodMenu(FoodMenu menu) {
+		for (FoodMenu m : mMenus) {
+			if (m.getMenuName().equals(menu.getMenuName())) {
+				throw new IllegalArgumentException("Menus cannot share names.");
+			}
+		}
+		return mMenus.add(menu);
 	}
 }
