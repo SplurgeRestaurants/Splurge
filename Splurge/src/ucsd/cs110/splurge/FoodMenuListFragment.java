@@ -29,7 +29,7 @@ public class FoodMenuListFragment extends Fragment {
 		mListView = (ListView) ret.findViewById(R.id.food_list);
 		Intent intent = getActivity().getIntent();
 		int category = 0;
-		category = intent.getIntExtra(RestaurantMainMenuActivity.CATEGORY,
+		category = intent.getIntExtra(RestaurantMainMenuActivity.MEAL,
 				category);
 		List<? extends Map<String, ?>> data;
 		switch (category) {

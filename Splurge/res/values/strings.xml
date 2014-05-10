@@ -20,5 +20,6 @@
     <string name="title_activity_breakfast_menu">BreakfastMenuActivity</string>
     <string name="title_activity_lunch_menu">LunchMenuActivity</string>
     <string name="title_activity_food_menu">FoodMenuActivity</string>
+    <string name="title_activity_restaurant_main_menu_fragment">RestaurantMainMenuFragment</string>
 
 </resources>

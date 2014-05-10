@@ -20,7 +20,6 @@ public class FoodMenuActivity extends Activity {
 		ft.replace(R.id.food_menu_list_fragment_placeholder, fragment);
 		ft.commit();
 		super.onCreate(savedInstanceState);
-		//mListView.setOnItemClickListener(listener);
 	}
 	
 	@Override

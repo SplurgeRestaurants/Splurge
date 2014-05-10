@@ -42,6 +42,10 @@
             android:name="ucsd.cs110.splurge.FoodMenuActivity"
             android:label="@string/title_activity_food_menu" >
         </activity>
+        <activity
+            android:name="ucsd.cs110.splurge.RestaurantMainMenuFragment"
+            android:label="@string/title_activity_restaurant_main_menu_fragment" >
+        </activity>
     </application>
 
 </manifest>
