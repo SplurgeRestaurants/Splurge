@@ -1,4 +1,4 @@
-package ucsd.cs110.splurge;
+package ucsd.cs110.splurge.model;
 
 public class FoodItem {
 

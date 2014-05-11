@@ -1,4 +1,4 @@
-package ucsd.cs110.splurge;
+package ucsd.cs110.splurge.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
