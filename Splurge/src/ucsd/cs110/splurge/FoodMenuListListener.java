@@ -25,11 +25,12 @@ public class FoodMenuListListener implements OnItemClickListener{
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		//TODO go to FoodItemActivity
-		Log.e("FoodMenuListListener", "dang this works");
+		//statrts the FoodItemActivity
+		//Log.e("FoodMenuListListener", "dang this works");
 		Intent intent = new Intent(mContext, FoodItemActivity.class);
+		//save position of food item from menu
+		Log.e("FoodMenuListListener", "Position is " + position);
 		intent.putExtra(FoodMenuActivity.FOOD_ITEM_POSITION, position);
 		mContext.startActivity(intent);
 	}
-
 }

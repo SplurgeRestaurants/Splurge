@@ -18,11 +18,23 @@ public class RestaurantMainMenuListener implements OnClickListener {
 	private Context mContext;
 	private static final int DELIVERY = 1;
 	private static final int TAKE_OUT = 0;
-
+	
+	/**
+	 * Create a new RestaurantMainMenuListener, designed to listen to a
+	 * RestaurantMainMenuFragment.
+	 * 
+	 * @param context
+	 *            Context used for spawning a new Activity
+	 */
 	public RestaurantMainMenuListener(Context context) {
 		mContext = context;
 	}
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see android.view.View.OnClickListener#onClick(android.view.View)
+	 * Makes sure the button opens the correct dialog
+	 */
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {

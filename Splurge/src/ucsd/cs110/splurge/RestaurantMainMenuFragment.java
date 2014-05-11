@@ -10,12 +10,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class RestaurantMainMenuFragment extends Fragment {
-
+	// TextView for restaurant name
 	TextView mTextView;
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
+	 * Set the restaurant name in TextView
+	 */
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//get layout
 		View ret = inflater.inflate(R.layout.main_menu, container, false);
 		// get restaurant name from intent and set it to the Text View
 		Intent intent = getActivity().getIntent();
@@ -25,7 +31,10 @@ public class RestaurantMainMenuFragment extends Fragment {
 		mTextView.setText(chosenRestaurant);
 		return (ret);
 	}
-
+	
+	/*
+	 * set listener for each button
+	 */
 	public void setMainMenuListener(OnClickListener listener) {
 		(getView().findViewById(R.id.menu)).setOnClickListener(listener);
 		(getView().findViewById(R.id.information)).setOnClickListener(listener);

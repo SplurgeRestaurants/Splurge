@@ -9,13 +9,20 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class HomeScreenActivity extends Activity {
-
+	// List
 	protected ListView mListView;
+	// Saves the chosen restaurant
 	public static String RESTAURANT;
+	// fragment for layout
 	private RestaurantListFragment fragment;
-
+	//button listener
 	public OnItemClickListener listener;
-
+	
+	/*
+	 * (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 * get fragment layout and initialize listener
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.home_screen_activity);
@@ -26,7 +33,7 @@ public class HomeScreenActivity extends Activity {
 		ft.commit();
 		super.onCreate(savedInstanceState);
 	}
-
+	// set the listener for the fragment
 	@Override
 	protected void onStart() {
 		fragment.setListListener(listener);

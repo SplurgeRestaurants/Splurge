@@ -2,6 +2,8 @@ package ucsd.cs110.splurge;
 
 import java.util.ArrayList;
 
+import ucsd.cs110.splurge.model.FoodItem;
+
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -10,12 +12,18 @@ import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class FoodMenuActivity extends Activity {
-
+	//fragment for layout
 	private FoodMenuListFragment fragment;
+	// button listener
 	public OnItemClickListener listener;
+	// populated with food items from a specified menu
 	static ArrayList<FoodItem> data;
+	// save position of the chosen food item
 	static String FOOD_ITEM_POSITION;
-
+	/*
+	 * Get layout from fragment
+	 * Initialize listener
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.food_menu_activity);
 		listener = new FoodMenuListListener(this);
@@ -25,13 +33,18 @@ public class FoodMenuActivity extends Activity {
 		ft.commit();
 		super.onCreate(savedInstanceState);
 	}
-	
+	/*
+	 * set listener for the fragment
+	 */
 	@Override
 	protected void onStart() {
 		fragment.setListListener(listener);
 		super.onStart();
 	}
-	
+	/*
+	 *  Get the food items that were selected from the menu
+	 *  Called when user presses add to order
+	 */
 	public void getSelected(View view){
 		for(int i = 0; i < data.size(); i++){
 			if(data.get(i).isSelected()){

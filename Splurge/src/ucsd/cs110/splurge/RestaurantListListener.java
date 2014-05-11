@@ -21,7 +21,11 @@ public class RestaurantListListener implements OnItemClickListener {
 	public RestaurantListListener(Context context) {
 		mContext = context;
 	}
-
+	/*
+	 * (non-Javadoc)
+	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	 * Saves the chosen restaurant in the intent and starts RestaurantMainMenuActivity
+	 */
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
