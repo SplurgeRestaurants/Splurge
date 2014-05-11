@@ -1,10 +1,6 @@
 package ucsd.cs110.splurge;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,42 +9,37 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 public class FoodMenuListFragment extends Fragment {
 
-	ListView mListView;
+	static ListView mListView;
+	FoodMenuAdapter adapter;
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		View ret = inflater.inflate(R.layout.food_menu_list, container,
-				false);
+		View ret = inflater.inflate(R.layout.food_menu_list, container, false);
 		mListView = (ListView) ret.findViewById(R.id.food_list);
 		Intent intent = getActivity().getIntent();
-		int category = 0;
-		category = intent.getIntExtra(RestaurantMainMenuActivity.MEAL,
-				category);
-		List<? extends Map<String, ?>> data;
-		switch (category) {
+		int meal = 0;
+		meal = intent
+				.getIntExtra(RestaurantMainMenuActivity.MEAL, meal);
+		switch (meal) {
 		case 0:
-			data = (List<? extends Map<String, ?>>) GetBreakfastMenuItem();
+			FoodMenuActivity.data = (ArrayList<FoodItem>) getBreakfastMenuItem();
 			break;
 		case 1:
-			data = (List<? extends Map<String, ?>>) GetLunchMenuItem();
+			FoodMenuActivity.data = (ArrayList<FoodItem>) getLunchMenuItem();
 			break;
 		case 2:
-			data = (List<? extends Map<String, ?>>) GetDinnerMenuItem();
+			FoodMenuActivity.data = (ArrayList<FoodItem>) getDinnerMenuItem();
 			break;
 		default:
-			data = null;
+			FoodMenuActivity.data = null;
 			break;
 		}
-		SimpleAdapter adapter = new SimpleAdapter(getActivity(), data,
-				R.layout.menu_item, new String[] { "MenuIcon", "MenuName" },
-				new int[] { R.id.MenuIcon, R.id.MenuName });
+		adapter = new FoodMenuAdapter(getActivity(), R.layout.menu_item, FoodMenuActivity.data);
 		mListView.setAdapter(adapter);
 		return ret;
 	}
@@ -56,66 +47,55 @@ public class FoodMenuListFragment extends Fragment {
 	/*
 	 * Populate list with breakfast items
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	List<Map> GetBreakfastMenuItem() {
-		List<Map> list = new ArrayList<Map>();
-
-		Map map = new HashMap();
-		map.put("MenuIcon", R.drawable.logo);
-		map.put("MenuName", "Hashbrowns");
-		list.add(map);
-
-		for (int i = 0; i < 10; i++) {
-			map = new HashMap();
-			map.put("MenuIcon", R.drawable.ic_launcher);
-			map.put("MenuName", "Fake Breakfast Item" + i);
-			list.add(map);
+	public ArrayList<FoodItem> getBreakfastMenuItem(){
+		ArrayList<FoodItem> food = new ArrayList<FoodItem>(11);
+		FoodItem hashbrowns = new FoodItem("Hashbrown");
+		hashbrowns.setImage(R.drawable.logo);
+		food.add(hashbrowns);
+		for(int i = 0; i < 10; i++){
+			FoodItem fakeitem = new FoodItem("Fake Breakfast Item " + i);
+			fakeitem.setImage(R.drawable.ic_launcher);
+			food.add(fakeitem);
 		}
-		return list;
+		return food;
 	}
+
 	/*
 	 * Populate list with lunch items
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	List<Map> GetLunchMenuItem() {
-		List<Map> list = new ArrayList<Map>();
-
-		Map map = new HashMap();
-		map.put("MenuIcon", R.drawable.logo);
-		map.put("MenuName", "Burger");
-		list.add(map);
-
-		for (int i = 0; i < 10; i++) {
-			map = new HashMap();
-			map.put("MenuIcon", R.drawable.ic_launcher);
-			map.put("MenuName", "Fake Lunch Item" + i);
-			list.add(map);
+	public ArrayList<FoodItem> getLunchMenuItem(){
+		ArrayList<FoodItem> food = new ArrayList<FoodItem>(11);
+		FoodItem burger = new FoodItem("Burger");
+		burger.setImage(R.drawable.logo);
+		food.add(burger);
+		for(int i = 0; i < 10; i++){
+			FoodItem fakeitem = new FoodItem("Fake Lunch Item " + i);
+			fakeitem.setImage(R.drawable.ic_launcher);
+			food.add(fakeitem);
 		}
-		return list;
+		return food;
 	}
+
 	/*
 	 * Populate list with dinner items
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	List<Map> GetDinnerMenuItem() {
-		List<Map> list = new ArrayList<Map>();
-
-		Map map = new HashMap();
-		map.put("MenuIcon", R.drawable.logo);
-		map.put("MenuName", "Steak");
-		list.add(map);
-
-		for (int i = 0; i < 10; i++) {
-			map = new HashMap();
-			map.put("MenuIcon", R.drawable.ic_launcher);
-			map.put("MenuName", "Fake Dinner Item" + i);
-			list.add(map);
+	
+	public ArrayList<FoodItem> getDinnerMenuItem(){
+		ArrayList<FoodItem> food = new ArrayList<FoodItem>(11);
+		FoodItem steak = new FoodItem("Steak");
+		steak.setImage(R.drawable.logo);
+		food.add(steak);
+		for(int i = 0; i < 10; i++){
+			FoodItem fakeitem = new FoodItem("Fake Dinner Item " + i);
+			fakeitem.setImage(R.drawable.ic_launcher);
+			food.add(fakeitem);
 		}
-		return list;
+		return food;
 	}
 
 	public void setListListener(OnItemClickListener listener) {
 		((ListView) getView().findViewById(R.id.food_list))
 				.setOnItemClickListener(listener);
 	}
+
 }

@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class RestaurantMainMenuFragment extends Fragment {
@@ -29,7 +28,7 @@ public class RestaurantMainMenuFragment extends Fragment {
 
 	public void setMainMenuListener(OnClickListener listener) {
 		(getView().findViewById(R.id.menu)).setOnClickListener(listener);
-		(getView().findViewById(R.id.location)).setOnClickListener(listener);
+		(getView().findViewById(R.id.information)).setOnClickListener(listener);
 		(getView().findViewById(R.id.diningout)).setOnClickListener(listener);
 		(getView().findViewById(R.id.reserve)).setOnClickListener(listener);
 	}

@@ -5,6 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <Button
+        android:id="@+id/add_to_order_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Add To Order" 
+        android:onClick="getSelected"/>
+
     <ListView
         android:id="@+id/food_list"
         android:layout_width="fill_parent"

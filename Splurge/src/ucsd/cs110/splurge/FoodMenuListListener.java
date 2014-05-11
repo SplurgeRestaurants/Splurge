@@ -1,11 +1,12 @@
 package ucsd.cs110.splurge;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class FoodMenuListListener implements OnItemClickListener {
+public class FoodMenuListListener implements OnItemClickListener{
 
 	Context mContext;
 
@@ -21,7 +22,15 @@ public class FoodMenuListListener implements OnItemClickListener {
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		//TODO
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+//	    SparseBooleanArray sp = FoodMenuListFragment.mListView.getCheckedItemPositions();
+//	    FoodMenuActivity.selectedStrings.clear();
+//	    for(int i=0;i<sp.size();i++)
+//	    {
+//	        FoodMenuActivity.selectedStrings.add(FoodMenuListFragment.mListView.getItemAtPosition(i).toString());
+//	    }
+		Log.e("FoodMenuListListener", "dang this works");
 	}
+
 }

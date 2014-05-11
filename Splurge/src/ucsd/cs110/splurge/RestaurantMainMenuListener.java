@@ -26,7 +26,7 @@ public class RestaurantMainMenuListener implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.location:
+		case R.id.information:
 			((Activity) mContext).getFragmentManager().beginTransaction()
 					.add(R.id.container, new LocationFragment()).commit();
 			break;
