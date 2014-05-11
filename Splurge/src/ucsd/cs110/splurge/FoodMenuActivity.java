@@ -8,11 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 
 public class FoodMenuActivity extends Activity {
 
-	protected ListView mListView;
 	private FoodMenuListFragment fragment;
 	public OnItemClickListener listener;
 	static ArrayList<FoodItem> data;
@@ -34,6 +32,8 @@ public class FoodMenuActivity extends Activity {
 	}
 	
 	public void getSelected(View view){
+		Log.e("Size", " size is " + data.size());
+		//temp fix for size problem
 		for(int i = 0; i < data.size(); i++){
 			Log.e("Items", data.get(i).getName());
 			if(data.get(i).isSelected()){

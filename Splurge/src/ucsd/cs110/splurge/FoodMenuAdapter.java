@@ -14,8 +14,9 @@ import android.widget.Toast;
 
 @SuppressWarnings("rawtypes")
 public class FoodMenuAdapter extends ArrayAdapter {
-
+	
 	private ArrayList<FoodItem> foodItems;
+	//Store the current context
 	Context mContext;
 
 	@SuppressWarnings("unchecked")
@@ -25,7 +26,7 @@ public class FoodMenuAdapter extends ArrayAdapter {
 		// TODO Auto-generated constructor stub
 		mContext = context;
 		this.foodItems = foodItems;
-		this.foodItems.addAll(foodItems);
+		//this.foodItems.addAll(foodItems);
 	}
 
 	private class ViewHolder {
@@ -58,13 +59,6 @@ public class FoodMenuAdapter extends ArrayAdapter {
 					food.setSelected(cb.isChecked());
 				}
 			});
-//			holder.image.setOnClickListener(new View.OnClickListener(){
-//				public void onClick(View v){
-//					Intent intent = new Intent(mContext, HomeScreenActivity.class);
-//					mContext.startActivity(intent);
-//					Log.e("Testing", "button works");
-//				}
-//			});
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}

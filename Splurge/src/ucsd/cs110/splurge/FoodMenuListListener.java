@@ -24,12 +24,7 @@ public class FoodMenuListListener implements OnItemClickListener{
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-//	    SparseBooleanArray sp = FoodMenuListFragment.mListView.getCheckedItemPositions();
-//	    FoodMenuActivity.selectedStrings.clear();
-//	    for(int i=0;i<sp.size();i++)
-//	    {
-//	        FoodMenuActivity.selectedStrings.add(FoodMenuListFragment.mListView.getItemAtPosition(i).toString());
-//	    }
+		//TODO go to FoodItemActivity
 		Log.e("FoodMenuListListener", "dang this works");
 	}
 
