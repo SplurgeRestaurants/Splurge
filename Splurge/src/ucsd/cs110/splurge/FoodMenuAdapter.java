@@ -26,7 +26,6 @@ public class FoodMenuAdapter extends ArrayAdapter {
 		// TODO Auto-generated constructor stub
 		mContext = context;
 		this.foodItems = foodItems;
-		//this.foodItems.addAll(foodItems);
 	}
 
 	private class ViewHolder {

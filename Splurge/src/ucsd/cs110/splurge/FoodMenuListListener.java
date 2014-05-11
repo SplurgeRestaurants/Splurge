@@ -1,6 +1,7 @@
 package ucsd.cs110.splurge;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,6 +27,9 @@ public class FoodMenuListListener implements OnItemClickListener{
 			long id) {
 		//TODO go to FoodItemActivity
 		Log.e("FoodMenuListListener", "dang this works");
+		Intent intent = new Intent(mContext, FoodItemActivity.class);
+		intent.putExtra(FoodMenuActivity.FOOD_ITEM_POSITION, position);
+		mContext.startActivity(intent);
 	}
 
 }

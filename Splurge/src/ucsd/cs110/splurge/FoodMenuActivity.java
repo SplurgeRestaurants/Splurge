@@ -14,6 +14,7 @@ public class FoodMenuActivity extends Activity {
 	private FoodMenuListFragment fragment;
 	public OnItemClickListener listener;
 	static ArrayList<FoodItem> data;
+	static String FOOD_ITEM_POSITION;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.food_menu_activity);
@@ -32,10 +33,7 @@ public class FoodMenuActivity extends Activity {
 	}
 	
 	public void getSelected(View view){
-		Log.e("Size", " size is " + data.size());
-		//temp fix for size problem
 		for(int i = 0; i < data.size(); i++){
-			Log.e("Items", data.get(i).getName());
 			if(data.get(i).isSelected()){
 				Log.e("Selected", data.get(i).getName());
 			}
