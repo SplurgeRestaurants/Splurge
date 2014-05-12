@@ -44,7 +44,10 @@ public class RestaurantMainMenuListener implements OnClickListener {
 			openFoodMenuDialog();
 			break;
 		case R.id.diningout:
-			openDiningOutDialog();
+			// TODO just go to DiningOutActivity instead of opening dialog
+			Intent intent1 = new Intent(mContext, DiningOutActivity.class);
+			mContext.startActivity(intent1);
+			// openDiningOutDialog();
 			break;
 		}
 	}

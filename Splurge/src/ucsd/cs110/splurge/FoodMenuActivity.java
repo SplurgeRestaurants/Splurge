@@ -19,6 +19,8 @@ public class FoodMenuActivity extends Activity {
 	static ArrayList<FoodItem> data;
 	// save position of the chosen food item
 	static String FOOD_ITEM_POSITION;
+	// populate with selected food items
+	static ArrayList<FoodItem> selected = new ArrayList<FoodItem>();
 
 	/*
 	 * Get layout from fragment Initialize listener
@@ -51,6 +53,7 @@ public class FoodMenuActivity extends Activity {
 		for (int i = 0; i < data.size(); i++) {
 			if (data.get(i).isSelected()) {
 				Log.e("Selected", data.get(i).getName());
+				selected.add(data.get(i));
 			}
 		}
 	}
