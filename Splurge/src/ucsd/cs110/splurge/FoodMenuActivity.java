@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import ucsd.cs110.splurge.model.FoodItem;
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -56,5 +57,10 @@ public class FoodMenuActivity extends Activity {
 				selected.add(data.get(i));
 			}
 		}
+		for (int i = 0; i < selected.size(); i++) {
+			selected.get(i).setSelected(false);
+		}
+		Intent intent = new Intent(this, DiningOutActivity.class);
+		startActivity(intent);
 	}
 }
