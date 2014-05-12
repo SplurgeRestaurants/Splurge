@@ -16,7 +16,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:onClick="goToFoodMenu"
-            android:text="Add To Order" />
+            android:text="Add To Order"
+             />
 
         <Button
             android:id="@+id/take_out"

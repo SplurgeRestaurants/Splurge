@@ -13,6 +13,7 @@
    <color name="red">#8A2D1B</color>
    <color name="white">#FFFFFF</color>
    <color name="black">#000000</color>
+   <color name="transblack">#99000000</color>
 </resources>
 
 
