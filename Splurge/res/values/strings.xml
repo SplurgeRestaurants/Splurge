@@ -22,5 +22,6 @@
     <string name="title_activity_food_menu">FoodMenuActivity</string>
     <string name="title_activity_restaurant_main_menu_fragment">RestaurantMainMenuFragment</string>
     <string name="title_activity_food_item">FoodItemActivity</string>
+    <string name="title_activity_information">InformationActivity</string>
 
 </resources>

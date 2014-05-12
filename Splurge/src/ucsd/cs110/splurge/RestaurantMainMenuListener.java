@@ -1,24 +1,18 @@
 package ucsd.cs110.splurge;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 
 public class RestaurantMainMenuListener implements OnClickListener {
 	private Context mContext;
 	private static final int DELIVERY = 1;
 	private static final int TAKE_OUT = 0;
-	
+
 	/**
 	 * Create a new RestaurantMainMenuListener, designed to listen to a
 	 * RestaurantMainMenuFragment.
@@ -29,18 +23,19 @@ public class RestaurantMainMenuListener implements OnClickListener {
 	public RestaurantMainMenuListener(Context context) {
 		mContext = context;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see android.view.View.OnClickListener#onClick(android.view.View)
-	 * Makes sure the button opens the correct dialog
+	 * 
+	 * @see android.view.View.OnClickListener#onClick(android.view.View) Makes
+	 * sure the button opens the correct dialog
 	 */
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.information:
-			((Activity) mContext).getFragmentManager().beginTransaction()
-					.add(R.id.container, new LocationFragment()).commit();
+			Intent intent = new Intent(mContext, InformationActivity.class);
+			mContext.startActivity(intent);
 			break;
 		case R.id.reserve:
 			openReserveDialog();
@@ -58,6 +53,7 @@ public class RestaurantMainMenuListener implements OnClickListener {
 	private void openReserveDialog() {
 		Builder dialog = new AlertDialog.Builder(mContext);
 		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
+			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
 				// TODO open reservation activity
 			}
@@ -71,6 +67,7 @@ public class RestaurantMainMenuListener implements OnClickListener {
 	private void openFoodMenuDialog() {
 		Builder dialog = new AlertDialog.Builder(mContext);
 		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
+			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
 				Intent intent = new Intent(mContext, FoodMenuActivity.class);
 				intent.putExtra(RestaurantMainMenuActivity.MEAL, i);
@@ -86,38 +83,26 @@ public class RestaurantMainMenuListener implements OnClickListener {
 	private void openDiningOutDialog() {
 		Builder dialog = new AlertDialog.Builder(mContext);
 		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
+			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
-				FragmentTransaction ft = ((Activity) mContext)
-						.getFragmentManager().beginTransaction();
+				Intent intent = null;
 				switch (i) {
 				case TAKE_OUT:
-					ft.add(R.id.container, new LocationFragment());
-					ft.commit();
+					intent = new Intent(mContext, InformationActivity.class);
+					// TODO save restaurant id?
 					break;
 				case DELIVERY:
-					ft.add(R.id.container, new LocationFragment());
-					ft.commit();
+					intent = new Intent(mContext, InformationActivity.class);
+					// TODO save restaurant id?
 					break;
 				default:
 					break;
 				}
+				mContext.startActivity(intent);
 			}
 		};
 		dialog.setTitle(R.string.dining_out_title);
 		dialog.setItems(R.array.dining_out, diaIn);
 		dialog.show();
 	}
-
-	public static class LocationFragment extends Fragment {
-		public LocationFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.map, container, false);
-			return rootView;
-		}
-	}
-
 }

@@ -50,6 +50,10 @@
             android:name="ucsd.cs110.splurge.FoodItemActivity"
             android:label="@string/title_activity_food_item" >
         </activity>
+        <activity
+            android:name="ucsd.cs110.splurge.InformationActivity"
+            android:label="@string/title_activity_information" >
+        </activity>
     </application>
 
 </manifest>
