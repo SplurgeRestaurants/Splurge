@@ -1,16 +1,28 @@
 package ucsd.cs110.splurge;
 
+import ucsd.cs110.splurge.model.RestaurantModel;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+/**
+ * Activity containing all Fragments for viewing. This Activty encapsulates all
+ * operations of the app, from switching between Views (Fragments), assigning
+ * Controllers (Listeners), and storing the Model (RestaurantModel).
+ */
 public class WrapperActivity extends Activity {
+
+	/**
+	 * The model. Contains business logic and data as per Model-View-Controller.
+	 */
+	private RestaurantModel mModel;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_wrapper);
+		mModel = new RestaurantModel();
 	}
 
 	@Override
@@ -42,5 +54,14 @@ public class WrapperActivity extends Activity {
 		ft.addToBackStack(null);
 		ft.commit();
 		f.setSuperListener(l);
+	}
+
+	/**
+	 * Retrieves the model for business logic and data.
+	 * 
+	 * @return The current Model.
+	 */
+	public RestaurantModel getModel() {
+		return mModel;
 	}
 }
