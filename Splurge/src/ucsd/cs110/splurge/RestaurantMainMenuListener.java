@@ -82,32 +82,4 @@ public class RestaurantMainMenuListener implements OnClickListener {
 		dialog.setItems(R.array.menus, diaIn);
 		dialog.show();
 	}
-
-	// Creates dialog for dining out options
-	// private void openDiningOutDialog() {
-	// Builder dialog = new AlertDialog.Builder(mContext);
-	// DialogInterface.OnClickListener diaIn = new
-	// DialogInterface.OnClickListener() {
-	// @Override
-	// public void onClick(DialogInterface dialoginterface, int i) {
-	// Intent intent = null;
-	// switch (i) {
-	// case TAKE_OUT:
-	// intent = new Intent(mContext, InformationActivity.class);
-	// // TODO save restaurant id?
-	// break;
-	// case DELIVERY:
-	// intent = new Intent(mContext, InformationActivity.class);
-	// // TODO save restaurant id?
-	// break;
-	// default:
-	// break;
-	// }
-	// mContext.startActivity(intent);
-	// }
-	// };
-	// dialog.setTitle(R.string.dining_out_title);
-	// dialog.setItems(R.array.dining_out, diaIn);
-	// dialog.show();
-	// }
 }
