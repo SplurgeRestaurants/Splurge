@@ -58,6 +58,10 @@
             android:name="ucsd.cs110.splurge.DiningOutActivity"
             android:label="@string/title_activity_dining_out" >
         </activity>
+        <activity
+            android:name="ucsd.cs110.splurge.WrapperActivity"
+            android:label="@string/title_activity_wrapper" >
+        </activity>
     </application>
 
 </manifest>

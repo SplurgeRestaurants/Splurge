@@ -24,5 +24,6 @@
     <string name="title_activity_food_item">FoodItemActivity</string>
     <string name="title_activity_information">InformationActivity</string>
     <string name="title_activity_dining_out">DiningOutActivity</string>
+    <string name="title_activity_wrapper">WrapperActivity</string>
 
 </resources>
