@@ -3,7 +3,6 @@ package ucsd.cs110.splurge;
 import java.util.ArrayList;
 
 import ucsd.cs110.splurge.model.FoodItem;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class FoodMenuListFragment extends Fragment {
+public class FoodMenuListFragment extends SuperFragment {
 	private static final int DINNER = 2;
 	private static final int LUNCH = 1;
 	private static final int BREAKFAST = 0;
@@ -114,4 +113,8 @@ public class FoodMenuListFragment extends Fragment {
 				.setOnItemClickListener(listener);
 	}
 
+	@Override
+	public void setSuperListener(SuperListener l) {
+		setListListener((OnItemClickListener) l);
+	}
 }

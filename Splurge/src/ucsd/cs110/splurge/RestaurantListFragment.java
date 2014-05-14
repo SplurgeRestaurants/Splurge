@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,28 +13,30 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-public class RestaurantListFragment extends Fragment {
+public class RestaurantListFragment extends SuperFragment {
 	// List
 	ListView mListView;
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
-	 *  Populate the list with restaurants
+	 * 
+	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater,
+	 * android.view.ViewGroup, android.os.Bundle) Populate the list with
+	 * restaurants
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//get layout
+		// get layout
 		View ret = inflater.inflate(R.layout.activity_home_screen, container,
 				false);
-		//get id for ListView
+		// get id for ListView
 		mListView = (ListView) ret.findViewById(R.id.list);
-		//Populate list with restaurant data
+		// Populate list with restaurant data
 		List<? extends Map<String, ?>> data = (List<? extends Map<String, ?>>) GetSampleData();
-		//adapter formats list entries in list
+		// adapter formats list entries in list
 		SimpleAdapter adapter = new SimpleAdapter(getActivity(), data,
 				R.layout.fragment_home_screen, new String[] { "RestaurantIcon",
 						"RestaurantName" }, new int[] { R.id.RestaurantIcon,
@@ -43,7 +44,7 @@ public class RestaurantListFragment extends Fragment {
 		mListView.setAdapter(adapter);
 		return ret;
 	}
-	
+
 	/*
 	 * Get the list of restaurants
 	 */
@@ -64,9 +65,15 @@ public class RestaurantListFragment extends Fragment {
 		}
 		return list;
 	}
+
 	// set the listener for list entries
 	public void setListListener(OnItemClickListener listener) {
 		((ListView) getView().findViewById(R.id.list))
 				.setOnItemClickListener(listener);
+	}
+
+	@Override
+	public void setSuperListener(SuperListener l) {
+		setListListener((OnItemClickListener) l);
 	}
 }

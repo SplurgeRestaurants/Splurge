@@ -1,6 +1,5 @@
 package ucsd.cs110.splurge;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class FoodItemFragment extends Fragment {
+public class FoodItemFragment extends SuperFragment {
 	// View Items in fragment
 	TextView name; // food item name
 	TextView description; // food item description
@@ -43,5 +42,10 @@ public class FoodItemFragment extends Fragment {
 				.getPrice()));
 
 		return ret;
+	}
+
+	@Override
+	public void setSuperListener(SuperListener l) {
+		// No listener applicable.
 	}
 }
