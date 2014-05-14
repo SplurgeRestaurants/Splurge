@@ -15,7 +15,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	private static final int LUNCH = 1;
 	private static final int BREAKFAST = 0;
 	// List
-	ListView mListView;
+	private ListView mListView;
 	// Adapter to create list entries in ListView
 	FoodMenuAdapter adapter;
 	static ArrayList<FoodItem> selectedFood = new ArrayList<FoodItem>();
@@ -25,7 +25,6 @@ public class FoodMenuListFragment extends SuperFragment {
 	static ArrayList<FoodItem> selected = new ArrayList<FoodItem>();
 	// populated with food items from a specified menu
 	static ArrayList<FoodItem> data;
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -119,7 +118,8 @@ public class FoodMenuListFragment extends SuperFragment {
 	}
 
 	@Override
-	public void setSuperListener(SuperListener l) {
-		setListListener((OnItemClickListener) l);
+	public void onStart() {
+		setListListener((OnItemClickListener) mSuperListener);
+		super.onStart();
 	}
 }

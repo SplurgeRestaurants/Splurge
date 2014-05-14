@@ -8,12 +8,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class InformationFragment extends SuperFragment {
-	TextView status;
-	TextView currentHours;
-	TextView hours;
-	TextView address;
-	TextView directions;
-
+	private TextView status;
+	private TextView currentHours;
+	private TextView hours;
+	private TextView address;
+	private TextView directions;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -53,7 +52,8 @@ public class InformationFragment extends SuperFragment {
 	}
 
 	@Override
-	public void setSuperListener(SuperListener l) {
-		setListListener((OnClickListener) l);
+	public void onStart() {
+		setListListener((OnClickListener) mSuperListener);
+		super.onStart();
 	}
 }

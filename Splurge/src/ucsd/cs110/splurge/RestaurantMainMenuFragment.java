@@ -36,7 +36,8 @@ public class RestaurantMainMenuFragment extends SuperFragment {
 	}
 
 	@Override
-	public void setSuperListener(SuperListener l) {
-		setMainMenuListener((OnClickListener) l);
+	public void onStart() {
+		setMainMenuListener((OnClickListener) mSuperListener);
+		super.onStart();
 	}
 }

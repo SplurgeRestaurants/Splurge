@@ -16,11 +16,6 @@
         <activity
             android:name="ucsd.cs110.splurge.HomeScreenActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="ucsd.cs110.splurge.RestaurantMainMenuActivity"
@@ -61,6 +56,11 @@
         <activity
             android:name="ucsd.cs110.splurge.WrapperActivity"
             android:label="@string/title_activity_wrapper" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

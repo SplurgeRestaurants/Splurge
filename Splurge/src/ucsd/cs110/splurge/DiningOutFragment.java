@@ -12,12 +12,11 @@ import android.widget.ListView;
 
 public class DiningOutFragment extends SuperFragment {
 
-	ListView mListView;
+	private ListView mListView;
 	// Adapter to create list entries in ListView
-	FoodMenuAdapter adapter;
+	private FoodMenuAdapter adapter;
 	private ArrayList<FoodItem> mSelectedFood;
 	private ArrayList<FoodItem> mSelected;
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -47,7 +46,8 @@ public class DiningOutFragment extends SuperFragment {
 	}
 
 	@Override
-	public void setSuperListener(SuperListener l) {
-		setFoodMenuListListener((OnItemClickListener) l);
+	public void onSaveInstanceState(Bundle outState) {
+		setFoodMenuListListener((OnItemClickListener) mSuperListener);
+		super.onSaveInstanceState(outState);
 	}
 }

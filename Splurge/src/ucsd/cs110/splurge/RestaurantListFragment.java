@@ -15,8 +15,7 @@ import android.widget.SimpleAdapter;
 
 public class RestaurantListFragment extends SuperFragment {
 	// List
-	ListView mListView;
-
+	private ListView mListView;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -73,7 +72,8 @@ public class RestaurantListFragment extends SuperFragment {
 	}
 
 	@Override
-	public void setSuperListener(SuperListener l) {
-		setListListener((OnItemClickListener) l);
+	public void onStart() {
+		setListListener((OnItemClickListener) mSuperListener);
+		super.onStart();
 	}
 }

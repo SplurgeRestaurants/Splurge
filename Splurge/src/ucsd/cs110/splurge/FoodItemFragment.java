@@ -10,11 +10,10 @@ import android.widget.TextView;
 
 public class FoodItemFragment extends SuperFragment {
 	// View Items in fragment
-	TextView name; // food item name
-	TextView description; // food item description
-	TextView price; // food item price
-	ImageView image; // food item image
-
+	private TextView name; // food item name
+	private TextView description; // food item description
+	private TextView price; // food item price
+	private ImageView image; // food item image
 	@Override
 	/**
 	 * Get information for the view
@@ -36,16 +35,12 @@ public class FoodItemFragment extends SuperFragment {
 				position);
 		// set the information to the appropriate views
 		name.setText(FoodMenuListFragment.data.get(position).getName());
-		image.setImageResource(FoodMenuListFragment.data.get(position).getImage());
+		image.setImageResource(FoodMenuListFragment.data.get(position)
+				.getImage());
 		description.setText(FoodMenuListFragment.data.get(position).getName());
 		price.setText(Integer.toString(FoodMenuListFragment.data.get(position)
 				.getPrice()));
 
 		return ret;
-	}
-
-	@Override
-	public void setSuperListener(SuperListener l) {
-		// No listener applicable.
 	}
 }
