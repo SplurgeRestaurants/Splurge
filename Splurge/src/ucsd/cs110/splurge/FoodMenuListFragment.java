@@ -16,39 +16,39 @@ public class FoodMenuListFragment extends Fragment {
 	private static final int DINNER = 2;
 	private static final int LUNCH = 1;
 	private static final int BREAKFAST = 0;
-	//List
+	// List
 	ListView mListView;
-	//Adapter to create list entries in ListView
+	// Adapter to create list entries in ListView
 	FoodMenuAdapter adapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//Get layout
+		// Get layout
 		View ret = inflater.inflate(R.layout.food_menu_list, container, false);
-		//get id for ListView
+		// get id for ListView
 		mListView = (ListView) ret.findViewById(R.id.food_list);
-		//get the specified meal option
+		// get the specified meal option
 		Intent intent = getActivity().getIntent();
 		int meal = 0;
-		meal = intent
-				.getIntExtra(RestaurantMainMenuActivity.MEAL, meal);
+		meal = intent.getIntExtra(RestaurantMainMenuActivity.MEAL, meal);
 		switch (meal) {
 		case BREAKFAST:
-			FoodMenuActivity.data = (ArrayList<FoodItem>) getBreakfastMenuItem();
+			FoodMenuActivity.data = getBreakfastMenuItem();
 			break;
 		case LUNCH:
-			FoodMenuActivity.data = (ArrayList<FoodItem>) getLunchMenuItem();
+			FoodMenuActivity.data = getLunchMenuItem();
 			break;
 		case DINNER:
-			FoodMenuActivity.data = (ArrayList<FoodItem>) getDinnerMenuItem();
+			FoodMenuActivity.data = getDinnerMenuItem();
 			break;
 		default:
 			FoodMenuActivity.data = null;
 			break;
 		}
-		adapter = new FoodMenuAdapter(getActivity(), R.layout.menu_item, FoodMenuActivity.data);
+		adapter = new FoodMenuAdapter(getActivity(), R.layout.menu_item,
+				FoodMenuActivity.data);
 		mListView.setAdapter(adapter);
 		return ret;
 	}
@@ -56,13 +56,13 @@ public class FoodMenuListFragment extends Fragment {
 	/*
 	 * Populate list with breakfast items
 	 */
-	public ArrayList<FoodItem> getBreakfastMenuItem(){
-		ArrayList<FoodItem> food = new ArrayList<FoodItem>(11);
+	public ArrayList<FoodItem> getBreakfastMenuItem() {
+		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
 		FoodItem hashbrowns = new FoodItem("Hashbrown");
 		hashbrowns.setImage(R.drawable.logo);
 		hashbrowns.setPrice(2000);
 		food.add(hashbrowns);
-		for(int i = 0; i < 10; i++){
+		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Breakfast Item " + i);
 			fakeitem.setImage(R.drawable.ic_launcher);
 			fakeitem.setPrice(300);
@@ -74,13 +74,13 @@ public class FoodMenuListFragment extends Fragment {
 	/*
 	 * Populate list with lunch items
 	 */
-	public ArrayList<FoodItem> getLunchMenuItem(){
-		ArrayList<FoodItem> food = new ArrayList<FoodItem>(11);
+	public ArrayList<FoodItem> getLunchMenuItem() {
+		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
 		FoodItem burger = new FoodItem("Burger");
 		burger.setImage(R.drawable.logo);
 		burger.setPrice(500);
 		food.add(burger);
-		for(int i = 0; i < 10; i++){
+		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Lunch Item " + i);
 			fakeitem.setImage(R.drawable.ic_launcher);
 			fakeitem.setPrice(300);
@@ -92,14 +92,14 @@ public class FoodMenuListFragment extends Fragment {
 	/*
 	 * Populate list with dinner items
 	 */
-	
-	public ArrayList<FoodItem> getDinnerMenuItem(){
-		ArrayList<FoodItem> food = new ArrayList<FoodItem>(11);
+
+	public ArrayList<FoodItem> getDinnerMenuItem() {
+		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
 		FoodItem steak = new FoodItem("Steak");
 		steak.setImage(R.drawable.logo);
 		steak.setPrice(1000);
 		food.add(steak);
-		for(int i = 0; i < 10; i++){
+		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Dinner Item " + i);
 			fakeitem.setImage(R.drawable.ic_launcher);
 			fakeitem.setPrice(300);
@@ -107,7 +107,8 @@ public class FoodMenuListFragment extends Fragment {
 		}
 		return food;
 	}
-	//set listener for list entries
+
+	// set listener for list entries
 	public void setListListener(OnItemClickListener listener) {
 		((ListView) getView().findViewById(R.id.food_list))
 				.setOnItemClickListener(listener);

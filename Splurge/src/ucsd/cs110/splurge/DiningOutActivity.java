@@ -10,6 +10,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+/**
+ *
+ *
+ */
 public class DiningOutActivity extends Activity {
 	DiningOutFragment fragment;
 	FoodMenuListListener listener;

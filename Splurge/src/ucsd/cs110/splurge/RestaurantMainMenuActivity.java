@@ -12,11 +12,12 @@ public class RestaurantMainMenuActivity extends Activity {
 	public OnClickListener listener;
 	// stores the chosen meal
 	static String MEAL;
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
-	 * Get fragment layout and initialize listener
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle) Get fragment layout
+	 * and initialize listener
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +27,14 @@ public class RestaurantMainMenuActivity extends Activity {
 		fragment = new RestaurantMainMenuFragment();
 		ft.replace(R.id.restaurant_main_menu_fragment_place_holder, fragment);
 		ft.commit();
+		FoodMenuActivity.selected.clear();
 		super.onCreate(savedInstanceState);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
-	 * @see android.app.Activity#onStart()
-	 * set listener for fragment
+	 * 
+	 * @see android.app.Activity#onStart() set listener for fragment
 	 */
 	@Override
 	protected void onStart() {
