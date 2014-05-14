@@ -27,8 +27,7 @@ public class RestaurantMainMenuFragment extends SuperFragment {
 		View ret = inflater.inflate(R.layout.main_menu, container, false);
 		// get restaurant name from intent and set it to the Text View
 		Intent intent = getActivity().getIntent();
-		String chosenRestaurant = intent
-				.getStringExtra(HomeScreenActivity.RESTAURANT);
+		String chosenRestaurant = "Model Placeholder";
 		mTextView = (TextView) ret.findViewById(R.id.textView1);
 		mTextView.setText(chosenRestaurant);
 		return (ret);

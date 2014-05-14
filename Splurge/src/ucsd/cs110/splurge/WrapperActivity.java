@@ -39,6 +39,7 @@ public class WrapperActivity extends Activity {
 	public void changeFragment(SuperFragment f, SuperListener l) {
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.replace(R.id.restaurant_list_fragment_placeholder, f);
+		ft.addToBackStack(null);
 		ft.commit();
 		f.setSuperListener(l);
 	}

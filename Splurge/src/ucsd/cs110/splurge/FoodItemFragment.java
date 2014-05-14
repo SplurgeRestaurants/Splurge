@@ -32,13 +32,13 @@ public class FoodItemFragment extends SuperFragment {
 		// get the intent to find the position of the food item in the food menu
 		Intent intent = getActivity().getIntent();
 		int position = 0;
-		position = intent.getIntExtra(FoodMenuActivity.FOOD_ITEM_POSITION,
+		position = intent.getIntExtra(FoodMenuListFragment.FOOD_ITEM_POSITION,
 				position);
 		// set the information to the appropriate views
-		name.setText(FoodMenuActivity.data.get(position).getName());
-		image.setImageResource(FoodMenuActivity.data.get(position).getImage());
-		description.setText(FoodMenuActivity.data.get(position).getName());
-		price.setText(Integer.toString(FoodMenuActivity.data.get(position)
+		name.setText(FoodMenuListFragment.data.get(position).getName());
+		image.setImageResource(FoodMenuListFragment.data.get(position).getImage());
+		description.setText(FoodMenuListFragment.data.get(position).getName());
+		price.setText(Integer.toString(FoodMenuListFragment.data.get(position)
 				.getPrice()));
 
 		return ret;

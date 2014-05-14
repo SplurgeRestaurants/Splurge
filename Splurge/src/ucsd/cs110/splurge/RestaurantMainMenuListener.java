@@ -2,14 +2,12 @@ package ucsd.cs110.splurge;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class RestaurantMainMenuListener implements OnClickListener {
-	private Context mContext;
+public class RestaurantMainMenuListener extends SuperListener implements
+		OnClickListener {
 
 	// private static final int DELIVERY = 1;
 	// private static final int TAKE_OUT = 0;
@@ -21,8 +19,8 @@ public class RestaurantMainMenuListener implements OnClickListener {
 	 * @param context
 	 *            Context used for spawning a new Activity
 	 */
-	public RestaurantMainMenuListener(Context context) {
-		mContext = context;
+	public RestaurantMainMenuListener(WrapperActivity context) {
+		super(context);
 	}
 
 	/*
@@ -35,8 +33,8 @@ public class RestaurantMainMenuListener implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.information:
-			Intent intent = new Intent(mContext, InformationActivity.class);
-			mContext.startActivity(intent);
+			mWrapper.changeFragment(new InformationFragment(),
+					new InformationListener(mWrapper));
 			break;
 		case R.id.reserve:
 			openReserveDialog();
@@ -45,17 +43,15 @@ public class RestaurantMainMenuListener implements OnClickListener {
 			openFoodMenuDialog();
 			break;
 		case R.id.diningout:
-			// TODO just go to DiningOutActivity instead of opening dialog
-			Intent intent1 = new Intent(mContext, DiningOutActivity.class);
-			mContext.startActivity(intent1);
-			// openDiningOutDialog();
+			mWrapper.changeFragment(new DiningOutFragment(),
+					new DiningOutListListener(mWrapper));
 			break;
 		}
 	}
 
 	// Creates dialog for reservation options
 	private void openReserveDialog() {
-		Builder dialog = new AlertDialog.Builder(mContext);
+		Builder dialog = new AlertDialog.Builder(mWrapper);
 		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
@@ -69,13 +65,12 @@ public class RestaurantMainMenuListener implements OnClickListener {
 
 	// Creates dialog for food menu options
 	private void openFoodMenuDialog() {
-		Builder dialog = new AlertDialog.Builder(mContext);
+		Builder dialog = new AlertDialog.Builder(mWrapper);
 		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
-				Intent intent = new Intent(mContext, FoodMenuActivity.class);
-				intent.putExtra(RestaurantMainMenuActivity.MEAL, i);
-				mContext.startActivity(intent);
+				mWrapper.changeFragment(new FoodMenuListFragment(),
+						new FoodMenuListListener(mWrapper));
 			}
 		};
 		dialog.setTitle(R.string.menu_title);

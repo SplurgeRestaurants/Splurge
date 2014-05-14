@@ -1,12 +1,11 @@
 package ucsd.cs110.splurge;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class InformationListener implements OnClickListener {
-	Context mContext;
+public class InformationListener extends SuperListener implements
+		OnClickListener {
 
 	/**
 	 * Create a new InformationListener, designed to listen to a
@@ -15,8 +14,8 @@ public class InformationListener implements OnClickListener {
 	 * @param context
 	 *            Context used for spawning a new Activity
 	 */
-	public InformationListener(Context context) {
-		mContext = context;
+	public InformationListener(WrapperActivity context) {
+		super(context);
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package ucsd.cs110.splurge;
 import java.util.ArrayList;
 
 import ucsd.cs110.splurge.model.FoodItem;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +18,13 @@ public class FoodMenuListFragment extends SuperFragment {
 	ListView mListView;
 	// Adapter to create list entries in ListView
 	FoodMenuAdapter adapter;
+	static ArrayList<FoodItem> selectedFood = new ArrayList<FoodItem>();
+	// save position of the chosen food item
+	static String FOOD_ITEM_POSITION;
+	// populate with selected food items
+	static ArrayList<FoodItem> selected = new ArrayList<FoodItem>();
+	// populated with food items from a specified menu
+	static ArrayList<FoodItem> data;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,25 +35,24 @@ public class FoodMenuListFragment extends SuperFragment {
 		// get id for ListView
 		mListView = (ListView) ret.findViewById(R.id.food_list);
 		// get the specified meal option
-		Intent intent = getActivity().getIntent();
+		// TODO (trtucker) refer to menus by string name, get menu from model
 		int meal = 0;
-		meal = intent.getIntExtra(RestaurantMainMenuActivity.MEAL, meal);
 		switch (meal) {
 		case BREAKFAST:
-			FoodMenuActivity.data = getBreakfastMenuItem();
+			FoodMenuListFragment.data = getBreakfastMenuItem();
 			break;
 		case LUNCH:
-			FoodMenuActivity.data = getLunchMenuItem();
+			FoodMenuListFragment.data = getLunchMenuItem();
 			break;
 		case DINNER:
-			FoodMenuActivity.data = getDinnerMenuItem();
+			FoodMenuListFragment.data = getDinnerMenuItem();
 			break;
 		default:
-			FoodMenuActivity.data = null;
+			FoodMenuListFragment.data = null;
 			break;
 		}
 		adapter = new FoodMenuAdapter(getActivity(), R.layout.menu_item,
-				FoodMenuActivity.data);
+				FoodMenuListFragment.data);
 		mListView.setAdapter(adapter);
 		return ret;
 	}
