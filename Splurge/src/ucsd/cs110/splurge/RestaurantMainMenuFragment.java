@@ -1,16 +1,12 @@
 package ucsd.cs110.splurge;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 public class RestaurantMainMenuFragment extends SuperFragment {
-	// TextView for restaurant name
-	TextView mTextView;
 
 	/*
 	 * (non-Javadoc)
@@ -26,10 +22,6 @@ public class RestaurantMainMenuFragment extends SuperFragment {
 		// get layout
 		View ret = inflater.inflate(R.layout.main_menu, container, false);
 		// get restaurant name from intent and set it to the Text View
-		Intent intent = getActivity().getIntent();
-		String chosenRestaurant = "Model Placeholder";
-		mTextView = (TextView) ret.findViewById(R.id.textView1);
-		mTextView.setText(chosenRestaurant);
 		return (ret);
 	}
 

@@ -34,6 +34,7 @@ public class RestaurantListListener extends SuperListener implements
 		chosenRestaurant = chosenRestaurant.substring(16,
 				chosenRestaurant.indexOf(","));
 		Log.e("ListView", "restuarant: " + chosenRestaurant);
+		mWrapper.getActionBar().setTitle(chosenRestaurant);
 		mWrapper.changeFragment(new RestaurantMainMenuFragment(),
 				new RestaurantMainMenuListener(mWrapper));
 	}
