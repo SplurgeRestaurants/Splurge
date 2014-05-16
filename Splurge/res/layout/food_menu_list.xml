@@ -10,8 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Add To Order" 
-        android:onClick="getSelected"/>
+        android:text="Add To Order" />
 
     <ListView
         android:id="@+id/food_list"

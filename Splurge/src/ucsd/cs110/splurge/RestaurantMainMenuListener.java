@@ -9,9 +9,6 @@ import android.view.View.OnClickListener;
 public class RestaurantMainMenuListener extends SuperListener implements
 		OnClickListener {
 
-	// private static final int DELIVERY = 1;
-	// private static final int TAKE_OUT = 0;
-
 	/**
 	 * Create a new RestaurantMainMenuListener, designed to listen to a
 	 * RestaurantMainMenuFragment.
@@ -69,6 +66,19 @@ public class RestaurantMainMenuListener extends SuperListener implements
 		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
+				switch (i) {
+				case 0:
+					FoodMenuListFragment.setMEAL("Breakfast");
+					break;
+				case 1:
+					FoodMenuListFragment.setMEAL("Lunch");
+					break;
+				case 2:
+					FoodMenuListFragment.setMEAL("Dinner");
+					break;
+				default:
+					break;
+				}
 				mWrapper.changeFragment(new FoodMenuListFragment(),
 						new FoodMenuListListener(mWrapper));
 			}

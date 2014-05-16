@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
 public class RestaurantListListener extends SuperListener implements
 		OnItemClickListener {
@@ -30,9 +31,8 @@ public class RestaurantListListener extends SuperListener implements
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		String chosenRestaurant = parent.getItemAtPosition(position).toString();
-		chosenRestaurant = chosenRestaurant.substring(16,
-				chosenRestaurant.indexOf(","));
+		TextView restaurantName = (TextView) (view.findViewById(R.id.RestaurantName));
+		String chosenRestaurant = restaurantName.getText().toString();
 		Log.e("ListView", "restuarant: " + chosenRestaurant);
 		mWrapper.getActionBar().setTitle(chosenRestaurant);
 		mWrapper.changeFragment(new RestaurantMainMenuFragment(),

@@ -6,17 +6,30 @@ import ucsd.cs110.splurge.model.FoodItem;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+/**
+ * 
+ * @author Dan Thai
+ * 
+ */
 public class DiningOutFragment extends SuperFragment {
-
+	/**
+	 * 
+	 */
 	private ListView mListView;
-	// Adapter to create list entries in ListView
+	/**
+	 * Adapter to create list entries in ListView
+	 */
 	private FoodMenuAdapter adapter;
-	private ArrayList<FoodItem> mSelectedFood;
-	private ArrayList<FoodItem> mSelected;
+	private ArrayList<FoodItem> mSelectedFood = new ArrayList<FoodItem>();
+
+	/**
+ * 
+ */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -34,20 +47,37 @@ public class DiningOutFragment extends SuperFragment {
 	}
 
 	public ArrayList<FoodItem> getFoodItemsSelected() {
-		return mSelected;
+		return FoodMenuListFragment.selectedFood;
 	}
 
-	/*
+	/**
 	 * set listener for list entries
+	 * 
+	 * @param listener
 	 */
 	public void setFoodMenuListListener(OnItemClickListener listener) {
 		((ListView) getView().findViewById(R.id.dining_out_list))
 				.setOnItemClickListener(listener);
 	}
 
+	/**
+	 * 
+	 * @param listener
+	 */
+	public void setDiningOutButtonListener(OnClickListener listener) {
+		getView().findViewById(R.id.add_to_order).setOnClickListener(listener);
+		getView().findViewById(R.id.delivery).setOnClickListener(listener);
+		getView().findViewById(R.id.take_out).setOnClickListener(listener);
+		getView().findViewById(R.id.remove_items).setOnClickListener(listener);
+	}
+
+	/**
+	 * 
+	 */
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onStart() {
 		setFoodMenuListListener((OnItemClickListener) mSuperListener);
-		super.onSaveInstanceState(outState);
+		setDiningOutButtonListener((OnClickListener) mSuperListener);
+		super.onStart();
 	}
 }

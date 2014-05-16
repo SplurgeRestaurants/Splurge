@@ -6,36 +6,53 @@ import ucsd.cs110.splurge.model.FoodItem;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+/**
+ * 
+ * @author Dan Thai
+ * 
+ */
 public class FoodMenuListFragment extends SuperFragment {
-	private static final int DINNER = 2;
-	private static final int LUNCH = 1;
-	private static final int BREAKFAST = 0;
-	// List
+	private static final String DINNER = "Dinner";
+	private static final String LUNCH = "Lunch";
+	private static final String BREAKFAST = "Breakfast";
+	private static String MEAL;
+	/**
+	 * 
+	 */
 	private ListView mListView;
-	// Adapter to create list entries in ListView
+	/**
+	 * Adapter to create list entries in ListView
+	 */
 	FoodMenuAdapter adapter;
-	static ArrayList<FoodItem> selectedFood = new ArrayList<FoodItem>();
-	// save position of the chosen food item
+	/**
+	 * save position of the chosen food item
+	 */
 	static String FOOD_ITEM_POSITION;
-	// populate with selected food items
-	static ArrayList<FoodItem> selected = new ArrayList<FoodItem>();
-	// populated with food items from a specified menu
+	/**
+	 * populate with selected food items
+	 */
+	static ArrayList<FoodItem> selectedFood = new ArrayList<FoodItem>();
+	/**
+	 * populated with food items from a specified menu
+	 */
 	static ArrayList<FoodItem> data;
+
+	/**
+	 * 
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// Get layout
 		View ret = inflater.inflate(R.layout.food_menu_list, container, false);
-		// get id for ListView
 		mListView = (ListView) ret.findViewById(R.id.food_list);
-		// get the specified meal option
 		// TODO (trtucker) refer to menus by string name, get menu from model
-		int meal = 0;
+		String meal = getMEAL();
 		switch (meal) {
 		case BREAKFAST:
 			FoodMenuListFragment.data = getBreakfastMenuItem();
@@ -47,7 +64,6 @@ public class FoodMenuListFragment extends SuperFragment {
 			FoodMenuListFragment.data = getDinnerMenuItem();
 			break;
 		default:
-			FoodMenuListFragment.data = null;
 			break;
 		}
 		adapter = new FoodMenuAdapter(getActivity(), R.layout.menu_item,
@@ -56,8 +72,10 @@ public class FoodMenuListFragment extends SuperFragment {
 		return ret;
 	}
 
-	/*
+	/**
 	 * Populate list with breakfast items
+	 * 
+	 * @return
 	 */
 	public ArrayList<FoodItem> getBreakfastMenuItem() {
 		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
@@ -74,8 +92,10 @@ public class FoodMenuListFragment extends SuperFragment {
 		return food;
 	}
 
-	/*
+	/**
 	 * Populate list with lunch items
+	 * 
+	 * @return
 	 */
 	public ArrayList<FoodItem> getLunchMenuItem() {
 		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
@@ -92,8 +112,10 @@ public class FoodMenuListFragment extends SuperFragment {
 		return food;
 	}
 
-	/*
+	/**
 	 * Populate list with dinner items
+	 * 
+	 * @return
 	 */
 
 	public ArrayList<FoodItem> getDinnerMenuItem() {
@@ -111,15 +133,40 @@ public class FoodMenuListFragment extends SuperFragment {
 		return food;
 	}
 
-	// set listener for list entries
-	public void setListListener(OnItemClickListener listener) {
+	/**
+	 * set listener for list entries
+	 * 
+	 * @param listener
+	 */
+	public void setFoodMenuListListener(OnItemClickListener listener) {
 		((ListView) getView().findViewById(R.id.food_list))
 				.setOnItemClickListener(listener);
 	}
 
+	/**
+	 * 
+	 * @param listener
+	 */
+	public void setFoodMenuButtonListener(OnClickListener listener) {
+		getView().findViewById(R.id.add_to_order_button).setOnClickListener(
+				listener);
+	}
+
+	/**
+	 * 
+	 */
 	@Override
 	public void onStart() {
-		setListListener((OnItemClickListener) mSuperListener);
+		setFoodMenuListListener((OnItemClickListener) mSuperListener);
+		setFoodMenuButtonListener((OnClickListener) mSuperListener);
 		super.onStart();
+	}
+
+	public static String getMEAL() {
+		return MEAL;
+	}
+
+	public static void setMEAL(String mEAL) {
+		MEAL = mEAL;
 	}
 }

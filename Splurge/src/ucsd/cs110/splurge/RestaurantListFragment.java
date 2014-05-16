@@ -1,21 +1,19 @@
 package ucsd.cs110.splurge;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
+import ucsd.cs110.splurge.model.Restaurant;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 public class RestaurantListFragment extends SuperFragment {
 	// List
 	private ListView mListView;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -23,23 +21,19 @@ public class RestaurantListFragment extends SuperFragment {
 	 * android.view.ViewGroup, android.os.Bundle) Populate the list with
 	 * restaurants
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// get layout
-		View ret = inflater.inflate(R.layout.activity_home_screen, container,
-				false);
-		// get id for ListView
+		View ret = inflater.inflate(R.layout.restaurant_list, container, false);
 		mListView = (ListView) ret.findViewById(R.id.list);
-		// Populate list with restaurant data
-		List<? extends Map<String, ?>> data = (List<? extends Map<String, ?>>) GetSampleData();
-		// adapter formats list entries in list
-		SimpleAdapter adapter = new SimpleAdapter(getActivity(), data,
-				R.layout.fragment_home_screen, new String[] { "RestaurantIcon",
-						"RestaurantName" }, new int[] { R.id.RestaurantIcon,
-						R.id.RestaurantName });
+		ArrayList<Restaurant> data = GetSampleData();
+		// SimpleAdapter adapter = new SimpleAdapter(getActivity(), data,
+		// R.layout.restaurant_list_entry, new String[] {
+		// "RestaurantIcon", "RestaurantName" }, new int[] {
+		// R.id.RestaurantIcon, R.id.RestaurantName });
+		RestaurantListAdapter adapter = new RestaurantListAdapter(
+				getActivity(), R.layout.restaurant_list_entry, data);
 		mListView.setAdapter(adapter);
 		return ret;
 	}
@@ -47,22 +41,19 @@ public class RestaurantListFragment extends SuperFragment {
 	/*
 	 * Get the list of restaurants
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	List<Map> GetSampleData() {
-		List<Map> list = new ArrayList<Map>();
+	ArrayList<Restaurant> GetSampleData() {
+		ArrayList<Restaurant> ret = new ArrayList<Restaurant>();
 
-		Map map = new HashMap();
-		map.put("RestaurantIcon", R.drawable.logo);
-		map.put("RestaurantName", "Bistro");
-		list.add(map);
+		Restaurant bistro = new Restaurant("Bistro");
+		bistro.setImage(R.drawable.logo);
+		ret.add(bistro);
 
 		for (int i = 0; i < 10; i++) {
-			map = new HashMap();
-			map.put("RestaurantIcon", R.drawable.ic_launcher);
-			map.put("RestaurantName", "Fake Restaurant" + i);
-			list.add(map);
+			Restaurant res = new Restaurant("Fake Restaurant " + i);
+			res.setImage(R.drawable.ic_launcher);
+			ret.add(res);
 		}
-		return list;
+		return ret;
 	}
 
 	// set the listener for list entries
