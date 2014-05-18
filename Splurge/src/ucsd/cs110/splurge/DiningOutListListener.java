@@ -104,8 +104,12 @@ public class DiningOutListListener extends SuperListener implements
 			}
 		}
 		// TODO (danthai) change to a page refresh
-		mWrapper.changeFragment(new DiningOutFragment(),
-				new DiningOutListListener(mWrapper));
+		// ViewGroup vg = (ViewGroup)
+		// mWrapper.findViewById(R.id.dining_out_list);
+		// vg.invalidate();
+		// mWrapper.changeFragment(new DiningOutFragment(),
+		// new DiningOutListListener(mWrapper));
+		DiningOutFragment.refresh();
 	}
 
 	/**

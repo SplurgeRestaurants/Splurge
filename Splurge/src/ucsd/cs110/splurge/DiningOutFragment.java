@@ -23,7 +23,7 @@ public class DiningOutFragment extends SuperFragment {
 	/**
 	 * Adapter to create list entries in ListView
 	 */
-	private FoodMenuAdapter adapter;
+	private static FoodMenuAdapter adapter;
 	/**
 	 * List of food items that were selected from the food menu
 	 */
@@ -86,5 +86,10 @@ public class DiningOutFragment extends SuperFragment {
 		setDiningOutListListener((OnItemClickListener) mSuperListener);
 		setDiningOutButtonListener((OnClickListener) mSuperListener);
 		super.onStart();
+	}
+
+	public static void refresh() {
+		adapter.notifyDataSetChanged();
+
 	}
 }
