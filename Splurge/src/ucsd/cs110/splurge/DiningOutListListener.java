@@ -1,12 +1,18 @@
 package ucsd.cs110.splurge;
 
-import android.util.Log;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
+/**
+ * Listener class for DiningOutFragment
+ */
 public class DiningOutListListener extends SuperListener implements
 		OnItemClickListener, OnClickListener {
 
@@ -21,16 +27,21 @@ public class DiningOutListListener extends SuperListener implements
 		super(wrapper);
 	}
 
+	/**
+	 * When a list entry is clicked on display the correct food item
+	 */
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		// starts the FoodItemActivity
-		// save position of food item from menu
-		Log.e("FoodMenuListListener", "Position is " + position);
-		// TODO (trtucker) tell FoodItemFragment which item to display
+		Intent intent = new Intent();
+		intent.putExtra(FoodMenuListFragment.FOOD_ITEM_POSITION, position);
+		mWrapper.setIntent(intent);
 		mWrapper.changeFragment(new FoodItemFragment(), null);
 	}
 
+	/**
+	 * Call the appropriate method for the button clicked
+	 */
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -52,21 +63,39 @@ public class DiningOutListListener extends SuperListener implements
 
 	}
 
+	/**
+	 * Place holder method. This should send a request for take out?
+	 */
 	public void notifyTakeOut() {
+		// TODO
 		Toast.makeText(mWrapper, "Take Out Successful", Toast.LENGTH_SHORT)
 				.show();
 	}
 
+	/**
+	 * Place holder method. This should send a request for delivery?
+	 */
 	public void notifyDelivery() {
+		// TODO
 		Toast.makeText(mWrapper, "Delivery Successful", Toast.LENGTH_SHORT)
 				.show();
 	}
 
+	/**
+	 * Go to the correct Menu, if no menu was previously chosen open a dialog
+	 */
 	public void goToFoodMenu() {
-		mWrapper.changeFragment(new FoodMenuListFragment(),
-				new FoodMenuListListener(mWrapper));
+		if (FoodMenuListFragment.getMEAL() == null) {
+			openFoodMenuDialog();
+		} else {
+			mWrapper.changeFragment(new FoodMenuListFragment(),
+					new FoodMenuListListener(mWrapper));
+		}
 	}
 
+	/**
+	 * Remove the selected items from the selectedFood array
+	 */
 	public void removeSelectedFoodItems() {
 		for (int i = 0; i < FoodMenuListFragment.selectedFood.size(); i++) {
 			if (FoodMenuListFragment.selectedFood.get(i).isSelected()) {
@@ -77,5 +106,35 @@ public class DiningOutListListener extends SuperListener implements
 		// TODO (danthai) change to a page refresh
 		mWrapper.changeFragment(new DiningOutFragment(),
 				new DiningOutListListener(mWrapper));
+	}
+
+	/**
+	 * Creates dialog for food menu options
+	 */
+	private void openFoodMenuDialog() {
+		Builder dialog = new AlertDialog.Builder(mWrapper);
+		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialoginterface, int i) {
+				switch (i) {
+				case 0:
+					FoodMenuListFragment.setMEAL("Breakfast");
+					break;
+				case 1:
+					FoodMenuListFragment.setMEAL("Lunch");
+					break;
+				case 2:
+					FoodMenuListFragment.setMEAL("Dinner");
+					break;
+				default:
+					break;
+				}
+				mWrapper.changeFragment(new FoodMenuListFragment(),
+						new FoodMenuListListener(mWrapper));
+			}
+		};
+		dialog.setTitle(R.string.menu_title);
+		dialog.setItems(R.array.menus, diaIn);
+		dialog.show();
 	}
 }

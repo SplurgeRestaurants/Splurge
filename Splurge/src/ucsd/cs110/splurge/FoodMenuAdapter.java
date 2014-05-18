@@ -29,6 +29,8 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 	private Context mContext;
 
 	/**
+	 * Create a new FoodMenuAdapter designed to bind the views to create a list
+	 * entry
 	 * 
 	 * @param context
 	 *            current The current context
@@ -48,13 +50,28 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 	 * Class to hold data for the views
 	 */
 	private class ViewHolder {
+		/**
+		 * Name of the food item
+		 */
 		TextView name;
+		/**
+		 * Price of the food item
+		 */
 		TextView price;
+		/**
+		 * Check box corresponding to the food item
+		 */
 		CheckBox cb;
+		/**
+		 * Image of the food item
+		 */
 		ImageView image;
 	}
 
 	/**
+	 * Binds the views together into a single view and set the correct data for
+	 * each view
+	 * 
 	 * @param position
 	 *            Location of the food item in the menu
 	 * @param convertView
@@ -68,30 +85,25 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 		LayoutInflater vi = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		convertView = vi.inflate(R.layout.menu_item, null);
-		// Get view from id
 		holder = new ViewHolder();
 		holder.name = (TextView) convertView.findViewById(R.id.MenuName);
 		holder.cb = (CheckBox) convertView.findViewById(R.id.checkBox1);
 		holder.image = (ImageView) convertView.findViewById(R.id.MenuIcon);
 		holder.price = (TextView) convertView.findViewById(R.id.MenuPrice);
 		convertView.setTag(holder);
-		// create listener for check box
 		holder.cb.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				CheckBox cb = (CheckBox) v;
 				FoodItem food = (FoodItem) cb.getTag();
 				Log.e("FoodMenuAdapter", "item should be checked");
-				// check to see if the check box was clicked or not
 				food.setSelected(cb.isChecked());
 			}
 		});
-		// get correct food item from position in menu
 		FoodItem food = foodItems.get(position);
-		// set values for the views
 		holder.name.setText(food.getName());
 		holder.image.setImageResource(food.getImage());
-		holder.price.setText(Integer.toString(food.getPrice()));
+		holder.price.setText("$" + Integer.toString(food.getPrice()));
 		holder.cb.setChecked(food.isSelected());
 		holder.cb.setTag(food);
 

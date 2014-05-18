@@ -12,17 +12,28 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 /**
- * 
- * @author Dan Thai
+ * Display the list of food items from the appropriate menu
  * 
  */
 public class FoodMenuListFragment extends SuperFragment {
+	/**
+	 * Enumerator for MEAL
+	 */
 	private static final String DINNER = "Dinner";
+	/**
+	 * Enumerator for MEAL
+	 */
 	private static final String LUNCH = "Lunch";
+	/**
+	 * Enumerator for MEAL
+	 */
 	private static final String BREAKFAST = "Breakfast";
+	/**
+	 * Store which meal was chosen
+	 */
 	private static String MEAL;
 	/**
-	 * 
+	 * Store the reference to the listview
 	 */
 	private ListView mListView;
 	/**
@@ -43,7 +54,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	static ArrayList<FoodItem> data;
 
 	/**
-	 * 
+	 * Display the correct menu
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,7 +63,8 @@ public class FoodMenuListFragment extends SuperFragment {
 		View ret = inflater.inflate(R.layout.food_menu_list, container, false);
 		mListView = (ListView) ret.findViewById(R.id.food_list);
 		// TODO (trtucker) refer to menus by string name, get menu from model
-		String meal = getMEAL();
+		String meal = getMEAL(); // (dqthai) my temp fix so I can get screen
+									// shots for artifact
 		switch (meal) {
 		case BREAKFAST:
 			FoodMenuListFragment.data = getBreakfastMenuItem();
@@ -75,7 +87,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	/**
 	 * Populate list with breakfast items
 	 * 
-	 * @return
+	 * @return Array of food items from the breakfast menu.
 	 */
 	public ArrayList<FoodItem> getBreakfastMenuItem() {
 		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
@@ -95,7 +107,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	/**
 	 * Populate list with lunch items
 	 * 
-	 * @return
+	 * @return Array of food items from the lunch menu.
 	 */
 	public ArrayList<FoodItem> getLunchMenuItem() {
 		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
@@ -115,7 +127,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	/**
 	 * Populate list with dinner items
 	 * 
-	 * @return
+	 * @return Array of food items from the dinner menu.
 	 */
 
 	public ArrayList<FoodItem> getDinnerMenuItem() {
@@ -137,6 +149,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	 * set listener for list entries
 	 * 
 	 * @param listener
+	 *            Listener to be set
 	 */
 	public void setFoodMenuListListener(OnItemClickListener listener) {
 		((ListView) getView().findViewById(R.id.food_list))
@@ -146,6 +159,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	/**
 	 * 
 	 * @param listener
+	 *            Listener to be set
 	 */
 	public void setFoodMenuButtonListener(OnClickListener listener) {
 		getView().findViewById(R.id.add_to_order_button).setOnClickListener(
@@ -153,7 +167,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	}
 
 	/**
-	 * 
+	 * Set mSuperListener to the buttons and list entries
 	 */
 	@Override
 	public void onStart() {
@@ -162,10 +176,21 @@ public class FoodMenuListFragment extends SuperFragment {
 		super.onStart();
 	}
 
+	/**
+	 * Get meal
+	 * 
+	 * @return String of meal
+	 */
 	public static String getMEAL() {
 		return MEAL;
 	}
 
+	/**
+	 * Set meal
+	 * 
+	 * @param mEAL
+	 *            Meal to be set
+	 */
 	public static void setMEAL(String mEAL) {
 		MEAL = mEAL;
 	}

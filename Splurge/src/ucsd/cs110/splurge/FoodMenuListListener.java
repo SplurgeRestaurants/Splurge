@@ -7,6 +7,10 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+/**
+ * Listener class for FoodMenuListFragment
+ * 
+ */
 public class FoodMenuListListener extends SuperListener implements
 		OnItemClickListener, OnClickListener {
 
@@ -21,6 +25,9 @@ public class FoodMenuListListener extends SuperListener implements
 		super(wrapper);
 	}
 
+	/**
+	 * Display the correct food menu item on the list
+	 */
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
@@ -32,15 +39,23 @@ public class FoodMenuListListener extends SuperListener implements
 		mWrapper.changeFragment(new FoodItemFragment(), null);
 	}
 
+	/**
+	 * Call the correct method for the button
+	 */
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		default:
+		case R.id.add_to_order_button:
 			getSelected();
+		default:
 			break;
 		}
 	}
 
+	/**
+	 * Scan the list for selected items and add them to the selectedFood array.
+	 * Go to the DiningOut page
+	 */
 	public void getSelected() {
 		for (int i = 0; i < FoodMenuListFragment.data.size(); i++) {
 			if (FoodMenuListFragment.data.get(i).isSelected()) {

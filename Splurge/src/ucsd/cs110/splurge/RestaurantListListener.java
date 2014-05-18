@@ -6,6 +6,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
+/**
+ * Listener for the RestaurantListFragment class
+ * 
+ */
 public class RestaurantListListener extends SuperListener implements
 		OnItemClickListener {
 
@@ -20,18 +24,14 @@ public class RestaurantListListener extends SuperListener implements
 		super(wrapper);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget
-	 * .AdapterView, android.view.View, int, long) Saves the chosen restaurant
-	 * in the intent and starts RestaurantMainMenuActivity
+	/**
+	 * Display the main menu for the correct restaurant
 	 */
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		TextView restaurantName = (TextView) (view.findViewById(R.id.RestaurantName));
+		TextView restaurantName = (TextView) (view
+				.findViewById(R.id.RestaurantName));
 		String chosenRestaurant = restaurantName.getText().toString();
 		Log.e("ListView", "restuarant: " + chosenRestaurant);
 		mWrapper.getActionBar().setTitle(chosenRestaurant);

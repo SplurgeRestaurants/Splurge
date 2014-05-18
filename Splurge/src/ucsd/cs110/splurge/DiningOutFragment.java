@@ -12,33 +12,32 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 /**
- * 
- * @author Dan Thai
+ * Fragment that displays the Dining out features
  * 
  */
 public class DiningOutFragment extends SuperFragment {
 	/**
-	 * 
+	 * Reference to the ListView
 	 */
 	private ListView mListView;
 	/**
 	 * Adapter to create list entries in ListView
 	 */
 	private FoodMenuAdapter adapter;
+	/**
+	 * List of food items that were selected from the food menu
+	 */
 	private ArrayList<FoodItem> mSelectedFood = new ArrayList<FoodItem>();
 
 	/**
- * 
- */
+	 * Display the layout and populate the list with food items, if any
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// get layout
 		View ret = inflater.inflate(R.layout.dining_out, container, false);
-		// get id for ListView
 		mListView = (ListView) ret.findViewById(R.id.dining_out_list);
-		// get data
 		mSelectedFood = getFoodItemsSelected();
 		adapter = new FoodMenuAdapter(getActivity(), R.layout.menu_item,
 				mSelectedFood);
@@ -46,23 +45,31 @@ public class DiningOutFragment extends SuperFragment {
 		return (ret);
 	}
 
+	/**
+	 * Get the food item selected from FoodMenuListFragment
+	 * 
+	 * @return An array of food items selected by the user
+	 */
 	public ArrayList<FoodItem> getFoodItemsSelected() {
 		return FoodMenuListFragment.selectedFood;
 	}
 
 	/**
-	 * set listener for list entries
+	 * Set listener for list entries
 	 * 
 	 * @param listener
+	 *            Listener to be set
 	 */
-	public void setFoodMenuListListener(OnItemClickListener listener) {
+	public void setDiningOutListListener(OnItemClickListener listener) {
 		((ListView) getView().findViewById(R.id.dining_out_list))
 				.setOnItemClickListener(listener);
 	}
 
 	/**
+	 * Set listener for the buttons on the page
 	 * 
 	 * @param listener
+	 *            Listener to be set
 	 */
 	public void setDiningOutButtonListener(OnClickListener listener) {
 		getView().findViewById(R.id.add_to_order).setOnClickListener(listener);
@@ -72,11 +79,11 @@ public class DiningOutFragment extends SuperFragment {
 	}
 
 	/**
-	 * 
+	 * set the mSuperListener to the buttons and list entries
 	 */
 	@Override
 	public void onStart() {
-		setFoodMenuListListener((OnItemClickListener) mSuperListener);
+		setDiningOutListListener((OnItemClickListener) mSuperListener);
 		setDiningOutButtonListener((OnClickListener) mSuperListener);
 		super.onStart();
 	}

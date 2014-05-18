@@ -13,12 +13,12 @@ import android.widget.TextView;
 
 /**
  * 
- * Creates a custom view for the food menu entries in the food menu.
+ * Creates a custom view for the restaurant entries in the home screen.
  * 
  */
 public class RestaurantListAdapter extends ArrayAdapter<Restaurant> {
 	/**
-	 * Populate with food items from the specified menu
+	 * Populate with restaurants
 	 */
 	private ArrayList<Restaurant> restaurants;
 	/**
@@ -33,7 +33,7 @@ public class RestaurantListAdapter extends ArrayAdapter<Restaurant> {
 	 * @param resource
 	 *            ID for layout file
 	 * @param Restaurants
-	 *            ArrayList of food items for the food menu entries
+	 *            ArrayList of restaurants
 	 */
 	public RestaurantListAdapter(Context context, int resource,
 			ArrayList<Restaurant> Restaurants) {
@@ -46,11 +46,20 @@ public class RestaurantListAdapter extends ArrayAdapter<Restaurant> {
 	 * Class to hold data for the views
 	 */
 	private class ViewHolder {
+		/**
+		 * Name of the restaurant
+		 */
 		TextView name;
+		/**
+		 * Image of the restaurant
+		 */
 		ImageView image;
 	}
 
 	/**
+	 * Binds the views into a single view and set the correct information for
+	 * each of the views
+	 * 
 	 * @param position
 	 *            Location of the food item in the menu
 	 * @param convertView

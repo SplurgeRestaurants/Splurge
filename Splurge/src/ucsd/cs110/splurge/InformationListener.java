@@ -4,6 +4,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+/**
+ * Listener for the InformationFragment
+ * 
+ */
 public class InformationListener extends SuperListener implements
 		OnClickListener {
 
@@ -18,15 +22,19 @@ public class InformationListener extends SuperListener implements
 		super(context);
 	}
 
+	/**
+	 * Call the correct method for each button
+	 */
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.hours:
-			// TODO get hours from data base and show new page or dialog
+			// TODO (dqthai) get hours from data base and show new page or
+			// dialog
 			Log.e("InformationListener", "Hours Button Works");
 			break;
 		case R.id.directions:
-			// TODO display google maps?
+			// TODO (dqthai) display google maps?
 			Log.e("InformationListener", "Direction Button Works");
 			break;
 		}

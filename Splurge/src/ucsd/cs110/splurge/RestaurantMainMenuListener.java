@@ -6,6 +6,10 @@ import android.content.DialogInterface;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+/**
+ * Listener for the RestaurantMainMenuFragment
+ * 
+ */
 public class RestaurantMainMenuListener extends SuperListener implements
 		OnClickListener {
 
@@ -20,11 +24,12 @@ public class RestaurantMainMenuListener extends SuperListener implements
 		super(context);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Buttons go to the correct page
 	 * 
-	 * @see android.view.View.OnClickListener#onClick(android.view.View) Makes
-	 * sure the button opens the correct dialog
+	 * @param v
+	 *            View being clicked on
+	 * 
 	 */
 	@Override
 	public void onClick(View v) {
@@ -46,7 +51,9 @@ public class RestaurantMainMenuListener extends SuperListener implements
 		}
 	}
 
-	// Creates dialog for reservation options
+	/**
+	 * Creates dialog for reservation options
+	 */
 	private void openReserveDialog() {
 		Builder dialog = new AlertDialog.Builder(mWrapper);
 		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
@@ -60,7 +67,9 @@ public class RestaurantMainMenuListener extends SuperListener implements
 		dialog.show();
 	}
 
-	// Creates dialog for food menu options
+	/**
+	 * Creates dialog for food menu options
+	 */
 	private void openFoodMenuDialog() {
 		Builder dialog = new AlertDialog.Builder(mWrapper);
 		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
