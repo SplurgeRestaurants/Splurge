@@ -63,7 +63,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="ucsd.cs110.splurge.DeliveryFormFragment"
+            android:name="ucsd.cs110.splurge.DiningOutFormFragment"
             android:label="@string/title_activity_delivery_form_fragment" >
         </activity>
     </application>

@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class DeliveryFormFragment extends SuperFragment {
+public class DiningOutFormFragment extends SuperFragment {
 	private ListView mListView;
 	private TextView mFormName;
 	private TextView mFormEmail;
@@ -43,6 +43,16 @@ public class DeliveryFormFragment extends SuperFragment {
 		mFormZipCode = (TextView) ret.findViewById(R.id.form_zip_code);
 		mFormPlaceOrderButton = (Button) ret
 				.findViewById(R.id.place_order_button);
+		String diningOutType = getActivity().getIntent()
+				.getCharSequenceExtra(DiningOutListListener.DINING_OUT_TYPE)
+				.toString();
+		if (diningOutType.compareTo("Take Out") == 0) {
+			((View) mFormStreetAddress.getParent()).setVisibility(View.GONE);
+			((View) mFormAptNumber.getParent()).setVisibility(View.GONE);
+			((View) mFormCity.getParent()).setVisibility(View.GONE);
+			((View) mFormState.getParent()).setVisibility(View.GONE);
+			((View) mFormZipCode.getParent()).setVisibility(View.GONE);
+		}
 		mOrder = getOrder();
 		adapter = new FoodMenuAdapter(getActivity(),
 				R.layout.order_summary_item, mOrder);
@@ -54,7 +64,7 @@ public class DeliveryFormFragment extends SuperFragment {
 		return DiningOutFragment.getFoodItemsSelected();
 	}
 
-	public void setDeliveryButtonListener(OnClickListener listener) {
+	public void setDiningOutFormButtonListener(OnClickListener listener) {
 		getView().findViewById(R.id.place_order_button).setOnClickListener(
 				listener);
 	}
@@ -73,7 +83,7 @@ public class DeliveryFormFragment extends SuperFragment {
 	 */
 	@Override
 	public void onStart() {
-		setDeliveryButtonListener((OnClickListener) mSuperListener);
+		setDiningOutFormButtonListener((OnClickListener) mSuperListener);
 		super.onStart();
 	}
 }

@@ -3,7 +3,7 @@ package ucsd.cs110.splurge;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class DeliveryFormListener extends SuperListener implements
+public class DiningOutFormListener extends SuperListener implements
 		OnClickListener {
 	/**
 	 * Create a new DeliveryFormListener, designed to listen to a
@@ -12,7 +12,7 @@ public class DeliveryFormListener extends SuperListener implements
 	 * @param wrapper
 	 *            Context used for spawning a new Activity
 	 */
-	public DeliveryFormListener(WrapperActivity wrapper) {
+	public DiningOutFormListener(WrapperActivity wrapper) {
 		super(wrapper);
 	}
 

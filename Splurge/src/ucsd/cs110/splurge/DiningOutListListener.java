@@ -16,6 +16,8 @@ import android.widget.AdapterView.OnItemClickListener;
 public class DiningOutListListener extends SuperListener implements
 		OnItemClickListener, OnClickListener {
 
+	static String DINING_OUT_TYPE;
+
 	/**
 	 * Create a new DiningOutListListener, designed to listen to a
 	 * DiningOutListFragment.
@@ -67,7 +69,10 @@ public class DiningOutListListener extends SuperListener implements
 	 * Place holder method. This should send a request for take out?
 	 */
 	public void notifyTakeOut() {
-		// TODO
+		Intent intent = new Intent();
+		intent.putExtra(DINING_OUT_TYPE, "Take Out");
+		mWrapper.setIntent(intent);
+		mWrapper.changeFragment(new DiningOutFormFragment(), null);
 		Log.e("DiningOutListener", "Take Out button works");
 	}
 
@@ -75,7 +80,10 @@ public class DiningOutListListener extends SuperListener implements
 	 * Place holder method. This should send a request for delivery?
 	 */
 	public void notifyDelivery() {
-		mWrapper.changeFragment(new DeliveryFormFragment(), null);
+		Intent intent = new Intent();
+		intent.putExtra(DINING_OUT_TYPE, "Delivery");
+		mWrapper.setIntent(intent);
+		mWrapper.changeFragment(new DiningOutFormFragment(), null);
 		Log.e("DiningOutListener", "Delivery button works");
 	}
 
