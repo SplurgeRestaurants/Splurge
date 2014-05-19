@@ -72,7 +72,8 @@ public class DiningOutListListener extends SuperListener implements
 		Intent intent = new Intent();
 		intent.putExtra(DINING_OUT_TYPE, "Take Out");
 		mWrapper.setIntent(intent);
-		mWrapper.changeFragment(new DiningOutFormFragment(), null);
+		mWrapper.changeFragment(new DiningOutFormFragment(),
+				new DiningOutFormListener(mWrapper));
 		Log.e("DiningOutListener", "Take Out button works");
 	}
 
@@ -83,7 +84,8 @@ public class DiningOutListListener extends SuperListener implements
 		Intent intent = new Intent();
 		intent.putExtra(DINING_OUT_TYPE, "Delivery");
 		mWrapper.setIntent(intent);
-		mWrapper.changeFragment(new DiningOutFormFragment(), null);
+		mWrapper.changeFragment(new DiningOutFormFragment(),
+				new DiningOutFormListener(mWrapper));
 		Log.e("DiningOutListener", "Delivery button works");
 	}
 

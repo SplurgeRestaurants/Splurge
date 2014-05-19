@@ -1,5 +1,6 @@
 package ucsd.cs110.splurge;
 
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -20,6 +21,7 @@ public class DiningOutFormListener extends SuperListener implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.place_order_button:
+			Log.e("DiningOutFormListener", "button works");
 			// TODO (dqthai) submit the form to the web site
 			break;
 		default:
