@@ -67,7 +67,6 @@ public class FoodMenuListListener extends SuperListener implements
 		for (int i = 0; i < FoodMenuListFragment.selectedFood.size(); i++) {
 			FoodMenuListFragment.selectedFood.get(i).setSelected(false);
 		}
-		// TODO (dqthai) change to view refresh rather than new view
 		mWrapper.changeFragment(new DiningOutFragment(),
 				new DiningOutListListener(mWrapper));
 	}

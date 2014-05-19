@@ -50,7 +50,7 @@ public class DiningOutFragment extends SuperFragment {
 	 * 
 	 * @return An array of food items selected by the user
 	 */
-	public ArrayList<FoodItem> getFoodItemsSelected() {
+	public static ArrayList<FoodItem> getFoodItemsSelected() {
 		return FoodMenuListFragment.selectedFood;
 	}
 
@@ -88,6 +88,9 @@ public class DiningOutFragment extends SuperFragment {
 		super.onStart();
 	}
 
+	/**
+	 * Reload the ListView when the contents of the list has been changed
+	 */
 	public static void refresh() {
 		adapter.notifyDataSetChanged();
 

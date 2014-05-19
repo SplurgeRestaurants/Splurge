@@ -4,11 +4,11 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
 
 /**
  * Listener class for DiningOutFragment
@@ -68,17 +68,15 @@ public class DiningOutListListener extends SuperListener implements
 	 */
 	public void notifyTakeOut() {
 		// TODO
-		Toast.makeText(mWrapper, "Take Out Successful", Toast.LENGTH_SHORT)
-				.show();
+		Log.e("DiningOutListener", "Take Out button works");
 	}
 
 	/**
 	 * Place holder method. This should send a request for delivery?
 	 */
 	public void notifyDelivery() {
-		// TODO
-		Toast.makeText(mWrapper, "Delivery Successful", Toast.LENGTH_SHORT)
-				.show();
+		mWrapper.changeFragment(new DeliveryFormFragment(), null);
+		Log.e("DiningOutListener", "Delivery button works");
 	}
 
 	/**
@@ -103,12 +101,6 @@ public class DiningOutListListener extends SuperListener implements
 				i = -1;
 			}
 		}
-		// TODO (danthai) change to a page refresh
-		// ViewGroup vg = (ViewGroup)
-		// mWrapper.findViewById(R.id.dining_out_list);
-		// vg.invalidate();
-		// mWrapper.changeFragment(new DiningOutFragment(),
-		// new DiningOutListListener(mWrapper));
 		DiningOutFragment.refresh();
 	}
 

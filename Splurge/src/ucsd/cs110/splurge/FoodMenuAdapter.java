@@ -27,6 +27,10 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 	 * Store the current context
 	 */
 	private Context mContext;
+	/**
+	 * Layout to use
+	 */
+	private int resource;
 
 	/**
 	 * Create a new FoodMenuAdapter designed to bind the views to create a list
@@ -44,6 +48,7 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 		super(context, resource, foodItems);
 		mContext = context;
 		this.foodItems = foodItems;
+		this.resource = resource;
 	}
 
 	/**
@@ -70,7 +75,7 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 
 	/**
 	 * Binds the views together into a single view and set the correct data for
-	 * each view
+	 * each view. Catches the error if there is not check box view.
 	 * 
 	 * @param position
 	 *            Location of the food item in the menu
@@ -81,32 +86,39 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup Parent) {
-		ViewHolder holder = null;
 		LayoutInflater vi = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		convertView = vi.inflate(R.layout.menu_item, null);
-		holder = new ViewHolder();
-		holder.name = (TextView) convertView.findViewById(R.id.MenuName);
-		holder.cb = (CheckBox) convertView.findViewById(R.id.checkBox1);
-		holder.image = (ImageView) convertView.findViewById(R.id.MenuIcon);
-		holder.price = (TextView) convertView.findViewById(R.id.MenuPrice);
+		convertView = vi.inflate(resource, null);
+		ViewHolder holder = new ViewHolder();
+		holder.name = (TextView) convertView.findViewById(R.id.FoodName);
+		holder.image = (ImageView) convertView.findViewById(R.id.FoodIcon);
+		holder.price = (TextView) convertView.findViewById(R.id.FoodPrice);
+		try {
+			holder.cb = (CheckBox) convertView.findViewById(R.id.checkBox1);
+			holder.cb.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					CheckBox cb = (CheckBox) v;
+					FoodItem food = (FoodItem) cb.getTag();
+					Log.e("FoodMenuAdapter", food.getName()
+							+ " should be checked");
+					food.setSelected(cb.isChecked());
+				}
+			});
+		} catch (Exception e) {
+
+		}
 		convertView.setTag(holder);
-		holder.cb.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CheckBox cb = (CheckBox) v;
-				FoodItem food = (FoodItem) cb.getTag();
-				Log.e("FoodMenuAdapter", "item should be checked");
-				food.setSelected(cb.isChecked());
-			}
-		});
 		FoodItem food = foodItems.get(position);
 		holder.name.setText(food.getName());
 		holder.image.setImageResource(food.getImage());
 		holder.price.setText("$" + Integer.toString(food.getPrice()));
-		holder.cb.setChecked(food.isSelected());
-		holder.cb.setTag(food);
+		try {
+			holder.cb.setChecked(food.isSelected());
+			holder.cb.setTag(food);
+		} catch (Exception e) {
 
+		}
 		return convertView;
 	}
 }

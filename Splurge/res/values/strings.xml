@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">Splurge</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_restaurant_view">RestaurantView</string>
     <string name="bistro_title">Bistro</string>
@@ -25,5 +24,23 @@
     <string name="title_activity_information">InformationActivity</string>
     <string name="title_activity_dining_out">DiningOutActivity</string>
     <string name="title_activity_wrapper">WrapperActivity</string>
+    <string name="dining_out">DINING OUT</string>
+    <string name="information">INFORMATION</string>
+    <string name="menu">MENU</string>
+    <string name="reserve">RESERVE</string>
+    <string name="map">Map</string>
+    <string name="waiters">Waiters</string>
+    <string name="title_activity_delivery_form_fragment">DeliveryFormFragment</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="person_name">Name</string>
+    <string name="person_email">Email</string>
+    <string name="person_phone_number">Phone Number</string>
+    <string name="person_street_address">Street Address</string>
+    <string name="person_city">City</string>
+    <string name="person_state">State</string>
+    <string name="person_zip_code">Zip Code</string>
+    <string name="person_apt_number">Suite/Apt#</string>
+    <string name="place_order">Place Order</string>
+    <string name="order_summary">Order Summary</string>
 
 </resources>
