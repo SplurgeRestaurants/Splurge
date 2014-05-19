@@ -18,4 +18,7 @@
     <string name="delivery">Delivery</string>
     <string name="dining_out_title">Dining Out</string>
 
+    <string name="hello">Open calendar</string> 
+    <color name="text_color">#31D1F1</color> 
+    <string name="open">Open</string>
 </resources>

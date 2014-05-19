@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -113,7 +114,25 @@ public class RestaurantMainMenuActivity extends Activity implements OnClickListe
 						new DialogInterface.OnClickListener() {
 							public void onClick(
 									DialogInterface dialoginterface, int i) {
-								// do something
+								switch(i){
+								case 0:
+									Intent i0 = new Intent(getApplicationContext(), CalendarViewSampleActivity.class);
+									startActivity(i0);
+								    // make a reservation
+									break;
+								case 1:
+									Intent i1 = new Intent(getApplicationContext(), CalendarViewSampleActivity.class);
+									startActivity(i1);
+									// change a reservation
+									break;
+								case 2:
+									Intent i2 = new Intent(getApplicationContext(), CalendarViewSampleActivity.class);
+									startActivity(i2);
+									// cancel reservation
+									break;
+								default:
+									break;
+								}
 							}
 						}).show();
 	}
