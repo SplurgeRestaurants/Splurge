@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
+import android.graphics.PointF;
+
 /**
  * Object containing all information specific to an individual restaurant.
  */
@@ -15,7 +17,7 @@ public class Restaurant {
 	private Collection<FoodMenu> mMenus;
 	/**
 	 * Times which are currently unavailable for reservation.
-	 *
+	 * 
 	 * It is expected that the default iteration through this Collection
 	 * provides unavailable times in sorted order.
 	 */
@@ -30,13 +32,15 @@ public class Restaurant {
 	 */
 	private String mRestaurantName;
 
+	private PointF location;
+
 	/**
 	 * Creates a new restaurant with nothing but a name.
-	 *
+	 * 
 	 * Container objects are initialized, but not populated. Population is to
 	 * occur elsewhere, and it is the responsibility of the owning object to
 	 * undertake.
-	 *
+	 * 
 	 * @param name
 	 *            The name of the Restaurant.
 	 */
@@ -50,7 +54,7 @@ public class Restaurant {
 
 	/**
 	 * Retrieves the name of the restaurant in user-friendly form.
-	 *
+	 * 
 	 * @return A printable name of the restaurant.
 	 */
 	public String getName() {
@@ -60,7 +64,7 @@ public class Restaurant {
 	/**
 	 * Checks through the unavailable timeslots to determine if the given
 	 * instant of time is unavailable.
-	 *
+	 * 
 	 * @param time
 	 *            The instant in time to check for unavailability.
 	 * @return <code>true</code> if the time is within reserved space.
@@ -76,7 +80,7 @@ public class Restaurant {
 
 	/**
 	 * Determines whether the given time is taken.
-	 *
+	 * 
 	 * @param time
 	 *            The point in time to check.
 	 * @return <code>true</code> if the time is unavailable, <code>false</code>
@@ -87,9 +91,19 @@ public class Restaurant {
 	}
 
 	/**
+	 * Informs the system that the given timeslot is unavailable.
+	 * 
+	 * @param time
+	 *            The unavailable timeslot.
+	 */
+	public void addUnavailableTime(Timeslot time) {
+		mUnavailableTimes.add(time);
+	}
+
+	/**
 	 * Retrieves a menu by its title. If no such menu exist, this function will
 	 * return <code>null</code>.
-	 *
+	 * 
 	 * @param label
 	 *            The title of the menu.
 	 * @return The menu, or <code>null</code> if no such menu exists.
@@ -105,7 +119,7 @@ public class Restaurant {
 	/**
 	 * Gets the hours available for a given day. If hours are unavailable on
 	 * that day, then the Timeslot value will be <code>null</code>.
-	 *
+	 * 
 	 * @param day
 	 *            Enum value depicting which day to check.
 	 * @return The Timeslot depicting hours for the given day, or
@@ -133,8 +147,38 @@ public class Restaurant {
 	}
 
 	/**
+	 * Sets the longitude of the restaurant's physical location.
+	 * 
+	 * @param x
+	 *            The longitude of the restaurant's location.
+	 */
+	public void setLocX(float x) {
+		location.x = x;
+	}
+
+	/**
+	 * Sets the latitude of the restaurant's physical location.
+	 * 
+	 * @param y
+	 *            The latitude of the restaurant's location.
+	 */
+	public void setLocY(float y) {
+		location.y = y;
+	}
+
+	/**
+	 * Sets the location to the given latitude and longitude pair.
+	 * 
+	 * @param point
+	 *            Point representation of the restaurant's location.
+	 */
+	public void setLocation(PointF point) {
+		location = point;
+	}
+
+	/**
 	 * Adds a FoodMenu to the restaurant listing.
-	 *
+	 * 
 	 * @param menu
 	 *            The Menu to add.
 	 * @return <code>true</code> on successful add.
