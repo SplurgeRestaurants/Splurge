@@ -33,13 +33,17 @@ public class FoodMenuListFragment extends SuperFragment {
 	 */
 	private static String MEAL;
 	/**
+	 * Current meal chosen
+	 */
+	private static String meal;
+	/**
 	 * Store the reference to the listview
 	 */
 	private ListView mListView;
 	/**
 	 * Adapter to create list entries in ListView
 	 */
-	FoodMenuAdapter adapter;
+	private FoodMenuAdapter adapter;
 	/**
 	 * save position of the chosen food item
 	 */
@@ -47,7 +51,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	/**
 	 * populate with selected food items
 	 */
-	static ArrayList<FoodItem> selectedFood = new ArrayList<FoodItem>();
+	private static ArrayList<FoodItem> selectedFood = new ArrayList<FoodItem>();
 	/**
 	 * populated with food items from a specified menu
 	 */
@@ -63,20 +67,22 @@ public class FoodMenuListFragment extends SuperFragment {
 		View ret = inflater.inflate(R.layout.food_menu_list, container, false);
 		mListView = (ListView) ret.findViewById(R.id.food_list);
 		// TODO (trtucker) refer to menus by string name, get menu from model
-		String meal = getMEAL(); // (dqthai) my temp fix so I can get screen
-									// shots for artifact
-		switch (meal) {
-		case BREAKFAST:
-			FoodMenuListFragment.data = getBreakfastMenuItem();
-			break;
-		case LUNCH:
-			FoodMenuListFragment.data = getLunchMenuItem();
-			break;
-		case DINNER:
-			FoodMenuListFragment.data = getDinnerMenuItem();
-			break;
-		default:
-			break;
+		if (data == null || getMEAL().compareTo(meal) != 0) {
+			meal = getMEAL(); // (dqthai) my temp fix so I can get screen
+								// shots for artifact
+			switch (meal) {
+			case BREAKFAST:
+				FoodMenuListFragment.data = getBreakfastMenuItem();
+				break;
+			case LUNCH:
+				FoodMenuListFragment.data = getLunchMenuItem();
+				break;
+			case DINNER:
+				FoodMenuListFragment.data = getDinnerMenuItem();
+				break;
+			default:
+				break;
+			}
 		}
 		adapter = new FoodMenuAdapter(getActivity(), R.layout.menu_item,
 				FoodMenuListFragment.data);
@@ -143,6 +149,15 @@ public class FoodMenuListFragment extends SuperFragment {
 			food.add(fakeitem);
 		}
 		return food;
+	}
+
+	/**
+	 * Get the food item selected from FoodMenuListFragment
+	 * 
+	 * @return An array of food items selected by the user
+	 */
+	public static ArrayList<FoodItem> getSelectedFoodItems() {
+		return FoodMenuListFragment.selectedFood;
 	}
 
 	/**
