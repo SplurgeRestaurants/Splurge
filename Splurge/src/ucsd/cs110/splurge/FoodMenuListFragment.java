@@ -47,7 +47,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	/**
 	 * populate with selected food items
 	 */
-	static ArrayList<FoodItem> selectedFood = new ArrayList<FoodItem>();
+	static ArrayList<FoodItem> selectedFood;
 	/**
 	 * populated with food items from a specified menu
 	 */

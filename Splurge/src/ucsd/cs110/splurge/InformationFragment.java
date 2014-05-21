@@ -39,12 +39,12 @@ public class InformationFragment extends SuperFragment {
 		View ret = inflater
 				.inflate(R.layout.information_page, container, false);
 		status = (TextView) ret.findViewById(R.id.status);
-		currentHours = (TextView) ret.findViewById(R.id.currentHours);
-		hours = (TextView) ret.findViewById(R.id.hours);
+		// currentHours = (TextView) ret.findViewById(R.id.currentHours);
+		// hours = (TextView) ret.findViewById(R.id.hours);
 		address = (TextView) ret.findViewById(R.id.address);
 		directions = (TextView) ret.findViewById(R.id.directions);
 		status.setText(getRestaurantStatus());
-		currentHours.setText(getRestaurantCurrentHours());
+		// currentHours.setText(getRestaurantCurrentHours());
 		address.setText(getRestaurantAddress());
 		return ret;
 	}
@@ -55,7 +55,7 @@ public class InformationFragment extends SuperFragment {
 	 * @return "Open" or "Closed"
 	 */
 	private String getRestaurantStatus() {
-		return "Now: Open Forever";
+		return "Now: Open";
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class InformationFragment extends SuperFragment {
 	 * @return String representing the hours
 	 */
 	private String getRestaurantCurrentHours() {
-		return "Hours: 24/7 Baby!";
+		return "Today: 11AM - 8PM";
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class InformationFragment extends SuperFragment {
 	 * @return String of the restaurant's address
 	 */
 	private String getRestaurantAddress() {
-		return "The Village";
+		return "Address: The Village";
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class InformationFragment extends SuperFragment {
 	 *            Listener to be set
 	 */
 	public void setButtonListener(OnClickListener listener) {
-		(getView().findViewById(R.id.hours)).setOnClickListener(listener);
+		// (getView().findViewById(R.id.hours)).setOnClickListener(listener);
 		(getView().findViewById(R.id.directions)).setOnClickListener(listener);
 	}
 
@@ -95,4 +95,5 @@ public class InformationFragment extends SuperFragment {
 		setButtonListener((OnClickListener) mSuperListener);
 		super.onStart();
 	}
+	// TODO (dqthai) add phone information
 }

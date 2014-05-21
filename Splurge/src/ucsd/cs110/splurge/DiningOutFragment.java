@@ -27,7 +27,7 @@ public class DiningOutFragment extends SuperFragment {
 	/**
 	 * List of food items that were selected from the food menu
 	 */
-	private ArrayList<FoodItem> mSelectedFood = new ArrayList<FoodItem>();
+	private ArrayList<FoodItem> mSelectedFood;
 
 	/**
 	 * Display the layout and populate the list with food items, if any
@@ -39,6 +39,12 @@ public class DiningOutFragment extends SuperFragment {
 		View ret = inflater.inflate(R.layout.dining_out, container, false);
 		mListView = (ListView) ret.findViewById(R.id.dining_out_list);
 		mSelectedFood = getFoodItemsSelected();
+		if (!mSelectedFood.isEmpty()) {
+			ret.findViewById(R.id.empty).setVisibility(View.GONE);
+			mListView.setVisibility(View.VISIBLE);
+		} else {
+			mListView.setVisibility(View.GONE);
+		}
 		adapter = new FoodMenuAdapter(getActivity(), R.layout.menu_item,
 				mSelectedFood);
 		mListView.setAdapter(adapter);

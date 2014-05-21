@@ -39,7 +39,8 @@ public class RestaurantMainMenuListener extends SuperListener implements
 					new InformationListener(mWrapper));
 			break;
 		case R.id.reserve:
-			openReserveDialog();
+			// TODO (Yuri) go to reservation page
+			// openReserveDialog();
 			break;
 		case R.id.menu:
 			openFoodMenuDialog();
