@@ -13,6 +13,7 @@ import android.widget.AdapterView.OnItemClickListener;
  */
 public class FoodMenuListListener extends SuperListener implements
 		OnItemClickListener, OnClickListener {
+	private static int backCount = 0;
 
 	/**
 	 * Create a new FoodMenuListListener, designed to listen to a
@@ -46,6 +47,8 @@ public class FoodMenuListListener extends SuperListener implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.add_to_order_button:
+			if (++backCount > 1)
+				mWrapper.getFragmentManager().popBackStack();
 			getSelected();
 		default:
 			break;
