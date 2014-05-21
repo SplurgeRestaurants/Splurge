@@ -40,7 +40,7 @@
    -->
    
         </activity>
-        <activity android:name="com.examples.android.calendar.CalendarView"></activity>
+        <activity android:name="ucsd.cs110.splurge.CalendarView"></activity>
         
  </application>
 </manifest>
