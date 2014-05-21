@@ -15,8 +15,12 @@ import android.widget.AdapterView.OnItemClickListener;
  */
 public class DiningOutListListener extends SuperListener implements
 		OnItemClickListener, OnClickListener {
-
+	/**
+	 * Chosen dining out option (Delivery or Take Out)
+	 */
 	static String DINING_OUT_TYPE;
+
+	private static int backCount;
 
 	/**
 	 * Create a new DiningOutListListener, designed to listen to a
@@ -93,9 +97,13 @@ public class DiningOutListListener extends SuperListener implements
 	 * Go to the correct Menu, if no menu was previously chosen open a dialog
 	 */
 	public void goToFoodMenu() {
-		for (int i = 0; i < FoodMenuListFragment.data.size(); i++) {
-			FoodMenuListFragment.data.get(i).setSelected(false);
+		if (FoodMenuListFragment.data != null) {
+			for (int i = 0; i < FoodMenuListFragment.data.size(); i++) {
+				FoodMenuListFragment.data.get(i).setSelected(false);
+			}
 		}
+		if (++backCount > 1)
+			mWrapper.getFragmentManager().popBackStack();
 		if (FoodMenuListFragment.getMEAL() == null) {
 			openFoodMenuDialog();
 		} else {
