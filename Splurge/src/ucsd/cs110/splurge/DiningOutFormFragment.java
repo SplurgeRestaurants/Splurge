@@ -99,7 +99,7 @@ public class DiningOutFormFragment extends SuperFragment {
 	 * @return Items that are going to be ordered
 	 */
 	ArrayList<FoodItem> getOrder() {
-		return DiningOutFragment.getFoodItemsSelected();
+		return DiningOutFragment.getSelectedFood();
 	}
 
 	/**

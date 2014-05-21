@@ -60,12 +60,13 @@ public class FoodMenuListListener extends SuperListener implements
 		for (int i = 0; i < FoodMenuListFragment.data.size(); i++) {
 			if (FoodMenuListFragment.data.get(i).isSelected()) {
 				Log.e("Selected", FoodMenuListFragment.data.get(i).getName());
-				FoodMenuListFragment.selectedFood.add(FoodMenuListFragment.data
-						.get(i));
+				FoodMenuListFragment.getSelectedFoodItems().add(
+						FoodMenuListFragment.data.get(i));
 			}
 		}
-		for (int i = 0; i < FoodMenuListFragment.selectedFood.size(); i++) {
-			FoodMenuListFragment.selectedFood.get(i).setSelected(false);
+		for (int i = 0; i < FoodMenuListFragment.getSelectedFoodItems().size(); i++) {
+			FoodMenuListFragment.getSelectedFoodItems().get(i)
+					.setSelected(false);
 		}
 		mWrapper.changeFragment(new DiningOutFragment(),
 				new DiningOutListListener(mWrapper));

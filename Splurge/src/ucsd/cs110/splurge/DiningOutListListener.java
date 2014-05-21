@@ -93,6 +93,9 @@ public class DiningOutListListener extends SuperListener implements
 	 * Go to the correct Menu, if no menu was previously chosen open a dialog
 	 */
 	public void goToFoodMenu() {
+		for (int i = 0; i < FoodMenuListFragment.data.size(); i++) {
+			FoodMenuListFragment.data.get(i).setSelected(false);
+		}
 		if (FoodMenuListFragment.getMEAL() == null) {
 			openFoodMenuDialog();
 		} else {
@@ -105,9 +108,9 @@ public class DiningOutListListener extends SuperListener implements
 	 * Remove the selected items from the selectedFood array
 	 */
 	public void removeSelectedFoodItems() {
-		for (int i = 0; i < FoodMenuListFragment.selectedFood.size(); i++) {
-			if (FoodMenuListFragment.selectedFood.get(i).isSelected()) {
-				FoodMenuListFragment.selectedFood.remove(i);
+		for (int i = 0; i < DiningOutFragment.getSelectedFood().size(); i++) {
+			if (DiningOutFragment.getSelectedFood().get(i).isSelected()) {
+				DiningOutFragment.getSelectedFood().remove(i);
 				i = -1;
 			}
 		}
