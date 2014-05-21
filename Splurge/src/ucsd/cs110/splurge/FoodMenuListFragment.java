@@ -43,7 +43,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	/**
 	 * save position of the chosen food item
 	 */
-	static String FOOD_ITEM_POSITION;
+	static String FOOD_ITEM_POSITION = "0";
 	/**
 	 * populate with selected food items
 	 */

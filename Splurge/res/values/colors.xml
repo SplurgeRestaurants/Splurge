@@ -10,10 +10,11 @@
 <resources>
    <color name="gold">#ffffd700</color>
    <color name="background">#336600</color>
-   <color name="red">#8A2D1B</color>
+   <color name="red">#CC0000</color>
    <color name="white">#FFFFFF</color>
    <color name="black">#000000</color>
    <color name="transblack">#99000000</color>
+   <color name="green">#669900</color>
 </resources>
 
 
