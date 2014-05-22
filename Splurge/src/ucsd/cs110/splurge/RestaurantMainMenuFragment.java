@@ -12,6 +12,11 @@ import android.view.ViewGroup;
  */
 public class RestaurantMainMenuFragment extends SuperFragment {
 	/**
+	 * Keep tracks of the number of pushes to the backStack
+	 */
+	static int backCount;
+
+	/**
 	 * Set the restaurant name in TextView
 	 */
 	@Override
@@ -41,6 +46,7 @@ public class RestaurantMainMenuFragment extends SuperFragment {
 	@Override
 	public void onStart() {
 		setMainMenuListener((OnClickListener) mSuperListener);
+		backCount = 0;
 		super.onStart();
 	}
 }

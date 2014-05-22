@@ -86,29 +86,32 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup Parent) {
-		LayoutInflater vi = (LayoutInflater) mContext
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		convertView = vi.inflate(resource, null);
 		ViewHolder holder = new ViewHolder();
-		holder.name = (TextView) convertView.findViewById(R.id.FoodName);
-		holder.image = (ImageView) convertView.findViewById(R.id.FoodIcon);
-		holder.price = (TextView) convertView.findViewById(R.id.FoodPrice);
-		try {
-			holder.cb = (CheckBox) convertView.findViewById(R.id.checkBox1);
-			holder.cb.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					CheckBox cb = (CheckBox) v;
-					FoodItem food = (FoodItem) cb.getTag();
-					Log.e("FoodMenuAdapter", food.getName()
-							+ " should be checked");
-					food.setSelected(cb.isChecked());
-				}
-			});
-		} catch (Exception e) {
+		if (convertView == null) {
+			LayoutInflater vi = LayoutInflater.from(mContext);
+			convertView = vi.inflate(resource, null);
+			holder.name = (TextView) convertView.findViewById(R.id.FoodName);
+			holder.image = (ImageView) convertView.findViewById(R.id.FoodIcon);
+			holder.price = (TextView) convertView.findViewById(R.id.FoodPrice);
+			try {
+				holder.cb = (CheckBox) convertView.findViewById(R.id.checkBox1);
+				holder.cb.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						CheckBox cb = (CheckBox) v;
+						FoodItem food = (FoodItem) cb.getTag();
+						Log.e("FoodMenuAdapter", food.getName()
+								+ " should be checked");
+						food.setSelected(cb.isChecked());
+					}
+				});
+			} catch (Exception e) {
 
+			}
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
 		}
-		convertView.setTag(holder);
 		FoodItem food = foodItems.get(position);
 		holder.name.setText(food.getName());
 		holder.image.setImageResource(food.getImage());

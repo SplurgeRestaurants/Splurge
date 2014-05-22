@@ -108,7 +108,11 @@ public class DiningOutFormFragment extends SuperFragment {
 	 * @return Compiled form information
 	 */
 	String getForm() {
-		return null;
+		String ret = "";
+		ret += mFormName.getText();
+		ret += mFormEmail.getText();
+		ret += mFormPhoneNumber.getText();
+		return ret;
 	}
 
 	/**

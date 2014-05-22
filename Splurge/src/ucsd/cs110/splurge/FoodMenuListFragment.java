@@ -154,10 +154,21 @@ public class FoodMenuListFragment extends SuperFragment {
 	/**
 	 * Get the food item selected from FoodMenuListFragment
 	 * 
-	 * @return An array of food items selected by the user
+	 * @return selectedFood
 	 */
 	public static ArrayList<FoodItem> getSelectedFoodItems() {
-		return FoodMenuListFragment.selectedFood;
+		return selectedFood;
+	}
+
+	/**
+	 * Remove checked status on all food items
+	 */
+	public static void clearChecked() {
+		if (data != null) {
+			for (int i = 0; i < data.size(); i++) {
+				data.get(i).setSelected(false);
+			}
+		}
 	}
 
 	/**

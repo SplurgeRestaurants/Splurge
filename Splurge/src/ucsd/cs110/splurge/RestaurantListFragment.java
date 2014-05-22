@@ -16,7 +16,7 @@ import android.widget.ListView;
  */
 public class RestaurantListFragment extends SuperFragment {
 	/**
-	 * Reference to the listview
+	 * Reference to the ListView
 	 */
 	private ListView mListView;
 

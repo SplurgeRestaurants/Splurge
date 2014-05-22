@@ -26,9 +26,9 @@
         android:textSize="35sp"
         android:textStyle="bold" />
         -->
-<!--  
+
     <TextView
-        android:id="@+id/hours"
+        android:id="@+id/phone_number"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
@@ -36,11 +36,9 @@
         android:background="@drawable/glass4"
         android:gravity="left|center_vertical"
         android:paddingLeft="30dip"
-        android:text="Weekly Hours \nand Holidays"
         android:textColor="@color/white"
         android:textSize="35sp"
         android:textStyle="bold" />
--->
     <TextView
         android:id="@+id/address"
         android:layout_width="fill_parent"
@@ -50,7 +48,6 @@
         android:background="@drawable/glass4"
         android:gravity="left|center_vertical"
         android:paddingLeft="30dip"
-        android:text="Address"
         android:textColor="@color/white"
         android:textSize="35sp"
         android:textStyle="bold" />
