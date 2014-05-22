@@ -17,9 +17,12 @@
         android:gravity="center"
         android:horizontalSpacing="10dp"
         android:numColumns="auto_fit"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
         android:stretchMode="columnWidth"
         android:verticalSpacing="10dp" 
-        android:background="#ffffff"/>
+        android:background="@drawable/roundedblackbox"/>
 
     <Button
         android:id="@+id/add_to_order_button"

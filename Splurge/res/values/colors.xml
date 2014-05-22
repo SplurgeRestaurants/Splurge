@@ -15,6 +15,9 @@
    <color name="black">#000000</color>
    <color name="transblack">#99000000</color>
    <color name="green">#669900</color>
+   <color name="frost">#A6000000</color>
+   <color name="pink">#ff8cfc</color>
+   <color name="snow">#A6ffffff</color>
 </resources>
 
 

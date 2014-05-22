@@ -19,7 +19,7 @@
             android:layout_weight="3"
             android:background="@drawable/roundedbutton"
             android:text="Add To Order"
-            android:textColor="@color/green" />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/take_out"
@@ -28,7 +28,8 @@
             android:layout_marginTop="5dp"
             android:layout_weight="2"
             android:background="@drawable/roundedbutton"
-            android:text="Take Out" />
+            android:text="Take Out"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/delivery"
@@ -37,15 +38,18 @@
             android:layout_margin="5dp"
             android:layout_weight="2"
             android:background="@drawable/roundedbutton"
-            android:text="Delivery" />
+            android:text="Delivery"
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <ListView
         android:id="@+id/dining_out_list"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_weight="1"
-        android:background="#ffffff"
+        android:background="@drawable/roundedblackbox"
         android:columnWidth="90dp"
         android:focusable="true"
         android:gravity="center"
@@ -56,13 +60,13 @@
 
     <Button
         android:id="@+id/remove_items"
-        android:layout_width="wrap_content"
+        android:layout_width="145dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:background="@drawable/roundedbutton"
         android:padding="15dp"
         android:text="Remove"
-        android:textColor="@color/red" />
+        android:textColor="@color/white" />
 
 </LinearLayout>
