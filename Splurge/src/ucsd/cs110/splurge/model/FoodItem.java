@@ -11,10 +11,18 @@ public class FoodItem {
 		this.name = name;
 	}
 
+	public FoodItem(FoodItem item) {
+		name = item.name;
+		imageId = item.imageId;
+		selected = item.selected;
+		price = item.price;
+	}
+
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public String toString() {
 		return getName();
 	}
