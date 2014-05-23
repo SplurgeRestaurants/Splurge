@@ -13,11 +13,19 @@ import android.util.Log;
  */
 public class ServerHttpJSONConnection {
 
+	/**
+	 * Constant field holding the host address of the Splurge server.
+	 */
 	private static final String HOST_ADDR = "http://www.splurge.com";
 
+	/**
+	 * Object handling the actual connection.
+	 */
 	private HttpURLConnection mServerConnection;
+	/**
+	 * Writer class for pushing messages through the connection.
+	 */
 	private BufferedWriter mWriter;
-	private ServerListener mServerListener;
 
 	/**
 	 * Opens a connection with the server.
@@ -77,6 +85,7 @@ public class ServerHttpJSONConnection {
 			closeConnection();
 		} catch (IOException e) {
 			Log.e("Splurge", "Exception occurred while sending data.");
+			Log.e("Splurge", e.getLocalizedMessage());
 		} finally {
 			mServerConnection.disconnect();
 		}
