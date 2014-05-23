@@ -15,7 +15,7 @@ public class Restaurant {
 	private Collection<FoodMenu> mMenus;
 	/**
 	 * Times which are currently unavailable for reservation.
-	 *
+	 * 
 	 * It is expected that the default iteration through this Collection
 	 * provides unavailable times in sorted order.
 	 */
@@ -29,14 +29,18 @@ public class Restaurant {
 	 * Name of the restaurant.
 	 */
 	private String mRestaurantName;
+	/**
+	 * Logo of the restaurant
+	 */
+	private int image;
 
 	/**
 	 * Creates a new restaurant with nothing but a name.
-	 *
+	 * 
 	 * Container objects are initialized, but not populated. Population is to
 	 * occur elsewhere, and it is the responsibility of the owning object to
 	 * undertake.
-	 *
+	 * 
 	 * @param name
 	 *            The name of the Restaurant.
 	 */
@@ -50,7 +54,7 @@ public class Restaurant {
 
 	/**
 	 * Retrieves the name of the restaurant in user-friendly form.
-	 *
+	 * 
 	 * @return A printable name of the restaurant.
 	 */
 	public String getName() {
@@ -60,7 +64,7 @@ public class Restaurant {
 	/**
 	 * Checks through the unavailable timeslots to determine if the given
 	 * instant of time is unavailable.
-	 *
+	 * 
 	 * @param time
 	 *            The instant in time to check for unavailability.
 	 * @return <code>true</code> if the time is within reserved space.
@@ -76,7 +80,7 @@ public class Restaurant {
 
 	/**
 	 * Determines whether the given time is taken.
-	 *
+	 * 
 	 * @param time
 	 *            The point in time to check.
 	 * @return <code>true</code> if the time is unavailable, <code>false</code>
@@ -89,7 +93,7 @@ public class Restaurant {
 	/**
 	 * Retrieves a menu by its title. If no such menu exist, this function will
 	 * return <code>null</code>.
-	 *
+	 * 
 	 * @param label
 	 *            The title of the menu.
 	 * @return The menu, or <code>null</code> if no such menu exists.
@@ -105,7 +109,7 @@ public class Restaurant {
 	/**
 	 * Gets the hours available for a given day. If hours are unavailable on
 	 * that day, then the Timeslot value will be <code>null</code>.
-	 *
+	 * 
 	 * @param day
 	 *            Enum value depicting which day to check.
 	 * @return The Timeslot depicting hours for the given day, or
@@ -134,7 +138,7 @@ public class Restaurant {
 
 	/**
 	 * Adds a FoodMenu to the restaurant listing.
-	 *
+	 * 
 	 * @param menu
 	 *            The Menu to add.
 	 * @return <code>true</code> on successful add.
@@ -148,5 +152,13 @@ public class Restaurant {
 			}
 		}
 		return mMenus.add(menu);
+	}
+
+	public int getImage() {
+		return image;
+	}
+
+	public void setImage(int imageId) {
+		image = imageId;
 	}
 }

@@ -1,6 +1,8 @@
 package ucsd.cs110.splurge;
 
-import android.app.Fragment;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,12 +11,26 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class FoodItemFragment extends Fragment {
-	// View Items in fragment
-	TextView name; // food item name
-	TextView description; // food item description
-	TextView price; // food item price
-	ImageView image; // food item image
+/**
+ * Fragment that displays information about the food item
+ */
+public class FoodItemFragment extends SuperFragment {
+	/**
+	 * Name of the food item
+	 */
+	private TextView mName;
+	/**
+	 * Description of the food item
+	 */
+	private TextView mDescription;
+	/**
+	 * Price of the food item
+	 */
+	private TextView mPrice;
+	/**
+	 * Image of the food item
+	 */
+	private ImageView mImage;
 
 	@Override
 	/**
@@ -23,25 +39,28 @@ public class FoodItemFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// Get the layout
 		View ret = inflater.inflate(R.layout.food_item, container, false);
-		// get view ids
-		name = (TextView) ret.findViewById(R.id.food_name);
-		description = (TextView) ret.findViewById(R.id.food_description);
-		image = (ImageView) ret.findViewById(R.id.food_image);
-		price = (TextView) ret.findViewById(R.id.food_price);
-		// get the intent to find the position of the food item in the food menu
+		mName = (TextView) ret.findViewById(R.id.food_name);
+		mDescription = (TextView) ret.findViewById(R.id.food_description);
+		mImage = (ImageView) ret.findViewById(R.id.food_image);
+		mPrice = (TextView) ret.findViewById(R.id.food_price);
 		Intent intent = getActivity().getIntent();
 		int position = 0;
-		position = intent.getIntExtra(FoodMenuActivity.FOOD_ITEM_POSITION,
+		position = intent.getIntExtra(FoodMenuListFragment.FOOD_ITEM_POSITION,
 				position);
-		// set the information to the appropriate views
-		name.setText(FoodMenuActivity.data.get(position).getName());
-		image.setImageResource(FoodMenuActivity.data.get(position).getImage());
-		description.setText(FoodMenuActivity.data.get(position).getName());
-		price.setText(Integer.toString(FoodMenuActivity.data.get(position)
-				.getPrice()));
+		mName.setText(FoodMenuListFragment.data.get(position).getName());
+		mImage.setImageResource(FoodMenuListFragment.data.get(position)
+				.getImage());
+		mDescription.setText(FoodMenuListFragment.data.get(position).getName());
 
+		NumberFormat fmt = NumberFormat.getNumberInstance(Locale.US);
+		NumberFormat currencyFormatter = NumberFormat
+				.getCurrencyInstance(Locale.US);
+		Double currencyAmount;
+
+		currencyAmount = (double) FoodMenuListFragment.data.get(position)
+				.getPrice();
+		mPrice.setText(currencyFormatter.format(currencyAmount));
 		return ret;
 	}
 }
