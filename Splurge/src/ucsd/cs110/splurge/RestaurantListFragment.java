@@ -1,72 +1,78 @@
 package ucsd.cs110.splurge;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import android.app.Fragment;
+import ucsd.cs110.splurge.model.Restaurant;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
-public class RestaurantListFragment extends Fragment {
-	// List
-	ListView mListView;
-	
-	/*
-	 * (non-Javadoc)
-	 * @see android.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
-	 *  Populate the list with restaurants
+/**
+ * Fragment to display the list of restaurants
+ * 
+ */
+public class RestaurantListFragment extends SuperFragment {
+	/**
+	 * Reference to the ListView
 	 */
-	@SuppressWarnings("unchecked")
+	private ListView mListView;
+
+	/**
+	 * Populate the list with restaurants
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//get layout
-		View ret = inflater.inflate(R.layout.activity_home_screen, container,
-				false);
-		//get id for ListView
+		View ret = inflater.inflate(R.layout.restaurant_list, container, false);
 		mListView = (ListView) ret.findViewById(R.id.list);
-		//Populate list with restaurant data
-		List<? extends Map<String, ?>> data = (List<? extends Map<String, ?>>) GetSampleData();
-		//adapter formats list entries in list
-		SimpleAdapter adapter = new SimpleAdapter(getActivity(), data,
-				R.layout.fragment_home_screen, new String[] { "RestaurantIcon",
-						"RestaurantName" }, new int[] { R.id.RestaurantIcon,
-						R.id.RestaurantName });
+		ArrayList<Restaurant> data = GetSampleData();
+		RestaurantListAdapter adapter = new RestaurantListAdapter(
+				getActivity(), R.layout.restaurant_list_entry, data);
 		mListView.setAdapter(adapter);
 		return ret;
 	}
-	
-	/*
-	 * Get the list of restaurants
-	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	List<Map> GetSampleData() {
-		List<Map> list = new ArrayList<Map>();
 
-		Map map = new HashMap();
-		map.put("RestaurantIcon", R.drawable.logo);
-		map.put("RestaurantName", "Bistro");
-		list.add(map);
+	/**
+	 * Get list of restaurants
+	 * 
+	 * @return List of restaurants
+	 */
+	ArrayList<Restaurant> GetSampleData() {
+		ArrayList<Restaurant> ret = new ArrayList<Restaurant>();
+
+		Restaurant bistro = new Restaurant("Bistro");
+		bistro.setImage(R.drawable.logo);
+		ret.add(bistro);
 
 		for (int i = 0; i < 10; i++) {
-			map = new HashMap();
-			map.put("RestaurantIcon", R.drawable.ic_launcher);
-			map.put("RestaurantName", "Fake Restaurant" + i);
-			list.add(map);
+			Restaurant res = new Restaurant("Fake Restaurant " + i);
+			res.setImage(R.drawable.ic_launcher);
+			ret.add(res);
 		}
-		return list;
+		return ret;
 	}
-	// set the listener for list entries
+
+	/**
+	 * Set listener for list entries
+	 * 
+	 * @param listener
+	 *            Listener to be set
+	 */
 	public void setListListener(OnItemClickListener listener) {
 		((ListView) getView().findViewById(R.id.list))
 				.setOnItemClickListener(listener);
+	}
+
+	/**
+	 * Set the mSuperListener to the list entries
+	 */
+	@Override
+	public void onStart() {
+		setListListener((OnItemClickListener) mSuperListener);
+		super.onStart();
 	}
 }

@@ -1,6 +1,8 @@
 package ucsd.cs110.splurge;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import ucsd.cs110.splurge.model.FoodItem;
 import android.content.Context;
@@ -27,8 +29,17 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 	 * Store the current context
 	 */
 	private Context mContext;
+	/**
+	 * Layout to use
+	 */
+	private int resource;
+	
+
+
 
 	/**
+	 * Create a new FoodMenuAdapter designed to bind the views to create a list
+	 * entry
 	 * 
 	 * @param context
 	 *            current The current context
@@ -42,19 +53,35 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 		super(context, resource, foodItems);
 		mContext = context;
 		this.foodItems = foodItems;
+		this.resource = resource;
 	}
 
 	/**
 	 * Class to hold data for the views
 	 */
 	private class ViewHolder {
+		/**
+		 * Name of the food item
+		 */
 		TextView name;
+		/**
+		 * Price of the food item
+		 */
 		TextView price;
+		/**
+		 * Check box corresponding to the food item
+		 */
 		CheckBox cb;
+		/**
+		 * Image of the food item
+		 */
 		ImageView image;
 	}
 
 	/**
+	 * Binds the views together into a single view and set the correct data for
+	 * each view. Catches the error if there is not check box view.
+	 * 
 	 * @param position
 	 *            Location of the food item in the menu
 	 * @param convertView
@@ -64,37 +91,50 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup Parent) {
-		ViewHolder holder = null;
-		LayoutInflater vi = (LayoutInflater) mContext
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		convertView = vi.inflate(R.layout.menu_item, null);
-		// Get view from id
-		holder = new ViewHolder();
-		holder.name = (TextView) convertView.findViewById(R.id.MenuName);
-		holder.cb = (CheckBox) convertView.findViewById(R.id.checkBox1);
-		holder.image = (ImageView) convertView.findViewById(R.id.MenuIcon);
-		holder.price = (TextView) convertView.findViewById(R.id.MenuPrice);
-		convertView.setTag(holder);
-		// create listener for check box
-		holder.cb.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CheckBox cb = (CheckBox) v;
-				FoodItem food = (FoodItem) cb.getTag();
-				Log.e("FoodMenuAdapter", "item should be checked");
-				// check to see if the check box was clicked or not
-				food.setSelected(cb.isChecked());
+		ViewHolder holder = new ViewHolder();
+		if (convertView == null) {
+			LayoutInflater vi = LayoutInflater.from(mContext);
+			convertView = vi.inflate(resource, null);
+			holder.name = (TextView) convertView.findViewById(R.id.FoodName);
+			holder.image = (ImageView) convertView.findViewById(R.id.FoodIcon);
+			holder.price = (TextView) convertView.findViewById(R.id.FoodPrice);
+			try {
+				holder.cb = (CheckBox) convertView.findViewById(R.id.checkBox1);
+				holder.cb.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						CheckBox cb = (CheckBox) v;
+						FoodItem food = (FoodItem) cb.getTag();
+						Log.e("FoodMenuAdapter", food.getName()
+								+ " should be checked");
+						food.setSelected(cb.isChecked());
+					}
+				});
+			} catch (Exception e) {
+
 			}
-		});
-		// get correct food item from position in menu
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
+		}
 		FoodItem food = foodItems.get(position);
-		// set values for the views
 		holder.name.setText(food.getName());
 		holder.image.setImageResource(food.getImage());
-		holder.price.setText(Integer.toString(food.getPrice()));
-		holder.cb.setChecked(food.isSelected());
-		holder.cb.setTag(food);
+		
+		
+		NumberFormat fmt = NumberFormat.getNumberInstance(Locale.US);
+		NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);
+		Double currencyAmount;
+		
+		currencyAmount = (double)food.getPrice();
+		holder.price.setText(currencyFormatter.format(currencyAmount));
+		//holder.price.setText("$" + Integer.toString(food.getPrice()));
+		try {
+			holder.cb.setChecked(food.isSelected());
+			holder.cb.setTag(food);
+		} catch (Exception e) {
 
+		}
 		return convertView;
 	}
 }

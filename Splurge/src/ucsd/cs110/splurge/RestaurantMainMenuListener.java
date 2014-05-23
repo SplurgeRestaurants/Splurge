@@ -2,17 +2,28 @@ package ucsd.cs110.splurge;
 
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public class RestaurantMainMenuListener implements OnClickListener {
-	private Context mContext;
-
-	// private static final int DELIVERY = 1;
-	// private static final int TAKE_OUT = 0;
+/**
+ * Listener for the RestaurantMainMenuFragment
+ * 
+ */
+public class RestaurantMainMenuListener extends SuperListener implements
+		OnClickListener {
+	/**
+	 * Enumerator indicating breakfast.
+	 */
+	private static final int BREAKFAST = 0;
+	/**
+	 * Enumerator indicating lunch.
+	 */
+	private static final int LUNCH = 1;
+	/**
+	 * Enumerator indicating dinner.
+	 */
+	private static final int DINNER = 2;
 
 	/**
 	 * Create a new RestaurantMainMenuListener, designed to listen to a
@@ -21,61 +32,62 @@ public class RestaurantMainMenuListener implements OnClickListener {
 	 * @param context
 	 *            Context used for spawning a new Activity
 	 */
-	public RestaurantMainMenuListener(Context context) {
-		mContext = context;
+	public RestaurantMainMenuListener(WrapperActivity context) {
+		super(context);
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Buttons go to the correct page
 	 * 
-	 * @see android.view.View.OnClickListener#onClick(android.view.View) Makes
-	 * sure the button opens the correct dialog
+	 * @param v
+	 *            View being clicked on
 	 */
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.information:
-			Intent intent = new Intent(mContext, InformationActivity.class);
-			mContext.startActivity(intent);
-			break;
-		case R.id.reserve:
-			openReserveDialog();
-			break;
 		case R.id.menu:
 			openFoodMenuDialog();
 			break;
+		case R.id.reserve:
+			// TODO (Yuri) go to reservation page
+			// mWrapper.changeFragment(new ReservationFragment(), new
+			// ReservationListener());
+			break;
+
 		case R.id.diningout:
-			// TODO just go to DiningOutActivity instead of opening dialog
-			Intent intent1 = new Intent(mContext, DiningOutActivity.class);
-			mContext.startActivity(intent1);
-			// openDiningOutDialog();
+			mWrapper.changeFragment(new DiningOutFragment(),
+					new DiningOutListListener(mWrapper));
+			break;
+		case R.id.information:
+			mWrapper.changeFragment(new InformationFragment(),
+					new InformationListener(mWrapper));
 			break;
 		}
 	}
 
-	// Creates dialog for reservation options
-	private void openReserveDialog() {
-		Builder dialog = new AlertDialog.Builder(mContext);
-		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialoginterface, int i) {
-				// TODO open reservation activity
-			}
-		};
-		dialog.setTitle(R.string.new_reserv_title);
-		dialog.setItems(R.array.reservations, diaIn);
-		dialog.show();
-	}
-
-	// Creates dialog for food menu options
+	/**
+	 * Creates dialog for food menu options
+	 */
 	private void openFoodMenuDialog() {
-		Builder dialog = new AlertDialog.Builder(mContext);
+		Builder dialog = new AlertDialog.Builder(mWrapper);
 		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
-				Intent intent = new Intent(mContext, FoodMenuActivity.class);
-				intent.putExtra(RestaurantMainMenuActivity.MEAL, i);
-				mContext.startActivity(intent);
+				switch (i) {
+				case BREAKFAST:
+					FoodMenuListFragment.setMEAL("Breakfast");
+					break;
+				case LUNCH:
+					FoodMenuListFragment.setMEAL("Lunch");
+					break;
+				case DINNER:
+					FoodMenuListFragment.setMEAL("Dinner");
+					break;
+				default:
+					break;
+				}
+				mWrapper.changeFragment(new FoodMenuListFragment(),
+						new FoodMenuListListener(mWrapper));
 			}
 		};
 		dialog.setTitle(R.string.menu_title);

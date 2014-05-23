@@ -1,35 +1,151 @@
 package ucsd.cs110.splurge;
 
-import android.content.Context;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class DiningOutListListener implements OnItemClickListener {
-	Context mContext;
+/**
+ * Listener class for DiningOutFragment
+ */
+public class DiningOutListListener extends SuperListener implements
+		OnItemClickListener, OnClickListener {
+	/**
+	 * Chosen dining out option (Delivery or Take Out)
+	 */
+	static String DINING_OUT_TYPE;
 
 	/**
 	 * Create a new DiningOutListListener, designed to listen to a
 	 * DiningOutListFragment.
 	 * 
-	 * @param context
+	 * @param wrapper
 	 *            Context used for spawning a new Activity
 	 */
-	public DiningOutListListener(Context context) {
-		mContext = context;
+	public DiningOutListListener(WrapperActivity wrapper) {
+		super(wrapper);
 	}
 
+	/**
+	 * When a list entry is clicked on display the correct food item
+	 */
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		// statrts the FoodItemActivity
-		// Log.e("FoodMenuListListener", "dang this works");
-		Intent intent = new Intent(mContext, FoodItemActivity.class);
-		// save position of food item from menu
-		Log.e("FoodMenuListListener", "Position is " + position);
-		intent.putExtra(FoodMenuActivity.FOOD_ITEM_POSITION, position);
-		mContext.startActivity(intent);
+		Intent intent = new Intent();
+		intent.putExtra(FoodMenuListFragment.FOOD_ITEM_POSITION, position);
+		mWrapper.setIntent(intent);
+		mWrapper.changeFragment(new FoodItemFragment(), null);
+	}
+
+	/**
+	 * Call the appropriate method for the button clicked
+	 */
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.delivery:
+			notifyDelivery();
+			break;
+		case R.id.add_to_order:
+			goToFoodMenu();
+			break;
+		case R.id.take_out:
+			notifyTakeOut();
+			break;
+		case R.id.remove_items:
+			removeSelectedFoodItems();
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	/**
+	 * Place holder method. This should send a request for take out?
+	 */
+	public void notifyTakeOut() {
+		Intent intent = new Intent();
+		intent.putExtra(DINING_OUT_TYPE, "Take Out");
+		mWrapper.setIntent(intent);
+		mWrapper.changeFragment(new DiningOutFormFragment(),
+				new DiningOutFormListener(mWrapper));
+		Log.e("DiningOutListener", "Take Out button works");
+	}
+
+	/**
+	 * Place holder method. This should send a request for delivery?
+	 */
+	public void notifyDelivery() {
+		Intent intent = new Intent();
+		intent.putExtra(DINING_OUT_TYPE, "Delivery");
+		mWrapper.setIntent(intent);
+		mWrapper.changeFragment(new DiningOutFormFragment(),
+				new DiningOutFormListener(mWrapper));
+		Log.e("DiningOutListener", "Delivery button works");
+	}
+
+	/**
+	 * Go to the correct Menu, if no menu was previously chosen open a dialog
+	 */
+	public void goToFoodMenu() {
+		FoodMenuListFragment.clearChecked();
+		if (++RestaurantMainMenuFragment.backCount > 1)
+			mWrapper.getFragmentManager().popBackStack();
+		if (FoodMenuListFragment.getMEAL() == null) {
+			openFoodMenuDialog();
+		} else {
+			mWrapper.changeFragment(new FoodMenuListFragment(),
+					new FoodMenuListListener(mWrapper));
+		}
+	}
+
+	/**
+	 * Remove the selected items from the selectedFood array
+	 */
+	public void removeSelectedFoodItems() {
+		for (int i = 0; i < DiningOutFragment.getSelectedFood().size(); i++) {
+			if (DiningOutFragment.getSelectedFood().get(i).isSelected()) {
+				DiningOutFragment.getSelectedFood().remove(i);
+				i = -1;
+			}
+		}
+		DiningOutFragment.refresh();
+	}
+
+	/**
+	 * Creates dialog for food menu options
+	 */
+	private void openFoodMenuDialog() {
+		Builder dialog = new AlertDialog.Builder(mWrapper);
+		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialoginterface, int i) {
+				switch (i) {
+				case 0:
+					FoodMenuListFragment.setMEAL("Breakfast");
+					break;
+				case 1:
+					FoodMenuListFragment.setMEAL("Lunch");
+					break;
+				case 2:
+					FoodMenuListFragment.setMEAL("Dinner");
+					break;
+				default:
+					break;
+				}
+				mWrapper.changeFragment(new FoodMenuListFragment(),
+						new FoodMenuListListener(mWrapper));
+			}
+		};
+		dialog.setTitle(R.string.menu_title);
+		dialog.setItems(R.array.menus, diaIn);
+		dialog.show();
 	}
 }

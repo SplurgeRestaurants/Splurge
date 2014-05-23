@@ -31,6 +31,10 @@ public class Restaurant {
 	 * Name of the restaurant.
 	 */
 	private String mRestaurantName;
+	/**
+	 * Logo of the restaurant
+	 */
+	private int image;
 
 	private PointF location;
 
@@ -192,5 +196,13 @@ public class Restaurant {
 			}
 		}
 		return mMenus.add(menu);
+	}
+
+	public int getImage() {
+		return image;
+	}
+
+	public void setImage(int imageId) {
+		image = imageId;
 	}
 }

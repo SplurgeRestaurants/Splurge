@@ -2,30 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal" >
-
-    <CheckBox
-        android:id="@+id/checkBox1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:focusable="true"
-        android:padding="20dp"
-       />
-
     <ImageView
         android:id="@+id/FoodIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="0dp" >
+        android:layout_margin="5dp" >
     </ImageView>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:focusableInTouchMode="true"
         android:orientation="vertical" >
 
         <TextView
@@ -34,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="#FFF38585"
-            android:textSize="15sp" >
+            android:textSize="12sp" >
         </TextView>
 
         <TextView
@@ -43,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="#FFF38585"
-            android:textSize="15sp" >
+            android:textSize="12sp" >
         </TextView>
     </LinearLayout>
 

@@ -3,58 +3,97 @@ package ucsd.cs110.splurge;
 import java.util.ArrayList;
 
 import ucsd.cs110.splurge.model.FoodItem;
-import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class FoodMenuListFragment extends Fragment {
-	private static final int DINNER = 2;
-	private static final int LUNCH = 1;
-	private static final int BREAKFAST = 0;
-	// List
-	ListView mListView;
-	// Adapter to create list entries in ListView
-	FoodMenuAdapter adapter;
+/**
+ * Display the list of food items from the appropriate menu
+ * 
+ */
+public class FoodMenuListFragment extends SuperFragment {
+	/**
+	 * Enumerator for MEAL
+	 */
+	private static final String DINNER = "Dinner";
+	/**
+	 * Enumerator for MEAL
+	 */
+	private static final String LUNCH = "Lunch";
+	/**
+	 * Enumerator for MEAL
+	 */
+	private static final String BREAKFAST = "Breakfast";
+	/**
+	 * Store which meal was chosen
+	 */
+	private static String MEAL;
+	/**
+	 * Current meal chosen
+	 */
+	private static String meal;
+	/**
+	 * Store the reference to the listview
+	 */
+	private ListView mListView;
+	/**
+	 * Adapter to create list entries in ListView
+	 */
+	private FoodMenuAdapter adapter;
+	/**
+	 * save position of the chosen food item
+	 */
+	static String FOOD_ITEM_POSITION = "0";
+	/**
+	 * populate with selected food items
+	 */
+	private static ArrayList<FoodItem> selectedFood = new ArrayList<FoodItem>();
+	/**
+	 * populated with food items from a specified menu
+	 */
+	static ArrayList<FoodItem> data;
 
+	/**
+	 * Display the correct menu
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// Get layout
 		View ret = inflater.inflate(R.layout.food_menu_list, container, false);
-		// get id for ListView
 		mListView = (ListView) ret.findViewById(R.id.food_list);
-		// get the specified meal option
-		Intent intent = getActivity().getIntent();
-		int meal = 0;
-		meal = intent.getIntExtra(RestaurantMainMenuActivity.MEAL, meal);
-		switch (meal) {
-		case BREAKFAST:
-			FoodMenuActivity.data = getBreakfastMenuItem();
-			break;
-		case LUNCH:
-			FoodMenuActivity.data = getLunchMenuItem();
-			break;
-		case DINNER:
-			FoodMenuActivity.data = getDinnerMenuItem();
-			break;
-		default:
-			FoodMenuActivity.data = null;
-			break;
+		// TODO (trtucker) refer to menus by string name, get menu from model
+		if (data == null || getMEAL().compareTo(meal) != 0) {
+			meal = getMEAL(); // (dqthai) my temp fix so I can get screen
+								// shots for artifact
+			switch (meal) {
+			case BREAKFAST:
+				FoodMenuListFragment.data = getBreakfastMenuItem();
+				break;
+			case LUNCH:
+				FoodMenuListFragment.data = getLunchMenuItem();
+				break;
+			case DINNER:
+				FoodMenuListFragment.data = getDinnerMenuItem();
+				break;
+			default:
+				break;
+			}
 		}
 		adapter = new FoodMenuAdapter(getActivity(), R.layout.menu_item,
-				FoodMenuActivity.data);
+				FoodMenuListFragment.data);
 		mListView.setAdapter(adapter);
 		return ret;
 	}
 
-	/*
+	/**
 	 * Populate list with breakfast items
+	 * 
+	 * @return Array of food items from the breakfast menu.
 	 */
 	public ArrayList<FoodItem> getBreakfastMenuItem() {
 		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
@@ -65,14 +104,16 @@ public class FoodMenuListFragment extends Fragment {
 		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Breakfast Item " + i);
 			fakeitem.setImage(R.drawable.ic_launcher);
-			fakeitem.setPrice(300);
+			fakeitem.setPrice(300 + (i * 30.3));
 			food.add(fakeitem);
 		}
 		return food;
 	}
 
-	/*
+	/**
 	 * Populate list with lunch items
+	 * 
+	 * @return Array of food items from the lunch menu.
 	 */
 	public ArrayList<FoodItem> getLunchMenuItem() {
 		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
@@ -83,14 +124,16 @@ public class FoodMenuListFragment extends Fragment {
 		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Lunch Item " + i);
 			fakeitem.setImage(R.drawable.ic_launcher);
-			fakeitem.setPrice(300);
+			fakeitem.setPrice(300 + (i * 30.3));
 			food.add(fakeitem);
 		}
 		return food;
 	}
 
-	/*
+	/**
 	 * Populate list with dinner items
+	 * 
+	 * @return Array of food items from the dinner menu.
 	 */
 
 	public ArrayList<FoodItem> getDinnerMenuItem() {
@@ -102,16 +145,79 @@ public class FoodMenuListFragment extends Fragment {
 		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Dinner Item " + i);
 			fakeitem.setImage(R.drawable.ic_launcher);
-			fakeitem.setPrice(300);
+			fakeitem.setPrice(300 + (i * 30.3));
 			food.add(fakeitem);
 		}
 		return food;
 	}
 
-	// set listener for list entries
-	public void setListListener(OnItemClickListener listener) {
+	/**
+	 * Get the food item selected from FoodMenuListFragment
+	 * 
+	 * @return selectedFood
+	 */
+	public static ArrayList<FoodItem> getSelectedFoodItems() {
+		return selectedFood;
+	}
+
+	/**
+	 * Get meal
+	 * 
+	 * @return String of meal
+	 */
+	public static String getMEAL() {
+		return MEAL;
+	}
+
+	/**
+	 * Set meal
+	 * 
+	 * @param mEAL
+	 *            Meal to be set
+	 */
+	public static void setMEAL(String mEAL) {
+		MEAL = mEAL;
+	}
+
+	/**
+	 * Remove checked status on all food items in data
+	 */
+	public static void clearChecked() {
+		if (data != null) {
+			for (int i = 0; i < data.size(); i++) {
+				data.get(i).setSelected(false);
+			}
+		}
+	}
+
+	/**
+	 * set listener for list entries
+	 * 
+	 * @param listener
+	 *            Listener to be set
+	 */
+	public void setFoodMenuListListener(OnItemClickListener listener) {
 		((ListView) getView().findViewById(R.id.food_list))
 				.setOnItemClickListener(listener);
 	}
 
+	/**
+	 * 
+	 * @param listener
+	 *            Listener to be set
+	 */
+	public void setFoodMenuButtonListener(OnClickListener listener) {
+		getView().findViewById(R.id.add_to_order_button).setOnClickListener(
+				listener);
+	}
+
+	/**
+	 * Set mSuperListener to the buttons and list entries
+	 */
+	@Override
+	public void onStart() {
+		setFoodMenuListListener((OnItemClickListener) mSuperListener);
+		setFoodMenuButtonListener((OnClickListener) mSuperListener);
+		super.onStart();
+	}
 }
