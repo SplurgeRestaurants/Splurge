@@ -30,10 +30,11 @@ public class JSONConnectionHandler {
 				.getRestaurant();
 	}
 
-	public int requestReservation(int partySize, Calendar startTime) {
+	public int requestReservation(int restaurantId, int partySize,
+			Calendar startTime) {
 		String resp = mJSONConnection
-				.pushServerMessage(new ReservationRequestMessage(partySize,
-						startTime));
+				.pushServerMessage(new ReservationRequestMessage(restaurantId,
+						partySize, startTime));
 		return ReservationResponseMessage.createFromJSON(resp).getId();
 	}
 }
