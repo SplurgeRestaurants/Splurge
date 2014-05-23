@@ -1,5 +1,6 @@
 package ucsd.cs110.splurge;
 
+import ucsd.cs110.splurge.model.FoodItem;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -62,8 +63,8 @@ public class FoodMenuListListener extends SuperListener implements
 		for (int i = 0; i < FoodMenuListFragment.data.size(); i++) {
 			if (FoodMenuListFragment.data.get(i).isSelected()) {
 				Log.e("Selected", FoodMenuListFragment.data.get(i).getName());
-				FoodMenuListFragment.getSelectedFoodItems().add(
-						FoodMenuListFragment.data.get(i));
+				FoodItem sel = new FoodItem(FoodMenuListFragment.data.get(i));
+				FoodMenuListFragment.getSelectedFoodItems().add(sel);
 			}
 		}
 		for (int i = 0; i < FoodMenuListFragment.getSelectedFoodItems().size(); i++) {

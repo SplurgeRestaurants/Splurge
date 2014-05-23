@@ -38,8 +38,8 @@ public class DiningOutFragment extends SuperFragment {
 		super.onCreate(savedInstanceState);
 		View ret = inflater.inflate(R.layout.dining_out, container, false);
 		mListView = (ListView) ret.findViewById(R.id.dining_out_list);
-		setSelectedFood(FoodMenuListFragment.getSelectedFoodItems());
-		if (!getSelectedFood().isEmpty()) {
+		mSelectedFood = FoodMenuListFragment.getSelectedFoodItems();
+		if (!mSelectedFood.isEmpty()) {
 			ret.findViewById(R.id.empty).setVisibility(View.GONE);
 			mListView.setVisibility(View.VISIBLE);
 		} else {
@@ -72,6 +72,7 @@ public class DiningOutFragment extends SuperFragment {
 	/**
 	 * Reload the ListView when the contents of the list has been changed
 	 */
+
 	public static void refresh() {
 		adapter.notifyDataSetChanged();
 	}

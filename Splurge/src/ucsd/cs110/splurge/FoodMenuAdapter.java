@@ -1,6 +1,8 @@
 package ucsd.cs110.splurge;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import ucsd.cs110.splurge.model.FoodItem;
 import android.content.Context;
@@ -31,6 +33,9 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 	 * Layout to use
 	 */
 	private int resource;
+	
+
+
 
 	/**
 	 * Create a new FoodMenuAdapter designed to bind the views to create a list
@@ -115,7 +120,15 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 		FoodItem food = foodItems.get(position);
 		holder.name.setText(food.getName());
 		holder.image.setImageResource(food.getImage());
-		holder.price.setText("$" + Integer.toString(food.getPrice()));
+		
+		
+		NumberFormat fmt = NumberFormat.getNumberInstance(Locale.US);
+		NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);
+		Double currencyAmount;
+		
+		currencyAmount = (double)food.getPrice();
+		holder.price.setText(currencyFormatter.format(currencyAmount));
+		//holder.price.setText("$" + Integer.toString(food.getPrice()));
 		try {
 			holder.cb.setChecked(food.isSelected());
 			holder.cb.setTag(food);

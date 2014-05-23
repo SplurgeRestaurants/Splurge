@@ -5,16 +5,24 @@ public class FoodItem {
 	private String name;
 	private int imageId;
 	private boolean selected;
-	private int price;
+	private double price;
 
 	public FoodItem(String name) {
 		this.name = name;
+	}
+
+	public FoodItem(FoodItem item) {
+		name = item.name;
+		imageId = item.imageId;
+		selected = item.selected;
+		price = item.price;
 	}
 
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public String toString() {
 		return getName();
 	}
@@ -35,11 +43,11 @@ public class FoodItem {
 		this.selected = selected;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setPrice(double d) {
+		this.price = d;
 	}
 }
