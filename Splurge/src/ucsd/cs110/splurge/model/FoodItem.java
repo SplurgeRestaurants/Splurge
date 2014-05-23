@@ -5,7 +5,7 @@ public class FoodItem {
 	private String name;
 	private int imageId;
 	private boolean selected;
-	private int price;
+	private double price;
 
 	public FoodItem(String name) {
 		this.name = name;
@@ -35,11 +35,11 @@ public class FoodItem {
 		this.selected = selected;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setPrice(double d) {
+		this.price = d;
 	}
 }

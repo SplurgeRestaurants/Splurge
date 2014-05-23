@@ -34,20 +34,22 @@ public class RestaurantMainMenuListener extends SuperListener implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.information:
-			mWrapper.changeFragment(new InformationFragment(),
-					new InformationListener(mWrapper));
+		case R.id.menu:
+			openFoodMenuDialog();
 			break;
+	
 		case R.id.reserve:
 			// TODO (Yuri) go to reservation page
 			// openReserveDialog();
 			break;
-		case R.id.menu:
-			openFoodMenuDialog();
-			break;
+	
 		case R.id.diningout:
 			mWrapper.changeFragment(new DiningOutFragment(),
 					new DiningOutListListener(mWrapper));
+			break;
+		case R.id.information:
+			mWrapper.changeFragment(new InformationFragment(),
+					new InformationListener(mWrapper));
 			break;
 		}
 	}

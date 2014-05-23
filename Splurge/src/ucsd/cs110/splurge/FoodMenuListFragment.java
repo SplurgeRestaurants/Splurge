@@ -98,7 +98,7 @@ public class FoodMenuListFragment extends SuperFragment {
 		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Breakfast Item " + i);
 			fakeitem.setImage(R.drawable.ic_launcher);
-			fakeitem.setPrice(300);
+			fakeitem.setPrice(300 + (i *30.3));
 			food.add(fakeitem);
 		}
 		return food;
@@ -118,7 +118,7 @@ public class FoodMenuListFragment extends SuperFragment {
 		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Lunch Item " + i);
 			fakeitem.setImage(R.drawable.ic_launcher);
-			fakeitem.setPrice(300);
+			fakeitem.setPrice(300 + (i *30.3));
 			food.add(fakeitem);
 		}
 		return food;
@@ -139,7 +139,7 @@ public class FoodMenuListFragment extends SuperFragment {
 		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Dinner Item " + i);
 			fakeitem.setImage(R.drawable.ic_launcher);
-			fakeitem.setPrice(300);
+			fakeitem.setPrice(300 + (i *30.3));
 			food.add(fakeitem);
 		}
 		return food;
