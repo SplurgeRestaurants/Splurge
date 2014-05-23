@@ -8,15 +8,31 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+/**
+ * Helper class for constructing the JSON request for making a reservation.
+ */
 public class ReservationRequestMessage extends ServerMessage {
 
 	private static final String TIME_START = "timeStart";
 	private static final String PARTY_SIZE = "partySize";
 	private static final String REST_ID = "restaurantID";
 
+	/**
+	 * The identificaiton number for the restaurant at which to make the
+	 * reservation.
+	 */
 	private int mRestaurantId;
+	/**
+	 * The party size to request for the reservation.
+	 */
 	private int mPartySize;
+	/**
+	 * The time at which the reservation is to begin.
+	 */
 	private Calendar mStartTime;
+	/**
+	 * The JSON object used for constructing the final result.
+	 */
 	private JSONObject mJSONRep;
 
 	/**

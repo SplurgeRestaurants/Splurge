@@ -30,6 +30,19 @@ public class JSONConnectionHandler {
 				.getRestaurant();
 	}
 
+	/**
+	 * Requests a reservation at the given restaurant for the given party size
+	 * and starting at the given time.
+	 * 
+	 * @param restaurantId
+	 *            The identification number of the restaurant at which a
+	 *            reservation is to be made.
+	 * @param partySize
+	 *            The number of individuals included in the reservation.
+	 * @param startTime
+	 *            The time at which the reservation is to begin.
+	 * @return The identification number for the reservation.
+	 */
 	public int requestReservation(int restaurantId, int partySize,
 			Calendar startTime) {
 		String resp = mJSONConnection
