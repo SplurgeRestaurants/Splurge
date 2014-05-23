@@ -104,7 +104,7 @@ public class FoodMenuListFragment extends SuperFragment {
 		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Breakfast Item " + i);
 			fakeitem.setImage(R.drawable.ic_launcher);
-			fakeitem.setPrice(300 + (i *30.3));
+			fakeitem.setPrice(300 + (i * 30.3));
 			food.add(fakeitem);
 		}
 		return food;
@@ -124,7 +124,7 @@ public class FoodMenuListFragment extends SuperFragment {
 		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Lunch Item " + i);
 			fakeitem.setImage(R.drawable.ic_launcher);
-			fakeitem.setPrice(300 + (i *30.3));
+			fakeitem.setPrice(300 + (i * 30.3));
 			food.add(fakeitem);
 		}
 		return food;
@@ -145,7 +145,7 @@ public class FoodMenuListFragment extends SuperFragment {
 		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Dinner Item " + i);
 			fakeitem.setImage(R.drawable.ic_launcher);
-			fakeitem.setPrice(300 + (i *30.3));
+			fakeitem.setPrice(300 + (i * 30.3));
 			food.add(fakeitem);
 		}
 		return food;
@@ -161,7 +161,26 @@ public class FoodMenuListFragment extends SuperFragment {
 	}
 
 	/**
-	 * Remove checked status on all food items
+	 * Get meal
+	 * 
+	 * @return String of meal
+	 */
+	public static String getMEAL() {
+		return MEAL;
+	}
+
+	/**
+	 * Set meal
+	 * 
+	 * @param mEAL
+	 *            Meal to be set
+	 */
+	public static void setMEAL(String mEAL) {
+		MEAL = mEAL;
+	}
+
+	/**
+	 * Remove checked status on all food items in data
 	 */
 	public static void clearChecked() {
 		if (data != null) {
@@ -200,24 +219,5 @@ public class FoodMenuListFragment extends SuperFragment {
 		setFoodMenuListListener((OnItemClickListener) mSuperListener);
 		setFoodMenuButtonListener((OnClickListener) mSuperListener);
 		super.onStart();
-	}
-
-	/**
-	 * Get meal
-	 * 
-	 * @return String of meal
-	 */
-	public static String getMEAL() {
-		return MEAL;
-	}
-
-	/**
-	 * Set meal
-	 * 
-	 * @param mEAL
-	 *            Meal to be set
-	 */
-	public static void setMEAL(String mEAL) {
-		MEAL = mEAL;
 	}
 }

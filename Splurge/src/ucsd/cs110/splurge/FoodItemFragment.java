@@ -31,7 +31,7 @@ public class FoodItemFragment extends SuperFragment {
 	 * Image of the food item
 	 */
 	private ImageView mImage;
-	
+
 	@Override
 	/**
 	 * Get information for the view
@@ -52,17 +52,15 @@ public class FoodItemFragment extends SuperFragment {
 		mImage.setImageResource(FoodMenuListFragment.data.get(position)
 				.getImage());
 		mDescription.setText(FoodMenuListFragment.data.get(position).getName());
-		
 
-		.NumberFormat fmt = NumberFormat.getNumberInstance(Locale.US);
-		NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);
+		NumberFormat fmt = NumberFormat.getNumberInstance(Locale.US);
+		NumberFormat currencyFormatter = NumberFormat
+				.getCurrencyInstance(Locale.US);
 		Double currencyAmount;
-		
-		currencyAmount = (double)FoodMenuListFragment.data.get(position).getPrice();
+
+		currencyAmount = (double) FoodMenuListFragment.data.get(position)
+				.getPrice();
 		mPrice.setText(currencyFormatter.format(currencyAmount));
-		/*mPrice.setText("$"
-				+ Integer.toString(FoodMenuListFragment.data.get(position)
-						.getPrice()));*/
 		return ret;
 	}
 }
