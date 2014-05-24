@@ -35,6 +35,7 @@ public class Restaurant {
 	 * Logo of the restaurant
 	 */
 	private int image;
+	private int mId;
 
 	private PointF location;
 
@@ -204,5 +205,13 @@ public class Restaurant {
 
 	public void setImage(int imageId) {
 		image = imageId;
+	}
+
+	public void setId(int id) {
+		mId = id;
+	}
+
+	public int getId() {
+		return mId;
 	}
 }
