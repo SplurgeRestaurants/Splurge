@@ -33,9 +33,6 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 	 * Layout to use
 	 */
 	private int resource;
-	
-
-
 
 	/**
 	 * Create a new FoodMenuAdapter designed to bind the views to create a list
@@ -119,16 +116,16 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 		}
 		FoodItem food = foodItems.get(position);
 		holder.name.setText(food.getName());
-		holder.image.setImageResource(food.getImage());
-		
-		
+		holder.image.setImageBitmap(food.getImage());
+
 		NumberFormat fmt = NumberFormat.getNumberInstance(Locale.US);
-		NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);
+		NumberFormat currencyFormatter = NumberFormat
+				.getCurrencyInstance(Locale.US);
 		Double currencyAmount;
-		
-		currencyAmount = (double)food.getPrice();
+
+		currencyAmount = (double) food.getPrice();
 		holder.price.setText(currencyFormatter.format(currencyAmount));
-		//holder.price.setText("$" + Integer.toString(food.getPrice()));
+		// holder.price.setText("$" + Integer.toString(food.getPrice()));
 		try {
 			holder.cb.setChecked(food.isSelected());
 			holder.cb.setTag(food);

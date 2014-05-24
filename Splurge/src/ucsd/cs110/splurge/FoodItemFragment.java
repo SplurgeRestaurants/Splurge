@@ -49,7 +49,7 @@ public class FoodItemFragment extends SuperFragment {
 		position = intent.getIntExtra(FoodMenuListFragment.FOOD_ITEM_POSITION,
 				position);
 		mName.setText(FoodMenuListFragment.data.get(position).getName());
-		mImage.setImageResource(FoodMenuListFragment.data.get(position)
+		mImage.setImageBitmap(FoodMenuListFragment.data.get(position)
 				.getImage());
 		mDescription.setText(FoodMenuListFragment.data.get(position).getName());
 

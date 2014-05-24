@@ -3,6 +3,7 @@ package ucsd.cs110.splurge;
 import java.util.ArrayList;
 
 import ucsd.cs110.splurge.model.FoodItem;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,12 +99,14 @@ public class FoodMenuListFragment extends SuperFragment {
 	public ArrayList<FoodItem> getBreakfastMenuItem() {
 		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
 		FoodItem hashbrowns = new FoodItem("Hashbrown");
-		hashbrowns.setImage(R.drawable.logo);
+		hashbrowns.setImage(BitmapFactory.decodeResource(getResources(),
+				R.drawable.logo));
 		hashbrowns.setPrice(2000);
 		food.add(hashbrowns);
 		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Breakfast Item " + i);
-			fakeitem.setImage(R.drawable.ic_launcher);
+			fakeitem.setImage(BitmapFactory.decodeResource(getResources(),
+					R.drawable.ic_launcher));
 			fakeitem.setPrice(300 + (i * 30.3));
 			food.add(fakeitem);
 		}
@@ -118,12 +121,14 @@ public class FoodMenuListFragment extends SuperFragment {
 	public ArrayList<FoodItem> getLunchMenuItem() {
 		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
 		FoodItem burger = new FoodItem("Burger");
-		burger.setImage(R.drawable.logo);
+		burger.setImage(BitmapFactory.decodeResource(getResources(),
+				R.drawable.logo));
 		burger.setPrice(500);
 		food.add(burger);
 		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Lunch Item " + i);
-			fakeitem.setImage(R.drawable.ic_launcher);
+			fakeitem.setImage(BitmapFactory.decodeResource(getResources(),
+					R.drawable.ic_launcher));
 			fakeitem.setPrice(300 + (i * 30.3));
 			food.add(fakeitem);
 		}
@@ -139,12 +144,14 @@ public class FoodMenuListFragment extends SuperFragment {
 	public ArrayList<FoodItem> getDinnerMenuItem() {
 		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
 		FoodItem steak = new FoodItem("Steak");
-		steak.setImage(R.drawable.logo);
+		steak.setImage(BitmapFactory.decodeResource(getResources(),
+				R.drawable.logo));
 		steak.setPrice(1000);
 		food.add(steak);
 		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Dinner Item " + i);
-			fakeitem.setImage(R.drawable.ic_launcher);
+			fakeitem.setImage(BitmapFactory.decodeResource(getResources(),
+					R.drawable.ic_launcher));
 			fakeitem.setPrice(300 + (i * 30.3));
 			food.add(fakeitem);
 		}
