@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
+import android.graphics.Bitmap;
 import android.graphics.PointF;
 
 /**
@@ -34,7 +35,11 @@ public class Restaurant {
 	/**
 	 * Logo of the restaurant
 	 */
-	private int image;
+	private Bitmap mImage;
+	/**
+	 * Identification number of the restaurant.
+	 */
+	private int mId;
 
 	private PointF location;
 
@@ -198,11 +203,45 @@ public class Restaurant {
 		return mMenus.add(menu);
 	}
 
-	public int getImage() {
-		return image;
+	/**
+	 * Gets the logo for this Restaurant.
+	 * 
+	 * @return This restaurant's logo.
+	 */
+	public Bitmap getImage() {
+		return mImage;
 	}
 
-	public void setImage(int imageId) {
-		image = imageId;
+	/**
+	 * Sets the logo for this Restaurant.
+	 * 
+	 * @param image
+	 *            This restaurant's new logo.
+	 */
+	public void setImage(Bitmap image) {
+		mImage = image;
+	}
+
+	/**
+	 * Sets the stored identification number for this restaurant. This will be
+	 * used in the future to make restaurant-specific requests, and should
+	 * correspond to the identification number of the restaurant in the
+	 * database.
+	 * 
+	 * @param id
+	 *            The new identification number.
+	 */
+	public void setId(int id) {
+		mId = id;
+	}
+
+	/**
+	 * Gets the identification number for this restaurant. This is to be used
+	 * with calls to make reservations, and other restaurant-specific requests.
+	 * 
+	 * @return This restaurant's identification number.
+	 */
+	public int getId() {
+		return mId;
 	}
 }
