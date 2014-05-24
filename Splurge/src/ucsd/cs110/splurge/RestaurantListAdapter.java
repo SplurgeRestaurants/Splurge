@@ -84,7 +84,7 @@ public class RestaurantListAdapter extends ArrayAdapter<Restaurant> {
 		}
 		Restaurant res = restaurants.get(position);
 		holder.name.setText(res.getName());
-		holder.image.setImageResource(res.getImage());
+		holder.image.setImageBitmap(res.getImage());
 		return convertView;
 	}
 }

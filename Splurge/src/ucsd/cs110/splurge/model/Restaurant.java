@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
+import android.graphics.Bitmap;
 import android.graphics.PointF;
 
 /**
@@ -34,7 +35,10 @@ public class Restaurant {
 	/**
 	 * Logo of the restaurant
 	 */
-	private int image;
+	private Bitmap mImage;
+	/**
+	 * Identification number of the restaurant.
+	 */
 	private int mId;
 
 	private PointF location;
@@ -199,12 +203,12 @@ public class Restaurant {
 		return mMenus.add(menu);
 	}
 
-	public int getImage() {
-		return image;
+	public Bitmap getImage() {
+		return mImage;
 	}
 
-	public void setImage(int imageId) {
-		image = imageId;
+	public void setImage(Bitmap image) {
+		mImage = image;
 	}
 
 	public void setId(int id) {
