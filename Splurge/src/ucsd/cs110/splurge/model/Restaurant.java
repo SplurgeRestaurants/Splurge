@@ -203,18 +203,44 @@ public class Restaurant {
 		return mMenus.add(menu);
 	}
 
+	/**
+	 * Gets the logo for this Restaurant.
+	 * 
+	 * @return This restaurant's logo.
+	 */
 	public Bitmap getImage() {
 		return mImage;
 	}
 
+	/**
+	 * Sets the logo for this Restaurant.
+	 * 
+	 * @param image
+	 *            This restaurant's new logo.
+	 */
 	public void setImage(Bitmap image) {
 		mImage = image;
 	}
 
+	/**
+	 * Sets the stored identification number for this restaurant. This will be
+	 * used in the future to make restaurant-specific requests, and should
+	 * correspond to the identification number of the restaurant in the
+	 * database.
+	 * 
+	 * @param id
+	 *            The new identification number.
+	 */
 	public void setId(int id) {
 		mId = id;
 	}
 
+	/**
+	 * Gets the identification number for this restaurant. This is to be used
+	 * with calls to make reservations, and other restaurant-specific requests.
+	 * 
+	 * @return This restaurant's identification number.
+	 */
 	public int getId() {
 		return mId;
 	}
