@@ -37,34 +37,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="ucsd.cs110.splurge.RestaurantMainMenuActivity"
-            android:label="@string/title_activity_restaurant_view" >
-        </activity>
-        <activity
-            android:name="ucsd.cs110.splurge.FoodMenuActivity"
-            android:label="@string/title_activity_food_menu" >
-        </activity>
-        <activity
-            android:name="ucsd.cs110.splurge.RestaurantMainMenuFragment"
-            android:label="@string/title_activity_restaurant_main_menu_fragment" >
-        </activity>
-        <activity
-            android:name="ucsd.cs110.splurge.FoodItemActivity"
-            android:label="@string/title_activity_food_item" >
-        </activity>
-        <activity
-            android:name="ucsd.cs110.splurge.InformationActivity"
-            android:label="@string/title_activity_information" >
-        </activity>
-        <activity
-            android:name="ucsd.cs110.splurge.DiningOutActivity"
-            android:label="@string/title_activity_dining_out" >
-        </activity>
-        <activity
-            android:name="ucsd.cs110.splurge.DiningOutFormFragment"
-            android:label="@string/title_activity_delivery_form_fragment" >
-        </activity>
     </application>
 
 </manifest>

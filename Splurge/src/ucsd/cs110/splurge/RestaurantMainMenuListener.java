@@ -49,9 +49,9 @@ public class RestaurantMainMenuListener extends SuperListener implements
 			openFoodMenuDialog();
 			break;
 		case R.id.reserve:
-			// TODO (Yuri) go to reservation page
-			// mWrapper.changeFragment(new ReservationFragment(), new
-			// ReservationListener());
+			// (dqthai get rid of null, make reservation listener)
+			mWrapper.changeFragment(new ReservationFragment(),
+					new ReservationFragmentListener(mWrapper));
 			break;
 
 		case R.id.diningout:
