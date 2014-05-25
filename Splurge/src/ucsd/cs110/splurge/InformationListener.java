@@ -28,10 +28,15 @@ public class InformationListener extends SuperListener implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.call_phone:
+			// TODO make button call the phone number
+			Log.e("InformationListener", "Call Phone Button Works");
+			break;
 		case R.id.directions:
 			// TODO (dqthai) display google maps?
 			Log.e("InformationListener", "Direction Button Works");
 			break;
+
 		}
 	}
 }

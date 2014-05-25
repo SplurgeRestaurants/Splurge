@@ -95,6 +95,7 @@ public class InformationFragment extends SuperFragment {
 	public void setButtonListener(OnClickListener listener) {
 		(getView().findViewById(R.id.directions)).setOnClickListener(listener);
 	}
+	
 
 	/**
 	 * Set mSuperListener for button listener
