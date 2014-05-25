@@ -105,7 +105,7 @@ public class RestaurantModel {
 	 * Retrieves the container of all restaurant names which should be available
 	 * to the user. These names should be user-friendly and immediately
 	 * printable. They are paired with the corresponding restaurant
-	 * identificaiton numbers to reduce confusion.
+	 * Identification numbers to reduce confusion.
 	 * 
 	 * @return An unspecified collection of all available restaurant listings.
 	 */
