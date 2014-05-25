@@ -1,5 +1,6 @@
 package ucsd.cs110.splurge;
 
+import ucsd.cs110.splurge.model.FoodItem;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -46,6 +47,8 @@ public class FoodMenuListListener extends SuperListener implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.add_to_order_button:
+			if (++RestaurantMainMenuFragment.backCount > 1)
+				mWrapper.getFragmentManager().popBackStack();
 			getSelected();
 		default:
 			break;
@@ -60,12 +63,13 @@ public class FoodMenuListListener extends SuperListener implements
 		for (int i = 0; i < FoodMenuListFragment.data.size(); i++) {
 			if (FoodMenuListFragment.data.get(i).isSelected()) {
 				Log.e("Selected", FoodMenuListFragment.data.get(i).getName());
-				FoodMenuListFragment.selectedFood.add(FoodMenuListFragment.data
-						.get(i));
+				FoodItem sel = new FoodItem(FoodMenuListFragment.data.get(i));
+				FoodMenuListFragment.getSelectedFoodItems().add(sel);
 			}
 		}
-		for (int i = 0; i < FoodMenuListFragment.selectedFood.size(); i++) {
-			FoodMenuListFragment.selectedFood.get(i).setSelected(false);
+		for (int i = 0; i < FoodMenuListFragment.getSelectedFoodItems().size(); i++) {
+			FoodMenuListFragment.getSelectedFoodItems().get(i)
+					.setSelected(false);
 		}
 		mWrapper.changeFragment(new DiningOutFragment(),
 				new DiningOutListListener(mWrapper));

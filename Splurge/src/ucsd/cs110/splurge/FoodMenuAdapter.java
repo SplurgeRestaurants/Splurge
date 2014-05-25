@@ -1,6 +1,8 @@
 package ucsd.cs110.splurge;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import ucsd.cs110.splurge.model.FoodItem;
 import android.content.Context;
@@ -86,33 +88,44 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup Parent) {
-		LayoutInflater vi = (LayoutInflater) mContext
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		convertView = vi.inflate(resource, null);
 		ViewHolder holder = new ViewHolder();
-		holder.name = (TextView) convertView.findViewById(R.id.FoodName);
-		holder.image = (ImageView) convertView.findViewById(R.id.FoodIcon);
-		holder.price = (TextView) convertView.findViewById(R.id.FoodPrice);
-		try {
-			holder.cb = (CheckBox) convertView.findViewById(R.id.checkBox1);
-			holder.cb.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					CheckBox cb = (CheckBox) v;
-					FoodItem food = (FoodItem) cb.getTag();
-					Log.e("FoodMenuAdapter", food.getName()
-							+ " should be checked");
-					food.setSelected(cb.isChecked());
-				}
-			});
-		} catch (Exception e) {
+		if (convertView == null) {
+			LayoutInflater vi = LayoutInflater.from(mContext);
+			convertView = vi.inflate(resource, null);
+			holder.name = (TextView) convertView.findViewById(R.id.FoodName);
+			holder.image = (ImageView) convertView.findViewById(R.id.FoodIcon);
+			holder.price = (TextView) convertView.findViewById(R.id.FoodPrice);
+			try {
+				holder.cb = (CheckBox) convertView.findViewById(R.id.checkBox1);
+				holder.cb.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						CheckBox cb = (CheckBox) v;
+						FoodItem food = (FoodItem) cb.getTag();
+						Log.e("FoodMenuAdapter", food.getName()
+								+ " should be checked");
+						food.setSelected(cb.isChecked());
+					}
+				});
+			} catch (Exception e) {
 
+			}
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
 		}
-		convertView.setTag(holder);
 		FoodItem food = foodItems.get(position);
 		holder.name.setText(food.getName());
-		holder.image.setImageResource(food.getImage());
-		holder.price.setText("$" + Integer.toString(food.getPrice()));
+		holder.image.setImageBitmap(food.getImage());
+
+		NumberFormat fmt = NumberFormat.getNumberInstance(Locale.US);
+		NumberFormat currencyFormatter = NumberFormat
+				.getCurrencyInstance(Locale.US);
+		Double currencyAmount;
+
+		currencyAmount = (double) food.getPrice();
+		holder.price.setText(currencyFormatter.format(currencyAmount));
+		// holder.price.setText("$" + Integer.toString(food.getPrice()));
 		try {
 			holder.cb.setChecked(food.isSelected());
 			holder.cb.setTag(food);

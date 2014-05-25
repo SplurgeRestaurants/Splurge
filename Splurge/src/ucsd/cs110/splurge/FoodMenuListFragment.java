@@ -3,6 +3,7 @@ package ucsd.cs110.splurge;
 import java.util.ArrayList;
 
 import ucsd.cs110.splurge.model.FoodItem;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,13 +34,17 @@ public class FoodMenuListFragment extends SuperFragment {
 	 */
 	private static String MEAL;
 	/**
+	 * Current meal chosen
+	 */
+	private static String meal;
+	/**
 	 * Store the reference to the listview
 	 */
 	private ListView mListView;
 	/**
 	 * Adapter to create list entries in ListView
 	 */
-	FoodMenuAdapter adapter;
+	private FoodMenuAdapter adapter;
 	/**
 	 * save position of the chosen food item
 	 */
@@ -47,7 +52,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	/**
 	 * populate with selected food items
 	 */
-	static ArrayList<FoodItem> selectedFood = new ArrayList<FoodItem>();
+	private static ArrayList<FoodItem> selectedFood = new ArrayList<FoodItem>();
 	/**
 	 * populated with food items from a specified menu
 	 */
@@ -63,20 +68,22 @@ public class FoodMenuListFragment extends SuperFragment {
 		View ret = inflater.inflate(R.layout.food_menu_list, container, false);
 		mListView = (ListView) ret.findViewById(R.id.food_list);
 		// TODO (trtucker) refer to menus by string name, get menu from model
-		String meal = getMEAL(); // (dqthai) my temp fix so I can get screen
-									// shots for artifact
-		switch (meal) {
-		case BREAKFAST:
-			FoodMenuListFragment.data = getBreakfastMenuItem();
-			break;
-		case LUNCH:
-			FoodMenuListFragment.data = getLunchMenuItem();
-			break;
-		case DINNER:
-			FoodMenuListFragment.data = getDinnerMenuItem();
-			break;
-		default:
-			break;
+		if (data == null || getMEAL().compareTo(meal) != 0) {
+			meal = getMEAL(); // (dqthai) my temp fix so I can get screen
+								// shots for artifact
+			switch (meal) {
+			case BREAKFAST:
+				FoodMenuListFragment.data = getBreakfastMenuItem();
+				break;
+			case LUNCH:
+				FoodMenuListFragment.data = getLunchMenuItem();
+				break;
+			case DINNER:
+				FoodMenuListFragment.data = getDinnerMenuItem();
+				break;
+			default:
+				break;
+			}
 		}
 		adapter = new FoodMenuAdapter(getActivity(), R.layout.menu_item,
 				FoodMenuListFragment.data);
@@ -92,13 +99,15 @@ public class FoodMenuListFragment extends SuperFragment {
 	public ArrayList<FoodItem> getBreakfastMenuItem() {
 		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
 		FoodItem hashbrowns = new FoodItem("Hashbrown");
-		hashbrowns.setImage(R.drawable.logo);
+		hashbrowns.setImage(BitmapFactory.decodeResource(getResources(),
+				R.drawable.logo));
 		hashbrowns.setPrice(2000);
 		food.add(hashbrowns);
 		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Breakfast Item " + i);
-			fakeitem.setImage(R.drawable.ic_launcher);
-			fakeitem.setPrice(300);
+			fakeitem.setImage(BitmapFactory.decodeResource(getResources(),
+					R.drawable.ic_launcher));
+			fakeitem.setPrice(300 + (i * 30.3));
 			food.add(fakeitem);
 		}
 		return food;
@@ -112,13 +121,15 @@ public class FoodMenuListFragment extends SuperFragment {
 	public ArrayList<FoodItem> getLunchMenuItem() {
 		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
 		FoodItem burger = new FoodItem("Burger");
-		burger.setImage(R.drawable.logo);
+		burger.setImage(BitmapFactory.decodeResource(getResources(),
+				R.drawable.logo));
 		burger.setPrice(500);
 		food.add(burger);
 		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Lunch Item " + i);
-			fakeitem.setImage(R.drawable.ic_launcher);
-			fakeitem.setPrice(300);
+			fakeitem.setImage(BitmapFactory.decodeResource(getResources(),
+					R.drawable.ic_launcher));
+			fakeitem.setPrice(300 + (i * 30.3));
 			food.add(fakeitem);
 		}
 		return food;
@@ -133,16 +144,57 @@ public class FoodMenuListFragment extends SuperFragment {
 	public ArrayList<FoodItem> getDinnerMenuItem() {
 		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
 		FoodItem steak = new FoodItem("Steak");
-		steak.setImage(R.drawable.logo);
+		steak.setImage(BitmapFactory.decodeResource(getResources(),
+				R.drawable.logo));
 		steak.setPrice(1000);
 		food.add(steak);
 		for (int i = 0; i < 10; i++) {
 			FoodItem fakeitem = new FoodItem("Fake Dinner Item " + i);
-			fakeitem.setImage(R.drawable.ic_launcher);
-			fakeitem.setPrice(300);
+			fakeitem.setImage(BitmapFactory.decodeResource(getResources(),
+					R.drawable.ic_launcher));
+			fakeitem.setPrice(300 + (i * 30.3));
 			food.add(fakeitem);
 		}
 		return food;
+	}
+
+	/**
+	 * Get the food item selected from FoodMenuListFragment
+	 * 
+	 * @return selectedFood
+	 */
+	public static ArrayList<FoodItem> getSelectedFoodItems() {
+		return selectedFood;
+	}
+
+	/**
+	 * Get meal
+	 * 
+	 * @return String of meal
+	 */
+	public static String getMEAL() {
+		return MEAL;
+	}
+
+	/**
+	 * Set meal
+	 * 
+	 * @param mEAL
+	 *            Meal to be set
+	 */
+	public static void setMEAL(String mEAL) {
+		MEAL = mEAL;
+	}
+
+	/**
+	 * Remove checked status on all food items in data
+	 */
+	public static void clearChecked() {
+		if (data != null) {
+			for (int i = 0; i < data.size(); i++) {
+				data.get(i).setSelected(false);
+			}
+		}
 	}
 
 	/**
@@ -174,24 +226,5 @@ public class FoodMenuListFragment extends SuperFragment {
 		setFoodMenuListListener((OnItemClickListener) mSuperListener);
 		setFoodMenuButtonListener((OnClickListener) mSuperListener);
 		super.onStart();
-	}
-
-	/**
-	 * Get meal
-	 * 
-	 * @return String of meal
-	 */
-	public static String getMEAL() {
-		return MEAL;
-	}
-
-	/**
-	 * Set meal
-	 * 
-	 * @param mEAL
-	 *            Meal to be set
-	 */
-	public static void setMEAL(String mEAL) {
-		MEAL = mEAL;
 	}
 }

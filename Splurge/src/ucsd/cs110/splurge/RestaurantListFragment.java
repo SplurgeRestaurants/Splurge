@@ -3,6 +3,7 @@ package ucsd.cs110.splurge;
 import java.util.ArrayList;
 
 import ucsd.cs110.splurge.model.Restaurant;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,7 @@ import android.widget.ListView;
  */
 public class RestaurantListFragment extends SuperFragment {
 	/**
-	 * Reference to the listview
+	 * Reference to the ListView
 	 */
 	private ListView mListView;
 
@@ -45,12 +46,14 @@ public class RestaurantListFragment extends SuperFragment {
 		ArrayList<Restaurant> ret = new ArrayList<Restaurant>();
 
 		Restaurant bistro = new Restaurant("Bistro");
-		bistro.setImage(R.drawable.logo);
+		bistro.setImage(BitmapFactory.decodeResource(getResources(),
+				R.drawable.logo));
 		ret.add(bistro);
 
 		for (int i = 0; i < 10; i++) {
 			Restaurant res = new Restaurant("Fake Restaurant " + i);
-			res.setImage(R.drawable.ic_launcher);
+			res.setImage(BitmapFactory.decodeResource(getResources(),
+					R.drawable.ic_launcher));
 			ret.add(res);
 		}
 		return ret;

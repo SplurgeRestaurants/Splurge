@@ -6,13 +6,33 @@ import java.util.GregorianCalendar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
+/**
+ * Helper class for constructing the JSON request for making a reservation.
+ */
 public class ReservationRequestMessage extends ServerMessage {
 
 	private static final String TIME_START = "timeStart";
 	private static final String PARTY_SIZE = "partySize";
+	private static final String REST_ID = "restaurantID";
 
+	/**
+	 * The identificaiton number for the restaurant at which to make the
+	 * reservation.
+	 */
+	private int mRestaurantId;
+	/**
+	 * The party size to request for the reservation.
+	 */
 	private int mPartySize;
+	/**
+	 * The time at which the reservation is to begin.
+	 */
 	private Calendar mStartTime;
+	/**
+	 * The JSON object used for constructing the final result.
+	 */
 	private JSONObject mJSONRep;
 
 	/**
@@ -21,7 +41,7 @@ public class ReservationRequestMessage extends ServerMessage {
 	 * and is usable.
 	 */
 	public ReservationRequestMessage() {
-		this(-1, new GregorianCalendar(0, 0, 0, 0, 0, 0));
+		this(-1, -1, new GregorianCalendar(0, 0, 0, 0, 0, 0));
 	}
 
 	/**
@@ -35,7 +55,8 @@ public class ReservationRequestMessage extends ServerMessage {
 	 * @param startTime
 	 *            The time at which the reservation shall begin.
 	 */
-	public ReservationRequestMessage(int partySize, Calendar startTime) {
+	public ReservationRequestMessage(int restaurantId, int partySize,
+			Calendar startTime) {
 		mJSONRep = new JSONObject();
 		try {
 			mJSONRep.put(MESSAGE_TYPE, getMessageType());
@@ -44,8 +65,26 @@ public class ReservationRequestMessage extends ServerMessage {
 			// This will never occur.
 		}
 
+		setRestaurantId(restaurantId);
 		setPartySize(partySize);
 		setReservationStartTime(startTime);
+	}
+
+	/**
+	 * Updates the restaurant at which a reservation is to be made.
+	 * 
+	 * @param restaurantId
+	 *            The identification number for the desired restaurant.
+	 */
+	private void setRestaurantId(int restaurantId) {
+		mRestaurantId = restaurantId;
+		try {
+			mJSONRep.put(REST_ID, mRestaurantId);
+		} catch (JSONException e) {
+			Log.e("Splurge",
+					"Unexpected JSON error occurred when setting restaurant ID.");
+			Log.e("Splurge", e.getLocalizedMessage());
+		}
 	}
 
 	/**

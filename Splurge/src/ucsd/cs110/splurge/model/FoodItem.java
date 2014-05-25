@@ -1,30 +1,40 @@
 package ucsd.cs110.splurge.model;
 
+import android.graphics.Bitmap;
+
 public class FoodItem {
 
 	private String name;
-	private int imageId;
+	private Bitmap mImage;
 	private boolean selected;
-	private int price;
+	private double price;
 
 	public FoodItem(String name) {
 		this.name = name;
+	}
+
+	public FoodItem(FoodItem item) {
+		name = item.name;
+		mImage = item.mImage;
+		selected = item.selected;
+		price = item.price;
 	}
 
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public String toString() {
 		return getName();
 	}
 
-	public void setImage(int imageId) {
-		this.imageId = imageId;
+	public void setImage(Bitmap image) {
+		mImage = image;
 	}
 
-	public int getImage() {
-		return imageId;
+	public Bitmap getImage() {
+		return mImage;
 	}
 
 	public boolean isSelected() {
@@ -35,11 +45,11 @@ public class FoodItem {
 		this.selected = selected;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setPrice(double d) {
+		this.price = d;
 	}
 }

@@ -3,70 +3,73 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/greenback"
+    android:background="@drawable/whiteback"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="Now: Open"
-        android:textColor="@color/white"
-        android:textSize="35sp"
-        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_weight="4"
+        android:background="@drawable/roundedwhitebox"
+        android:orientation="vertical"
+        android:padding="5dp" >
 
-    <TextView
-        android:id="@+id/currentHours"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/glass4"
-        android:gravity="left"
-        android:text="Today: 11AM-8PM"
-        android:textColor="@color/white"
-        android:textSize="35sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Now: Open"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/hours"
+        <TextView
+            android:id="@+id/phone_number"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="example_number: \n (999) 999 9999 "
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:text="example_address: \n1234 poop street, \npoopland CA 91523"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/call_phone"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_weight="1"
-        android:background="@drawable/glass4"
+        android:background="@drawable/roundedbutton"
+        android:drawableLeft="@drawable/button1"
+        android:drawablePadding="30dp"
         android:gravity="left|center_vertical"
-        android:paddingLeft="30dip"
-        android:text="Weekly Hours \nand Holidays"
+        android:paddingLeft="20dp"
+        android:text="Call Phone"
         android:textColor="@color/white"
-        android:textSize="35sp"
-        android:textStyle="bold" />
+        android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/address"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:background="@drawable/glass4"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="30dip"
-        android:text="Address"
-        android:textColor="@color/white"
-        android:textSize="35sp"
-        android:textStyle="bold" />
-
-    <TextView
+    <Button
         android:id="@+id/directions"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_margin="5dp"
         android:layout_weight="1"
-        android:background="@drawable/glass4"
+        android:background="@drawable/roundedbutton"
+        android:drawableLeft="@drawable/button1"
+        android:drawablePadding="30dp"
         android:gravity="left|center_vertical"
-        android:paddingLeft="30dip"
-        android:text="Shortest Route"
+        android:paddingLeft="20dp"
+        android:text="Get Directions"
         android:textColor="@color/white"
-        android:textSize="35sp"
-        android:textStyle="bold" />
+        android:textSize="20sp" />
 
 </LinearLayout>

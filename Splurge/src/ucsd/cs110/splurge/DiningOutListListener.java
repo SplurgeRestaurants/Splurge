@@ -15,7 +15,9 @@ import android.widget.AdapterView.OnItemClickListener;
  */
 public class DiningOutListListener extends SuperListener implements
 		OnItemClickListener, OnClickListener {
-
+	/**
+	 * Chosen dining out option (Delivery or Take Out)
+	 */
 	static String DINING_OUT_TYPE;
 
 	/**
@@ -72,7 +74,8 @@ public class DiningOutListListener extends SuperListener implements
 		Intent intent = new Intent();
 		intent.putExtra(DINING_OUT_TYPE, "Take Out");
 		mWrapper.setIntent(intent);
-		mWrapper.changeFragment(new DiningOutFormFragment(), null);
+		mWrapper.changeFragment(new DiningOutFormFragment(),
+				new DiningOutFormListener(mWrapper));
 		Log.e("DiningOutListener", "Take Out button works");
 	}
 
@@ -83,7 +86,8 @@ public class DiningOutListListener extends SuperListener implements
 		Intent intent = new Intent();
 		intent.putExtra(DINING_OUT_TYPE, "Delivery");
 		mWrapper.setIntent(intent);
-		mWrapper.changeFragment(new DiningOutFormFragment(), null);
+		mWrapper.changeFragment(new DiningOutFormFragment(),
+				new DiningOutFormListener(mWrapper));
 		Log.e("DiningOutListener", "Delivery button works");
 	}
 
@@ -91,6 +95,9 @@ public class DiningOutListListener extends SuperListener implements
 	 * Go to the correct Menu, if no menu was previously chosen open a dialog
 	 */
 	public void goToFoodMenu() {
+		FoodMenuListFragment.clearChecked();
+		if (++RestaurantMainMenuFragment.backCount > 1)
+			mWrapper.getFragmentManager().popBackStack();
 		if (FoodMenuListFragment.getMEAL() == null) {
 			openFoodMenuDialog();
 		} else {
@@ -103,9 +110,9 @@ public class DiningOutListListener extends SuperListener implements
 	 * Remove the selected items from the selectedFood array
 	 */
 	public void removeSelectedFoodItems() {
-		for (int i = 0; i < FoodMenuListFragment.selectedFood.size(); i++) {
-			if (FoodMenuListFragment.selectedFood.get(i).isSelected()) {
-				FoodMenuListFragment.selectedFood.remove(i);
+		for (int i = 0; i < DiningOutFragment.getSelectedFood().size(); i++) {
+			if (DiningOutFragment.getSelectedFood().get(i).isSelected()) {
+				DiningOutFragment.getSelectedFood().remove(i);
 				i = -1;
 			}
 		}

@@ -8,24 +8,59 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class DiningOutFormFragment extends SuperFragment {
+	/**
+	 * List of food items to be ordered
+	 */
 	private ListView mListView;
+	/**
+	 * Input for the name field
+	 */
 	private TextView mFormName;
+	/**
+	 * Input for email field
+	 */
 	private TextView mFormEmail;
+	/**
+	 * Input for phone number field
+	 */
 	private TextView mFormPhoneNumber;
+	/**
+	 * Input for street address field
+	 */
 	private TextView mFormStreetAddress;
+	/**
+	 * Input for apartment number field
+	 */
 	private TextView mFormAptNumber;
+	/**
+	 * Input for city field
+	 */
 	private TextView mFormCity;
+	/**
+	 * Input for state field
+	 */
 	private TextView mFormState;
+	/**
+	 * Input for zip code field
+	 */
 	private TextView mFormZipCode;
-	private Button mFormPlaceOrderButton;
+	/**
+	 * Format the list entries
+	 */
 	private FoodMenuAdapter adapter;
+	/**
+	 * Populated with food items to be ordered
+	 */
 	private ArrayList<FoodItem> mOrder;
 
+	/**
+	 * Hide the address views if "Take Out" was selected. Populated the order
+	 * summary list. Set up layout.
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -41,8 +76,6 @@ public class DiningOutFormFragment extends SuperFragment {
 		mFormCity = (TextView) ret.findViewById(R.id.form_city);
 		mFormState = (TextView) ret.findViewById(R.id.form_state);
 		mFormZipCode = (TextView) ret.findViewById(R.id.form_zip_code);
-		mFormPlaceOrderButton = (Button) ret
-				.findViewById(R.id.place_order_button);
 		String diningOutType = getActivity().getIntent()
 				.getCharSequenceExtra(DiningOutListListener.DINING_OUT_TYPE)
 				.toString();
@@ -60,13 +93,13 @@ public class DiningOutFormFragment extends SuperFragment {
 		return (ret);
 	}
 
+	/**
+	 * Get the selected food items
+	 * 
+	 * @return Items that are going to be ordered
+	 */
 	ArrayList<FoodItem> getOrder() {
-		return DiningOutFragment.getFoodItemsSelected();
-	}
-
-	public void setDiningOutFormButtonListener(OnClickListener listener) {
-		getView().findViewById(R.id.place_order_button).setOnClickListener(
-				listener);
+		return FoodMenuListFragment.getSelectedFoodItems();
 	}
 
 	/**
@@ -75,7 +108,22 @@ public class DiningOutFormFragment extends SuperFragment {
 	 * @return Compiled form information
 	 */
 	String getForm() {
-		return null;
+		String ret = "";
+		ret += mFormName.getText();
+		ret += mFormEmail.getText();
+		ret += mFormPhoneNumber.getText();
+		return ret;
+	}
+
+	/**
+	 * Set a listener for the buttons
+	 * 
+	 * @param listener
+	 *            Listener to be set
+	 */
+	public void setDiningOutFormButtonListener(OnClickListener listener) {
+		getView().findViewById(R.id.place_order_button).setOnClickListener(
+				listener);
 	}
 
 	/**

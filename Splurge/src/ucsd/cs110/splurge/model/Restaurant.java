@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
+import android.graphics.Bitmap;
+import android.graphics.PointF;
+
 /**
  * Object containing all information specific to an individual restaurant.
  */
@@ -32,7 +35,13 @@ public class Restaurant {
 	/**
 	 * Logo of the restaurant
 	 */
-	private int image;
+	private Bitmap mImage;
+	/**
+	 * Identification number of the restaurant.
+	 */
+	private int mId;
+
+	private PointF location;
 
 	/**
 	 * Creates a new restaurant with nothing but a name.
@@ -91,6 +100,16 @@ public class Restaurant {
 	}
 
 	/**
+	 * Informs the system that the given timeslot is unavailable.
+	 * 
+	 * @param time
+	 *            The unavailable timeslot.
+	 */
+	public void addUnavailableTime(Timeslot time) {
+		mUnavailableTimes.add(time);
+	}
+
+	/**
 	 * Retrieves a menu by its title. If no such menu exist, this function will
 	 * return <code>null</code>.
 	 * 
@@ -137,6 +156,36 @@ public class Restaurant {
 	}
 
 	/**
+	 * Sets the longitude of the restaurant's physical location.
+	 * 
+	 * @param x
+	 *            The longitude of the restaurant's location.
+	 */
+	public void setLocX(float x) {
+		location.x = x;
+	}
+
+	/**
+	 * Sets the latitude of the restaurant's physical location.
+	 * 
+	 * @param y
+	 *            The latitude of the restaurant's location.
+	 */
+	public void setLocY(float y) {
+		location.y = y;
+	}
+
+	/**
+	 * Sets the location to the given latitude and longitude pair.
+	 * 
+	 * @param point
+	 *            Point representation of the restaurant's location.
+	 */
+	public void setLocation(PointF point) {
+		location = point;
+	}
+
+	/**
 	 * Adds a FoodMenu to the restaurant listing.
 	 * 
 	 * @param menu
@@ -154,11 +203,45 @@ public class Restaurant {
 		return mMenus.add(menu);
 	}
 
-	public int getImage() {
-		return image;
+	/**
+	 * Gets the logo for this Restaurant.
+	 * 
+	 * @return This restaurant's logo.
+	 */
+	public Bitmap getImage() {
+		return mImage;
 	}
 
-	public void setImage(int imageId) {
-		image = imageId;
+	/**
+	 * Sets the logo for this Restaurant.
+	 * 
+	 * @param image
+	 *            This restaurant's new logo.
+	 */
+	public void setImage(Bitmap image) {
+		mImage = image;
+	}
+
+	/**
+	 * Sets the stored identification number for this restaurant. This will be
+	 * used in the future to make restaurant-specific requests, and should
+	 * correspond to the identification number of the restaurant in the
+	 * database.
+	 * 
+	 * @param id
+	 *            The new identification number.
+	 */
+	public void setId(int id) {
+		mId = id;
+	}
+
+	/**
+	 * Gets the identification number for this restaurant. This is to be used
+	 * with calls to make reservations, and other restaurant-specific requests.
+	 * 
+	 * @return This restaurant's identification number.
+	 */
+	public int getId() {
+		return mId;
 	}
 }

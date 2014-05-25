@@ -27,7 +27,7 @@ public class DiningOutFragment extends SuperFragment {
 	/**
 	 * List of food items that were selected from the food menu
 	 */
-	private ArrayList<FoodItem> mSelectedFood = new ArrayList<FoodItem>();
+	private static ArrayList<FoodItem> mSelectedFood;
 
 	/**
 	 * Display the layout and populate the list with food items, if any
@@ -38,20 +38,43 @@ public class DiningOutFragment extends SuperFragment {
 		super.onCreate(savedInstanceState);
 		View ret = inflater.inflate(R.layout.dining_out, container, false);
 		mListView = (ListView) ret.findViewById(R.id.dining_out_list);
-		mSelectedFood = getFoodItemsSelected();
+		mSelectedFood = FoodMenuListFragment.getSelectedFoodItems();
+		if (!mSelectedFood.isEmpty()) {
+			ret.findViewById(R.id.empty).setVisibility(View.GONE);
+			mListView.setVisibility(View.VISIBLE);
+		} else {
+			mListView.setVisibility(View.GONE);
+		}
 		adapter = new FoodMenuAdapter(getActivity(), R.layout.menu_item,
-				mSelectedFood);
+				getSelectedFood());
 		mListView.setAdapter(adapter);
 		return (ret);
 	}
 
 	/**
-	 * Get the food item selected from FoodMenuListFragment
+	 * Get the selected food items from the dining out list
 	 * 
-	 * @return An array of food items selected by the user
+	 * @return Array of the selected food items from dining out list
 	 */
-	public static ArrayList<FoodItem> getFoodItemsSelected() {
-		return FoodMenuListFragment.selectedFood;
+	public static ArrayList<FoodItem> getSelectedFood() {
+		return mSelectedFood;
+	}
+
+	/**
+	 * Set selected food items
+	 * 
+	 * @param mSelectedFood
+	 */
+	public static void setSelectedFood(ArrayList<FoodItem> mSelectedFood) {
+		DiningOutFragment.mSelectedFood = mSelectedFood;
+	}
+
+	/**
+	 * Reload the ListView when the contents of the list has been changed
+	 */
+
+	public static void refresh() {
+		adapter.notifyDataSetChanged();
 	}
 
 	/**
@@ -86,13 +109,5 @@ public class DiningOutFragment extends SuperFragment {
 		setDiningOutListListener((OnItemClickListener) mSuperListener);
 		setDiningOutButtonListener((OnClickListener) mSuperListener);
 		super.onStart();
-	}
-
-	/**
-	 * Reload the ListView when the contents of the list has been changed
-	 */
-	public static void refresh() {
-		adapter.notifyDataSetChanged();
-
 	}
 }

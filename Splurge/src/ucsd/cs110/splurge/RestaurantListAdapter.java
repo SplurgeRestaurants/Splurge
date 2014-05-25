@@ -70,17 +70,21 @@ public class RestaurantListAdapter extends ArrayAdapter<Restaurant> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup Parent) {
 		ViewHolder holder = null;
-		LayoutInflater vi = (LayoutInflater) mContext
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		convertView = vi.inflate(R.layout.restaurant_list_entry, null);
-		holder = new ViewHolder();
-		holder.name = (TextView) convertView.findViewById(R.id.RestaurantName);
-		holder.image = (ImageView) convertView
-				.findViewById(R.id.RestaurantIcon);
-		convertView.setTag(holder);
+		if (convertView == null) {
+			LayoutInflater vi = LayoutInflater.from(mContext);
+			convertView = vi.inflate(R.layout.restaurant_list_entry, null);
+			holder = new ViewHolder();
+			holder.name = (TextView) convertView
+					.findViewById(R.id.RestaurantName);
+			holder.image = (ImageView) convertView
+					.findViewById(R.id.RestaurantIcon);
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
+		}
 		Restaurant res = restaurants.get(position);
 		holder.name.setText(res.getName());
-		holder.image.setImageResource(res.getImage());
+		holder.image.setImageBitmap(res.getImage());
 		return convertView;
 	}
 }

@@ -12,6 +12,18 @@ import android.view.View.OnClickListener;
  */
 public class RestaurantMainMenuListener extends SuperListener implements
 		OnClickListener {
+	/**
+	 * Enumerator indicating breakfast.
+	 */
+	private static final int BREAKFAST = 0;
+	/**
+	 * Enumerator indicating lunch.
+	 */
+	private static final int LUNCH = 1;
+	/**
+	 * Enumerator indicating dinner.
+	 */
+	private static final int DINNER = 2;
 
 	/**
 	 * Create a new RestaurantMainMenuListener, designed to listen to a
@@ -29,42 +41,28 @@ public class RestaurantMainMenuListener extends SuperListener implements
 	 * 
 	 * @param v
 	 *            View being clicked on
-	 * 
 	 */
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.information:
-			mWrapper.changeFragment(new InformationFragment(),
-					new InformationListener(mWrapper));
-			break;
-		case R.id.reserve:
-			openReserveDialog();
-			break;
 		case R.id.menu:
 			openFoodMenuDialog();
 			break;
+		case R.id.reserve:
+			// TODO (Yuri) go to reservation page
+			// mWrapper.changeFragment(new ReservationFragment(), new
+			// ReservationListener());
+			break;
+
 		case R.id.diningout:
 			mWrapper.changeFragment(new DiningOutFragment(),
 					new DiningOutListListener(mWrapper));
 			break;
+		case R.id.information:
+			mWrapper.changeFragment(new InformationFragment(),
+					new InformationListener(mWrapper));
+			break;
 		}
-	}
-
-	/**
-	 * Creates dialog for reservation options
-	 */
-	private void openReserveDialog() {
-		Builder dialog = new AlertDialog.Builder(mWrapper);
-		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialoginterface, int i) {
-				// TODO open reservation activity
-			}
-		};
-		dialog.setTitle(R.string.new_reserv_title);
-		dialog.setItems(R.array.reservations, diaIn);
-		dialog.show();
 	}
 
 	/**
@@ -76,13 +74,13 @@ public class RestaurantMainMenuListener extends SuperListener implements
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
 				switch (i) {
-				case 0:
+				case BREAKFAST:
 					FoodMenuListFragment.setMEAL("Breakfast");
 					break;
-				case 1:
+				case LUNCH:
 					FoodMenuListFragment.setMEAL("Lunch");
 					break;
-				case 2:
+				case DINNER:
 					FoodMenuListFragment.setMEAL("Dinner");
 					break;
 				default:

@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -14,24 +15,17 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="ucsd.cs110.splurge.HomeScreenActivity"
+            android:name="ucsd.cs110.splurge.WrapperActivity"
             android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="ucsd.cs110.splurge.RestaurantMainMenuActivity"
             android:label="@string/title_activity_restaurant_view" >
-        </activity>
-        <activity
-            android:name="ucsd.cs110.splurge.BreakfastMenuActivity"
-            android:label="@string/title_activity_breakfast_menu"
-            android:parentActivityName="ucsd.cs110.splurge.HomeScreenActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="ucsd.cs110.splurge.HomeScreenActivity" />
-        </activity>
-        <activity
-            android:name="ucsd.cs110.splurge.LunchMenuActivity"
-            android:label="@string/title_activity_lunch_menu" >
         </activity>
         <activity
             android:name="ucsd.cs110.splurge.FoodMenuActivity"
@@ -52,15 +46,6 @@
         <activity
             android:name="ucsd.cs110.splurge.DiningOutActivity"
             android:label="@string/title_activity_dining_out" >
-        </activity>
-        <activity
-            android:name="ucsd.cs110.splurge.WrapperActivity"
-            android:label="@string/title_activity_wrapper" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="ucsd.cs110.splurge.DiningOutFormFragment"
