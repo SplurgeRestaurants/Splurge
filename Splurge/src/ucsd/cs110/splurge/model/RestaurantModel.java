@@ -1,6 +1,7 @@
 package ucsd.cs110.splurge.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 
 import ucsd.cs110.splurge.connectivity.JSONConnectionHandler;
@@ -90,6 +91,31 @@ public class RestaurantModel {
 		mCurrentRestaurant = mConnectionHandler.requestRestaurantInfo(id);
 		Log.i("Splurge",
 				"Model restaurant set to " + mCurrentRestaurant.getName());
+	}
+
+	/**
+	 * Request a reservation at the given start time.
+	 * 
+	 * @param partySize
+	 *            The number of party members for which to request a
+	 *            reservation.
+	 * @param startTime
+	 *            The time at which the reservation is to begin.
+	 * @return The identification number for the acquired reservation, or -1 if
+	 *         no reservation was available.
+	 */
+	public int requestReservation(int partySize, Calendar startTime) {
+		if (mCurrentRestaurant.isTimeUnavailable(startTime))
+			return -1;
+		return mConnectionHandler.requestReservation(
+				mCurrentRestaurant.getId(), partySize, startTime);
+	}
+
+	/**
+	 * Updates the available reservation times.
+	 */
+	public void updateAvailableTimes() {
+		setRestaurantById(mCurrentRestaurant.getId());
 	}
 
 	/**
