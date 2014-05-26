@@ -25,4 +25,15 @@ public abstract class SuperFragment extends Fragment {
 	public void setSuperListener(SuperListener l) {
 		mSuperListener = l;
 	}
+
+	/**
+	 * Convenience method for casting <code>getActivity()</code> into a
+	 * WrapperActivity.
+	 * 
+	 * @return The Activity with which this Fragment is currently associated,
+	 *         casted to a WrapperActivity.
+	 */
+	public WrapperActivity getWrapperActivity() {
+		return (WrapperActivity) getActivity();
+	}
 }
