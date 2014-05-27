@@ -5,12 +5,14 @@ import java.util.Calendar;
 import java.util.Collection;
 
 import ucsd.cs110.splurge.connectivity.JSONConnectionHandler;
+import ucsd.cs110.splurge.connectivity.tasks.RestaurantListAsyncTask;
+import ucsd.cs110.splurge.connectivity.tasks.RestaurantListRequestListener;
 import android.util.Log;
 
 /**
  * Class containing business logic for the Splurge application.
  */
-public class RestaurantModel {
+public class RestaurantModel implements RestaurantListRequestListener {
 	/**
 	 * Container for Restaurants that the Model has requested from the Server,
 	 * but are not necessarily currently viewed. This a cache for the event that
@@ -34,6 +36,11 @@ public class RestaurantModel {
 	 * calls.
 	 */
 	private JSONConnectionHandler mConnectionHandler;
+	/**
+	 * Listener of restaurant list requests to which results should be
+	 * forwarded.
+	 */
+	private RestaurantListRequestListener mForwardListener;
 
 	/**
 	 * Creates a new model with empty lists and no selected restaurant.
@@ -169,14 +176,30 @@ public class RestaurantModel {
 	 * printable. They are paired with the corresponding restaurant
 	 * Identification numbers to reduce confusion.
 	 * 
-	 * @return An unspecified collection of all available restaurant listings.
+	 * This accepts a listener which shall be notified about the result should
+	 * the result not be available locally. In a move inspired by the decorator
+	 * pattern, the model is also a listener, and will cache the result and
+	 * forward it to the listening class when the result becomes available.
+	 * 
+	 * @param listener
+	 *            Listener to notify when the result has been acquired.
+	 * 
+	 * @return An unspecified collection of all available restaurant listings,
+	 *         or <code>null</code> if it will be returned later.
 	 */
-	public Collection<RestaurantListing> getAvailableRestaurantNames() {
+	public Collection<RestaurantListing> getAvailableRestaurantNames(
+			RestaurantListRequestListener listener) {
+		mForwardListener = listener;
 		if (mAvailableRestaurantNames == null
 				|| mAvailableRestaurantNames.isEmpty()) {
-			mAvailableRestaurantNames = mConnectionHandler
-					.requestRestaurantList();
+			RestaurantListAsyncTask rlat = new RestaurantListAsyncTask(this);
 		}
 		return mAvailableRestaurantNames;
+	}
+
+	@Override
+	public void receiveRetaurantList(Collection<RestaurantListing> list) {
+		mAvailableRestaurantNames = list;
+		mForwardListener.receiveRetaurantList(list);
 	}
 }

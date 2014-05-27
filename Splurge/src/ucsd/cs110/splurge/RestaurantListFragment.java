@@ -1,7 +1,9 @@
 package ucsd.cs110.splurge;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
+import ucsd.cs110.splurge.connectivity.tasks.RestaurantListRequestListener;
 import ucsd.cs110.splurge.model.Restaurant;
 import ucsd.cs110.splurge.model.RestaurantListing;
 import android.graphics.BitmapFactory;
@@ -16,7 +18,8 @@ import android.widget.ListView;
  * Fragment to display the list of restaurants
  * 
  */
-public class RestaurantListFragment extends SuperFragment {
+public class RestaurantListFragment extends SuperFragment implements
+		RestaurantListRequestListener {
 	/**
 	 * Reference to the ListView
 	 */
@@ -32,7 +35,8 @@ public class RestaurantListFragment extends SuperFragment {
 		View ret = inflater.inflate(R.layout.restaurant_list, container, false);
 		mListView = (ListView) ret.findViewById(R.id.list);
 		ArrayList<RestaurantListing> data = new ArrayList<RestaurantListing>(
-				getWrapperActivity().getModel().getAvailableRestaurantNames());
+				getWrapperActivity().getModel().getAvailableRestaurantNames(
+						this));
 		RestaurantListAdapter adapter = new RestaurantListAdapter(
 				getActivity(), R.layout.restaurant_list_entry, data);
 		mListView.setAdapter(adapter);
@@ -79,5 +83,14 @@ public class RestaurantListFragment extends SuperFragment {
 	public void onStart() {
 		setListListener((OnItemClickListener) mSuperListener);
 		super.onStart();
+	}
+
+	@Override
+	public void receiveRetaurantList(Collection<RestaurantListing> list) {
+		ArrayList<RestaurantListing> data = new ArrayList<RestaurantListing>(
+				list);
+		RestaurantListAdapter adapter = new RestaurantListAdapter(
+				getActivity(), R.layout.restaurant_list_entry, data);
+		mListView.setAdapter(adapter);
 	}
 }
