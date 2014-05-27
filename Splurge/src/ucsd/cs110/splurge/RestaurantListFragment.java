@@ -87,6 +87,7 @@ public class RestaurantListFragment extends SuperFragment implements
 
 	@Override
 	public void receiveRetaurantList(Collection<RestaurantListing> list) {
+		Log.i("Splurge", "Received a restaurant list. Size is: " + list.size());
 		ArrayList<RestaurantListing> data = new ArrayList<RestaurantListing>(
 				list);
 		RestaurantListAdapter adapter = new RestaurantListAdapter(
