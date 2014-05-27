@@ -3,6 +3,7 @@ package ucsd.cs110.splurge;
 import java.util.ArrayList;
 
 import ucsd.cs110.splurge.model.Restaurant;
+import ucsd.cs110.splurge.model.RestaurantListing;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,7 +31,8 @@ public class RestaurantListFragment extends SuperFragment {
 		super.onCreate(savedInstanceState);
 		View ret = inflater.inflate(R.layout.restaurant_list, container, false);
 		mListView = (ListView) ret.findViewById(R.id.list);
-		ArrayList<Restaurant> data = GetSampleData();
+		ArrayList<RestaurantListing> data = new ArrayList<RestaurantListing>(
+				getWrapperActivity().getModel().getAvailableRestaurantNames());
 		RestaurantListAdapter adapter = new RestaurantListAdapter(
 				getActivity(), R.layout.restaurant_list_entry, data);
 		mListView.setAdapter(adapter);

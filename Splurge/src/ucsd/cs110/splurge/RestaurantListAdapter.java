@@ -2,7 +2,7 @@ package ucsd.cs110.splurge;
 
 import java.util.ArrayList;
 
-import ucsd.cs110.splurge.model.Restaurant;
+import ucsd.cs110.splurge.model.RestaurantListing;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +16,11 @@ import android.widget.TextView;
  * Creates a custom view for the restaurant entries in the home screen.
  * 
  */
-public class RestaurantListAdapter extends ArrayAdapter<Restaurant> {
+public class RestaurantListAdapter extends ArrayAdapter<RestaurantListing> {
 	/**
 	 * Populate with restaurants
 	 */
-	private ArrayList<Restaurant> restaurants;
+	private ArrayList<RestaurantListing> restaurants;
 	/**
 	 * Store the current context
 	 */
@@ -36,7 +36,7 @@ public class RestaurantListAdapter extends ArrayAdapter<Restaurant> {
 	 *            ArrayList of restaurants
 	 */
 	public RestaurantListAdapter(Context context, int resource,
-			ArrayList<Restaurant> Restaurants) {
+			ArrayList<RestaurantListing> Restaurants) {
 		super(context, resource, Restaurants);
 		mContext = context;
 		this.restaurants = Restaurants;
@@ -82,9 +82,9 @@ public class RestaurantListAdapter extends ArrayAdapter<Restaurant> {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		Restaurant res = restaurants.get(position);
-		holder.name.setText(res.getName());
-		holder.image.setImageBitmap(res.getImage());
+		RestaurantListing res = restaurants.get(position);
+		holder.name.setText(res.getRestaurantName());
+		holder.image.setImageBitmap(res.getRestaurantImage());
 		return convertView;
 	}
 }

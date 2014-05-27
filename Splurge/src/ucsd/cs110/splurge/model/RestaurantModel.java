@@ -172,6 +172,11 @@ public class RestaurantModel {
 	 * @return An unspecified collection of all available restaurant listings.
 	 */
 	public Collection<RestaurantListing> getAvailableRestaurantNames() {
+		if (mAvailableRestaurantNames == null
+				|| mAvailableRestaurantNames.isEmpty()) {
+			mAvailableRestaurantNames = mConnectionHandler
+					.requestRestaurantList();
+		}
 		return mAvailableRestaurantNames;
 	}
 }

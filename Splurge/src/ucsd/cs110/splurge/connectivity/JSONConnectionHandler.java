@@ -1,8 +1,10 @@
 package ucsd.cs110.splurge.connectivity;
 
 import java.util.Calendar;
+import java.util.Collection;
 
 import ucsd.cs110.splurge.model.Restaurant;
+import ucsd.cs110.splurge.model.RestaurantListing;
 
 /**
  * Deals with the connection specifics and acquires information as requested.
@@ -49,5 +51,20 @@ public class JSONConnectionHandler {
 				.pushServerMessage(new ReservationRequestMessage(restaurantId,
 						partySize, startTime));
 		return ReservationResponseMessage.createFromJSON(resp).getId();
+	}
+
+	/**
+	 * Requests a list of available restaurants. This includes any restaurant in
+	 * the system at which the user could theoretically make a reservation,
+	 * about which the user could read information, or for which the user could
+	 * utilize any of the Splurge features.
+	 * 
+	 * @return A list of available restaurants.
+	 */
+	public Collection<RestaurantListing> requestRestaurantList() {
+		String resp = mJSONConnection
+				.pushServerMessage(new RestaurantListRequestMessage());
+		return RestaurantListResponseMessage.createFromJSON(resp)
+				.getRestaurantList();
 	}
 }
