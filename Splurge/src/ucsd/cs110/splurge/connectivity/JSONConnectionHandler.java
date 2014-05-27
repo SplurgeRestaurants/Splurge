@@ -16,6 +16,10 @@ public class JSONConnectionHandler {
 	 */
 	private ServerHttpJSONConnection mJSONConnection;
 
+	public JSONConnectionHandler() {
+		mJSONConnection = new ServerHttpJSONConnection();
+	}
+
 	/**
 	 * Requests information about the restaurant given by the identification
 	 * number. This includes menu information, availability, and most other key
