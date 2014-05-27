@@ -16,7 +16,7 @@ public class ServerHttpJSONConnection {
 	/**
 	 * Constant field holding the host address of the Splurge server.
 	 */
-	private static final String HOST_ADDR = "http://thawing-cliffs-1703.herokuapp.com/";
+	private static final String HOST_ADDR = "http://splurge.herokuapp.com/";
 
 	/**
 	 * Object handling the actual connection.
