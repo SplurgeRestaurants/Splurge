@@ -98,12 +98,7 @@ public class DiningOutListListener extends SuperListener implements
 		FoodMenuListFragment.clearChecked();
 		if (++RestaurantMainMenuFragment.backCount > 1)
 			mWrapper.getFragmentManager().popBackStack();
-		if (FoodMenuListFragment.getMEAL() == null) {
-			openFoodMenuDialog();
-		} else {
-			mWrapper.changeFragment(new FoodMenuListFragment(),
-					new FoodMenuListListener(mWrapper));
-		}
+		openFoodMenuDialog();
 	}
 
 	/**
@@ -125,28 +120,17 @@ public class DiningOutListListener extends SuperListener implements
 	 */
 	private void openFoodMenuDialog() {
 		Builder dialog = new AlertDialog.Builder(mWrapper);
+		final FoodMenuListFragment nextFrag = new FoodMenuListFragment();
 		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
-				switch (i) {
-				case 0:
-					FoodMenuListFragment.setMEAL("Breakfast");
-					break;
-				case 1:
-					FoodMenuListFragment.setMEAL("Lunch");
-					break;
-				case 2:
-					FoodMenuListFragment.setMEAL("Dinner");
-					break;
-				default:
-					break;
-				}
+				nextFrag.setMealByIndex(i);
 				mWrapper.changeFragment(new FoodMenuListFragment(),
 						new FoodMenuListListener(mWrapper));
 			}
 		};
 		dialog.setTitle(R.string.menu_title);
-		dialog.setItems(R.array.menus, diaIn);
+		dialog.setItems(mWrapper.getModel().getMenuLabels(), diaIn);
 		dialog.show();
 	}
 }

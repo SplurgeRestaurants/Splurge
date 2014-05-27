@@ -128,6 +128,42 @@ public class RestaurantModel {
 	}
 
 	/**
+	 * Retrieves a menu by its title. If no such menu exist, this function will
+	 * return <code>null</code>.
+	 * 
+	 * @param label
+	 *            The title of the menu.
+	 * @return The menu, or <code>null</code> if no such menu exists.
+	 */
+	public FoodMenu getFoodMenuByLabel(String label) {
+		return getRestaurant().getMenuByLabel(label);
+	}
+
+	/**
+	 * Retrieves a menu by its index. There is no guarantee that a particular
+	 * index will correspond to the same meal across multiple restaurants,
+	 * although a given index will always return the same menu for the same
+	 * restaurant.
+	 * 
+	 * @param index
+	 *            The index number for the menu to retrieve.
+	 * @return A menu.
+	 */
+	public FoodMenu getFoodMenuByIndex(int index) {
+		return getRestaurant().getFoodMenuByIndex(index);
+	}
+
+	/**
+	 * Retrieves an array of the labels for the menus available for this
+	 * restaurant. This is not guaranteed to be in any particular order.
+	 * 
+	 * @return An array of labels fo rhte menus available for this restaurant.
+	 */
+	public String[] getMenuLabels() {
+		return getRestaurant().getMenuLabels();
+	}
+
+	/**
 	 * Retrieves the container of all restaurant names which should be available
 	 * to the user. These names should be user-friendly and immediately
 	 * printable. They are paired with the corresponding restaurant

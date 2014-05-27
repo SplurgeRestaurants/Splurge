@@ -3,7 +3,7 @@ package ucsd.cs110.splurge;
 import java.util.ArrayList;
 
 import ucsd.cs110.splurge.model.FoodItem;
-import android.graphics.BitmapFactory;
+import ucsd.cs110.splurge.model.FoodMenu;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,25 +18,9 @@ import android.widget.ListView;
  */
 public class FoodMenuListFragment extends SuperFragment {
 	/**
-	 * Enumerator for MEAL
+	 * The menu which shall be displayed.
 	 */
-	private static final String DINNER = "Dinner";
-	/**
-	 * Enumerator for MEAL
-	 */
-	private static final String LUNCH = "Lunch";
-	/**
-	 * Enumerator for MEAL
-	 */
-	private static final String BREAKFAST = "Breakfast";
-	/**
-	 * Store which meal was chosen
-	 */
-	private static String MEAL;
-	/**
-	 * Current meal chosen
-	 */
-	private static String meal;
+	private FoodMenu mMenu;
 	/**
 	 * Store the reference to the listview
 	 */
@@ -68,23 +52,7 @@ public class FoodMenuListFragment extends SuperFragment {
 		View ret = inflater.inflate(R.layout.food_menu_list, container, false);
 		mListView = (ListView) ret.findViewById(R.id.food_list);
 		// TODO (trtucker) refer to menus by string name, get menu from model
-		if (data == null || getMEAL().compareTo(meal) != 0) {
-			meal = getMEAL(); // (dqthai) my temp fix so I can get screen
-								// shots for artifact
-			switch (meal) {
-			case BREAKFAST:
-				FoodMenuListFragment.data = getBreakfastMenuItem();
-				break;
-			case LUNCH:
-				FoodMenuListFragment.data = getLunchMenuItem();
-				break;
-			case DINNER:
-				FoodMenuListFragment.data = getDinnerMenuItem();
-				break;
-			default:
-				break;
-			}
-		}
+		FoodMenuListFragment.data = new ArrayList<>(mMenu.getFoodList());
 		adapter = new FoodMenuAdapter(getActivity(), R.layout.menu_item,
 				FoodMenuListFragment.data);
 		mListView.setAdapter(adapter);
@@ -92,69 +60,19 @@ public class FoodMenuListFragment extends SuperFragment {
 	}
 
 	/**
-	 * Populate list with breakfast items
+	 * Populate list with food items from an arbitrarily-named menu.
 	 * 
-	 * @return Array of food items from the breakfast menu.
+	 * @param label
+	 *            The title of the menu to look up.
+	 * @return Array of food items from the requested menu, or an empty array if
+	 *         the menu doesn't exist.
 	 */
-	public ArrayList<FoodItem> getBreakfastMenuItem() {
+	public ArrayList<FoodItem> getArbitraryMenuItem(String label) {
 		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
-		FoodItem hashbrowns = new FoodItem("Hashbrown");
-		hashbrowns.setImage(BitmapFactory.decodeResource(getResources(),
-				R.drawable.logo));
-		hashbrowns.setPrice(2000);
-		food.add(hashbrowns);
-		for (int i = 0; i < 10; i++) {
-			FoodItem fakeitem = new FoodItem("Fake Breakfast Item " + i);
-			fakeitem.setImage(BitmapFactory.decodeResource(getResources(),
-					R.drawable.ic_launcher));
-			fakeitem.setPrice(300 + (i * 30.3));
-			food.add(fakeitem);
-		}
-		return food;
-	}
-
-	/**
-	 * Populate list with lunch items
-	 * 
-	 * @return Array of food items from the lunch menu.
-	 */
-	public ArrayList<FoodItem> getLunchMenuItem() {
-		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
-		FoodItem burger = new FoodItem("Burger");
-		burger.setImage(BitmapFactory.decodeResource(getResources(),
-				R.drawable.logo));
-		burger.setPrice(500);
-		food.add(burger);
-		for (int i = 0; i < 10; i++) {
-			FoodItem fakeitem = new FoodItem("Fake Lunch Item " + i);
-			fakeitem.setImage(BitmapFactory.decodeResource(getResources(),
-					R.drawable.ic_launcher));
-			fakeitem.setPrice(300 + (i * 30.3));
-			food.add(fakeitem);
-		}
-		return food;
-	}
-
-	/**
-	 * Populate list with dinner items
-	 * 
-	 * @return Array of food items from the dinner menu.
-	 */
-
-	public ArrayList<FoodItem> getDinnerMenuItem() {
-		ArrayList<FoodItem> food = new ArrayList<FoodItem>();
-		FoodItem steak = new FoodItem("Steak");
-		steak.setImage(BitmapFactory.decodeResource(getResources(),
-				R.drawable.logo));
-		steak.setPrice(1000);
-		food.add(steak);
-		for (int i = 0; i < 10; i++) {
-			FoodItem fakeitem = new FoodItem("Fake Dinner Item " + i);
-			fakeitem.setImage(BitmapFactory.decodeResource(getResources(),
-					R.drawable.ic_launcher));
-			fakeitem.setPrice(300 + (i * 30.3));
-			food.add(fakeitem);
-		}
+		FoodMenu menu = getWrapperActivity().getModel().getFoodMenuByLabel(
+				label);
+		if (menu != null)
+			food.addAll(menu.getFoodList());
 		return food;
 	}
 
@@ -167,23 +85,12 @@ public class FoodMenuListFragment extends SuperFragment {
 		return selectedFood;
 	}
 
-	/**
-	 * Get meal
-	 * 
-	 * @return String of meal
-	 */
-	public static String getMEAL() {
-		return MEAL;
+	public String getMeal() {
+		return mMenu.getMenuName();
 	}
 
-	/**
-	 * Set meal
-	 * 
-	 * @param mEAL
-	 *            Meal to be set
-	 */
-	public static void setMEAL(String mEAL) {
-		MEAL = mEAL;
+	public void setMeal(String meal) {
+		mMenu = getWrapperActivity().getModel().getFoodMenuByLabel(meal);
 	}
 
 	/**
@@ -226,5 +133,9 @@ public class FoodMenuListFragment extends SuperFragment {
 		setFoodMenuListListener((OnItemClickListener) mSuperListener);
 		setFoodMenuButtonListener((OnClickListener) mSuperListener);
 		super.onStart();
+	}
+
+	public void setMealByIndex(int i) {
+		mMenu = getWrapperActivity().getModel().getFoodMenuByIndex(i);
 	}
 }

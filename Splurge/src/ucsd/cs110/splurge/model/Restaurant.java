@@ -15,7 +15,7 @@ public class Restaurant {
 	/**
 	 * Menus available for the restaurant. These are labeled individually.
 	 */
-	private Collection<FoodMenu> mMenus;
+	private ArrayList<FoodMenu> mMenus;
 	/**
 	 * Times which are currently unavailable for reservation.
 	 * 
@@ -126,6 +126,36 @@ public class Restaurant {
 				return m;
 		}
 		return null;
+	}
+
+	/**
+	 * Retrieves an array of the labels for the menus available for this
+	 * restaurant. This is not guaranteed to be in any particular order.
+	 * 
+	 * @return An array of labels fo rhte menus available for this restaurant.
+	 */
+	public String[] getMenuLabels() {
+		String[] ret = new String[mMenus.size()];
+		int i = 0;
+		for (FoodMenu menu : mMenus) {
+			ret[i] = menu.getMenuName();
+			++i;
+		}
+		return ret;
+	}
+
+	/**
+	 * Retrieves a menu by its index. There is no guarantee that a particular
+	 * index will correspond to the same meal across multiple restaurants,
+	 * although a given index will always return the same menu for the same
+	 * restaurant.
+	 * 
+	 * @param index
+	 *            The index number for the menu to retrieve.
+	 * @return A menu.
+	 */
+	public FoodMenu getFoodMenuByIndex(int index) {
+		return mMenus.get(index);
 	}
 
 	/**

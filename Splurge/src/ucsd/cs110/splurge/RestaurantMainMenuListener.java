@@ -70,28 +70,17 @@ public class RestaurantMainMenuListener extends SuperListener implements
 	 */
 	private void openFoodMenuDialog() {
 		Builder dialog = new AlertDialog.Builder(mWrapper);
+		final FoodMenuListFragment nextFrag = new FoodMenuListFragment();
 		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
-				switch (i) {
-				case BREAKFAST:
-					FoodMenuListFragment.setMEAL("Breakfast");
-					break;
-				case LUNCH:
-					FoodMenuListFragment.setMEAL("Lunch");
-					break;
-				case DINNER:
-					FoodMenuListFragment.setMEAL("Dinner");
-					break;
-				default:
-					break;
-				}
+				nextFrag.setMealByIndex(i);
 				mWrapper.changeFragment(new FoodMenuListFragment(),
 						new FoodMenuListListener(mWrapper));
 			}
 		};
 		dialog.setTitle(R.string.menu_title);
-		dialog.setItems(R.array.menus, diaIn);
+		dialog.setItems(mWrapper.getModel().getMenuLabels(), diaIn);
 		dialog.show();
 	}
 }
