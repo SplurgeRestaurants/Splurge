@@ -18,7 +18,7 @@ public class DiningOutListListener extends SuperListener implements
 	/**
 	 * Chosen dining out option (Delivery or Take Out)
 	 */
-	static String DINING_OUT_TYPE;
+	final static String DINING_OUT_TYPE = "dining out";
 
 	/**
 	 * Create a new DiningOutListListener, designed to listen to a
@@ -110,13 +110,14 @@ public class DiningOutListListener extends SuperListener implements
 	 * Remove the selected items from the selectedFood array
 	 */
 	public void removeSelectedFoodItems() {
-		for (int i = 0; i < DiningOutFragment.getSelectedFood().size(); i++) {
-			if (DiningOutFragment.getSelectedFood().get(i).isSelected()) {
-				DiningOutFragment.getSelectedFood().remove(i);
+		DiningOutFragment frag = new DiningOutFragment();
+		for (int i = 0; i < frag.getSelectedFood().size(); i++) {
+			if (frag.getSelectedFood().get(i).isSelected()) {
+				frag.getSelectedFood().remove(i);
 				i = -1;
 			}
 		}
-		DiningOutFragment.refresh();
+		frag.refresh();
 	}
 
 	/**

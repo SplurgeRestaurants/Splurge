@@ -44,5 +44,6 @@
     <string name="order_summary">Order Summary</string>
     <string name="hello">Open calendar</string>
     <string name="open">Open</string>
+    <string name="order_notes">Order Notes</string>
 
 </resources>

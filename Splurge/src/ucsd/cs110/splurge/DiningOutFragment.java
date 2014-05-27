@@ -23,11 +23,11 @@ public class DiningOutFragment extends SuperFragment {
 	/**
 	 * Adapter to create list entries in ListView
 	 */
-	private static FoodMenuAdapter adapter;
+	private FoodMenuAdapter adapter;
 	/**
 	 * List of food items that were selected from the food menu
 	 */
-	private static ArrayList<FoodItem> mSelectedFood;
+	private ArrayList<FoodItem> mSelectedFood;
 
 	/**
 	 * Display the layout and populate the list with food items, if any
@@ -46,34 +46,30 @@ public class DiningOutFragment extends SuperFragment {
 			mListView.setVisibility(View.GONE);
 		}
 		adapter = new FoodMenuAdapter(getActivity(), R.layout.menu_item,
-				getSelectedFood());
+				mSelectedFood);
 		mListView.setAdapter(adapter);
 		return (ret);
 	}
 
 	/**
-	 * Get the selected food items from the dining out list
+	 * Set the array with an array with selected food items
 	 * 
-	 * @return Array of the selected food items from dining out list
+	 * @param selected
+	 *            Array to be set.
 	 */
-	public static ArrayList<FoodItem> getSelectedFood() {
-		return mSelectedFood;
+	public void setSelected(ArrayList<FoodItem> selected) {
+		this.mSelectedFood = selected;
 	}
 
-	/**
-	 * Set selected food items
-	 * 
-	 * @param mSelectedFood
-	 */
-	public static void setSelectedFood(ArrayList<FoodItem> mSelectedFood) {
-		DiningOutFragment.mSelectedFood = mSelectedFood;
+	public ArrayList<FoodItem> getSelectedFood() {
+		return mSelectedFood;
 	}
 
 	/**
 	 * Reload the ListView when the contents of the list has been changed
 	 */
 
-	public static void refresh() {
+	public void refresh() {
 		adapter.notifyDataSetChanged();
 	}
 

@@ -42,6 +42,9 @@ public class Restaurant {
 	private int mId;
 
 	private PointF location;
+	private int mPhoneNumber;
+	private String mStreetAddress;
+	private String mZipcode;
 
 	/**
 	 * Creates a new restaurant with nothing but a name.
@@ -243,5 +246,41 @@ public class Restaurant {
 	 */
 	public int getId() {
 		return mId;
+	}
+
+	/**
+	 * Set the phone number of the restaurant
+	 * 
+	 * @param phoneNumber
+	 *            The restaurant's phone number
+	 */
+	public void setPhoneNumber(int phoneNumber) {
+		mPhoneNumber = phoneNumber;
+	}
+
+	/**
+	 * Get the phone number of the restaurant
+	 * 
+	 * @return The restaurant's phone number
+	 */
+	public int getPhoneNumber() {
+		// TODO Auto-generated method stub
+		return mPhoneNumber;
+	}
+
+	public String getStreetAddress() {
+		return mStreetAddress;
+	}
+
+	public void setStreetAddress(String mStreetAddress) {
+		this.mStreetAddress = mStreetAddress;
+	}
+
+	public String getZipcode() {
+		return mZipcode;
+	}
+
+	public void setZipcode(String mZipcode) {
+		this.mZipcode = mZipcode;
 	}
 }

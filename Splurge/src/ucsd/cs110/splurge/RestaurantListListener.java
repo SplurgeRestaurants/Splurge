@@ -1,6 +1,5 @@
 package ucsd.cs110.splurge;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -33,7 +32,6 @@ public class RestaurantListListener extends SuperListener implements
 		TextView restaurantName = (TextView) (view
 				.findViewById(R.id.RestaurantName));
 		String chosenRestaurant = restaurantName.getText().toString();
-		Log.e("ListView", "restuarant: " + chosenRestaurant);
 		mWrapper.getActionBar().setTitle(chosenRestaurant);
 		mWrapper.changeFragment(new RestaurantMainMenuFragment(),
 				new RestaurantMainMenuListener(mWrapper));

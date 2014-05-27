@@ -1,5 +1,8 @@
 package ucsd.cs110.splurge;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,16 +30,30 @@ public class InformationListener extends SuperListener implements
 	 */
 	@Override
 	public void onClick(View v) {
+		Intent intent;
 		switch (v.getId()) {
 		case R.id.call_phone:
 			// TODO make button call the phone number
 			Log.e("InformationListener", "Call Phone Button Works");
+			String phoneNumber = "tel:"
+					+ Integer.toString(mWrapper.getModel().getRestaurant()
+							.getPhoneNumber());
+			phoneNumber = "tel:4089812708";
+			intent = new Intent(Intent.ACTION_DIAL, Uri.parse(phoneNumber));
+			mWrapper.startActivity(intent);
 			break;
 		case R.id.directions:
-			// TODO (dqthai) display google maps?
-			Log.e("InformationListener", "Direction Button Works");
+			String address = "672+E+11400+S+84020";
+			// TODO address field in restaurant model
+			address = String.format(
+					"%s+%s",
+					TextUtils.join("+", mWrapper.getModel().getRestaurant()
+							.getStreetAddress().split("\\s+")), mWrapper
+							.getModel().getRestaurant().getZipcode());
+			intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q="
+					+ address));
+			mWrapper.startActivity(intent);
 			break;
-
 		}
 	}
 }

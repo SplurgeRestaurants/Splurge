@@ -1,21 +1,13 @@
 package ucsd.cs110.splurge;
 
-import java.util.ArrayList;
-
-import ucsd.cs110.splurge.model.FoodItem;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class DiningOutFormFragment extends SuperFragment {
-	/**
-	 * List of food items to be ordered
-	 */
-	private ListView mListView;
 	/**
 	 * Input for the name field
 	 */
@@ -48,14 +40,6 @@ public class DiningOutFormFragment extends SuperFragment {
 	 * Input for zip code field
 	 */
 	private TextView mFormZipCode;
-	/**
-	 * Format the list entries
-	 */
-	private FoodMenuAdapter adapter;
-	/**
-	 * Populated with food items to be ordered
-	 */
-	private ArrayList<FoodItem> mOrder;
 
 	/**
 	 * Hide the address views if "Take Out" was selected. Populated the order
@@ -66,7 +50,6 @@ public class DiningOutFormFragment extends SuperFragment {
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		View ret = inflater.inflate(R.layout.delivery_form, container, false);
-		mListView = (ListView) ret.findViewById(R.id.order_summary_list);
 		mFormName = (TextView) ret.findViewById(R.id.form_name);
 		mFormEmail = (TextView) ret.findViewById(R.id.form_email);
 		mFormPhoneNumber = (TextView) ret.findViewById(R.id.form_phone_number);
@@ -86,20 +69,7 @@ public class DiningOutFormFragment extends SuperFragment {
 			((View) mFormState.getParent()).setVisibility(View.GONE);
 			((View) mFormZipCode.getParent()).setVisibility(View.GONE);
 		}
-		mOrder = getOrder();
-		adapter = new FoodMenuAdapter(getActivity(),
-				R.layout.order_summary_item, mOrder);
-		mListView.setAdapter(adapter);
 		return (ret);
-	}
-
-	/**
-	 * Get the selected food items
-	 * 
-	 * @return Items that are going to be ordered
-	 */
-	ArrayList<FoodItem> getOrder() {
-		return FoodMenuListFragment.getSelectedFoodItems();
 	}
 
 	/**

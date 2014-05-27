@@ -1,5 +1,6 @@
 package ucsd.cs110.splurge;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,7 +28,7 @@ public class ReservationFragment extends SuperFragment {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == PICK_DATE_REQUEST) {
-			if (resultCode == getActivity().RESULT_OK) {
+			if (resultCode == Activity.RESULT_OK) {
 				Toast.makeText(getActivity().getApplicationContext(),
 						data.getStringExtra("date"), Toast.LENGTH_SHORT).show();
 				String[] dateArr = data.getStringExtra("date").split("-");
