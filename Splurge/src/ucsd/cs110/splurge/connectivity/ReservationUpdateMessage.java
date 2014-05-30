@@ -9,8 +9,8 @@ import org.json.JSONObject;
  */
 public class ReservationUpdateMessage extends ServerMessage {
 
-	private static final String RESERVATION_ID = "reservationID";
-	private static final String WAITER_ID = "waiterID";
+	private static final String RESERVATION_ID = "id";
+	private static final String WAITER_ID = "waiter_id";
 	private static final String PRE_ORDER = "pre-order";
 
 	/**

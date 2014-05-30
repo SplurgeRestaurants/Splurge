@@ -111,11 +111,12 @@ public class RestaurantModel implements RestaurantListRequestListener {
 	 * @return The identification number for the acquired reservation, or -1 if
 	 *         no reservation was available.
 	 */
-	public int requestReservation(int partySize, Calendar startTime) {
+	public int requestReservation(int partySize, String partyName,
+			Calendar startTime) {
 		if (mCurrentRestaurant.isTimeUnavailable(startTime))
 			return -1;
 		return mConnectionHandler.requestReservation(
-				mCurrentRestaurant.getId(), partySize, startTime);
+				mCurrentRestaurant.getId(), partySize, partyName, startTime);
 	}
 
 	/**

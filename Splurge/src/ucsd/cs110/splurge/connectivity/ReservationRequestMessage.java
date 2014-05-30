@@ -14,8 +14,9 @@ import android.util.Log;
 public class ReservationRequestMessage extends ServerMessage {
 
 	private static final String TIME_START = "timeStart";
-	private static final String PARTY_SIZE = "partySize";
-	private static final String REST_ID = "restaurantID";
+	private static final String PARTY_SIZE = "party_size";
+	private static final String REST_ID = "restaurants_id";
+	private static final String PARTY_NAME = "name";
 
 	/**
 	 * The identificaiton number for the restaurant at which to make the
@@ -26,6 +27,10 @@ public class ReservationRequestMessage extends ServerMessage {
 	 * The party size to request for the reservation.
 	 */
 	private int mPartySize;
+	/**
+	 * The name under which the reservation is to be made.
+	 */
+	private String mPartyName;
 	/**
 	 * The time at which the reservation is to begin.
 	 */
@@ -41,7 +46,7 @@ public class ReservationRequestMessage extends ServerMessage {
 	 * and is usable.
 	 */
 	public ReservationRequestMessage() {
-		this(-1, -1, new GregorianCalendar(0, 0, 0, 0, 0, 0));
+		this(-1, -1, "none", new GregorianCalendar(0, 0, 0, 0, 0, 0));
 	}
 
 	/**
@@ -56,10 +61,9 @@ public class ReservationRequestMessage extends ServerMessage {
 	 *            The time at which the reservation shall begin.
 	 */
 	public ReservationRequestMessage(int restaurantId, int partySize,
-			Calendar startTime) {
+			String partyName, Calendar startTime) {
 		mJSONRep = new JSONObject();
 		try {
-			mJSONRep.put(MESSAGE_TYPE, getMessageType());
 			mJSONRep.put("status", "request");
 		} catch (JSONException e) {
 			// This will never occur.
@@ -67,6 +71,7 @@ public class ReservationRequestMessage extends ServerMessage {
 
 		setRestaurantId(restaurantId);
 		setPartySize(partySize);
+		setPartyName(partyName);
 		setReservationStartTime(startTime);
 	}
 
@@ -115,6 +120,23 @@ public class ReservationRequestMessage extends ServerMessage {
 		}
 	}
 
+	/**
+	 * Updates the reservation party name.
+	 * 
+	 * @param name
+	 *            The name under which the reservation is to be made.
+	 */
+	public void setPartyName(String name) {
+		mPartyName = name;
+		try {
+			mJSONRep.put(PARTY_NAME, mPartyName);
+		} catch (JSONException e) {
+			Log.e("Splurge",
+					"Unexpected JSON error while setting party name in reservation request.");
+			Log.e("Splurge", e.getLocalizedMessage());
+		}
+	}
+
 	@Override
 	public String getMessageType() {
 		return "Reservation";
@@ -122,13 +144,21 @@ public class ReservationRequestMessage extends ServerMessage {
 
 	@Override
 	public String compileToJSON() {
+		JSONObject wrap = new JSONObject();
+		try {
+			wrap.put(getMessageType(), mJSONRep);
+		} catch (JSONException e) {
+			Log.e("Splurge",
+					"Unexpected JSON error in Reservation Request compilation.");
+			Log.e("Splurge", e.getLocalizedMessage());
+		}
 		try {
 			// Prefered behaviour is to retrieve a human-readable String.
-			return mJSONRep.toString(INDENT_SPACES);
+			return wrap.toString(INDENT_SPACES);
 		} catch (JSONException e) {
 			// Not sure why this would occur, but this seems to be the best
 			// failsafe.
-			return mJSONRep.toString();
+			return wrap.toString();
 		}
 	}
 }
