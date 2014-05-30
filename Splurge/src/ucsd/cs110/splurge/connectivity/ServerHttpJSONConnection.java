@@ -1,7 +1,9 @@
 package ucsd.cs110.splurge.connectivity;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -80,7 +82,12 @@ public class ServerHttpJSONConnection {
 		try {
 			openConnection();
 			pushJSONString(m.compileToJSON());
-			String ret = mServerConnection.getResponseMessage();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(
+					mServerConnection.getInputStream()));
+			String add;
+			String ret = "";
+			while ((add = reader.readLine()) != null)
+				ret += add;
 			Log.i("Splurge", "Response message: " + ret);
 			closeConnection();
 		} catch (IOException e) {
