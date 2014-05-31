@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/whiteback"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:padding="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="5dp"
-        android:layout_weight="4"
+        android:layout_weight="6"
         android:background="@drawable/roundedwhitebox"
         android:orientation="vertical"
         android:padding="5dp" >
@@ -45,14 +45,13 @@
         android:id="@+id/call_phone"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:background="@drawable/roundedbutton"
         android:drawableLeft="@drawable/callbutton2"
         android:drawablePadding="40dp"
         android:gravity="left|center_vertical"
         android:paddingLeft="20dp"
+        android:layout_marginTop="5dp"
         android:text="Call Phone"
         android:textColor="@color/white"
         android:textSize="20sp" />
@@ -61,7 +60,7 @@
         android:id="@+id/directions"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:background="@drawable/roundedbutton"
         android:drawableLeft="@drawable/directionsbutton"
