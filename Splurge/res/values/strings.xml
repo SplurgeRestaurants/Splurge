@@ -45,5 +45,8 @@
     <string name="hello">Open calendar</string>
     <string name="open">Open</string>
     <string name="order_notes">Order Notes</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_test">Test</string>
+    <string name="party_size">Party Size</string>
 
 </resources>

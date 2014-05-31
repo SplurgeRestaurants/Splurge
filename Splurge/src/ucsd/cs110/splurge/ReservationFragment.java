@@ -1,44 +1,44 @@
 package ucsd.cs110.splurge;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
-import android.widget.Toast;
+import android.widget.NumberPicker;
+import android.widget.TextView;
 
 public class ReservationFragment extends SuperFragment {
-	/** Called when the activity is first created. */
 
-	static final int DATE_DIALOG_ID = 0;
-	static final int PICK_DATE_REQUEST = 1;
+	private NumberPicker mMinuteSpinner;
+	private NumberPicker mHourSpinner;
+	private NumberPicker mAmPmSpinner;
+	private TextView mPartySize;
+	private final int MAX_PARTY_SIZE = 20;
+	static final String[] mAmPmString = { "AM", "PM" };
+	static final String[] mHours = { "1", "2", "3", "4", "5", "6", "7", "8",
+			"9", "10", "11", "12" };
+	static final String[] mMinutes = { "00", "15", "30", "45" };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		View ret = inflater.inflate(R.layout.main, container, false);
+		View ret = inflater.inflate(R.layout.reservation, container, false);
+		mHourSpinner = (NumberPicker) ret.findViewById(R.id.hour);
+		mHourSpinner.setMinValue(0);
+		mHourSpinner.setMaxValue(11);
+		mHourSpinner.setDisplayedValues(mHours);
+		mHourSpinner.setOnLongPressUpdateInterval(100);
+		mMinuteSpinner = (NumberPicker) ret.findViewById(R.id.minute);
+		mMinuteSpinner.setMinValue(0);
+		mMinuteSpinner.setMaxValue(3);
+		mMinuteSpinner.setDisplayedValues(mMinutes);
+		mMinuteSpinner.setOnLongPressUpdateInterval(100);
+		mAmPmSpinner = (NumberPicker) ret.findViewById(R.id.amPm);
+		mAmPmSpinner.setMinValue(0);
+		mAmPmSpinner.setMaxValue(1);
+		mAmPmSpinner.setDisplayedValues(mAmPmString);
 		return ret;
-	}
-
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == PICK_DATE_REQUEST) {
-			if (resultCode == Activity.RESULT_OK) {
-				Toast.makeText(getActivity().getApplicationContext(),
-						data.getStringExtra("date"), Toast.LENGTH_SHORT).show();
-				String[] dateArr = data.getStringExtra("date").split("-");
-				DatePicker dp = (DatePicker) getActivity().findViewById(
-						R.id.datePicker1);
-				dp.updateDate(Integer.parseInt(dateArr[0]),
-						Integer.parseInt(dateArr[1]),
-						Integer.parseInt(dateArr[2]));
-			}
-		}
 	}
 
 	/**

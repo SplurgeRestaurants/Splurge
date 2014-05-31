@@ -2,8 +2,8 @@ package ucsd.cs110.splurge;
 
 import java.util.Calendar;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -53,6 +53,7 @@ public class CalenderViewFragmentListener extends SuperListener implements
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
+		Log.e("Splurge", "calendar button works");
 		TextView date = (TextView) view.findViewById(R.id.date);
 		if (date instanceof TextView && !date.getText().equals("")) {
 
@@ -66,8 +67,10 @@ public class CalenderViewFragmentListener extends SuperListener implements
 					"date",
 					android.text.format.DateFormat.format("yyyy-MM",
 							CalendarViewFragment.month) + "-" + day);
-			mWrapper.setResult(Activity.RESULT_OK, intent);
-			mWrapper.finish();
+			mWrapper.changeFragment(new ReservationFragment(),
+					new ReservationFragmentListener(mWrapper));
+			// mWrapper.setResult(Activity.RESULT_OK, intent);
+			// mWrapper.finish();
 		}
 
 	}
