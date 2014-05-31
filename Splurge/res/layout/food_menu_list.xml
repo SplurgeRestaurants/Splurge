@@ -4,16 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/whiteback"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:padding="5dp">
 
     <ListView
         android:id="@+id/food_list"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_weight="8"
+        android:layout_weight="7"
 
         android:background="@drawable/roundedblackbox"
         android:columnWidth="90dp"
@@ -28,14 +26,14 @@
 
     <Button
         android:id="@+id/add_to_order_button"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="1"
         android:background="@drawable/roundedbutton"
         android:padding="5dp"
-        android:text="Add"
-        android:textColor="@color/green" />
+        android:text="Add To Order"
+        android:textColor="@color/white" />
 
 </LinearLayout>
