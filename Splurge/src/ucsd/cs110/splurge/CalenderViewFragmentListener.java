@@ -2,7 +2,6 @@ package ucsd.cs110.splurge;
 
 import java.util.Calendar;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -66,8 +65,8 @@ public class CalenderViewFragmentListener extends SuperListener implements
 					"date",
 					android.text.format.DateFormat.format("yyyy-MM",
 							CalendarViewFragment.month) + "-" + day);
-			mWrapper.setResult(Activity.RESULT_OK, intent);
-			mWrapper.finish();
+			mWrapper.changeFragment(new ReservationFragment(),
+					new ReservationFragmentListener(mWrapper));
 		}
 
 	}

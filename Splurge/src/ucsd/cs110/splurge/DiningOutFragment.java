@@ -23,11 +23,11 @@ public class DiningOutFragment extends SuperFragment {
 	/**
 	 * Adapter to create list entries in ListView
 	 */
-	private FoodMenuAdapter adapter;
+	private static FoodMenuAdapter adapter;
 	/**
 	 * List of food items that were selected from the food menu
 	 */
-	private ArrayList<FoodItem> mSelectedFood;
+	private static ArrayList<FoodItem> mSelectedFood;
 
 	/**
 	 * Display the layout and populate the list with food items, if any
@@ -61,7 +61,7 @@ public class DiningOutFragment extends SuperFragment {
 		this.mSelectedFood = selected;
 	}
 
-	public ArrayList<FoodItem> getSelectedFood() {
+	public static ArrayList<FoodItem> getSelectedFood() {
 		return mSelectedFood;
 	}
 
@@ -69,7 +69,7 @@ public class DiningOutFragment extends SuperFragment {
 	 * Reload the ListView when the contents of the list has been changed
 	 */
 
-	public void refresh() {
+	public static void refresh() {
 		adapter.notifyDataSetChanged();
 	}
 

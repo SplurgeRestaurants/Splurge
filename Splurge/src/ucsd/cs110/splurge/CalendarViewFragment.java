@@ -25,13 +25,20 @@ public class CalendarViewFragment extends SuperFragment {
 	static ArrayList<String> items; // container to store some random
 									// calendar items
 
+	/*
+	 * TODO (dqthai) shouldnt be able to click on calendar items before today
+	 * calendar items will have a way to indicate that there are no available
+	 * times that day make it unclickable calendar items go to a time picker
+	 * time picker should on show available times page should also have a form
+	 * for party size preorder? submit form to website
+	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		View ret = inflater.inflate(R.layout.calendar, container, false);
 		month = Calendar.getInstance();
-		onNewIntent(getActivity().getIntent());
+		// onNewIntent(getActivity().getIntent());
 
 		items = new ArrayList<String>();
 		adapter = new CalendarAdapter(getActivity(), month);

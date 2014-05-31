@@ -25,6 +25,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="ucsd.cs110.splurge.MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name="ucsd.cs110.splurge.Test"
+            android:label="@string/title_activity_test" >
+        </activity>
     </application>
 
 </manifest>
