@@ -38,6 +38,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_color"
+            android:paddingLeft = "5dp"
+			android:paddingTop = "7dp"
             android:textSize="13sp" >
         </TextView>
 
@@ -46,6 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/subtext_color"
+            android:paddingLeft="5dp"
+            android:paddingTop="1dp"
             android:textSize="12sp" >
         </TextView>
     </LinearLayout>
