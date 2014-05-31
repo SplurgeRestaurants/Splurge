@@ -29,7 +29,7 @@ public class ReservationFragmentListener extends SuperListener implements
 		switch (v.getId()) {
 		case R.id.openButton:
 			EditText mPartySize = (EditText) mWrapper
-					.findViewById(R.id.form_party_size);
+					.findViewById(R.id.party_size);
 			NumberPicker hours = (NumberPicker) mWrapper
 					.findViewById(R.id.hour);
 			NumberPicker minutes = (NumberPicker) mWrapper

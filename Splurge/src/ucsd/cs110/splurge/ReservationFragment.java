@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.NumberPicker;
 
 public class ReservationFragment extends SuperFragment {
@@ -13,7 +12,7 @@ public class ReservationFragment extends SuperFragment {
 	private NumberPicker mMinuteSpinner;
 	private NumberPicker mHourSpinner;
 	private NumberPicker mAmPmSpinner;
-	private EditText mPartySize;
+	private NumberPicker mPartySize;
 	private final int MAX_PARTY_SIZE = 20;
 	static final String[] mAmPmString = { "AM", "PM" };
 	static final String[] mHours = { "1", "2", "3", "4", "5", "6", "7", "8",
@@ -38,8 +37,10 @@ public class ReservationFragment extends SuperFragment {
 		mAmPmSpinner.setMinValue(0);
 		mAmPmSpinner.setMaxValue(1);
 		mAmPmSpinner.setDisplayedValues(mAmPmString);
-		mPartySize = (EditText) ret.findViewById(R.id.form_party_size);
-		mPartySize.setHint("Max Party Size is" + MAX_PARTY_SIZE);
+		mPartySize = (NumberPicker) ret.findViewById(R.id.party_size);
+		mPartySize.setMinValue(0);
+		mPartySize.setMaxValue(MAX_PARTY_SIZE);
+		mPartySize.setOnLongPressUpdateInterval(100);
 		return ret;
 	}
 
