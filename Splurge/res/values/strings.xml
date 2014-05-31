@@ -27,7 +27,7 @@
     <string name="dining_out">DINING OUT</string>
     <string name="information">INFORMATION</string>
     <string name="menu">MENU</string>
-    <string name="reserve">RESERVE</string>
+    <string name="reserve">RESERVATIONS</string>
     <string name="map">Map</string>
     <string name="waiters">Waiters</string>
     <string name="title_activity_delivery_form_fragment">DeliveryFormFragment</string>
