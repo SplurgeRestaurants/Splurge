@@ -48,18 +48,16 @@ public class FoodItemFragment extends SuperFragment {
 		int position = 0;
 		position = intent.getIntExtra(FoodMenuListFragment.FOOD_ITEM_POSITION,
 				position);
-		mName.setText(FoodMenuListFragment.data.get(position).getName());
-		mImage.setImageBitmap(FoodMenuListFragment.data.get(position)
-				.getImage());
-		mDescription.setText(FoodMenuListFragment.data.get(position).getName());
+		FoodMenuListFragment frag = new FoodMenuListFragment();
+		mName.setText(frag.getFoodData().get(position).getName());
+		mImage.setImageBitmap(frag.getFoodData().get(position).getImage());
+		mDescription.setText(frag.getFoodData().get(position).getName());
 
-		NumberFormat fmt = NumberFormat.getNumberInstance(Locale.US);
 		NumberFormat currencyFormatter = NumberFormat
 				.getCurrencyInstance(Locale.US);
 		Double currencyAmount;
 
-		currencyAmount = (double) FoodMenuListFragment.data.get(position)
-				.getPrice();
+		currencyAmount = (double) frag.getFoodData().get(position).getPrice();
 		mPrice.setText(currencyFormatter.format(currencyAmount));
 		return ret;
 	}

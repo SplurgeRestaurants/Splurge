@@ -12,18 +12,6 @@ import android.view.View.OnClickListener;
  */
 public class RestaurantMainMenuListener extends SuperListener implements
 		OnClickListener {
-	/**
-	 * Enumerator indicating breakfast.
-	 */
-	private static final int BREAKFAST = 0;
-	/**
-	 * Enumerator indicating lunch.
-	 */
-	private static final int LUNCH = 1;
-	/**
-	 * Enumerator indicating dinner.
-	 */
-	private static final int DINNER = 2;
 
 	/**
 	 * Create a new RestaurantMainMenuListener, designed to listen to a
@@ -52,6 +40,7 @@ public class RestaurantMainMenuListener extends SuperListener implements
 			// (dqthai get rid of null, make reservation listener)
 			mWrapper.changeFragment(new CalendarViewFragment(),
 					new CalenderViewFragmentListener(mWrapper));
+			;
 			break;
 
 		case R.id.diningout:

@@ -3,6 +3,7 @@ package ucsd.cs110.splurge;
 import java.util.Calendar;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -20,6 +21,11 @@ public class CalenderViewFragmentListener extends SuperListener implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.previous:
+			if (CalendarViewFragment.month.get(Calendar.MONTH) - 1 < Calendar
+					.getInstance().get(Calendar.MONTH)) {
+				Log.e("Splurge", "i");
+				return;
+			}
 			if (CalendarViewFragment.month.get(Calendar.MONTH) == CalendarViewFragment.month
 					.getActualMinimum(Calendar.MONTH)) {
 				CalendarViewFragment.month.set((CalendarViewFragment.month
@@ -52,6 +58,10 @@ public class CalenderViewFragmentListener extends SuperListener implements
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
+		if (position < Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
+			view.setClickable(false);
+			return;
+		}
 		TextView date = (TextView) view.findViewById(R.id.date);
 		if (date instanceof TextView && !date.getText().equals("")) {
 

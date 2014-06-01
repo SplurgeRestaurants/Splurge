@@ -60,16 +60,16 @@ public class FoodMenuListListener extends SuperListener implements
 	 * Go to the DiningOut page
 	 */
 	public void getSelected() {
-		for (int i = 0; i < FoodMenuListFragment.data.size(); i++) {
-			if (FoodMenuListFragment.data.get(i).isSelected()) {
-				Log.e("Selected", FoodMenuListFragment.data.get(i).getName());
-				FoodItem sel = new FoodItem(FoodMenuListFragment.data.get(i));
-				FoodMenuListFragment.getSelectedFoodItems().add(sel);
+		FoodMenuListFragment frag = new FoodMenuListFragment();
+		for (int i = 0; i < frag.getFoodData().size(); i++) {
+			if (frag.getFoodData().get(i).isSelected()) {
+				Log.e("Selected", frag.getFoodData().get(i).getName());
+				FoodItem sel = new FoodItem(frag.getFoodData().get(i));
+				frag.getSelectedFoodData().add(sel);
 			}
 		}
-		for (int i = 0; i < FoodMenuListFragment.getSelectedFoodItems().size(); i++) {
-			FoodMenuListFragment.getSelectedFoodItems().get(i)
-					.setSelected(false);
+		for (int i = 0; i < frag.getSelectedFoodData().size(); i++) {
+			frag.getSelectedFoodData().get(i).setSelected(false);
 		}
 		mWrapper.changeFragment(new DiningOutFragment(),
 				new DiningOutListListener(mWrapper));

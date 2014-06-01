@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -68,7 +67,7 @@ public class DiningOutListListener extends SuperListener implements
 	}
 
 	/**
-	 * Place holder method. This should send a request for take out?
+	 * Go to take out form
 	 */
 	public void notifyTakeOut() {
 		Intent intent = new Intent();
@@ -76,11 +75,10 @@ public class DiningOutListListener extends SuperListener implements
 		mWrapper.setIntent(intent);
 		mWrapper.changeFragment(new DiningOutFormFragment(),
 				new DiningOutFormListener(mWrapper));
-		Log.e("DiningOutListener", "Take Out button works");
 	}
 
 	/**
-	 * Place holder method. This should send a request for delivery?
+	 * Go to delivery form
 	 */
 	public void notifyDelivery() {
 		Intent intent = new Intent();
@@ -88,14 +86,14 @@ public class DiningOutListListener extends SuperListener implements
 		mWrapper.setIntent(intent);
 		mWrapper.changeFragment(new DiningOutFormFragment(),
 				new DiningOutFormListener(mWrapper));
-		Log.e("DiningOutListener", "Delivery button works");
 	}
 
 	/**
 	 * Go to the correct Menu, if no menu was previously chosen open a dialog
 	 */
 	public void goToFoodMenu() {
-		FoodMenuListFragment.clearChecked();
+		FoodMenuListFragment frag = new FoodMenuListFragment();
+		frag.clearChecked();
 		if (++RestaurantMainMenuFragment.backCount > 1)
 			mWrapper.getFragmentManager().popBackStack();
 		openFoodMenuDialog();
@@ -105,13 +103,14 @@ public class DiningOutListListener extends SuperListener implements
 	 * Remove the selected items from the selectedFood array
 	 */
 	public void removeSelectedFoodItems() {
-		for (int i = 0; i < DiningOutFragment.getSelectedFood().size(); i++) {
-			if (DiningOutFragment.getSelectedFood().get(i).isSelected()) {
-				DiningOutFragment.getSelectedFood().remove(i);
+		DiningOutFragment frag = new DiningOutFragment();
+		for (int i = 0; i < frag.getSelectedFood().size(); i++) {
+			if (frag.getSelectedFood().get(i).isSelected()) {
+				frag.getSelectedFood().remove(i);
 				i = -1;
 			}
 		}
-		DiningOutFragment.refresh();
+		frag.refresh();
 	}
 
 	/**

@@ -2,7 +2,6 @@ package ucsd.cs110.splurge;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Random;
 
 import android.app.Activity;
 import android.content.Context;
@@ -78,15 +77,6 @@ public class CalendarViewFragment extends SuperFragment {
 		@Override
 		public void run() {
 			items.clear();
-			// format random values. You can implement a dedicated class to
-			// provide real values
-			for (int i = 0; i < 31; i++) {
-				Random r = new Random();
-
-				if (r.nextInt(10) > 6) {
-					items.add(Integer.toString(i));
-				}
-			}
 
 			adapter.setItems(items);
 			adapter.notifyDataSetChanged();

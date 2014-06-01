@@ -16,9 +16,11 @@ public class CalendarAdapter extends BaseAdapter {
 
 	private Context mContext;
 
-	private Calendar month;
+	private java.util.Calendar month;
 	private Calendar selectedDate;
 	private ArrayList<String> items;
+	// references to our items
+	public String[] days;
 
 	public CalendarAdapter(Context c, Calendar monthCalendar) {
 		month = monthCalendar;
@@ -140,7 +142,4 @@ public class CalendarAdapter extends BaseAdapter {
 			dayNumber++;
 		}
 	}
-
-	// references to our items
-	public String[] days;
 }

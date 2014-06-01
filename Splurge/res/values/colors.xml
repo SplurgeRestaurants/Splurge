@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <resources>
-   <color name="gold">#ffffd700</color>
-   <color name="background">#336600</color>
-   <color name="red">#CC0000</color>
-   <color name="white">#FFFFFF</color>
-   <color name="black">#000000</color>
-   <color name="transblack">#99000000</color>
-   <color name="green">#669900</color>
-   <color name="frost">#A6000000</color>
-   <color name="pink">#ff8cfc</color>
-   <color name="snow">#A6ffffff</color>
-   <color name="text_color">#FFFFFF</color> <!--  white  -->
-   <color name="subtext_color">#C9C9C9</color> <!-- gray -->
-   <color name="blue">#33B5E5</color>
-</resources>
 
+    <color name="gold">#ffffd700</color>
+    <color name="background">#336600</color>
+    <color name="red">#CC0000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transblack">#99000000</color>
+    <color name="green">#669900</color>
+    <color name="frost">#A6000000</color>
+    <color name="pink">#ff8cfc</color>
+    <color name="snow">#A6ffffff</color>
+    <color name="text_color">#31D1F1</color>
+    <color name="blue">#33B5E5</color>
+
+</resources>

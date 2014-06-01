@@ -23,7 +23,7 @@ public class DiningOutFragment extends SuperFragment {
 	/**
 	 * Adapter to create list entries in ListView
 	 */
-	private static FoodMenuAdapter adapter;
+	private FoodMenuAdapter adapter;
 	/**
 	 * List of food items that were selected from the food menu
 	 */
@@ -38,7 +38,8 @@ public class DiningOutFragment extends SuperFragment {
 		super.onCreate(savedInstanceState);
 		View ret = inflater.inflate(R.layout.dining_out, container, false);
 		mListView = (ListView) ret.findViewById(R.id.dining_out_list);
-		mSelectedFood = FoodMenuListFragment.getSelectedFoodItems();
+		FoodMenuListFragment frag = new FoodMenuListFragment();
+		mSelectedFood = frag.getSelectedFoodData();
 		if (!mSelectedFood.isEmpty()) {
 			ret.findViewById(R.id.empty).setVisibility(View.GONE);
 			mListView.setVisibility(View.VISIBLE);
@@ -58,10 +59,10 @@ public class DiningOutFragment extends SuperFragment {
 	 *            Array to be set.
 	 */
 	public void setSelected(ArrayList<FoodItem> selected) {
-		this.mSelectedFood = selected;
+		DiningOutFragment.mSelectedFood = selected;
 	}
 
-	public static ArrayList<FoodItem> getSelectedFood() {
+	public ArrayList<FoodItem> getSelectedFood() {
 		return mSelectedFood;
 	}
 
@@ -69,7 +70,7 @@ public class DiningOutFragment extends SuperFragment {
 	 * Reload the ListView when the contents of the list has been changed
 	 */
 
-	public static void refresh() {
+	public void refresh() {
 		adapter.notifyDataSetChanged();
 	}
 

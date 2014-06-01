@@ -118,7 +118,6 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 		holder.name.setText(food.getName());
 		holder.image.setImageBitmap(food.getImage());
 
-		NumberFormat fmt = NumberFormat.getNumberInstance(Locale.US);
 		NumberFormat currencyFormatter = NumberFormat
 				.getCurrencyInstance(Locale.US);
 		Double currencyAmount;

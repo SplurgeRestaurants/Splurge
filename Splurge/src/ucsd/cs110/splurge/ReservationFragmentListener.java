@@ -3,15 +3,15 @@ package ucsd.cs110.splurge;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.NumberPicker.OnScrollListener;
 
 /**
  * Listener for the RestaurantMainMenuFragment
  * 
  */
 public class ReservationFragmentListener extends SuperListener implements
-		OnClickListener {
+		OnClickListener, OnScrollListener {
 
 	/**
 	 * Create a new ReservationFragmentListener, designed to listen to a
@@ -28,7 +28,7 @@ public class ReservationFragmentListener extends SuperListener implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.openButton:
-			EditText mPartySize = (EditText) mWrapper
+			NumberPicker mPartySize = (NumberPicker) mWrapper
 					.findViewById(R.id.party_size);
 			NumberPicker hours = (NumberPicker) mWrapper
 					.findViewById(R.id.hour);
@@ -40,13 +40,26 @@ public class ReservationFragmentListener extends SuperListener implements
 					.getValue()];
 			String selectedAmPm = ReservationFragment.mAmPmString[amPm
 					.getValue()];
-			String getPartySize = mPartySize.getText().toString();
+			int getPartySize = mPartySize.getValue();
 			Log.e("Splurge", selectedHour + " " + selectedMinute + " "
 					+ selectedAmPm);
 			Log.e("Splurge", "Party size is " + getPartySize);
 			break;
 		default:
 			break;
+		}
+	}
+
+	@Override
+	public void onScrollStateChange(NumberPicker view, int scrollState) {
+		if (scrollState == NumberPicker.OnScrollListener.SCROLL_STATE_IDLE) {
+			switch (view.getId()) {
+			case R.id.hour:
+
+				break;
+			case R.id.minute:
+				break;
+			}
 		}
 	}
 }

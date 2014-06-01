@@ -32,7 +32,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	/**
 	 * save position of the chosen food item
 	 */
-	static String FOOD_ITEM_POSITION = "0";
+	static final String FOOD_ITEM_POSITION = "0";
 	/**
 	 * populate with selected food items
 	 */
@@ -40,7 +40,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	/**
 	 * populated with food items from a specified menu
 	 */
-	static ArrayList<FoodItem> data;
+	private static ArrayList<FoodItem> data;
 
 	/**
 	 * Display the correct menu
@@ -76,12 +76,11 @@ public class FoodMenuListFragment extends SuperFragment {
 		return food;
 	}
 
-	/**
-	 * Get the food item selected from FoodMenuListFragment
-	 * 
-	 * @return selectedFood
-	 */
-	public static ArrayList<FoodItem> getSelectedFoodItems() {
+	public ArrayList<FoodItem> getFoodData() {
+		return data;
+	}
+
+	public ArrayList<FoodItem> getSelectedFoodData() {
 		return selectedFood;
 	}
 
@@ -96,7 +95,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	/**
 	 * Remove checked status on all food items in data
 	 */
-	public static void clearChecked() {
+	public void clearChecked() {
 		if (data != null) {
 			for (int i = 0; i < data.size(); i++) {
 				data.get(i).setSelected(false);

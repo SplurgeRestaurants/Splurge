@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.NumberPicker;
+import android.widget.NumberPicker.OnScrollListener;
 
 public class ReservationFragment extends SuperFragment {
 
@@ -17,7 +18,8 @@ public class ReservationFragment extends SuperFragment {
 	static final String[] mAmPmString = { "AM", "PM" };
 	static final String[] mHours = { "1", "2", "3", "4", "5", "6", "7", "8",
 			"9", "10", "11", "12" };
-	static final String[] mMinutes = { "00", "15", "30", "45" };
+	static final String[] mMinutes = { "00", "15", "30", "45", "00", "15",
+			"30", "45" };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,7 +32,7 @@ public class ReservationFragment extends SuperFragment {
 		mHourSpinner.setOnLongPressUpdateInterval(100);
 		mMinuteSpinner = (NumberPicker) ret.findViewById(R.id.minute);
 		mMinuteSpinner.setMinValue(0);
-		mMinuteSpinner.setMaxValue(3);
+		mMinuteSpinner.setMaxValue(7);
 		mMinuteSpinner.setDisplayedValues(mMinutes);
 		mMinuteSpinner.setOnLongPressUpdateInterval(100);
 		mAmPmSpinner = (NumberPicker) ret.findViewById(R.id.amPm);
@@ -54,12 +56,22 @@ public class ReservationFragment extends SuperFragment {
 		(getView().findViewById(R.id.openButton)).setOnClickListener(listener);
 	}
 
+	public void setScrollLister(OnScrollListener listener) {
+		((NumberPicker) getView().findViewById(R.id.hour))
+				.setOnScrollListener(listener);
+		((NumberPicker) getView().findViewById(R.id.minute))
+				.setOnScrollListener(listener);
+		((NumberPicker) getView().findViewById(R.id.amPm))
+				.setOnScrollListener(listener);
+	}
+
 	/**
 	 * Set mSuperListener to the buttons
 	 */
 	@Override
 	public void onStart() {
 		setReservationListener((OnClickListener) mSuperListener);
+		setScrollLister((OnScrollListener) mSuperListener);
 		super.onStart();
 	}
 }
