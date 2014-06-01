@@ -12,6 +12,7 @@
     <color name="pink">#ff8cfc</color>
     <color name="snow">#A6ffffff</color>
     <color name="text_color">#31D1F1</color>
+    <color name="subtext_color">#C9C9C9</color>  <!-- gray -->
     <color name="blue">#33B5E5</color>
 
 </resources>
