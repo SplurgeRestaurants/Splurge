@@ -6,21 +6,7 @@
     android:background="@drawable/whiteback"
     android:orientation="vertical"
     android:padding="-5dp" >
-
-    <Button
-        android:id="@+id/information"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:background="@color/transblack"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="30dip"
-        android:text="@string/information"
-        android:textColor="@color/white"
-        android:textSize="35sp"
-        android:textStyle="bold" />
-
+    
     <Button
         android:id="@+id/menu"
         android:layout_width="fill_parent"
@@ -43,7 +29,6 @@
         android:layout_weight="1"
         android:background="@color/transblack"
         android:gravity="left|center_vertical"
-        android:minHeight="0dp"
         android:paddingLeft="30dip"
         android:text="@string/reserve"
         android:textColor="#ffffff"
@@ -54,7 +39,6 @@
         android:id="@+id/diningout"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:background="@color/transblack"
@@ -63,6 +47,24 @@
         android:text="@string/dining_out"
         android:textColor="#ffffff"
         android:textSize="35sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+         />
+    
+    
+    <Button
+        android:id="@+id/information"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+         android:background="@color/transblack"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="30dip"
+        android:text="@string/information"
+        android:textColor="#ffffff"
+        android:textSize="35sp"
+        android:textStyle="bold"
+         />
+    
 
 </LinearLayout>
