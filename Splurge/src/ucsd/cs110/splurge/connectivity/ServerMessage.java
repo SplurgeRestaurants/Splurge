@@ -33,4 +33,13 @@ public abstract class ServerMessage {
 	 * @return A JSON String containing the information of the message.
 	 */
 	public abstract String compileToJSON();
+
+	/**
+	 * Gets the suffix of the URL to which this message is to be sent. This is
+	 * in order to compensate for the variety of pages receiving messages on the
+	 * server side.
+	 * 
+	 * @return The specific page on the website receiving this message
+	 */
+	public abstract String getURLSuffix();
 }

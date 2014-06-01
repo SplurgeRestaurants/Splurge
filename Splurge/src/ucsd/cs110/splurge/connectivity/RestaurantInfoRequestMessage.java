@@ -65,4 +65,9 @@ public class RestaurantInfoRequestMessage extends ServerMessage {
 	private void setId(int id) {
 		mId = id;
 	}
+
+	@Override
+	public String getURLSuffix() {
+		return "restaurants/info_restaurant";
+	}
 }

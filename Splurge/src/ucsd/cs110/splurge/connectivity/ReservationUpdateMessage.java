@@ -149,4 +149,9 @@ public class ReservationUpdateMessage extends ServerMessage {
 	public int getWaiterID() {
 		return mWaiterID;
 	}
+
+	@Override
+	public String getURLSuffix() {
+		return "reservations/";
+	}
 }

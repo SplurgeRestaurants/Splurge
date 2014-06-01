@@ -29,4 +29,9 @@ public class RestaurantListRequestMessage extends ServerMessage {
 			return json.toString();
 		}
 	}
+
+	@Override
+	public String getURLSuffix() {
+		return "restaurants/list_restaurants";
+	}
 }

@@ -138,6 +138,11 @@ public class ReservationRequestMessage extends ServerMessage {
 	}
 
 	@Override
+	public String getURLSuffix() {
+		return "reservations/";
+	}
+
+	@Override
 	public String getMessageType() {
 		return "Reservation";
 	}
