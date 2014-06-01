@@ -4,24 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/whiteback"
-    android:orientation="vertical" 
-    android:padding="5dp">
+    android:orientation="vertical"
+    android:padding="5dp" >
 
     <ListView
         android:id="@+id/food_list"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="7"
-
         android:background="@drawable/roundedblackbox"
         android:columnWidth="90dp"
+        android:dividerHeight="2dp"
         android:focusable="true"
         android:gravity="center"
         android:horizontalSpacing="10dp"
         android:numColumns="auto_fit"
         android:padding="5dp"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp" >
+ >
     </ListView>
 
     <Button
