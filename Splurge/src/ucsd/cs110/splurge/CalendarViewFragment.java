@@ -2,12 +2,15 @@ package ucsd.cs110.splurge;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
+import ucsd.cs110.splurge.model.Restaurant;
+import ucsd.cs110.splurge.model.Timeslot;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,19 +20,18 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 public class CalendarViewFragment extends SuperFragment {
-
+	private Restaurant mRestaurant = getWrapperActivity().getModel()
+			.getRestaurant();
 	static Calendar month;
 	static CalendarAdapter adapter;
 	static Handler handler;
-	static ArrayList<String> items; // container to store some random
-									// calendar items
+	static ArrayList<String> mUnavailableTimes;
+	static ArrayList<Timeslot> mTakenTimes;
 
 	/*
-	 * TODO (dqthai) shouldnt be able to click on calendar items before today
-	 * calendar items will have a way to indicate that there are no available
-	 * times that day make it unclickable calendar items go to a time picker
-	 * time picker should on show available times page should also have a form
-	 * for party size preorder? submit form to website
+	 * TODO (dqthai) calendar items will have a way to indicate that there are
+	 * no available times that day make it unclickable time picker should on
+	 * show available times page preorder? submit form to website
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,9 +39,8 @@ public class CalendarViewFragment extends SuperFragment {
 		super.onCreate(savedInstanceState);
 		View ret = inflater.inflate(R.layout.calendar, container, false);
 		month = Calendar.getInstance();
-		// onNewIntent(getActivity().getIntent());
-
-		items = new ArrayList<String>();
+		mUnavailableTimes = new ArrayList<String>();
+		getUnavailableDays();
 		adapter = new CalendarAdapter(getActivity(), month);
 
 		GridView gridview = (GridView) ret.findViewById(R.id.gridview);
@@ -54,31 +55,59 @@ public class CalendarViewFragment extends SuperFragment {
 		return ret;
 	}
 
+	public void getUnavailableDays() {
+		int day, currMonth;
+		mTakenTimes = (ArrayList<Timeslot>) mRestaurant.getUnavailableTimes();
+		for (int i = 0; i < mTakenTimes.size(); i++) {
+			day = mTakenTimes.get(i).getStartTime().get(Calendar.DATE);
+			currMonth = mTakenTimes.get(i).getStartTime().get(Calendar.MONTH);
+			Log.e("Splurge", currMonth + " " + day);
+			String chosenDay = Integer.toString(day);
+			if (month.get(Calendar.MONTH) == mTakenTimes.get(i).getStartTime()
+					.get(Calendar.MONTH)) {
+				mUnavailableTimes.add(chosenDay);
+			}
+		}
+	}
+
+	public boolean isDayFull(Calendar time) {
+		int currDay = time.get(Calendar.DATE);
+		ArrayList<Timeslot> sameDay = new ArrayList<Timeslot>();
+		mTakenTimes = (ArrayList<Timeslot>) mRestaurant.getUnavailableTimes();
+		for (int i = 0; i < mTakenTimes.size(); i++) {
+			if (currDay == mTakenTimes.get(i).getStartTime().get(Calendar.DATE)) {
+				sameDay.add(mTakenTimes.get(i));
+			}
+		}
+		Collections.sort(sameDay);
+		int startHour = mRestaurant
+				.getHoursForDay(time.get(Calendar.DAY_OF_WEEK)).getStartTime()
+				.get(Calendar.HOUR_OF_DAY);
+		int endHour = mRestaurant.getHoursForDay(Calendar.DAY_OF_WEEK)
+				.getEndTime().get(Calendar.HOUR_OF_DAY);
+		for (int hours = startHour; hours < endHour; hours++) {
+			for (int minutes = 0; minutes < 60; minutes += 15) {
+
+			}
+		}
+		return false;
+	}
+
 	public static void refreshCalendar(Context context) {
 		TextView title = (TextView) ((Activity) context)
 				.findViewById(R.id.title);
-
 		adapter.refreshDays();
 		adapter.notifyDataSetChanged();
-		handler.post(calendarUpdater); // generate some random calendar items
+		handler.post(calendarUpdater);
 
 		title.setText(android.text.format.DateFormat.format("MMMM yyyy", month));
-	}
-
-	public void onNewIntent(Intent intent) {
-		String date = intent.getStringExtra("date");
-		String[] dateArr = date.split("-"); // date format is yyyy-mm-dd
-		month.set(Integer.parseInt(dateArr[0]), Integer.parseInt(dateArr[1]),
-				Integer.parseInt(dateArr[2]));
 	}
 
 	public static Runnable calendarUpdater = new Runnable() {
 
 		@Override
 		public void run() {
-			items.clear();
-
-			adapter.setItems(items);
+			adapter.setItems(mUnavailableTimes);
 			adapter.notifyDataSetChanged();
 		}
 	};

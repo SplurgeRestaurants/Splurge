@@ -113,6 +113,15 @@ public class Restaurant {
 	}
 
 	/**
+	 * Gets the list of unavailable times
+	 * 
+	 * @return The unavailable time slots
+	 */
+	public Collection<Timeslot> getUnavailableTimes() {
+		return mUnavailableTimes;
+	}
+
+	/**
 	 * Retrieves a menu by its title. If no such menu exist, this function will
 	 * return <code>null</code>.
 	 * 
@@ -167,21 +176,21 @@ public class Restaurant {
 	 * @return The Timeslot depicting hours for the given day, or
 	 *         <code>null</code> if closed all day.
 	 */
-	public Timeslot getHoursForDay(DayOfWeek day) {
+	public Timeslot getHoursForDay(int day) {
 		switch (day) {
-		case MONDAY:
+		case Calendar.SUNDAY:
 			return mOpenHours[0];
-		case TUESDAY:
+		case Calendar.MONDAY:
 			return mOpenHours[1];
-		case WEDNESDAY:
+		case Calendar.TUESDAY:
 			return mOpenHours[2];
-		case THURSDAY:
+		case Calendar.WEDNESDAY:
 			return mOpenHours[3];
-		case FRIDAY:
+		case Calendar.THURSDAY:
 			return mOpenHours[4];
-		case SATURDAY:
+		case Calendar.FRIDAY:
 			return mOpenHours[5];
-		case SUNDAY:
+		case Calendar.SATURDAY:
 			return mOpenHours[6];
 		default:
 			throw new IllegalArgumentException("Illegal day of week: " + day);

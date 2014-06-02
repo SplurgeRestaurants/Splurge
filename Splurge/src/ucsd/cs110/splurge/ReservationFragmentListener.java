@@ -44,6 +44,7 @@ public class ReservationFragmentListener extends SuperListener implements
 			Log.e("Splurge", selectedHour + " " + selectedMinute + " "
 					+ selectedAmPm);
 			Log.e("Splurge", "Party size is " + getPartySize);
+			mWrapper.changeFragment(new ReservationConfirmation(), null);
 			break;
 		default:
 			break;
@@ -55,7 +56,6 @@ public class ReservationFragmentListener extends SuperListener implements
 		if (scrollState == NumberPicker.OnScrollListener.SCROLL_STATE_IDLE) {
 			switch (view.getId()) {
 			case R.id.hour:
-
 				break;
 			case R.id.minute:
 				break;
