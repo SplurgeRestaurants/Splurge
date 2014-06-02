@@ -4,11 +4,11 @@ import java.util.Collection;
 
 import ucsd.cs110.splurge.connectivity.JSONConnectionHandler;
 import ucsd.cs110.splurge.model.RestaurantListing;
+import android.content.Context;
 import android.os.AsyncTask;
 
-public class RestaurantListAsyncTask
-		extends
-		AsyncTask<JSONConnectionHandler, Integer, Collection<RestaurantListing>> {
+public class RestaurantListAsyncTask extends
+		AsyncTask<Object, Integer, Collection<RestaurantListing>> {
 
 	private RestaurantListRequestListener mListener;
 
@@ -17,9 +17,9 @@ public class RestaurantListAsyncTask
 	}
 
 	@Override
-	protected Collection<RestaurantListing> doInBackground(
-			JSONConnectionHandler... params) {
-		return params[0].requestRestaurantList();
+	protected Collection<RestaurantListing> doInBackground(Object... params) {
+		return ((JSONConnectionHandler) params[0])
+				.requestRestaurantList((Context) params[1]);
 	}
 
 	@Override

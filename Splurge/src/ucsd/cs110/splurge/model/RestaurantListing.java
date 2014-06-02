@@ -1,7 +1,7 @@
 package ucsd.cs110.splurge.model;
 
 import ucsd.cs110.splurge.R;
-import android.content.res.Resources;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -57,8 +57,8 @@ public class RestaurantListing {
 	 *            Base64-encoded restaurant logo as it will appear to the
 	 *            patron.
 	 */
-	public RestaurantListing(String name, int id, String base64) {
-		this(name, id, BitmapFactory.decodeResource(Resources.getSystem(),
+	public RestaurantListing(String name, int id, String base64, Context awful) {
+		this(name, id, BitmapFactory.decodeResource(awful.getResources(),
 				R.drawable.mainlogo6));
 		byte[] a = Base64.decode(base64, Base64.DEFAULT);
 		if (a.length > 0)
