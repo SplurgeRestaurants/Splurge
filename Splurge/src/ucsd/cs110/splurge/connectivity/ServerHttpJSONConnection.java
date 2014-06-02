@@ -65,6 +65,7 @@ public class ServerHttpJSONConnection {
 	private void pushJSONString(String json) {
 		try {
 			mWriter.write(json);
+			mWriter.flush();
 		} catch (IOException e) {
 		}
 	}
