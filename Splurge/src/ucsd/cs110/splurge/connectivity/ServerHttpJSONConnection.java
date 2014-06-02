@@ -50,7 +50,6 @@ public class ServerHttpJSONConnection {
 	 * @throws IOException
 	 */
 	private void closeConnection() throws IOException {
-		mWriter.close();
 		mServerConnection.disconnect();
 	}
 
@@ -79,17 +78,17 @@ public class ServerHttpJSONConnection {
 	 * @return The Server's response message.
 	 */
 	public String pushServerMessage(ServerMessage m) {
+		String ret = "";
 		try {
-			openConnection(m.getMessageType());
+			openConnection(m.getURLSuffix());
 			pushJSONString(m.compileToJSON());
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					mServerConnection.getInputStream()));
 			String add;
-			String ret = "";
 			while ((add = reader.readLine()) != null)
 				ret += add;
 			Log.i("Splurge", "Response message: " + ret);
-			closeConnection();
+			return ret;
 		} catch (IOException e) {
 			Log.e("Splurge", "Exception occurred while sending data.");
 			Log.e("Splurge", e.getMessage());
@@ -97,6 +96,6 @@ public class ServerHttpJSONConnection {
 		} finally {
 			mServerConnection.disconnect();
 		}
-		return "";
+		return ret;
 	}
 }

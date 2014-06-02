@@ -1,5 +1,7 @@
 package ucsd.cs110.splurge.model;
 
+import ucsd.cs110.splurge.R;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -56,9 +58,11 @@ public class RestaurantListing {
 	 *            patron.
 	 */
 	public RestaurantListing(String name, int id, String base64) {
-		this(name, id, Bitmap.createBitmap(0, 0, null));
+		this(name, id, BitmapFactory.decodeResource(Resources.getSystem(),
+				R.drawable.mainlogo6));
 		byte[] a = Base64.decode(base64, Base64.DEFAULT);
-		setRestaurantImage(BitmapFactory.decodeByteArray(a, 0, a.length));
+		if (a.length > 0)
+			setRestaurantImage(BitmapFactory.decodeByteArray(a, 0, a.length));
 	}
 
 	/**

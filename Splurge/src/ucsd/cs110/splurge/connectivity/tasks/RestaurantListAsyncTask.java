@@ -13,7 +13,7 @@ public class RestaurantListAsyncTask
 	private RestaurantListRequestListener mListener;
 
 	public RestaurantListAsyncTask(RestaurantListRequestListener listener) {
-		listener = mListener;
+		mListener = listener;
 	}
 
 	@Override
