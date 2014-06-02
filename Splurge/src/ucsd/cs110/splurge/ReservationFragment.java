@@ -31,7 +31,7 @@ public class ReservationFragment extends SuperFragment {
 		mHourSpinner.setOnLongPressUpdateInterval(100);
 		mMinuteSpinner = (NumberPicker) ret.findViewById(R.id.minute);
 		mMinuteSpinner.setMinValue(0);
-		mMinuteSpinner.setMaxValue(7);
+		mMinuteSpinner.setMaxValue(3);
 		mMinuteSpinner.setDisplayedValues(mMinutes);
 		mMinuteSpinner.setOnLongPressUpdateInterval(100);
 		mAmPmSpinner = (NumberPicker) ret.findViewById(R.id.amPm);

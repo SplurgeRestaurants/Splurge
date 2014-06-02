@@ -75,6 +75,9 @@ public class CalenderViewFragmentListener extends SuperListener implements
 					"date",
 					android.text.format.DateFormat.format("yyyy-MM",
 							CalendarViewFragment.month) + "-" + day);
+			Log.e("Splurge",
+					android.text.format.DateFormat.format("yyyy-MM",
+							CalendarViewFragment.month) + "-" + day);
 			mWrapper.changeFragment(new ReservationFragment(),
 					new ReservationFragmentListener(mWrapper));
 		}

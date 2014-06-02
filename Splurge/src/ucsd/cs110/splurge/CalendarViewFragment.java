@@ -2,7 +2,6 @@ package ucsd.cs110.splurge;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 
 import ucsd.cs110.splurge.model.Restaurant;
 import ucsd.cs110.splurge.model.Timeslot;
@@ -20,8 +19,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 public class CalendarViewFragment extends SuperFragment {
-	private Restaurant mRestaurant = getWrapperActivity().getModel()
-			.getRestaurant();
+	private Restaurant mRestaurant;
 	static Calendar month;
 	static CalendarAdapter adapter;
 	static Handler handler;
@@ -39,8 +37,13 @@ public class CalendarViewFragment extends SuperFragment {
 		super.onCreate(savedInstanceState);
 		View ret = inflater.inflate(R.layout.calendar, container, false);
 		month = Calendar.getInstance();
+		mRestaurant = getWrapperActivity().getModel().getRestaurant();
 		mUnavailableTimes = new ArrayList<String>();
-		getUnavailableDays();
+		try {
+			getUnavailableDays();
+		} catch (Exception e) {
+
+		}
 		adapter = new CalendarAdapter(getActivity(), month);
 
 		GridView gridview = (GridView) ret.findViewById(R.id.gridview);
@@ -64,7 +67,8 @@ public class CalendarViewFragment extends SuperFragment {
 			Log.e("Splurge", currMonth + " " + day);
 			String chosenDay = Integer.toString(day);
 			if (month.get(Calendar.MONTH) == mTakenTimes.get(i).getStartTime()
-					.get(Calendar.MONTH)) {
+					.get(Calendar.MONTH)
+					&& isDayFull(mTakenTimes.get(i).getStartTime())) {
 				mUnavailableTimes.add(chosenDay);
 			}
 		}
@@ -79,16 +83,14 @@ public class CalendarViewFragment extends SuperFragment {
 				sameDay.add(mTakenTimes.get(i));
 			}
 		}
-		Collections.sort(sameDay);
 		int startHour = mRestaurant
 				.getHoursForDay(time.get(Calendar.DAY_OF_WEEK)).getStartTime()
 				.get(Calendar.HOUR_OF_DAY);
 		int endHour = mRestaurant.getHoursForDay(Calendar.DAY_OF_WEEK)
 				.getEndTime().get(Calendar.HOUR_OF_DAY);
-		for (int hours = startHour; hours < endHour; hours++) {
-			for (int minutes = 0; minutes < 60; minutes += 15) {
-
-			}
+		int size = (endHour - startHour) * 4;
+		if (size == sameDay.size()) {
+			return true;
 		}
 		return false;
 	}
