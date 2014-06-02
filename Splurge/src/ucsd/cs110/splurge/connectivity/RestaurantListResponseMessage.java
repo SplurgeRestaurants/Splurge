@@ -27,7 +27,7 @@ public class RestaurantListResponseMessage {
 			for (int i = 0; i < arr.length(); ++i) {
 				JSONObject obj = arr.getJSONObject(i);
 				list.add(new RestaurantListing(obj.getString("name"), obj
-						.getInt("id"), obj.getString("image")));
+						.getInt("id"), obj.getString("icon")));
 			}
 			return new RestaurantListResponseMessage(list);
 		} catch (JSONException ex) {
