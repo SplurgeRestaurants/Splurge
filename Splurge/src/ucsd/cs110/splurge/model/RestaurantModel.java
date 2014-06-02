@@ -40,7 +40,7 @@ public class RestaurantModel implements RestaurantListRequestListener {
 	 * Listener of restaurant list requests to which results should be
 	 * forwarded.
 	 */
-	private RestaurantListRequestListener mForwardListener;
+	private RestaurantListRequestListener mListForwardListener;
 
 	/**
 	 * Creates a new model with empty lists and no selected restaurant.
@@ -190,17 +190,21 @@ public class RestaurantModel implements RestaurantListRequestListener {
 	 */
 	public Collection<RestaurantListing> getAvailableRestaurantNames(
 			RestaurantListRequestListener listener) {
-		mForwardListener = listener;
+		Log.i("Splurge", "Restaurant list requested from model");
+		mListForwardListener = listener;
 		if (mAvailableRestaurantNames == null
 				|| mAvailableRestaurantNames.isEmpty()) {
+			Log.i("Splurge", "Restaurant list async task started");
 			RestaurantListAsyncTask rlat = new RestaurantListAsyncTask(this);
+			rlat.execute(mConnectionHandler);
 		}
 		return mAvailableRestaurantNames;
 	}
 
 	@Override
 	public void receiveRetaurantList(Collection<RestaurantListing> list) {
+		Log.i("Splurge", "List received");
 		mAvailableRestaurantNames = list;
-		mForwardListener.receiveRetaurantList(list);
+		mListForwardListener.receiveRetaurantList(list);
 	}
 }
