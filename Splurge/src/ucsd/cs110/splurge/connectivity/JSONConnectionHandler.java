@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import ucsd.cs110.splurge.model.Restaurant;
 import ucsd.cs110.splurge.model.RestaurantListing;
+import android.content.Context;
 
 /**
  * Deals with the connection specifics and acquires information as requested.
@@ -67,10 +68,10 @@ public class JSONConnectionHandler {
 	 * 
 	 * @return A list of available restaurants.
 	 */
-	public Collection<RestaurantListing> requestRestaurantList() {
+	public Collection<RestaurantListing> requestRestaurantList(Context awful) {
 		String resp = mJSONConnection
 				.pushServerMessage(new RestaurantListRequestMessage());
-		return RestaurantListResponseMessage.createFromJSON(resp)
+		return RestaurantListResponseMessage.createFromJSON(resp, awful)
 				.getRestaurantList();
 	}
 }

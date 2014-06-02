@@ -37,7 +37,7 @@ public class RestaurantListFragment extends SuperFragment implements
 		mListView = (ListView) ret.findViewById(R.id.list);
 		ArrayList<RestaurantListing> data = new ArrayList<RestaurantListing>(
 				getWrapperActivity().getModel().getAvailableRestaurantNames(
-						this));
+						this, getActivity()));
 		RestaurantListAdapter adapter = new RestaurantListAdapter(
 				getActivity(), R.layout.restaurant_list_entry, data);
 		mListView.setAdapter(adapter);

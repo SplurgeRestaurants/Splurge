@@ -12,6 +12,7 @@ import ucsd.cs110.splurge.connectivity.tasks.RestaurantInfoAsyncTask;
 import ucsd.cs110.splurge.connectivity.tasks.RestaurantInfoRequestListener;
 import ucsd.cs110.splurge.connectivity.tasks.RestaurantListAsyncTask;
 import ucsd.cs110.splurge.connectivity.tasks.RestaurantListRequestListener;
+import android.content.Context;
 import android.util.Log;
 
 /**
@@ -217,14 +218,14 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 *         or <code>null</code> if it will be returned later.
 	 */
 	public Collection<RestaurantListing> getAvailableRestaurantNames(
-			RestaurantListRequestListener listener) {
+			RestaurantListRequestListener listener, Context awful) {
 		Log.i("Splurge", "Restaurant list requested from model");
 		mListForwardListener = listener;
 		if (mAvailableRestaurantNames == null
 				|| mAvailableRestaurantNames.isEmpty()) {
 			Log.i("Splurge", "Restaurant list async task started");
 			RestaurantListAsyncTask rlat = new RestaurantListAsyncTask(this);
-			rlat.execute(mConnectionHandler);
+			rlat.execute(mConnectionHandler, awful);
 		}
 		return mAvailableRestaurantNames;
 	}

@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ucsd.cs110.splurge.model.RestaurantListing;
+import android.content.Context;
 import android.util.Log;
 
 public class RestaurantListResponseMessage {
@@ -18,7 +19,8 @@ public class RestaurantListResponseMessage {
 		setRestaurantList(list);
 	}
 
-	public static RestaurantListResponseMessage createFromJSON(String json) {
+	public static RestaurantListResponseMessage createFromJSON(String json,
+			Context awful) {
 		JSONObject jsonInput;
 		Collection<RestaurantListing> list = new ArrayList<RestaurantListing>();
 		try {
@@ -27,7 +29,7 @@ public class RestaurantListResponseMessage {
 			for (int i = 0; i < arr.length(); ++i) {
 				JSONObject obj = arr.getJSONObject(i);
 				list.add(new RestaurantListing(obj.getString("name"), obj
-						.getInt("id"), obj.getString("icon")));
+						.getInt("id"), obj.getString("icon"), awful));
 			}
 			return new RestaurantListResponseMessage(list);
 		} catch (JSONException ex) {
