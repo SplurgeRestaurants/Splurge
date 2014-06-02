@@ -6,7 +6,7 @@ import java.util.Calendar;
  * Immutable class representing a period of time. Its primary functionality is
  * to determine whether other times fall within or interfere with this Timeslot.
  */
-public class Timeslot {
+public class Timeslot implements Comparable<Timeslot> {
 	private final Calendar startTime;
 	private final Calendar endTime;
 
@@ -53,5 +53,20 @@ public class Timeslot {
 	 */
 	public boolean contains(Timeslot t) {
 		return startTime.before(t.startTime) && endTime.after(t.endTime);
+	}
+
+	@Override
+	public int compareTo(Timeslot another) {
+		if (startTime.before(another.startTime))
+			return -1;
+		if (startTime.after(another.startTime))
+			return 1;
+		if (startTime.equals(another.startTime)) {
+			if (endTime.before(another.endTime))
+				return -1;
+			if (endTime.after(another.endTime))
+				return 1;
+		}
+		return 0;
 	}
 }
