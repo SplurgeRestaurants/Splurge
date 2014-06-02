@@ -271,4 +271,13 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	public String getRestaurantZipcode() {
 		return getRestaurant().getZipcode();
 	}
+
+	/**
+	 * Retrieves the name of the currently selected restaurant.
+	 * 
+	 * @return The current restaurant's name.
+	 */
+	public String getRestaurantName() {
+		return getRestaurant().getName();
+	}
 }

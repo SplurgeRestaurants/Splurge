@@ -32,11 +32,11 @@ public class RestaurantInfoRequestMessage extends ServerMessage {
 	public String compileToJSON() {
 		JSONObject jsonObj = new JSONObject();
 		try {
-			jsonObj.put(MESSAGE_TYPE, getMessageType())
-					.put("request", "Restaurant").put("restaurantId", getId());
+			jsonObj.put("restaurant_Id", getId()).put("request", "Restaurant")
+					.put(MESSAGE_TYPE, getMessageType());
 		} catch (JSONException e) {
 			Log.e("Splurge",
-					"Unexpected JSONException in RestaurantINfoRequestMessage.");
+					"Unexpected JSONException in RestaurantInfoRequestMessage.");
 			Log.e("Splurge", e.getLocalizedMessage());
 		}
 		try {

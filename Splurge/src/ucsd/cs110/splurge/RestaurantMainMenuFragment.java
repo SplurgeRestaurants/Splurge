@@ -47,6 +47,8 @@ public class RestaurantMainMenuFragment extends SuperFragment {
 	public void onStart() {
 		setMainMenuListener((OnClickListener) mSuperListener);
 		backCount = 0;
+		getActivity().setTitle(
+				getWrapperActivity().getModel().getRestaurantName());
 		super.onStart();
 	}
 }

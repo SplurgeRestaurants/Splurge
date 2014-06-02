@@ -1,5 +1,6 @@
 package ucsd.cs110.splurge;
 
+import ucsd.cs110.splurge.model.OnRestaurantReadyListener;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -10,7 +11,7 @@ import android.widget.TextView;
  * 
  */
 public class RestaurantListListener extends SuperListener implements
-		OnItemClickListener {
+		OnItemClickListener, OnRestaurantReadyListener {
 
 	/**
 	 * Create a new RestaurantListListener, designed to listen to a
@@ -32,7 +33,11 @@ public class RestaurantListListener extends SuperListener implements
 		TextView restaurantName = (TextView) (view
 				.findViewById(R.id.RestaurantName));
 		String chosenRestaurant = restaurantName.getText().toString();
-		mWrapper.getActionBar().setTitle(chosenRestaurant);
+		mWrapper.getModel().setRestaurantByName(chosenRestaurant, this);
+	}
+
+	@Override
+	public void onRestaurantReady() {
 		mWrapper.changeFragment(new RestaurantMainMenuFragment(),
 				new RestaurantMainMenuListener(mWrapper));
 	}

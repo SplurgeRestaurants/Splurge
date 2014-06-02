@@ -32,7 +32,7 @@ public class JSONConnectionHandler {
 	 */
 	public Restaurant requestRestaurantInfo(int id) {
 		String resp = mJSONConnection
-				.pushServerMessage(new ReservationUpdateMessage(id));
+				.pushServerMessage(new RestaurantInfoRequestMessage(id));
 		return RestaurantInfoResponseMessage.createFromJSON(resp)
 				.getRestaurant();
 	}

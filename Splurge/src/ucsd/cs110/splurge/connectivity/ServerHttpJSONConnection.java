@@ -39,6 +39,8 @@ public class ServerHttpJSONConnection {
 				.openConnection();
 		mServerConnection.setDoInput(true);
 		mServerConnection.setDoOutput(true);
+		mServerConnection
+				.setRequestProperty("Content-type", "application/json");
 		// That's the Decorator pattern if I ever saw it.
 		mWriter = new BufferedWriter(new OutputStreamWriter(
 				mServerConnection.getOutputStream()));
