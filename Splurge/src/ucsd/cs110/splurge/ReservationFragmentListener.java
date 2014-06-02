@@ -4,7 +4,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.NumberPicker;
-import android.widget.NumberPicker.OnScrollListener;
+import android.widget.NumberPicker.OnValueChangeListener;
 import android.widget.Toast;
 
 /**
@@ -12,7 +12,7 @@ import android.widget.Toast;
  * 
  */
 public class ReservationFragmentListener extends SuperListener implements
-		OnClickListener, OnScrollListener {
+		OnClickListener, OnValueChangeListener {
 
 	private boolean reservationSuccessful = false;
 
@@ -62,14 +62,28 @@ public class ReservationFragmentListener extends SuperListener implements
 	}
 
 	@Override
-	public void onScrollStateChange(NumberPicker view, int scrollState) {
-		if (scrollState == NumberPicker.OnScrollListener.SCROLL_STATE_IDLE) {
-			switch (view.getId()) {
-			case R.id.hour:
-				break;
-			case R.id.minute:
-				break;
+	public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+		switch (picker.getId()) {
+		case R.id.hour:
+			int hour = picker.getValue();
+			NumberPicker mMinuteSpinner = (NumberPicker) mWrapper
+					.findViewById(R.id.minute);
+			if (hour == 5) {
+				mMinuteSpinner.setMinValue(0);
+				mMinuteSpinner.setMaxValue(0);
+				mMinuteSpinner.setDisplayedValues(new String[] { "00" });
+				mMinuteSpinner.refreshDrawableState();
+			} else {
+				mMinuteSpinner.setMinValue(0);
+				mMinuteSpinner.setMaxValue(0);
+				mMinuteSpinner.setDisplayedValues(new String[] { "00", "15",
+						"30", "45" });
+				mMinuteSpinner.setMaxValue(3);
+				mMinuteSpinner.refreshDrawableState();
 			}
+			break;
+		case R.id.minute:
+			break;
 		}
 	}
 }
