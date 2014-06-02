@@ -242,4 +242,32 @@ public class RestaurantModel implements RestaurantListRequestListener,
 		mCurrentRestaurant = restaurant;
 		// Restaurant is not passed along to another listener
 	}
+
+	/**
+	 * Get the phone number of the currently selected restaurant.
+	 * 
+	 * @return The restaurant's phone number.
+	 */
+	public int getRestaurantPhoneNumber() {
+		return getRestaurant().getPhoneNumber();
+	}
+
+	/**
+	 * Gets the street address of the currently restaurant in a human-readable
+	 * format.
+	 * 
+	 * @return The currently selected restaurant's street address.
+	 */
+	public String getRestaurantStreetAddress() {
+		return getRestaurant().getStreetAddress();
+	}
+
+	/**
+	 * Gets the zip code of the currently selected restaurant.
+	 * 
+	 * @return The currently selected restaurant's zip code.
+	 */
+	public String getRestaurantZipcode() {
+		return getRestaurant().getZipcode();
+	}
 }

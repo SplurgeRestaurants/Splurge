@@ -36,8 +36,8 @@ public class InformationListener extends SuperListener implements
 			// TODO make button call the phone number
 			Log.e("InformationListener", "Call Phone Button Works");
 			String phoneNumber = "tel:"
-					+ Integer.toString(mWrapper.getModel().getRestaurant()
-							.getPhoneNumber());
+					+ Integer.toString(mWrapper.getModel()
+							.getRestaurantPhoneNumber());
 			phoneNumber = "tel:4089812708";
 			intent = new Intent(Intent.ACTION_DIAL, Uri.parse(phoneNumber));
 			mWrapper.startActivity(intent);
@@ -47,9 +47,9 @@ public class InformationListener extends SuperListener implements
 			// TODO address field in restaurant model
 			address = String.format(
 					"%s+%s",
-					TextUtils.join("+", mWrapper.getModel().getRestaurant()
-							.getStreetAddress().split("\\s+")), mWrapper
-							.getModel().getRestaurant().getZipcode());
+					TextUtils.join("+", mWrapper.getModel()
+							.getRestaurantStreetAddress().split("\\s+")),
+					mWrapper.getModel().getRestaurantZipcode());
 			intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q="
 					+ address));
 			mWrapper.startActivity(intent);
