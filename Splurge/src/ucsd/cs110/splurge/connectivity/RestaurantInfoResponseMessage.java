@@ -12,7 +12,6 @@ import ucsd.cs110.splurge.model.Restaurant;
 import ucsd.cs110.splurge.model.Timeslot;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.PointF;
 import android.util.Base64;
 import android.util.Log;
 
@@ -21,6 +20,19 @@ import android.util.Log;
  * information request.
  */
 public class RestaurantInfoResponseMessage {
+	private static final String RESTAURANT_NAME = "restaurantName";
+	private static final String RESTAURANT_ID = "restaurantId";
+	private static final String RESTAURANT_ADDRESS = "restaurantLocation";
+	private static final String RESTAURANT_MENUS = "restaurantMenus";
+	private static final String RESTAURANT_HOURS = "restaurantHours";
+	private static final String RESTAURANT_AVAILABILITY = "reservableDays";
+	private static final String AVAILABILITY_START = "start";
+	private static final String AVAILABILITY_END = "end";
+	private static final String MENU_TITLE = "title";
+	private static final String MENU_ITEMS = "items";
+	private static final String MENU_ITEM_NAME = "itemName";
+	private static final String MENU_ITEM_IMAGE = "itemImage";
+
 	private Restaurant mMessageResult;
 
 	private RestaurantInfoResponseMessage(Restaurant r) {
@@ -48,54 +60,58 @@ public class RestaurantInfoResponseMessage {
 		JSONObject inputJSON;
 		try {
 			inputJSON = new JSONObject(input);
-			String name = inputJSON.getString("restaurantName");
+			String name = inputJSON.getString(RESTAURANT_NAME);
 			Restaurant encaps = new Restaurant(name);
 
-			encaps.setId(inputJSON.getInt("restaurantId"));
+			encaps.setId(inputJSON.getInt(RESTAURANT_ID));
 
-			if (inputJSON.has("restaurantLocation")) {
-				JSONArray locArray = inputJSON
-						.getJSONArray("restaurantLocation");
-				encaps.setLocation(new PointF((float) locArray.getDouble(0),
-						(float) locArray.getDouble(1)));
+			if (inputJSON.has(RESTAURANT_ADDRESS)) {
+				String fullAddy = inputJSON.getString(RESTAURANT_ADDRESS);
+				int zipStart = fullAddy.lastIndexOf(' ');
+				encaps.setZipcode(fullAddy.substring(zipStart).trim());
+				encaps.setStreetAddress(fullAddy.substring(0, zipStart).trim());
 			}
 
 			// Add unavailable times
-			if (inputJSON.has("restaurantAvailability")) {
+			if (inputJSON.has(RESTAURANT_AVAILABILITY)) {
 				JSONArray unavailables = inputJSON
-						.getJSONArray("restaurantAvailability");
+						.getJSONArray(RESTAURANT_AVAILABILITY);
 				for (int i = 0; i < unavailables.length(); ++i) {
 					JSONObject obj = unavailables.getJSONObject(i);
 					Calendar start, end;
 					start = Calendar.getInstance();
 					end = Calendar.getInstance();
-					start.setTimeInMillis(obj.getLong("start"));
-					end.setTimeInMillis(obj.getLong("end"));
+					start.setTimeInMillis(obj.getLong(AVAILABILITY_START));
+					end.setTimeInMillis(obj.getLong(AVAILABILITY_END));
 					encaps.addUnavailableTime(new Timeslot(start, end));
 				}
 			}
 
 			// Extract menus
-			if (inputJSON.has("restaurantMenus")) {
-				JSONArray menuArray = inputJSON.getJSONArray("restaurantMenus");
+			if (inputJSON.has(RESTAURANT_MENUS)) {
+				JSONArray menuArray = inputJSON.getJSONArray(RESTAURANT_MENUS);
 				for (int menuInd = 0; menuInd < menuArray.length(); ++menuInd) {
 					JSONObject currentMenu = menuArray.getJSONObject(menuInd);
 					FoodMenu buildMenu = new FoodMenu(
-							currentMenu.getString("title"));
-					JSONArray menuItems = currentMenu.getJSONArray("items");
+							currentMenu.getString(MENU_TITLE));
+					JSONArray menuItems = currentMenu.getJSONArray(MENU_ITEMS);
 					for (int itemInd = 0; itemInd < currentMenu.length(); ++itemInd) {
 						JSONObject foodJSON = menuItems.getJSONObject(itemInd);
 						FoodItem food = new FoodItem(
-								foodJSON.getString("itemName"));
-						byte[] decodedImage = Base64
-								.decode(foodJSON.getString("itemImage"),
-										Base64.DEFAULT);
+								foodJSON.getString(MENU_ITEM_NAME));
+						byte[] decodedImage = Base64.decode(
+								foodJSON.getString(MENU_ITEM_IMAGE),
+								Base64.DEFAULT);
 						Bitmap image = BitmapFactory.decodeByteArray(
 								decodedImage, 0, decodedImage.length);
 						food.setImage(image);
 						buildMenu.addFoodItem(food);
 					}
 				}
+			}
+
+			if (inputJSON.has(RESTAURANT_HOURS)) {
+				// TODO (trtucker) interpret hours array
 			}
 
 			return new RestaurantInfoResponseMessage(encaps);
