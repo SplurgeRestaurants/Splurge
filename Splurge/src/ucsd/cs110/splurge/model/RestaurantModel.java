@@ -3,8 +3,13 @@ package ucsd.cs110.splurge.model;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import ucsd.cs110.splurge.connectivity.JSONConnectionHandler;
+import ucsd.cs110.splurge.connectivity.tasks.RestaurantInfoAsyncTask;
+import ucsd.cs110.splurge.connectivity.tasks.RestaurantInfoRequestListener;
 import ucsd.cs110.splurge.connectivity.tasks.RestaurantListAsyncTask;
 import ucsd.cs110.splurge.connectivity.tasks.RestaurantListRequestListener;
 import android.util.Log;
@@ -12,7 +17,8 @@ import android.util.Log;
 /**
  * Class containing business logic for the Splurge application.
  */
-public class RestaurantModel implements RestaurantListRequestListener {
+public class RestaurantModel implements RestaurantListRequestListener,
+		RestaurantInfoRequestListener {
 	/**
 	 * Container for Restaurants that the Model has requested from the Server,
 	 * but are not necessarily currently viewed. This a cache for the event that
@@ -58,7 +64,8 @@ public class RestaurantModel implements RestaurantListRequestListener {
 	 * @param name
 	 *            The restaurant's name as it appears to the system.
 	 */
-	public void setRestaurantByName(String name) {
+	public void setRestaurantByName(String name,
+			OnRestaurantReadyListener listener) {
 		// Get the restaurant ID from the internal list
 		int id = -1;
 		for (RestaurantListing l : mAvailableRestaurantNames) {
@@ -69,7 +76,7 @@ public class RestaurantModel implements RestaurantListRequestListener {
 		}
 
 		if (id != -1) {
-			setRestaurantById(id);
+			setRestaurantById(id, listener);
 		} else {
 			Log.e("Splurge", "Could not deduce id from restaurant name: "
 					+ name);
@@ -84,20 +91,41 @@ public class RestaurantModel implements RestaurantListRequestListener {
 	 * @param id
 	 *            The identification number of the restaurant to select.
 	 */
-	public void setRestaurantById(int id) {
+	public void setRestaurantById(int id, OnRestaurantReadyListener listener) {
 		// Check the currently loaded restaurants for the given Id
 		for (Restaurant r : mLoadedRestaurants) {
 			if (r.getId() == id) {
 				mCurrentRestaurant = r;
 				Log.i("Splurge", "Model restaurant set to " + r.getName());
+				listener.onRestaurantReady();
 				return;
 			}
 		}
 
 		// Because the restaurant was not found, we must query the server
-		mCurrentRestaurant = mConnectionHandler.requestRestaurantInfo(id);
-		Log.i("Splurge",
-				"Model restaurant set to " + mCurrentRestaurant.getName());
+		mCurrentRestaurant = getRestaurantByIdAsync(id, listener);
+	}
+
+	/**
+	 * Attempts to poll the server for the given restaurant. It will wait a set
+	 * period of time for a result, and will return null if the result is not
+	 * available within that time.
+	 * 
+	 * @param id
+	 *            The identification number of the restaurant to request.
+	 * @return The restaurant, or <code>null</code> if it takes too long.
+	 */
+	private Restaurant getRestaurantByIdAsync(int id,
+			OnRestaurantReadyListener listener) {
+		RestaurantInfoAsyncTask riat = new RestaurantInfoAsyncTask(this);
+		riat.execute(mConnectionHandler, id);
+		try {
+			Restaurant result = riat.get(500, TimeUnit.MILLISECONDS);
+			listener.onRestaurantReady();
+			return result;
+		} catch (InterruptedException | ExecutionException | TimeoutException e) {
+		}
+		return null;
 	}
 
 	/**
@@ -122,8 +150,8 @@ public class RestaurantModel implements RestaurantListRequestListener {
 	/**
 	 * Updates the available reservation times.
 	 */
-	public void updateAvailableTimes() {
-		setRestaurantById(mCurrentRestaurant.getId());
+	public void updateAvailableTimes(OnRestaurantReadyListener listener) {
+		setRestaurantById(mCurrentRestaurant.getId(), listener);
 	}
 
 	/**
@@ -165,7 +193,7 @@ public class RestaurantModel implements RestaurantListRequestListener {
 	 * Retrieves an array of the labels for the menus available for this
 	 * restaurant. This is not guaranteed to be in any particular order.
 	 * 
-	 * @return An array of labels fo rhte menus available for this restaurant.
+	 * @return An array of labels for the menus available for this restaurant.
 	 */
 	public String[] getMenuLabels() {
 		return getRestaurant().getMenuLabels();
@@ -206,5 +234,12 @@ public class RestaurantModel implements RestaurantListRequestListener {
 		Log.i("Splurge", "List received");
 		mAvailableRestaurantNames = list;
 		mListForwardListener.receiveRetaurantList(list);
+	}
+
+	@Override
+	public void receiveRestaurantInfo(Restaurant restaurant) {
+		Log.i("Splurge", "Restaurant received asynchronously");
+		mCurrentRestaurant = restaurant;
+		// Restaurant is not passed along to another listener
 	}
 }
