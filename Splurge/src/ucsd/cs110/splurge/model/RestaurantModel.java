@@ -91,6 +91,11 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 * 
 	 * @param id
 	 *            The identification number of the restaurant to select.
+	 * @param listener
+	 *            Listener to notify when the restaurant becomes ready for use
+	 *            by the application.
+	 * @param awful
+	 *            Context for accessing resources in lower classes.
 	 */
 	public void setRestaurantById(int id, OnRestaurantReadyListener listener,
 			Context awful) {
@@ -115,6 +120,11 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 * 
 	 * @param id
 	 *            The identification number of the restaurant to request.
+	 * @param listener
+	 *            Listener to notify when the restaurant becomes available for
+	 *            use by the application.
+	 * @param awful
+	 *            Context for accessing resources in lower classes.
 	 * @return The restaurant, or <code>null</code> if it takes too long.
 	 */
 	private Restaurant getRestaurantByIdAsync(int id,
@@ -136,6 +146,10 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 * @param partySize
 	 *            The number of party members for which to request a
 	 *            reservation.
+	 * @param startTime
+	 *            The time at which the reservation is to begin.
+	 * @param partyName
+	 *            The name under which the reservation is to be made.
 	 * @param startTime
 	 *            The time at which the reservation is to begin.
 	 * @return The identification number for the acquired reservation, or -1 if
