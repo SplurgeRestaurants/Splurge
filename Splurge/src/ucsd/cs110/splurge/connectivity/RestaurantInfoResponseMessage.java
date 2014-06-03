@@ -6,10 +6,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ucsd.cs110.splurge.R;
 import ucsd.cs110.splurge.model.FoodItem;
 import ucsd.cs110.splurge.model.FoodMenu;
 import ucsd.cs110.splurge.model.Restaurant;
 import ucsd.cs110.splurge.model.Timeslot;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -32,6 +34,7 @@ public class RestaurantInfoResponseMessage {
 	private static final String MENU_ITEMS = "items";
 	private static final String MENU_ITEM_NAME = "itemName";
 	private static final String MENU_ITEM_IMAGE = "itemImage";
+	private static final String MENU_ITEM_PRICE = "price";
 
 	private Restaurant mMessageResult;
 
@@ -56,7 +59,8 @@ public class RestaurantInfoResponseMessage {
 	 *            JSON string to interpret
 	 * @return An object wrapping the decoded Restaurant.
 	 */
-	public static RestaurantInfoResponseMessage createFromJSON(String input) {
+	public static RestaurantInfoResponseMessage createFromJSON(String input,
+			Context awful) {
 		JSONObject inputJSON;
 		try {
 			inputJSON = new JSONObject(input);
@@ -69,7 +73,10 @@ public class RestaurantInfoResponseMessage {
 				String fullAddy = inputJSON.getString(RESTAURANT_ADDRESS);
 				int zipStart = fullAddy.lastIndexOf(' ');
 				encaps.setZipcode(fullAddy.substring(zipStart).trim());
-				encaps.setStreetAddress(fullAddy.substring(0, zipStart).trim());
+				fullAddy = fullAddy.substring(0, zipStart).trim();
+				if (fullAddy.charAt(fullAddy.length() - 1) == ',')
+					fullAddy = fullAddy.substring(0, fullAddy.length() - 1);
+				encaps.setStreetAddress(fullAddy);
 			}
 
 			// Add unavailable times
@@ -99,12 +106,22 @@ public class RestaurantInfoResponseMessage {
 						JSONObject foodJSON = menuItems.getJSONObject(itemInd);
 						FoodItem food = new FoodItem(
 								foodJSON.getString(MENU_ITEM_NAME));
-						byte[] decodedImage = Base64.decode(
-								foodJSON.getString(MENU_ITEM_IMAGE),
-								Base64.DEFAULT);
-						Bitmap image = BitmapFactory.decodeByteArray(
-								decodedImage, 0, decodedImage.length);
-						food.setImage(image);
+						Bitmap defaultImage = BitmapFactory.decodeResource(
+								awful.getResources(), R.drawable.mainlogo6);
+						if (foodJSON.has(MENU_ITEM_IMAGE)
+								&& foodJSON.getString(MENU_ITEM_IMAGE).length() > 0) {
+							byte[] decodedImage = Base64.decode(
+									foodJSON.getString(MENU_ITEM_IMAGE),
+									Base64.DEFAULT);
+							Bitmap image = BitmapFactory.decodeByteArray(
+									decodedImage, 0, decodedImage.length);
+							food.setImage(image);
+						} else {
+							food.setImage(defaultImage);
+						}
+						if (foodJSON.has(MENU_ITEM_PRICE)) {
+							food.setPrice(foodJSON.getDouble(MENU_ITEM_PRICE));
+						}
 						buildMenu.addFoodItem(food);
 					}
 				}

@@ -66,7 +66,7 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 *            The restaurant's name as it appears to the system.
 	 */
 	public void setRestaurantByName(String name,
-			OnRestaurantReadyListener listener) {
+			OnRestaurantReadyListener listener, Context awful) {
 		// Get the restaurant ID from the internal list
 		int id = -1;
 		for (RestaurantListing l : mAvailableRestaurantNames) {
@@ -77,7 +77,7 @@ public class RestaurantModel implements RestaurantListRequestListener,
 		}
 
 		if (id != -1) {
-			setRestaurantById(id, listener);
+			setRestaurantById(id, listener, awful);
 		} else {
 			Log.e("Splurge", "Could not deduce id from restaurant name: "
 					+ name);
@@ -92,7 +92,8 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 * @param id
 	 *            The identification number of the restaurant to select.
 	 */
-	public void setRestaurantById(int id, OnRestaurantReadyListener listener) {
+	public void setRestaurantById(int id, OnRestaurantReadyListener listener,
+			Context awful) {
 		// Check the currently loaded restaurants for the given Id
 		for (Restaurant r : mLoadedRestaurants) {
 			if (r.getId() == id) {
@@ -104,7 +105,7 @@ public class RestaurantModel implements RestaurantListRequestListener,
 		}
 
 		// Because the restaurant was not found, we must query the server
-		mCurrentRestaurant = getRestaurantByIdAsync(id, listener);
+		mCurrentRestaurant = getRestaurantByIdAsync(id, listener, awful);
 	}
 
 	/**
@@ -117,9 +118,9 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 * @return The restaurant, or <code>null</code> if it takes too long.
 	 */
 	private Restaurant getRestaurantByIdAsync(int id,
-			OnRestaurantReadyListener listener) {
+			OnRestaurantReadyListener listener, Context awful) {
 		RestaurantInfoAsyncTask riat = new RestaurantInfoAsyncTask(this);
-		riat.execute(mConnectionHandler, id);
+		riat.execute(mConnectionHandler, id, awful);
 		try {
 			Restaurant result = riat.get(500, TimeUnit.MILLISECONDS);
 			listener.onRestaurantReady();
@@ -151,8 +152,9 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	/**
 	 * Updates the available reservation times.
 	 */
-	public void updateAvailableTimes(OnRestaurantReadyListener listener) {
-		setRestaurantById(mCurrentRestaurant.getId(), listener);
+	public void updateAvailableTimes(OnRestaurantReadyListener listener,
+			Context awful) {
+		setRestaurantById(mCurrentRestaurant.getId(), listener, awful);
 	}
 
 	/**

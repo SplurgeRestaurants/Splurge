@@ -2,6 +2,7 @@ package ucsd.cs110.splurge.connectivity.tasks;
 
 import ucsd.cs110.splurge.connectivity.JSONConnectionHandler;
 import ucsd.cs110.splurge.model.Restaurant;
+import android.content.Context;
 import android.os.AsyncTask;
 
 /**
@@ -31,8 +32,8 @@ public class RestaurantInfoAsyncTask extends
 
 	@Override
 	protected Restaurant doInBackground(Object... params) {
-		return ((JSONConnectionHandler) params[0])
-				.requestRestaurantInfo(((Integer) params[1]).intValue());
+		return ((JSONConnectionHandler) params[0]).requestRestaurantInfo(
+				(Context) params[2], ((Integer) params[1]).intValue());
 	}
 
 	@Override

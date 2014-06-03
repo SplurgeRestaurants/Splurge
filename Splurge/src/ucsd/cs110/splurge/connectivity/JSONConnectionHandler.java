@@ -30,10 +30,10 @@ public class JSONConnectionHandler {
 	 *            The identification number to pull.
 	 * @return An object containing most information about the restaurant.
 	 */
-	public Restaurant requestRestaurantInfo(int id) {
+	public Restaurant requestRestaurantInfo(Context awful, int id) {
 		String resp = mJSONConnection
 				.pushServerMessage(new RestaurantInfoRequestMessage(id));
-		return RestaurantInfoResponseMessage.createFromJSON(resp)
+		return RestaurantInfoResponseMessage.createFromJSON(resp, awful)
 				.getRestaurant();
 	}
 

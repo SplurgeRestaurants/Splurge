@@ -33,7 +33,8 @@ public class RestaurantListListener extends SuperListener implements
 		TextView restaurantName = (TextView) (view
 				.findViewById(R.id.RestaurantName));
 		String chosenRestaurant = restaurantName.getText().toString();
-		mWrapper.getModel().setRestaurantByName(chosenRestaurant, this);
+		mWrapper.getModel().setRestaurantByName(chosenRestaurant, this,
+				mWrapper);
 	}
 
 	@Override
