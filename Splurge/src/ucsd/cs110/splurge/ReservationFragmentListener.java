@@ -7,6 +7,7 @@ import ucsd.cs110.splurge.model.Timeslot;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.NumberPicker.OnValueChangeListener;
 import android.widget.Toast;
@@ -44,6 +45,9 @@ public class ReservationFragmentListener extends SuperListener implements
 			NumberPicker amPm = (NumberPicker) mWrapper.findViewById(R.id.amPm);
 			String selectedAmPm = ReservationFragment.mAmPmString[amPm
 					.getValue()];
+			EditText partyName = (EditText) mWrapper
+					.findViewById(R.id.form_party_name);
+			String pName = partyName.getText().toString();
 			String selectedHour;
 			if (selectedAmPm.compareTo("AM") == 0) {
 				selectedHour = ReservationFragment.mHours[hours.getValue()];
@@ -55,6 +59,7 @@ public class ReservationFragmentListener extends SuperListener implements
 			String selectedMinute = ReservationFragment.mMinutes[minutes
 					.getValue()];
 			int getPartySize = mPartySize.getValue();
+			Log.e("Splurge", "Party Name is " + pName);
 			Log.e("Splurge", selectedHour + " " + selectedMinute + " "
 					+ selectedAmPm);
 			Log.e("Splurge", "Party size is " + getPartySize);

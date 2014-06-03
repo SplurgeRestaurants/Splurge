@@ -46,5 +46,6 @@
     <string name="open">Open</string>
     <string name="order_notes">Order Notes</string>
     <string name="party_size">Party Size</string>
+    <string name="party_name">Party Name</string>
 
 </resources>
