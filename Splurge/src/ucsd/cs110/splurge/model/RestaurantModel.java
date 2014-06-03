@@ -8,6 +8,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import ucsd.cs110.splurge.connectivity.JSONConnectionHandler;
+import ucsd.cs110.splurge.connectivity.tasks.NullReservationRequestListener;
+import ucsd.cs110.splurge.connectivity.tasks.ReservationRequestAsyncTask;
+import ucsd.cs110.splurge.connectivity.tasks.ReservationRequestListener;
 import ucsd.cs110.splurge.connectivity.tasks.RestaurantInfoAsyncTask;
 import ucsd.cs110.splurge.connectivity.tasks.RestaurantInfoRequestListener;
 import ucsd.cs110.splurge.connectivity.tasks.RestaurantListAsyncTask;
@@ -19,7 +22,7 @@ import android.util.Log;
  * Class containing business logic for the Splurge application.
  */
 public class RestaurantModel implements RestaurantListRequestListener,
-		RestaurantInfoRequestListener {
+		RestaurantInfoRequestListener, ReservationRequestListener {
 	/**
 	 * Container for Restaurants that the Model has requested from the Server,
 	 * but are not necessarily currently viewed. This a cache for the event that
@@ -48,6 +51,10 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 * forwarded.
 	 */
 	private RestaurantListRequestListener mListForwardListener;
+	/**
+	 * Listener of reservation requests to which results should be forwarded.
+	 */
+	private ReservationRequestListener mReservationForwardListener;
 
 	/**
 	 * Creates a new model with empty lists and no selected restaurant.
@@ -91,6 +98,11 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 * 
 	 * @param id
 	 *            The identification number of the restaurant to select.
+	 * @param listener
+	 *            Listener to notify when the restaurant becomes ready for use
+	 *            by the application.
+	 * @param awful
+	 *            Context for accessing resources in lower classes.
 	 */
 	public void setRestaurantById(int id, OnRestaurantReadyListener listener,
 			Context awful) {
@@ -115,6 +127,11 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 * 
 	 * @param id
 	 *            The identification number of the restaurant to request.
+	 * @param listener
+	 *            Listener to notify when the restaurant becomes available for
+	 *            use by the application.
+	 * @param awful
+	 *            Context for accessing resources in lower classes.
 	 * @return The restaurant, or <code>null</code> if it takes too long.
 	 */
 	private Restaurant getRestaurantByIdAsync(int id,
@@ -138,15 +155,40 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 *            reservation.
 	 * @param startTime
 	 *            The time at which the reservation is to begin.
-	 * @return The identification number for the acquired reservation, or -1 if
-	 *         no reservation was available.
+	 * @param partyName
+	 *            The name under which the reservation is to be made.
+	 * @param startTime
+	 *            The time at which the reservation is to begin.
+	 * @param listener
+	 *            Listener which is to be notified when the reservation is
+	 *            received. Note that the listener will only be notified if -2
+	 *            is returned from this method.
+	 * @return The identification number for the acquired reservation, -1 if no
+	 *         reservation was available, or -2 if the response has yet to
+	 *         arrive.
 	 */
 	public int requestReservation(int partySize, String partyName,
-			Calendar startTime) {
+			Calendar startTime, ReservationRequestListener listener) {
 		if (mCurrentRestaurant.isTimeUnavailable(startTime))
 			return -1;
-		return mConnectionHandler.requestReservation(
-				mCurrentRestaurant.getId(), partySize, partyName, startTime);
+		ReservationRequestAsyncTask rrat = new ReservationRequestAsyncTask(this);
+		rrat.execute(mConnectionHandler, getRestaurant().getId(), partySize,
+				partyName, startTime);
+		mReservationForwardListener = listener;
+		try {
+			int response = rrat.get(500, TimeUnit.MILLISECONDS);
+			Log.i("Splurge", "Received reservation response in short order.");
+			// Set the listener to a null listener to avoid double-notification
+			mReservationForwardListener = new NullReservationRequestListener();
+			return response;
+		} catch (InterruptedException | TimeoutException e) {
+			Log.i("Splurge", "Reservation receipt deferred to later time.");
+			return -2;
+		} catch (ExecutionException e) {
+			Log.e("Splurge",
+					"Execution exception when getting our reservation.");
+		}
+		return -1;
 	}
 
 	/**
@@ -281,5 +323,12 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 */
 	public String getRestaurantName() {
 		return getRestaurant().getName();
+	}
+
+	@Override
+	public void receiveReservationId(int id) {
+		// TODO (trtucker) store reservation ids and related information into a
+		// local database.
+		mReservationForwardListener.receiveReservationId(id);
 	}
 }

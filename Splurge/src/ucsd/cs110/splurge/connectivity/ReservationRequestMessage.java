@@ -1,7 +1,9 @@
 package ucsd.cs110.splurge.connectivity;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,7 +15,7 @@ import android.util.Log;
  */
 public class ReservationRequestMessage extends ServerMessage {
 
-	private static final String TIME_START = "timeStart";
+	private static final String TIME_START = "time_start";
 	private static final String PARTY_SIZE = "party_size";
 	private static final String REST_ID = "restaurants_id";
 	private static final String PARTY_NAME = "name";
@@ -101,7 +103,9 @@ public class ReservationRequestMessage extends ServerMessage {
 	public void setReservationStartTime(Calendar startTime) {
 		mStartTime = startTime;
 		try {
-			mJSONRep.put(TIME_START, mStartTime.getTimeInMillis());
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
+					Locale.US);
+			mJSONRep.put(TIME_START, df.format(mStartTime.getTime()));
 		} catch (JSONException e) {
 		}
 	}
