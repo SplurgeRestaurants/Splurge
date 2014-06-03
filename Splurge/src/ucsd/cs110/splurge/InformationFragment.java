@@ -45,7 +45,7 @@ public class InformationFragment extends SuperFragment {
 	 * @return String representing phone number
 	 */
 	private String getPhoneNumber() {
-		return "Phone Number: 911";
+		return getWrapperActivity().getModel().getRestaurantPhoneNumber();
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class InformationFragment extends SuperFragment {
 	 * @return String of the restaurant's address
 	 */
 	private String getRestaurantAddress() {
-		return "Address: The Village";
+		return getWrapperActivity().getModel().getRestaurantStreetAddress();
 	}
 
 	/**

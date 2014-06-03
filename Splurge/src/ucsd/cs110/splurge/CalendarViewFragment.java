@@ -39,19 +39,12 @@ public class CalendarViewFragment extends SuperFragment {
 		month = Calendar.getInstance();
 		mRestaurant = getWrapperActivity().getModel().getRestaurant();
 		mUnavailableTimes = new ArrayList<String>();
-		try {
-			getUnavailableDays();
-		} catch (Exception e) {
-
-		}
+		getUnavailableDays();
 		adapter = new CalendarAdapter(getActivity(), month);
-
 		GridView gridview = (GridView) ret.findViewById(R.id.gridview);
 		gridview.setAdapter(adapter);
-
 		handler = new Handler();
 		handler.post(calendarUpdater);
-
 		TextView title = (TextView) ret.findViewById(R.id.title);
 		title.setText(android.text.format.DateFormat.format("MMMM yyyy", month));
 

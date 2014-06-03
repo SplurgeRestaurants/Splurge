@@ -3,7 +3,6 @@ package ucsd.cs110.splurge;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -33,19 +32,13 @@ public class InformationListener extends SuperListener implements
 		Intent intent;
 		switch (v.getId()) {
 		case R.id.call_phone:
-			// TODO make button call the phone number
-			Log.e("InformationListener", "Call Phone Button Works");
 			String phoneNumber = "tel:"
-					+ Integer.toString(mWrapper.getModel()
-							.getRestaurantPhoneNumber());
-			phoneNumber = "tel:4089812708";
+					+ mWrapper.getModel().getRestaurantPhoneNumber();
 			intent = new Intent(Intent.ACTION_DIAL, Uri.parse(phoneNumber));
 			mWrapper.startActivity(intent);
 			break;
 		case R.id.directions:
-			String address = "672+E+11400+S+84020";
-			// TODO address field in restaurant model
-			address = String.format(
+			String address = String.format(
 					"%s+%s",
 					TextUtils.join("+", mWrapper.getModel()
 							.getRestaurantStreetAddress().split("\\s+")),
