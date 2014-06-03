@@ -42,7 +42,7 @@ public class Restaurant {
 	private int mId;
 
 	private PointF location;
-	private int mPhoneNumber;
+	private String mPhoneNumber;
 	private String mStreetAddress;
 	private String mZipcode;
 
@@ -293,7 +293,7 @@ public class Restaurant {
 	 * @param phoneNumber
 	 *            The restaurant's phone number
 	 */
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		mPhoneNumber = phoneNumber;
 	}
 
@@ -302,8 +302,7 @@ public class Restaurant {
 	 * 
 	 * @return The restaurant's phone number
 	 */
-	public int getPhoneNumber() {
-		// TODO Auto-generated method stub
+	public String getPhoneNumber() {
 		return mPhoneNumber;
 	}
 

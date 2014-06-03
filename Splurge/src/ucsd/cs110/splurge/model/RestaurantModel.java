@@ -251,7 +251,7 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 * 
 	 * @return The restaurant's phone number.
 	 */
-	public int getRestaurantPhoneNumber() {
+	public String getRestaurantPhoneNumber() {
 		return getRestaurant().getPhoneNumber();
 	}
 
