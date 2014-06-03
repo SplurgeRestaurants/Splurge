@@ -2,7 +2,9 @@ package ucsd.cs110.splurge;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
+import ucsd.cs110.splurge.connectivity.tasks.ReservationRequestListener;
 import ucsd.cs110.splurge.model.Timeslot;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +19,7 @@ import android.widget.Toast;
  * 
  */
 public class ReservationFragmentListener extends SuperListener implements
-		OnClickListener, OnValueChangeListener {
+		OnClickListener, OnValueChangeListener, ReservationRequestListener {
 
 	private boolean reservationSuccessful = false;
 
@@ -48,28 +50,47 @@ public class ReservationFragmentListener extends SuperListener implements
 			EditText partyName = (EditText) mWrapper
 					.findViewById(R.id.form_party_name);
 			String pName = partyName.getText().toString();
-			String selectedHour;
+			int selectedHour;
 			if (selectedAmPm.compareTo("AM") == 0) {
-				selectedHour = ReservationFragment.mHours[hours.getValue()];
-			} else {
-				selectedHour = ReservationFragment.mHours[hours.getValue()];
 				selectedHour = Integer
-						.toString(Integer.parseInt(selectedHour) + 12);
+						.parseInt(ReservationFragment.mHours[hours.getValue()]);
+			} else {
+				selectedHour = Integer
+						.parseInt(ReservationFragment.mHours[hours.getValue()]);
+				selectedHour += 12;
 			}
-			String selectedMinute = ReservationFragment.mMinutes[minutes
-					.getValue()];
+			int selectedMinute = Integer
+					.parseInt(ReservationFragment.mMinutes[minutes.getValue()]);
 			int getPartySize = mPartySize.getValue();
 			Log.e("Splurge", "Party Name is " + pName);
+
 			Log.e("Splurge", selectedHour + " " + selectedMinute + " "
 					+ selectedAmPm);
 			Log.e("Splurge", "Party size is " + getPartySize);
+
+			// Populate the starting time with given values
+			GregorianCalendar startTime = new GregorianCalendar();
+			startTime.set(Calendar.HOUR_OF_DAY, selectedHour - 1);
+			startTime.set(Calendar.MINUTE, selectedMinute);
+			startTime.set(Calendar.MONTH,
+					CalendarViewFragment.month.get(Calendar.MONTH));
+			startTime.set(Calendar.YEAR,
+					CalendarViewFragment.month.get(Calendar.YEAR));
+			startTime.set(Calendar.DAY_OF_MONTH,
+					CalendarViewFragment.month.get(Calendar.DAY_OF_MONTH));
+
+			int result = mWrapper.getModel().requestReservation(getPartySize,
+					"no name", startTime, this);
 			if (reservationSuccessful) {
-				Toast.makeText(mWrapper, "Reservation Successful",
+				Toast.makeText(mWrapper,
+						"Reservation Successful. Your id is " + result,
 						Toast.LENGTH_LONG).show();
-			} else {
+			} else if (result == -1) {
 				Toast.makeText(mWrapper,
 						"Reservation Unsuccessful, pick another time",
 						Toast.LENGTH_LONG).show();
+			} else if (result == -2) {
+				Log.i("Splurge", "Reservation information available later.");
 			}
 			break;
 		default:
@@ -124,5 +145,19 @@ public class ReservationFragmentListener extends SuperListener implements
 		mMinuteSpinner.setMaxValue(0);
 		mMinuteSpinner.setDisplayedValues(displayMinutes);
 		mMinuteSpinner.setMaxValue(displayMinutes.length - 1);
+	}
+
+	@Override
+	public void receiveReservationId(int id) {
+		if (id >= 0) {
+			Toast.makeText(mWrapper,
+					"Reservation Successful. Your id is " + id,
+					Toast.LENGTH_LONG).show();
+		}
+		if (id == -1) {
+			Toast.makeText(mWrapper,
+					"Reservation Unsuccessful, pick another time",
+					Toast.LENGTH_LONG).show();
+		}
 	}
 }
