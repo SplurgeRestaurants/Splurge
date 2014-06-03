@@ -44,6 +44,7 @@ public class ReservationFragment extends SuperFragment {
 		mPartySize = (NumberPicker) ret.findViewById(R.id.party_size);
 		mPartySize.setMinValue(0);
 		mPartySize.setMaxValue(MAX_PARTY_SIZE - 1);
+		mPartySize.setDisplayedValues(mPSize);
 		mPartySize.setOnLongPressUpdateInterval(100);
 		return ret;
 	}
