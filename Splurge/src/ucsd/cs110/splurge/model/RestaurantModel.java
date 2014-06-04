@@ -8,6 +8,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import ucsd.cs110.splurge.connectivity.JSONConnectionHandler;
+import ucsd.cs110.splurge.connectivity.tasks.DineOutRequestAsyncTask;
+import ucsd.cs110.splurge.connectivity.tasks.DineOutRequestListener;
 import ucsd.cs110.splurge.connectivity.tasks.NullReservationRequestListener;
 import ucsd.cs110.splurge.connectivity.tasks.ReservationRequestAsyncTask;
 import ucsd.cs110.splurge.connectivity.tasks.ReservationRequestListener;
@@ -22,7 +24,8 @@ import android.util.Log;
  * Class containing business logic for the Splurge application.
  */
 public class RestaurantModel implements RestaurantListRequestListener,
-		RestaurantInfoRequestListener, ReservationRequestListener {
+		RestaurantInfoRequestListener, ReservationRequestListener,
+		DineOutRequestListener {
 	/**
 	 * Container for Restaurants that the Model has requested from the Server,
 	 * but are not necessarily currently viewed. This a cache for the event that
@@ -55,6 +58,10 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 * Listener of reservation requests to which results should be forwarded.
 	 */
 	private ReservationRequestListener mReservationForwardListener;
+	/**
+	 * Listener of dine out requests to which results should be forwarded.
+	 */
+	private DineOutRequestListener mDineOutForwardListener;
 
 	/**
 	 * Creates a new model with empty lists and no selected restaurant.
@@ -187,6 +194,56 @@ public class RestaurantModel implements RestaurantListRequestListener,
 		} catch (ExecutionException e) {
 			Log.e("Splurge",
 					"Execution exception when getting our reservation.");
+		}
+		return -1;
+	}
+
+	/**
+	 * Request a dine-out order at a given time.
+	 * 
+	 * @param requesterName
+	 *            The name of the individual requesting a dine-out order.
+	 * @param phoneNum
+	 *            The phone number at which the requesting individual may be
+	 *            contacted.
+	 * @param addy
+	 *            The address to which the delivery is to be made, if
+	 *            applicable.
+	 * @param kind
+	 *            The kind of request being made. This should be
+	 *            DineOutRequestMessage.KIND_*
+	 * @param startTime
+	 *            The time at which the request is to be fulfilled.
+	 * @param meal
+	 *            Long description of the request being made, including items,
+	 *            quantities, and special notes.
+	 * @param listener
+	 *            The listener which is to be notified when the response has
+	 *            been received. Note that this listener will only be notified
+	 *            if this method returns -2.
+	 * @return The identification number of the dine-out order if successful, -1
+	 *         if unsuccessful, and -2 if the response has not yet been received
+	 *         and the listener will be notified when a response has been
+	 *         received.
+	 */
+	public int requestDineOut(String requesterName, String phoneNum,
+			String addy, String kind, Calendar startTime, String meal,
+			DineOutRequestListener listener) {
+		mDineOutForwardListener = listener;
+		DineOutRequestAsyncTask dorat = new DineOutRequestAsyncTask(this);
+		dorat.execute(mConnectionHandler, getRestaurant().getId());
+		try {
+			int response = dorat.get(500, TimeUnit.MILLISECONDS);
+			Log.i("Splurge", "Received dine-out response in short order.");
+			mDineOutForwardListener = new NullDineOutRequestListener();
+			return response;
+		} catch (InterruptedException | TimeoutException e) {
+			Log.i("Splurge",
+					"Dine out response receipt deferred to a later time.");
+			return -2;
+		} catch (ExecutionException e) {
+			Log.e("Splurge",
+					"Execution exception when getting our dine-out order.");
 		}
 		return -1;
 	}
@@ -330,5 +387,10 @@ public class RestaurantModel implements RestaurantListRequestListener,
 		// TODO (trtucker) store reservation ids and related information into a
 		// local database.
 		mReservationForwardListener.receiveReservationId(id);
+	}
+
+	@Override
+	public void receiveDineOutId(int id) {
+		mDineOutForwardListener.receiveDineOutId(id);
 	}
 }

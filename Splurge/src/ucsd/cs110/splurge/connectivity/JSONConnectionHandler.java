@@ -74,4 +74,36 @@ public class JSONConnectionHandler {
 		return RestaurantListResponseMessage.createFromJSON(resp, awful)
 				.getRestaurantList();
 	}
+
+	/**
+	 * Requests a dine-out order (either take-out or delivery).
+	 * 
+	 * @param restaurantId
+	 *            Identification number of the restaurant at which the request
+	 *            is to be made.
+	 * @param requesterName
+	 *            The name of the individual requesting the order.
+	 * @param phoneNum
+	 *            The phone number at which the requester may be conacted.
+	 * @param addy
+	 *            The address to which the delivery shall be made.
+	 * @param kind
+	 *            The kind of order; either DineOutRequestMessage.KIND_TAKE_OUT
+	 *            or DineOutRequestMessage.KIND_DELIVERY.
+	 * @param requestTime
+	 *            The time around which the request should be realized.
+	 * @param meal
+	 *            Long, ugly String including item names, quantities, and
+	 *            special notes.
+	 * @return The integer representing the identification number for the
+	 *         successful order or -1 if the order was unsuccessful.
+	 */
+	public int requestDineOut(int restaurantId, String requesterName,
+			String phoneNum, String addy, String kind, Calendar requestTime,
+			String meal) {
+		String resp = mJSONConnection
+				.pushServerMessage(new DineOutRequestMessage(restaurantId,
+						requesterName, phoneNum, addy, kind, requestTime, meal));
+		return DineOutResponseMessage.createFromJSON(resp).getId();
+	}
 }
