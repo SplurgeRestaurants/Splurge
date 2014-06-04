@@ -27,7 +27,7 @@
     <string name="dining_out">DINING OUT</string>
     <string name="information">INFORMATION</string>
     <string name="menu">MENU</string>
-    <string name="reserve">RESERVE</string>
+    <string name="reserve">RESERVATION</string>
     <string name="map">Map</string>
     <string name="waiters">Waiters</string>
     <string name="title_activity_delivery_form_fragment">DeliveryFormFragment</string>
@@ -43,7 +43,7 @@
     <string name="place_order">Place Order</string>
     <string name="order_summary">Order Summary</string>
     <string name="hello">Open calendar</string>
-    <string name="open">Open</string>
+    <string name="open">Submit Reservation</string>
     <string name="order_notes">Order Notes</string>
     <string name="party_size">Party Size</string>
     <string name="party_name">Party Name</string>
