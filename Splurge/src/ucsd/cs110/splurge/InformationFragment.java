@@ -1,5 +1,8 @@
 package ucsd.cs110.splurge;
 
+import java.util.Calendar;
+
+import ucsd.cs110.splurge.model.Timeslot;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +23,7 @@ public class InformationFragment extends SuperFragment {
 	 * Address of the restaurant
 	 */
 	private TextView address;
+	private TextView hours;
 
 	/**
 	 * Display the information for the restaurant
@@ -33,10 +37,23 @@ public class InformationFragment extends SuperFragment {
 		status = (TextView) ret.findViewById(R.id.status);
 		phoneNumber = (TextView) ret.findViewById(R.id.phone_number);
 		address = (TextView) ret.findViewById(R.id.address);
+		hours = (TextView) ret.findViewById(R.id.hours);
+		hours.setText(getHours());
 		status.setText(getRestaurantStatus());
 		address.setText(getRestaurantAddress());
 		phoneNumber.setText(getPhoneNumber());
 		return ret;
+	}
+
+	private String getHours() {
+		String hour = "Hours: ";
+		Timeslot time = getWrapperActivity()
+				.getModel()
+				.getRestaurant()
+				.getHoursForDay(
+						Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+		return hour + time.getStartTime().get(Calendar.HOUR) + "AM" + " - "
+				+ time.getEndTime().get(Calendar.HOUR) + "PM";
 	}
 
 	/**

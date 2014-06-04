@@ -21,11 +21,18 @@
             android:layout_height="wrap_content"
             android:text="Now: Open"
             android:textSize="20sp" />
+        
+        <TextView 
+            android:id="@+id/hours"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/phone_number"
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="example_number: \n (999) 999 9999 "
@@ -34,8 +41,8 @@
         <TextView
             android:id="@+id/address"
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="example_address: \n1234 poop street, \npoopland CA 91523"
             android:textSize="20sp" />
