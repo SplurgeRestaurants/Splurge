@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 /**
  * Fragment that displays the Dining out features
@@ -71,7 +72,12 @@ public class DiningOutFragment extends SuperFragment {
 	 */
 
 	public void refresh() {
-		adapter.notifyDataSetChanged();
+		try {
+			adapter.notifyDataSetChanged();
+		} catch (Exception e) {
+			Toast.makeText(getWrapperActivity(), "You have no items",
+					Toast.LENGTH_LONG).show();
+		}
 	}
 
 	/**

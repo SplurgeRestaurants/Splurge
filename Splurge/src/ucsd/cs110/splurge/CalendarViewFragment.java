@@ -9,7 +9,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,6 +24,7 @@ public class CalendarViewFragment extends SuperFragment {
 	static Handler handler;
 	static ArrayList<String> mUnavailableTimes;
 	static ArrayList<Timeslot> mTakenTimes;
+	static final String DATE = "date";
 
 	/*
 	 * TODO (dqthai) calendar items will have a way to indicate that there are
@@ -38,8 +38,7 @@ public class CalendarViewFragment extends SuperFragment {
 		View ret = inflater.inflate(R.layout.calendar, container, false);
 		month = Calendar.getInstance();
 		mRestaurant = getWrapperActivity().getModel().getRestaurant();
-		mUnavailableTimes = new ArrayList<String>();
-		getUnavailableDays();
+		mUnavailableTimes = mRestaurant.getUnavailableDays(month);
 		adapter = new CalendarAdapter(getActivity(), month);
 		GridView gridview = (GridView) ret.findViewById(R.id.gridview);
 		gridview.setAdapter(adapter);
@@ -47,45 +46,7 @@ public class CalendarViewFragment extends SuperFragment {
 		handler.post(calendarUpdater);
 		TextView title = (TextView) ret.findViewById(R.id.title);
 		title.setText(android.text.format.DateFormat.format("MMMM yyyy", month));
-
 		return ret;
-	}
-
-	public void getUnavailableDays() {
-		int day, currMonth;
-		mTakenTimes = (ArrayList<Timeslot>) mRestaurant.getUnavailableTimes();
-		for (int i = 0; i < mTakenTimes.size(); i++) {
-			day = mTakenTimes.get(i).getStartTime().get(Calendar.DATE);
-			currMonth = mTakenTimes.get(i).getStartTime().get(Calendar.MONTH);
-			Log.e("Splurge", currMonth + " " + day);
-			String chosenDay = Integer.toString(day);
-			if (month.get(Calendar.MONTH) == mTakenTimes.get(i).getStartTime()
-					.get(Calendar.MONTH)
-					&& isDayFull(mTakenTimes.get(i).getStartTime())) {
-				mUnavailableTimes.add(chosenDay);
-			}
-		}
-	}
-
-	public boolean isDayFull(Calendar time) {
-		int currDay = time.get(Calendar.DATE);
-		ArrayList<Timeslot> sameDay = new ArrayList<Timeslot>();
-		mTakenTimes = (ArrayList<Timeslot>) mRestaurant.getUnavailableTimes();
-		for (int i = 0; i < mTakenTimes.size(); i++) {
-			if (currDay == mTakenTimes.get(i).getStartTime().get(Calendar.DATE)) {
-				sameDay.add(mTakenTimes.get(i));
-			}
-		}
-		int startHour = mRestaurant
-				.getHoursForDay(time.get(Calendar.DAY_OF_WEEK)).getStartTime()
-				.get(Calendar.HOUR_OF_DAY);
-		int endHour = mRestaurant.getHoursForDay(Calendar.DAY_OF_WEEK)
-				.getEndTime().get(Calendar.HOUR_OF_DAY);
-		int size = (endHour - startHour) * 4;
-		if (size == sameDay.size()) {
-			return true;
-		}
-		return false;
 	}
 
 	public static void refreshCalendar(Context context) {

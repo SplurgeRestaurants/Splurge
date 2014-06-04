@@ -3,7 +3,6 @@ package ucsd.cs110.splurge;
 import java.util.Calendar;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -22,8 +21,9 @@ public class CalenderViewFragmentListener extends SuperListener implements
 		switch (v.getId()) {
 		case R.id.previous:
 			if (CalendarViewFragment.month.get(Calendar.MONTH) - 1 < Calendar
-					.getInstance().get(Calendar.MONTH)) {
-				Log.e("Splurge", "i");
+					.getInstance().get(Calendar.MONTH)
+					&& CalendarViewFragment.month.get(Calendar.YEAR) == Calendar
+							.getInstance().get(Calendar.YEAR)) {
 				return;
 			}
 			if (CalendarViewFragment.month.get(Calendar.MONTH) == CalendarViewFragment.month
@@ -70,14 +70,11 @@ public class CalenderViewFragmentListener extends SuperListener implements
 			if (day.length() == 1) {
 				day = "0" + day;
 			}
-			// return chosen date as string format
 			intent.putExtra(
-					"date",
+					CalendarViewFragment.DATE,
 					android.text.format.DateFormat.format("yyyy-MM",
 							CalendarViewFragment.month) + "-" + day);
-			Log.e("Splurge",
-					android.text.format.DateFormat.format("yyyy-MM",
-							CalendarViewFragment.month) + "-" + day);
+			mWrapper.setIntent(intent);
 			mWrapper.changeFragment(new ReservationFragment(),
 					new ReservationFragmentListener(mWrapper));
 		}

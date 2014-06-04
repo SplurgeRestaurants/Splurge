@@ -14,14 +14,13 @@ public class ReservationFragment extends SuperFragment {
 	private NumberPicker mHourSpinner;
 	private NumberPicker mAmPmSpinner;
 	private NumberPicker mPartySize;
-	private final int MAX_PARTY_SIZE = 20;
+	private final int MAX_PARTY_SIZE = 10;
 	static final String[] mAmPmString = { "AM", "PM" };
 	static final String[] mHours = { "1", "2", "3", "4", "5", "6", "7", "8",
 			"9", "10", "11", "12" };
 	static final String[] mMinutes = { "00", "15", "30", "45" };
 	static final String[] mPSize = { "1", "2", "3", "4", "5", "6", "7", "8",
-			"9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
-			"20" };
+			"9", "10" };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,8 +28,11 @@ public class ReservationFragment extends SuperFragment {
 		View ret = inflater.inflate(R.layout.reservation, container, false);
 		mHourSpinner = (NumberPicker) ret.findViewById(R.id.hour);
 		mHourSpinner.setMinValue(0);
-		mHourSpinner.setMaxValue(11);
-		mHourSpinner.setDisplayedValues(mHours);
+		mHourSpinner.setMaxValue(0);
+		String[] hours = getWrapperActivity().getModel().getRestaurant()
+				.getAvailableHours(CalendarViewFragment.month);
+		mHourSpinner.setDisplayedValues(hours);
+		mHourSpinner.setMaxValue(hours.length - 1);
 		mHourSpinner.setOnLongPressUpdateInterval(100);
 		mMinuteSpinner = (NumberPicker) ret.findViewById(R.id.minute);
 		mMinuteSpinner.setMinValue(0);

@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import android.graphics.Bitmap;
 import android.graphics.PointF;
+import android.util.Log;
 
 /**
  * Object containing all information specific to an individual restaurant.
@@ -320,5 +321,106 @@ public class Restaurant {
 
 	public void setZipcode(String mZipcode) {
 		this.mZipcode = mZipcode;
+	}
+
+	public ArrayList<String> getUnavailableDays(Calendar month) {
+		int day, currMonth;
+		ArrayList<String> unavailableDays = new ArrayList<String>();
+		ArrayList<Timeslot> mTakenTimes = (ArrayList<Timeslot>) getUnavailableTimes();
+		for (int i = 0; i < mTakenTimes.size(); i++) {
+			day = mTakenTimes.get(i).getStartTime().get(Calendar.DATE);
+			currMonth = mTakenTimes.get(i).getStartTime().get(Calendar.MONTH);
+			Log.e("Splurge", currMonth + " " + day);
+			String chosenDay = Integer.toString(day);
+			if (month.get(Calendar.MONTH) == mTakenTimes.get(i).getStartTime()
+					.get(Calendar.MONTH)
+					&& isDayFull(mTakenTimes.get(i).getStartTime())) {
+				unavailableDays.add(chosenDay);
+			}
+		}
+		return unavailableDays;
+	}
+
+	public boolean isDayFull(Calendar time) {
+		int currDay = time.get(Calendar.DAY_OF_YEAR);
+		ArrayList<Timeslot> sameDay = new ArrayList<Timeslot>();
+		ArrayList<Timeslot> mTakenTimes = (ArrayList<Timeslot>) getUnavailableTimes();
+		for (int i = 0; i < mTakenTimes.size(); i++) {
+			if (currDay == mTakenTimes.get(i).getStartTime()
+					.get(Calendar.DAY_OF_YEAR)) {
+				sameDay.add(mTakenTimes.get(i));
+			}
+		}
+		int startHour = getHoursForDay(time.get(Calendar.DAY_OF_WEEK))
+				.getStartTime().get(Calendar.HOUR_OF_DAY);
+		int endHour = getHoursForDay(time.get(Calendar.DAY_OF_WEEK))
+				.getEndTime().get(Calendar.HOUR_OF_DAY);
+		int size = (endHour - startHour) * 4;
+		if (size == sameDay.size()) {
+			return true;
+		}
+		return false;
+	}
+
+	public String[] getAvailableHours(Calendar time) {
+		// int currDay = time.get(Calendar.DAY_OF_YEAR);
+		// ArrayList<Timeslot> sameDay = new ArrayList<Timeslot>();
+		// ArrayList<Timeslot> takenTimes = (ArrayList<Timeslot>)
+		// getUnavailableTimes();
+		// for (int i = 0; i < takenTimes.size(); i++) {
+		// if (currDay == takenTimes.get(i).getStartTime()
+		// .get(Calendar.DAY_OF_YEAR)) {
+		// sameDay.add(takenTimes.get(i));
+		// }
+		// }
+		// int startHour = getHoursForDay(time.get(Calendar.DAY_OF_WEEK))
+		// .getStartTime().get(Calendar.HOUR_OF_DAY);
+		// int endHour = getHoursForDay(time.get(Calendar.DAY_OF_WEEK))
+		// .getEndTime().get(Calendar.HOUR_OF_DAY);
+		// String[] minutes;
+		// ArrayList<String> hours = new ArrayList<String>();
+		// for (int i = startHour; i <= endHour; i++) {
+		// hours.add(Integer.toString(i));
+		// }
+		// for (int hour = startHour; hour <= endHour; hour++) {
+		// minutes = getAvailableMinutes(time, hour);
+		// if (minutes.length == 0) {
+		// hours.remove(Integer.toString(hour));
+		// }
+		// }
+		// String ret[] = new String[hours.size()];
+		// for (int i = 0; i < hours.size(); i++) {
+		// ret[i] = hours.get(i);
+		// }
+		String[] ret = new String[12];
+		for (int i = 1; i <= 12; i++) {
+			ret[i - 1] = Integer.toString(i);
+		}
+		return ret;
+	}
+
+	public String[] getAvailableMinutes(Calendar currTime, int hour) {
+		ArrayList<String> minutes = new ArrayList<String>();
+		minutes.add("00");
+		minutes.add("15");
+		minutes.add("30");
+		minutes.add("45");
+		ArrayList<Timeslot> unavailableTimes = (ArrayList<Timeslot>) getUnavailableTimes();
+		Calendar time;
+		for (int i = 0; i < unavailableTimes.size(); i++) {
+			time = unavailableTimes.get(i).getStartTime();
+			if (time.get(Calendar.DAY_OF_YEAR) == currTime
+					.get(Calendar.DAY_OF_YEAR)) {
+				if (time.get(Calendar.HOUR_OF_DAY) == currTime
+						.get(Calendar.HOUR_OF_DAY)) {
+					minutes.remove(Integer.toString(time.get(Calendar.MINUTE)));
+				}
+			}
+		}
+		String[] displayMinutes = new String[minutes.size()];
+		for (int i = 0; i < displayMinutes.length; i++) {
+			displayMinutes[i] = minutes.get(i);
+		}
+		return displayMinutes;
 	}
 }
