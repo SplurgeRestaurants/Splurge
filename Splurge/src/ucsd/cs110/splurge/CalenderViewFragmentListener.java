@@ -58,7 +58,9 @@ public class CalenderViewFragmentListener extends SuperListener implements
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		if (position < Calendar.getInstance().get(Calendar.DAY_OF_MONTH)) {
+		if (position < Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+				&& CalendarViewFragment.month.get(Calendar.MONTH) == Calendar
+						.getInstance().get(Calendar.MONTH)) {
 			view.setClickable(false);
 			return;
 		}
