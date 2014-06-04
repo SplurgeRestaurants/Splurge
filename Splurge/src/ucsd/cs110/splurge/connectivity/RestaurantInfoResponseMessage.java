@@ -1,6 +1,9 @@
 package ucsd.cs110.splurge.connectivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +28,7 @@ public class RestaurantInfoResponseMessage {
 	private static final String RESTAURANT_NAME = "restaurantName";
 	private static final String RESTAURANT_ID = "restaurantId";
 	private static final String RESTAURANT_ADDRESS = "restaurantLocation";
-	private static final String RESTAURANT_MENUS = "restaurantMenus";
+	private static final String RESTAURANT_MENUS = "restaurantMenu";
 	private static final String RESTAURANT_HOURS = "restaurantHours";
 	private static final String RESTAURANT_AVAILABILITY = "reservableDays";
 	private static final String AVAILABILITY_START = "start";
@@ -35,6 +38,9 @@ public class RestaurantInfoResponseMessage {
 	private static final String MENU_ITEM_NAME = "itemName";
 	private static final String MENU_ITEM_IMAGE = "itemImage";
 	private static final String MENU_ITEM_PRICE = "price";
+	private static final String HOURS_DAY_NUM = "dayNum";
+	private static final String HOURS_START_TIME = "startTime";
+	private static final String HOURS_END_TIME = "endTime";
 
 	private Restaurant mMessageResult;
 
@@ -102,7 +108,7 @@ public class RestaurantInfoResponseMessage {
 					FoodMenu buildMenu = new FoodMenu(
 							currentMenu.getString(MENU_TITLE));
 					JSONArray menuItems = currentMenu.getJSONArray(MENU_ITEMS);
-					for (int itemInd = 0; itemInd < currentMenu.length(); ++itemInd) {
+					for (int itemInd = 0; itemInd < menuItems.length(); ++itemInd) {
 						JSONObject foodJSON = menuItems.getJSONObject(itemInd);
 						FoodItem food = new FoodItem(
 								foodJSON.getString(MENU_ITEM_NAME));
@@ -124,11 +130,32 @@ public class RestaurantInfoResponseMessage {
 						}
 						buildMenu.addFoodItem(food);
 					}
+					if (buildMenu.getFoodList().size() > 0)
+						encaps.addFoodMenu(buildMenu);
 				}
 			}
 
 			if (inputJSON.has(RESTAURANT_HOURS)) {
-				// TODO (trtucker) interpret hours array
+				SimpleDateFormat hoursParse = new SimpleDateFormat("HH:mm",
+						Locale.US);
+				JSONArray hoursArr = inputJSON.getJSONArray(RESTAURANT_HOURS);
+				for (int i = 0; i < hoursArr.length(); ++i) {
+					JSONObject hoursObj = hoursArr.getJSONObject(i);
+					int day = hoursObj.getInt(HOURS_DAY_NUM);
+					String start = hoursObj.getString(HOURS_START_TIME);
+					String end = hoursObj.getString(HOURS_END_TIME);
+					Calendar startTime = Calendar.getInstance();
+					Calendar endTime = Calendar.getInstance();
+					try {
+						startTime.setTime(hoursParse.parse(start));
+						endTime.setTime(hoursParse.parse(start));
+					} catch (ParseException e) {
+						Log.e("Splurge", "Unable to parse start and end time: "
+								+ start + ", " + end);
+					}
+					encaps.setHoursForDay(day + 1, new Timeslot(startTime,
+							endTime));
+				}
 			}
 
 			return new RestaurantInfoResponseMessage(encaps);

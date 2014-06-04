@@ -202,6 +202,34 @@ public class Restaurant {
 		}
 	}
 
+	public void setHoursForDay(int day, Timeslot ts) {
+		switch (day) {
+		case Calendar.SUNDAY:
+			mOpenHours[0] = ts;
+			break;
+		case Calendar.MONDAY:
+			mOpenHours[1] = ts;
+			break;
+		case Calendar.TUESDAY:
+			mOpenHours[2] = ts;
+			break;
+		case Calendar.WEDNESDAY:
+			mOpenHours[3] = ts;
+			break;
+		case Calendar.THURSDAY:
+			mOpenHours[4] = ts;
+			break;
+		case Calendar.FRIDAY:
+			mOpenHours[5] = ts;
+			break;
+		case Calendar.SATURDAY:
+			mOpenHours[6] = ts;
+			break;
+		default:
+			throw new IllegalArgumentException("Illegal day of week: " + day);
+		}
+	}
+
 	/**
 	 * Sets the longitude of the restaurant's physical location.
 	 * 
