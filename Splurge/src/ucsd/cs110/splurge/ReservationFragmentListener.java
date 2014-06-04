@@ -74,7 +74,7 @@ public class ReservationFragmentListener extends SuperListener implements
 			int day = Integer.parseInt(date.substring(8, 10));
 			startTime.set(Calendar.HOUR_OF_DAY, selectedHour);
 			startTime.set(Calendar.MINUTE, selectedMinute);
-			startTime.set(Calendar.MONTH, month);
+			startTime.set(Calendar.MONTH, month - 1);
 			startTime.set(Calendar.YEAR, year);
 			startTime.set(Calendar.DAY_OF_MONTH, day);
 			Log.e("Splurge", "The set date " + startTime.getTime().toString());
