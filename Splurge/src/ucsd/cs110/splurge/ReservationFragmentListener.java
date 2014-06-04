@@ -20,8 +20,6 @@ import android.widget.Toast;
 public class ReservationFragmentListener extends SuperListener implements
 		OnClickListener, OnValueChangeListener, ReservationRequestListener {
 
-	private boolean reservationSuccessful = false;
-
 	/**
 	 * Create a new ReservationFragmentListener, designed to listen to a
 	 * ResevationFragment.
@@ -82,10 +80,13 @@ public class ReservationFragmentListener extends SuperListener implements
 			Log.e("Splurge", "The set date " + startTime.getTime().toString());
 			int result = mWrapper.getModel().requestReservation(getPartySize,
 					pName, startTime, this);
-			if (reservationSuccessful) {
-				Toast.makeText(mWrapper,
-						"Reservation Successful. Your id is " + result,
-						Toast.LENGTH_LONG).show();
+			startTime.set(Calendar.SECOND, 0);
+
+			if (result >= 0) {
+				Toast.makeText(
+						mWrapper,
+						String.format("Reservation Successful. Your id is %d.",
+								result), Toast.LENGTH_LONG).show();
 				mWrapper.changeFragment(new RestaurantMainMenuFragment(),
 						new RestaurantMainMenuListener(mWrapper));
 			} else if (result == -1) {
@@ -121,8 +122,9 @@ public class ReservationFragmentListener extends SuperListener implements
 	@Override
 	public void receiveReservationId(int id) {
 		if (id >= 0) {
-			Toast.makeText(mWrapper,
-					"Reservation Successful. Your id is " + id,
+			Toast.makeText(
+					mWrapper,
+					String.format("Reservation Successful. Your id is %d.", id),
 					Toast.LENGTH_LONG).show();
 		}
 		if (id == -1) {

@@ -41,6 +41,7 @@ public class ServerHttpJSONConnection {
 		mServerConnection.setDoOutput(true);
 		mServerConnection
 				.setRequestProperty("Content-type", "application/json");
+		mServerConnection.setRequestProperty("Accept", "application/json");
 		// That's the Decorator pattern if I ever saw it.
 		mWriter = new BufferedWriter(new OutputStreamWriter(
 				mServerConnection.getOutputStream()));
@@ -63,6 +64,7 @@ public class ServerHttpJSONConnection {
 	 *            information.
 	 */
 	private void pushJSONString(String json) {
+		Log.i("Splurge", "Sending: " + json);
 		try {
 			mWriter.write(json);
 			mWriter.flush();
