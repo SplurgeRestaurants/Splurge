@@ -125,7 +125,7 @@ public class DiningOutListListener extends SuperListener implements
 	 * Remove the selected items from the selectedFood array
 	 */
 	public void removeSelectedFoodItems() {
-		DiningOutFragment frag = new DiningOutFragment();
+		DiningOutFragment frag = mListeningTo;
 		for (int i = 0; i < frag.getSelectedFood().size(); i++) {
 			if (frag.getSelectedFood().get(i).isSelected()) {
 				frag.getSelectedFood().remove(i);
