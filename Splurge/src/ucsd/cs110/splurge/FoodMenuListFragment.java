@@ -88,7 +88,7 @@ public class FoodMenuListFragment extends SuperFragment {
 		return mMenu.getMenuName();
 	}
 
-	public void setMeal(String meal) {
+	public void setMealByLabel(String meal) {
 		mMenu = getWrapperActivity().getModel().getFoodMenuByLabel(meal);
 	}
 
@@ -132,6 +132,10 @@ public class FoodMenuListFragment extends SuperFragment {
 		setFoodMenuListListener((OnItemClickListener) mSuperListener);
 		setFoodMenuButtonListener((OnClickListener) mSuperListener);
 		super.onStart();
+	}
+
+	public void setMeal(FoodMenu meal) {
+		mMenu = meal;
 	}
 
 	public void setMealByIndex(int i) {
