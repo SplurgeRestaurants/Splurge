@@ -122,9 +122,9 @@ public class DiningOutListListener extends SuperListener implements
 		DialogInterface.OnClickListener diaIn = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialoginterface, int i) {
-				nextFrag.setMealByIndex(i);
-				mWrapper.changeFragment(new FoodMenuListFragment(),
-						new FoodMenuListListener(mWrapper));
+				nextFrag.setMeal(mWrapper.getModel().getFoodMenuByIndex(i));
+				mWrapper.changeFragment(nextFrag, new FoodMenuListListener(
+						mWrapper));
 			}
 		};
 		dialog.setTitle(R.string.menu_title);
