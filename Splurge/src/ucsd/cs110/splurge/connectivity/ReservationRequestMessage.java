@@ -102,6 +102,7 @@ public class ReservationRequestMessage extends ServerMessage {
 	 */
 	public void setReservationStartTime(Calendar startTime) {
 		mStartTime = startTime;
+		mStartTime.set(Calendar.SECOND, 0);
 		try {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
 					Locale.US);
