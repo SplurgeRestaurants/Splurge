@@ -41,11 +41,14 @@ public class DiningOutFragment extends SuperFragment {
 		mListView = (ListView) ret.findViewById(R.id.dining_out_list);
 		FoodMenuListFragment frag = new FoodMenuListFragment();
 		mSelectedFood = frag.getSelectedFoodData();
+
 		if (!mSelectedFood.isEmpty()) {
 			ret.findViewById(R.id.empty).setVisibility(View.GONE);
 			mListView.setVisibility(View.VISIBLE);
 		} else {
-			mListView.setVisibility(View.GONE);
+			ret.findViewById(R.id.dining_out_list_background).setVisibility(
+					View.GONE);
+			// mListView.setVisibility(View.GONE);
 		}
 		adapter = new FoodMenuAdapter(getActivity(), R.layout.menu_item,
 				mSelectedFood);

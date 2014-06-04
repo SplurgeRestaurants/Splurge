@@ -7,29 +7,93 @@
     android:orientation="vertical"
     android:padding="5dp" >
 
+    <Button
+        android:id="@+id/add_to_order"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/roundedbutton"
+        android:text="Add More"
+        android:textColor="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/dining_out_list_background"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="7"
+        android:padding="5dp"
+        android:background="@drawable/roundedblackbox"
+        android:orientation="vertical"
+        android:paddingBottom="5dp" >
+
+        <ListView
+            android:id="@+id/dining_out_list"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:columnWidth="90dp"
+            android:focusable="true"
+            android:gravity="center"
+            android:horizontalSpacing="10dp"
+            android:numColumns="auto_fit"
+            android:stretchMode="columnWidth"
+            android:dividerHeight="2dp"
+            android:verticalSpacing="10dp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/remove_items"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="left"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/delete_button"
+                android:text="Delete"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/price_sum"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:gravity="center_vertical"
+                android:text="Total: $4.20"
+                android:textColor="@color/text_color"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="7"
+        android:gravity="center"
+        android:text="No Items Selected"
+        android:textColor="@color/subtext_color" />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginBottom="5dp"
         android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/add_to_order"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="2"
-            android:background="@drawable/roundedbutton"
-            android:text="Add More"
-            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/take_out"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:background="@drawable/roundedbutton"
             android:text="Take Out"
             android:textColor="@color/white" />
@@ -38,45 +102,10 @@
             android:id="@+id/delivery"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:background="@drawable/roundedbutton"
             android:text="Delivery"
             android:textColor="@color/white" />
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/dining_out_list"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="6"
-        android:background="@drawable/roundedblackbox"
-        android:columnWidth="90dp"
-        android:focusable="true"
-        android:gravity="center"
-        android:horizontalSpacing="10dp"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp" />
-
-    <TextView
-        android:id="@+id/empty"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_weight="6"
-        android:text="No Items Selected"
-        android:textColor="@color/subtext_color" />
-
-    <Button
-        android:id="@+id/remove_items"
-        android:layout_width="145dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:layout_weight="1"
-        android:background="@drawable/roundedbutton"
-        android:text="Remove"
-        android:textColor="@color/white" />
 
 </LinearLayout>
