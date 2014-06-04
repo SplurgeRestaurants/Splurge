@@ -2,6 +2,7 @@ package ucsd.cs110.splurge.connectivity;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,8 +29,9 @@ public class RestaurantListResponseMessage {
 			JSONArray arr = jsonInput.getJSONArray("list");
 			for (int i = 0; i < arr.length(); ++i) {
 				JSONObject obj = arr.getJSONObject(i);
-				list.add(new RestaurantListing(obj.getString("name"), obj
-						.getInt("id"), obj.getString("icon"), awful));
+				list.add(new RestaurantListing(obj.getString("name")
+						.toUpperCase(Locale.US), obj.getInt("id"), obj
+						.getString("icon"), awful));
 			}
 			return new RestaurantListResponseMessage(list);
 		} catch (JSONException ex) {

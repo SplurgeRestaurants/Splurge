@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ucsd.cs110.splurge.model.RestaurantListing;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +77,7 @@ public class RestaurantListAdapter extends ArrayAdapter<RestaurantListing> {
 			holder = new ViewHolder();
 			holder.name = (TextView) convertView
 					.findViewById(R.id.RestaurantName);
+			holder.name.setTextColor(Color.BLACK);
 			holder.image = (ImageView) convertView
 					.findViewById(R.id.RestaurantIcon);
 			convertView.setTag(holder);
