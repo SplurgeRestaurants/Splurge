@@ -78,23 +78,29 @@ public class ReservationFragmentListener extends SuperListener implements
 			startTime.set(Calendar.YEAR, year);
 			startTime.set(Calendar.DAY_OF_MONTH, day);
 			Log.e("Splurge", "The set date " + startTime.getTime().toString());
-			int result = mWrapper.getModel().requestReservation(getPartySize,
-					pName, startTime, this);
-			startTime.set(Calendar.SECOND, 0);
+			try {
+				int result = mWrapper.getModel().requestReservation(
+						getPartySize, pName, startTime, this);
 
-			if (result >= 0) {
-				Toast.makeText(
-						mWrapper,
-						String.format("Reservation Successful. Your id is %d.",
-								result), Toast.LENGTH_LONG).show();
-				mWrapper.changeFragment(new RestaurantMainMenuFragment(),
-						new RestaurantMainMenuListener(mWrapper));
-			} else if (result == -1) {
-				Toast.makeText(mWrapper,
-						"Reservation Unsuccessful, pick another time",
-						Toast.LENGTH_LONG).show();
-			} else if (result == -2) {
-				Log.i("Splurge", "Reservation information available later.");
+				startTime.set(Calendar.SECOND, 0);
+				if (result >= 0) {
+					Toast.makeText(
+							mWrapper,
+							String.format(
+									"Reservation Successful. Your id is %d.",
+									result), Toast.LENGTH_LONG).show();
+					mWrapper.changeFragment(new RestaurantMainMenuFragment(),
+							new RestaurantMainMenuListener(mWrapper));
+				} else if (result == -1) {
+					Toast.makeText(mWrapper,
+							"Reservation Unsuccessful, pick another time",
+							Toast.LENGTH_LONG).show();
+				} else if (result == -2) {
+					Log.i("Splurge", "Reservation information available later.");
+				}
+			} catch (Exception e) {
+				Toast.makeText(mWrapper, "Missing Field(s)", Toast.LENGTH_SHORT)
+						.show();
 			}
 			break;
 		default:
