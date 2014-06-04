@@ -61,6 +61,10 @@ public class Restaurant {
 		mRestaurantName = name;
 		mMenus = new ArrayList<FoodMenu>();
 		mUnavailableTimes = new ArrayList<Timeslot>();
+		mStreetAddress = "";
+		mZipcode = "";
+		mPhoneNumber = "";
+		location = new PointF();
 
 		mOpenHours = new Timeslot[7];
 	}
