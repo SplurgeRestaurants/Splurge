@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class DiningOutFormFragment extends SuperFragment {
+
 	/**
 	 * Input for the name field
 	 */
@@ -102,6 +103,19 @@ public class DiningOutFormFragment extends SuperFragment {
 	@Override
 	public void onStart() {
 		setDiningOutFormButtonListener((OnClickListener) mSuperListener);
+		((DiningOutFormListener) mSuperListener).setListened(this);
 		super.onStart();
+	}
+
+	public String getFilledName() {
+		return mFormName.getText().toString();
+	}
+
+	public String getFilledPhoneNumber() {
+		return mFormPhoneNumber.getText().toString();
+	}
+
+	public String getFilledAddress() {
+		return mFormStreetAddress.getText().toString();
 	}
 }

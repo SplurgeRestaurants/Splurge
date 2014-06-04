@@ -36,9 +36,9 @@ public class DineOutRequestAsyncTask extends
 	@Override
 	protected Integer doInBackground(Object... params) {
 		return ((JSONConnectionHandler) params[0]).requestDineOut(
-				(Integer) params[0], (String) params[1], (String) params[2],
-				(String) params[3], (String) params[4], (Calendar) params[5],
-				(String) params[6]);
+				(Integer) params[1], (String) params[2], (String) params[3],
+				(String) params[4], (String) params[5], (Calendar) params[6],
+				(String) params[7]);
 	}
 
 	@Override

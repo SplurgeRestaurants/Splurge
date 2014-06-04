@@ -231,7 +231,8 @@ public class RestaurantModel implements RestaurantListRequestListener,
 			DineOutRequestListener listener) {
 		mDineOutForwardListener = listener;
 		DineOutRequestAsyncTask dorat = new DineOutRequestAsyncTask(this);
-		dorat.execute(mConnectionHandler, getRestaurant().getId());
+		dorat.execute(mConnectionHandler, getRestaurant().getId(),
+				requesterName, phoneNum, addy, kind, startTime, meal);
 		try {
 			int response = dorat.get(500, TimeUnit.MILLISECONDS);
 			Log.i("Splurge", "Received dine-out response in short order.");

@@ -1,5 +1,8 @@
 package ucsd.cs110.splurge;
 
+import java.util.ArrayList;
+
+import ucsd.cs110.splurge.model.FoodItem;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -17,7 +20,10 @@ public class DiningOutListListener extends SuperListener implements
 	/**
 	 * Chosen dining out option (Delivery or Take Out)
 	 */
-	final static String DINING_OUT_TYPE = "dining out";
+	public final static String DINING_OUT_TYPE = "dining out";
+	public static final String OUTPUT_STRING = "out string";
+
+	private DiningOutFragment mListeningTo;
 
 	/**
 	 * Create a new DiningOutListListener, designed to listen to a
@@ -40,6 +46,10 @@ public class DiningOutListListener extends SuperListener implements
 		intent.putExtra(FoodMenuListFragment.FOOD_ITEM_POSITION, position);
 		mWrapper.setIntent(intent);
 		mWrapper.changeFragment(new FoodItemFragment(), null);
+	}
+
+	public void setListened(DiningOutFragment listened) {
+		mListeningTo = listened;
 	}
 
 	/**
@@ -72,6 +82,8 @@ public class DiningOutListListener extends SuperListener implements
 	public void notifyTakeOut() {
 		Intent intent = new Intent();
 		intent.putExtra(DINING_OUT_TYPE, "Take Out");
+		intent.putExtra(OUTPUT_STRING,
+				interpretSelection(mListeningTo.getSelectedFood()));
 		mWrapper.setIntent(intent);
 		mWrapper.changeFragment(new DiningOutFormFragment(),
 				new DiningOutFormListener(mWrapper));
@@ -83,9 +95,19 @@ public class DiningOutListListener extends SuperListener implements
 	public void notifyDelivery() {
 		Intent intent = new Intent();
 		intent.putExtra(DINING_OUT_TYPE, "Delivery");
+		intent.putExtra(OUTPUT_STRING,
+				interpretSelection(mListeningTo.getSelectedFood()));
 		mWrapper.setIntent(intent);
 		mWrapper.changeFragment(new DiningOutFormFragment(),
 				new DiningOutFormListener(mWrapper));
+	}
+
+	private String interpretSelection(ArrayList<FoodItem> items) {
+		String ret = "";
+		for (FoodItem item : items) {
+			ret += item.getName() + ", ";
+		}
+		return ret;
 	}
 
 	/**

@@ -114,6 +114,7 @@ public class DiningOutFragment extends SuperFragment {
 	public void onStart() {
 		setDiningOutListListener((OnItemClickListener) mSuperListener);
 		setDiningOutButtonListener((OnClickListener) mSuperListener);
+		((DiningOutListListener) mSuperListener).setListened(this);
 		super.onStart();
 	}
 }
