@@ -11,6 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Class for providing information on how to display days on the grid view.
+ */
 public class CalendarAdapter extends BaseAdapter {
 	static final int FIRST_DAY_OF_WEEK = 0; // Sunday = 0, Monday = 1
 

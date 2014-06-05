@@ -9,9 +9,20 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
+/**
+ * Listener for the CalendarViewFragment. This handles all user interactions
+ * with the fragment.
+ */
 public class CalenderViewFragmentListener extends SuperListener implements
 		OnClickListener, OnItemClickListener {
 
+	/**
+	 * Creates a new listener.
+	 * 
+	 * @param context
+	 *            WrapperActivity for use in accessing the model and a Context
+	 *            updating the view.
+	 */
 	public CalenderViewFragmentListener(WrapperActivity context) {
 		super(context);
 	}

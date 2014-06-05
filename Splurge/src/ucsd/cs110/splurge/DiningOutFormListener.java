@@ -8,6 +8,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+/**
+ * Listener for the DiningOutFormFragment. This handles all user interactions
+ * for the fragment.
+ */
 public class DiningOutFormListener extends SuperListener implements
 		OnClickListener, DineOutRequestListener {
 
@@ -65,6 +69,14 @@ public class DiningOutFormListener extends SuperListener implements
 		}
 	}
 
+	/**
+	 * Sets the fragment to which this listener is listening. This is necessary
+	 * in order to pull user-provided information from the fragment, such as the
+	 * user's name and phone number.
+	 * 
+	 * @param listened
+	 *            The fragment to which this listener listens.
+	 */
 	public void setListened(DiningOutFormFragment listened) {
 		mListenedTo = listened;
 	}

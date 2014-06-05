@@ -9,6 +9,15 @@ import android.os.AsyncTask;
  * Class for asynchronously requesting information on a given restaurant. When
  * the restaurant has been received, the class will notify its listener and pass
  * along the information.
+ * <p>
+ * When calling <code>execute()</code>, the following parameters should be used:
+ * <ul>
+ * <li>JSONConnectionHandler which will handle the server connection</li>
+ * <li>Integer identification number of the restaurant for which information is
+ * to be requested</li>
+ * <li>Context which will be used to access application resources</li>
+ * </ul>
+ * </p>
  */
 public class RestaurantInfoAsyncTask extends
 		AsyncTask<Object, Integer, Restaurant> {
