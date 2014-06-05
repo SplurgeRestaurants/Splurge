@@ -49,6 +49,12 @@ public class RestaurantMainMenuFragment extends SuperFragment {
 		backCount = 0;
 		getActivity().setTitle(
 				getWrapperActivity().getModel().getRestaurantName());
+		DiningOutFragment frag = new DiningOutFragment();
+		try {
+			frag.getSelectedFood().clear();
+		} catch (Exception e) {
+
+		}
 		super.onStart();
 	}
 }

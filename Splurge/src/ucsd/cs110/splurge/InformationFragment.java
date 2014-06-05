@@ -52,8 +52,20 @@ public class InformationFragment extends SuperFragment {
 				.getRestaurant()
 				.getHoursForDay(
 						Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
-		return hour + time.getStartTime().get(Calendar.HOUR) + "AM" + " - "
-				+ time.getEndTime().get(Calendar.HOUR) + "PM";
+		hour += time.getStartTime().get(Calendar.HOUR);
+		if (time.getStartTime().get(Calendar.AM_PM) == 0) {
+			hour += "AM";
+		} else {
+			hour += "PM";
+		}
+		hour += " - ";
+		hour += time.getEndTime().get(Calendar.HOUR);
+		if (time.getEndTime().get(Calendar.AM_PM) == 0) {
+			hour += "AM";
+		} else {
+			hour += "PM";
+		}
+		return hour;
 	}
 
 	/**

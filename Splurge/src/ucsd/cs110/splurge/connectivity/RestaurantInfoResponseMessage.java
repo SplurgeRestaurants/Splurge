@@ -148,7 +148,7 @@ public class RestaurantInfoResponseMessage {
 					Calendar endTime = Calendar.getInstance();
 					try {
 						startTime.setTime(hoursParse.parse(start));
-						endTime.setTime(hoursParse.parse(start));
+						endTime.setTime(hoursParse.parse(end));
 					} catch (ParseException e) {
 						Log.e("Splurge", "Unable to parse start and end time: "
 								+ start + ", " + end);

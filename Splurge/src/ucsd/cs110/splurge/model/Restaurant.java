@@ -3,6 +3,9 @@ package ucsd.cs110.splurge.model;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import android.graphics.Bitmap;
 import android.graphics.PointF;
@@ -395,39 +398,55 @@ public class Restaurant {
 	}
 
 	public String[] getAvailableHours(Calendar time) {
-		// int currDay = time.get(Calendar.DAY_OF_YEAR);
-		// ArrayList<Timeslot> sameDay = new ArrayList<Timeslot>();
-		// ArrayList<Timeslot> takenTimes = (ArrayList<Timeslot>)
-		// getUnavailableTimes();
-		// for (int i = 0; i < takenTimes.size(); i++) {
-		// if (currDay == takenTimes.get(i).getStartTime()
-		// .get(Calendar.DAY_OF_YEAR)) {
-		// sameDay.add(takenTimes.get(i));
-		// }
-		// }
-		// int startHour = getHoursForDay(time.get(Calendar.DAY_OF_WEEK))
-		// .getStartTime().get(Calendar.HOUR_OF_DAY);
-		// int endHour = getHoursForDay(time.get(Calendar.DAY_OF_WEEK))
-		// .getEndTime().get(Calendar.HOUR_OF_DAY);
-		// String[] minutes;
-		// ArrayList<String> hours = new ArrayList<String>();
-		// for (int i = startHour; i <= endHour; i++) {
-		// hours.add(Integer.toString(i));
-		// }
-		// for (int hour = startHour; hour <= endHour; hour++) {
-		// minutes = getAvailableMinutes(time, hour);
-		// if (minutes.length == 0) {
-		// hours.remove(Integer.toString(hour));
-		// }
-		// }
-		// String ret[] = new String[hours.size()];
-		// for (int i = 0; i < hours.size(); i++) {
-		// ret[i] = hours.get(i);
-		// }
-		String[] ret = new String[12];
-		for (int i = 1; i <= 12; i++) {
-			ret[i - 1] = Integer.toString(i);
+		int currDay = time.get(Calendar.DAY_OF_YEAR);
+		ArrayList<Timeslot> sameDay = new ArrayList<Timeslot>();
+		ArrayList<Timeslot> takenTimes = (ArrayList<Timeslot>) getUnavailableTimes();
+		for (int i = 0; i < takenTimes.size(); i++) {
+			if (currDay == takenTimes.get(i).getStartTime()
+					.get(Calendar.DAY_OF_YEAR)) {
+				sameDay.add(takenTimes.get(i));
+			}
 		}
+		int startHour = getHoursForDay(time.get(Calendar.DAY_OF_WEEK))
+				.getStartTime().get(Calendar.HOUR_OF_DAY);
+		int endHour = getHoursForDay(time.get(Calendar.DAY_OF_WEEK))
+				.getEndTime().get(Calendar.HOUR_OF_DAY);
+		String[] minutes;
+		Log.e("Time", "start hour " + startHour);
+		Log.e("Time", "end hour " + endHour);
+		ArrayList<String> hours = new ArrayList<String>();
+		for (int i = startHour; i <= endHour; i++) {
+			hours.add(Integer.toString(i));
+		}
+		for (int hour = startHour; hour <= endHour; hour++) {
+			minutes = getAvailableMinutes(time, hour);
+			if (minutes.length == 0) {
+				hours.remove(Integer.toString(hour));
+			}
+		}
+		Set<String> removeDuplicates = new HashSet<String>();
+		for (int i = 0; i < hours.size(); i++) {
+			if (Integer.parseInt(hours.get(i)) > 12) {
+				int newHour = Integer.parseInt(hours.get(i)) - 12;
+				hours.set(i, Integer.toString(newHour));
+			}
+		}
+		removeDuplicates.addAll(hours);
+		hours.clear();
+		hours.addAll(removeDuplicates);
+		ArrayList<Integer> sort = new ArrayList<Integer>();
+		for (int i = 0; i < hours.size(); i++) {
+			sort.add(Integer.parseInt(hours.get(i)));
+		}
+		Collections.sort(sort);
+		String ret[] = new String[sort.size()];
+		for (int i = 0; i < sort.size(); i++) {
+			ret[i] = Integer.toString(sort.get(i));
+		}
+		// String[] ret = new String[12];
+		// for (int i = 1; i <= 12; i++) {
+		// ret[i - 1] = Integer.toString(i);
+		// }
 		return ret;
 	}
 
