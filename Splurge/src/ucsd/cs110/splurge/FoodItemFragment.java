@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -27,6 +28,10 @@ public class FoodItemFragment extends SuperFragment {
 	 * Price of the food item
 	 */
 	private TextView mPrice;
+	/**
+	 * Image of the food item
+	 */
+	private ImageView mImage;
 
 	@Override
 	/**
@@ -39,6 +44,7 @@ public class FoodItemFragment extends SuperFragment {
 		mName = (TextView) ret.findViewById(R.id.food_name);
 		mDescription = (TextView) ret.findViewById(R.id.food_description);
 		mPrice = (TextView) ret.findViewById(R.id.food_price);
+		mImage = (ImageView) ret.findViewById(R.id.food_image);
 		Intent intent = getActivity().getIntent();
 		int position = 0;
 		position = intent.getIntExtra(FoodMenuListFragment.FOOD_ITEM_POSITION,
@@ -51,14 +57,17 @@ public class FoodItemFragment extends SuperFragment {
 			FoodMenuListFragment frag = new FoodMenuListFragment();
 			mName.setText(frag.getFoodData().get(position).getName());
 			mDescription.setText(frag.getFoodData().get(position).getName());
+			mImage.setImageBitmap(frag.getFoodData().get(position).getImage());
 			currencyAmount = (double) frag.getFoodData().get(position)
 					.getPrice();
 			mPrice.setText(currencyFormatter.format(currencyAmount));
 		} else if (origin.compareTo("Dining Out") == 0) {
 			DiningOutFragment frag = new DiningOutFragment();
 			mName.setText(frag.getSelectedFood().get(position).getName());
-			mDescription
-					.setText(frag.getSelectedFood().get(position).getName());
+			mDescription.setText(frag.getSelectedFood().get(position)
+					.getDescription());
+			mImage.setImageBitmap(frag.getSelectedFood().get(position)
+					.getImage());
 			currencyAmount = (double) frag.getSelectedFood().get(position)
 					.getPrice();
 			mPrice.setText(currencyFormatter.format(currencyAmount));

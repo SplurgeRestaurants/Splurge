@@ -20,6 +20,14 @@
         android:scaleX="1.5"
         android:scaleY="1.5" />
 
+    <ImageView
+        android:id="@+id/FoodIcon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_marginRight="5dp" >
+    </ImageView>
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"

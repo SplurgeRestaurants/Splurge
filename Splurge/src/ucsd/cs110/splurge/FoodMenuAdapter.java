@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -68,6 +69,10 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 		 * Check box corresponding to the food item
 		 */
 		CheckBox cb;
+		/**
+		 * Image of the food item
+		 */
+		ImageView image;
 	}
 
 	/**
@@ -89,6 +94,7 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 			convertView = vi.inflate(resource, null);
 			holder.name = (TextView) convertView.findViewById(R.id.FoodName);
 			holder.price = (TextView) convertView.findViewById(R.id.FoodPrice);
+			holder.image = (ImageView) convertView.findViewById(R.id.FoodIcon);
 			try {
 				holder.cb = (CheckBox) convertView.findViewById(R.id.checkBox1);
 				holder.cb.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +108,7 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 					}
 				});
 			} catch (Exception e) {
-
+				Log.e("Splurge", "View does not have check box");
 			}
 			convertView.setTag(holder);
 		} else {
@@ -110,7 +116,7 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 		}
 		FoodItem food = foodItems.get(position);
 		holder.name.setText(food.getName());
-
+		holder.image.setImageBitmap(food.getImage());
 		NumberFormat currencyFormatter = NumberFormat
 				.getCurrencyInstance(Locale.US);
 		Double currencyAmount;

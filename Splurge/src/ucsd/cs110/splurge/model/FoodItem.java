@@ -4,24 +4,26 @@ import android.graphics.Bitmap;
 
 public class FoodItem {
 
-	private String name;
+	private String mName;
 	private Bitmap mImage;
-	private boolean selected;
-	private double price;
+	private boolean mSelected;
+	private double mPrice;
+	private String mDescription;
 
 	public FoodItem(String name) {
-		this.name = name;
+		this.mName = name;
 	}
 
 	public FoodItem(FoodItem item) {
-		name = item.name;
+		mName = item.mName;
 		mImage = item.mImage;
-		selected = item.selected;
-		price = item.price;
+		mSelected = item.mSelected;
+		mPrice = item.mPrice;
+		mDescription = item.mDescription;
 	}
 
 	public String getName() {
-		return name;
+		return mName;
 	}
 
 	@Override
@@ -38,18 +40,26 @@ public class FoodItem {
 	}
 
 	public boolean isSelected() {
-		return selected;
+		return mSelected;
 	}
 
 	public void setSelected(boolean selected) {
-		this.selected = selected;
+		this.mSelected = selected;
 	}
 
 	public double getPrice() {
-		return price;
+		return mPrice;
 	}
 
 	public void setPrice(double d) {
-		this.price = d;
+		this.mPrice = d;
+	}
+
+	public void setDescription(String description) {
+		mDescription = description;
+	}
+
+	public String getDescription() {
+		return mDescription;
 	}
 }
