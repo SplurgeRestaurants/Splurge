@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/background_main"
+    android:background="@color/primary"
     android:orientation="vertical"
     android:padding="5dp" >
 
@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="7"
-        android:background="@drawable/background_form"
+        android:background="@drawable/background_deliveryform"
         android:orientation="vertical"
         android:padding="5dp" >
 
@@ -198,7 +198,7 @@
         android:layout_weight="1"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:background="@drawable/background_button"
+        android:background="@drawable/button_regular"
         android:text="@string/place_order"
         android:textColor="@color/white" />
 

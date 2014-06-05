@@ -12,7 +12,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@drawable/background_button"
+        android:background="@drawable/button_regular"
         android:text="Add More"
         android:textColor="@color/white" />
 
@@ -66,7 +66,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight="2"
                 android:gravity="center_vertical"
-                android:textColor="@color/text_color"
+                android:textColor="@color/white"
                 android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
@@ -93,7 +93,7 @@
             android:layout_height="fill_parent"
             android:layout_marginRight="5dp"
             android:layout_weight="2"
-            android:background="@drawable/background_button"
+            android:background="@drawable/button_regular"
             android:text="Take Out"
             android:textColor="@color/white" />
 
@@ -102,7 +102,7 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="2"
-            android:background="@drawable/background_button"
+            android:background="@drawable/button_regular"
             android:text="Delivery"
             android:textColor="@color/white" />
     </LinearLayout>

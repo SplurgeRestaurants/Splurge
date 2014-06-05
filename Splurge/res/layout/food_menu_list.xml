@@ -19,8 +19,7 @@
         android:gravity="center"
         android:horizontalSpacing="10dp"
         android:numColumns="auto_fit"
-        android:padding="5dp"
- >
+        android:padding="5dp" >
     </ListView>
 
     <Button
@@ -30,7 +29,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:layout_weight="1"
-        android:background="@drawable/background_button"
+        android:background="@drawable/button_regular"
         android:padding="5dp"
         android:text="Add To Order"
         android:textColor="@color/white" />
