@@ -22,7 +22,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	 */
 	private FoodMenu mMenu;
 	/**
-	 * Store the reference to the listview
+	 * Store the reference to the List View
 	 */
 	private ListView mListView;
 	/**

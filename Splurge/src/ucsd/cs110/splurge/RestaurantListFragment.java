@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import ucsd.cs110.splurge.connectivity.tasks.RestaurantListRequestListener;
-import ucsd.cs110.splurge.model.Restaurant;
 import ucsd.cs110.splurge.model.RestaurantListing;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,28 +39,6 @@ public class RestaurantListFragment extends SuperFragment implements
 		RestaurantListAdapter adapter = new RestaurantListAdapter(
 				getActivity(), R.layout.restaurant_list_entry, data);
 		mListView.setAdapter(adapter);
-		return ret;
-	}
-
-	/**
-	 * Get list of restaurants
-	 * 
-	 * @return List of restaurants
-	 */
-	ArrayList<Restaurant> GetSampleData() {
-		ArrayList<Restaurant> ret = new ArrayList<Restaurant>();
-
-		Restaurant bistro = new Restaurant("Bistro");
-		bistro.setImage(BitmapFactory.decodeResource(getResources(),
-				R.drawable.logo));
-		ret.add(bistro);
-
-		for (int i = 0; i < 10; i++) {
-			Restaurant res = new Restaurant("Fake Restaurant " + i);
-			res.setImage(BitmapFactory.decodeResource(getResources(),
-					R.drawable.ic_launcher));
-			ret.add(res);
-		}
 		return ret;
 	}
 

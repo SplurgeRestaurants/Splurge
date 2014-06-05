@@ -122,7 +122,7 @@ public class DiningOutListListener extends SuperListener implements
 	}
 
 	/**
-	 * Go to the correct Menu, if no menu was previously chosen open a dialog
+	 * Open a food menu dialog
 	 */
 	public void goToFoodMenu() {
 		if (++RestaurantMainMenuFragment.backCount > 1)

@@ -37,12 +37,9 @@ public class RestaurantMainMenuListener extends SuperListener implements
 			openFoodMenuDialog();
 			break;
 		case R.id.reserve:
-			// (dqthai get rid of null, make reservation listener)
 			mWrapper.changeFragment(new CalendarViewFragment(),
 					new CalenderViewFragmentListener(mWrapper));
-			;
 			break;
-
 		case R.id.diningout:
 			mWrapper.changeFragment(new DiningOutFragment(),
 					new DiningOutListListener(mWrapper));
