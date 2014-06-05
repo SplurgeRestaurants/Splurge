@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/whiteback"
+    android:background="@drawable/background_main"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -10,7 +10,7 @@
         android:layout_height="0dp"
         android:layout_margin="5dp"
         android:layout_weight="7"
-        android:background="@drawable/roundedwhitebox"
+        android:background="@drawable/background_form"
         android:orientation="vertical"
         android:padding="30dp"
         android:paddingBottom="10dp" >
@@ -114,7 +114,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="5dp"
         android:layout_weight="1"
-        android:background="@drawable/roundedbutton"
+        android:background="@drawable/background_button"
         android:text="@string/open"
         android:textColor="@color/white" />
 

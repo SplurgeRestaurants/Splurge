@@ -3,53 +3,55 @@
     android:id="@id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/whiteback"
+    android:background="@color/primary"
     android:orientation="vertical"
-    android:padding="-5dp" >
-    
-    <Button
-        android:id="@+id/menu"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_weight="1"
-        android:background="@color/transblack"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="30dip"
-        android:text="@string/menu"
-        android:textColor="#ffffff"
-        android:textSize="35sp"
-        android:textStyle="bold" />
+    android:padding="5dp" >
 
     <Button
         android:id="@+id/reserve"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
         android:layout_weight="1"
-        android:background="@color/transblack"
+        android:background="@drawable/background_mainbutton"
         android:gravity="left|center_vertical"
         android:paddingLeft="30dip"
         android:text="@string/reserve"
-        android:textColor="#ffffff"
-        android:textSize="35sp"
-        android:textStyle="bold" />
+        android:textColor="@color/secondary"
+        android:textSize="35sp" />
 
     <Button
         android:id="@+id/diningout"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
         android:layout_weight="1"
-        android:background="@color/transblack"
+        android:background="@drawable/background_mainbutton"
         android:gravity="left|center_vertical"
         android:paddingLeft="30dip"
         android:text="@string/dining_out"
-        android:textColor="#ffffff"
-        android:textSize="35sp"
-        android:textStyle="bold"
-         />
+        android:textColor="@color/secondary"
+        android:textSize="35sp" 
+        android:layout_marginTop="20dp"/>
+
+<View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="20dp"
+    android:background="@color/secondary" />
     
+    <Button
+        android:id="@+id/menu"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/background_mainbutton"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="30dip"
+        android:text="@string/menu"
+        android:textColor="@color/secondary"
+        android:textSize="35sp" />
     
     <Button
         android:id="@+id/information"
@@ -57,14 +59,11 @@
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:layout_weight="1"
-         android:background="@color/transblack"
+        android:background="@drawable/background_mainbutton"
         android:gravity="left|center_vertical"
         android:paddingLeft="30dip"
         android:text="@string/information"
-        android:textColor="#ffffff"
-        android:textSize="35sp"
-        android:textStyle="bold"
-         />
-    
+        android:textColor="@color/secondary"
+        android:textSize="35sp" />
 
 </LinearLayout>

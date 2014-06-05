@@ -7,5 +7,5 @@
     	  android:drawable="@drawable/item_background_focused"
           android:state_focused="true" />
     <item  
-     	  android:drawable="@drawable/item_background" />
+     	  android:drawable="@drawable/background_calendar_item" />
 </selector>

@@ -4,118 +4,113 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/header"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/header_background"
         android:orientation="horizontal" >
 
-        <LinearLayout
-            android:layout_width="fill_parent"
+        <Button
+            android:id="@+id/previous"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:gravity="left" >
-
-            <TextView
-                android:id="@+id/previous"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:padding="5dp"
-                android:paddingLeft="5dp"
-                android:text="&lt;&lt;"
-                android:textColor="@color/white"
-                android:textSize="35sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:background="@drawable/background_button"
+            android:text="&lt;&lt;"
+            android:textColor="@color/white"
+            android:textSize="35sp" />
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:padding="5dp"
-            android:paddingLeft="5dp"
+            android:text="Month"
             android:textColor="@color/white"
-            android:textSize="35sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
+        <Button
+            android:id="@+id/next"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/title"
-            android:gravity="right" >
+            android:layout_margin="5dp"
+            android:background="@drawable/background_button"
+            android:gravity="center"
+            android:text=">>"
+            android:textColor="@color/white"
+            android:textSize="35sp" />
 
-            <TextView
-                android:id="@+id/next"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:padding="5dp"
-                android:paddingLeft="5dp"
-                android:text=">>"
-                android:textColor="@color/white"
-                android:textSize="35sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-        <TextView 
-            android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sunday"
-            android:textSize="10sp"/>
-               <TextView 
-            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:text="SUN" />
+
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Monday"
-            android:textSize="10sp"/>
-                      <TextView 
-            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:text="MON" />
+
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tuesday"
-            android:textSize="10sp"/>
-                             <TextView 
-            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:text="TUE" />
+
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Wednesday"
-            android:textSize="10sp"/>
-                                    <TextView 
-            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:text="WED" />
+
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Thursday"
-            android:textSize="10sp"/>
-                                           <TextView 
-            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:text="THU" />
+
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Friday"
-            android:textSize="10sp"/>
-                                                  <TextView 
-            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:text="FRI" />
+
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Saturday"
-            android:textSize="10sp"/>
+            android:gravity="center"
+            android:text="SAT" />
     </LinearLayout>
-	
+
     <GridView
         android:id="@+id/gridview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
-        android:horizontalSpacing="2dp"
         android:numColumns="7"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="2dp" />
+         >
+    </GridView>
 
 </LinearLayout>

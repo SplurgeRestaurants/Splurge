@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,20 +56,23 @@ public class CalendarAdapter extends BaseAdapter {
 		return 0;
 	}
 
+
+
 	// create a new view for each item referenced by the Adapter
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View v = convertView;
 		TextView dayView;
+
 		if (convertView == null) { // if it's not recycled, initialize some
 									// attributes
 			LayoutInflater vi = LayoutInflater.from(mContext);
 			v = vi.inflate(R.layout.calendar_item, null);
+			v.setLayoutParams(new GridView.LayoutParams(GridView.AUTO_FIT, 95));
+
 		}
 
 		dayView = (TextView) v.findViewById(R.id.date);
-		TextView dayOfTheWeek = (TextView) v.findViewById(R.id.day_of_the_week);
-
 		// disable empty days from the beginning
 		if (days[position].equals("")) {
 			dayView.setClickable(false);
@@ -80,7 +84,7 @@ public class CalendarAdapter extends BaseAdapter {
 							.get(Calendar.MONTH)
 					&& days[position].equals(""
 							+ selectedDate.get(Calendar.DAY_OF_MONTH))) {
-				v.setBackgroundResource(R.drawable.item_background_focused);
+				v.setBackgroundResource(R.drawable.background_form);
 			} else {
 				v.setBackgroundResource(R.drawable.list_item_background);
 			}
