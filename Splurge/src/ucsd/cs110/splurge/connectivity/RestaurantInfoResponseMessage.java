@@ -70,7 +70,7 @@ public class RestaurantInfoResponseMessage {
 		JSONObject inputJSON;
 		try {
 			inputJSON = new JSONObject(input);
-			String name = inputJSON.getString(RESTAURANT_NAME);
+			String name = inputJSON.getString(RESTAURANT_NAME).toUpperCase();
 			Restaurant encaps = new Restaurant(name);
 
 			encaps.setId(inputJSON.getInt(RESTAURANT_ID));

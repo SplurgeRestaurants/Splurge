@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -61,9 +60,7 @@ public class DineOutRequestMessage extends ServerMessage {
 	private void setMeal(String meal) {
 		mMealDesc = meal;
 		try {
-			JSONArray nArr = new JSONArray();
-			nArr.put(mMealDesc);
-			mJSONRep.put(REQUESTED_MEAL, nArr);
+			mJSONRep.put(REQUESTED_MEAL, mMealDesc);
 		} catch (JSONException e) {
 			Log.e("Splurge",
 					"Unexpected JSON Exception setting dine-out meal: "
