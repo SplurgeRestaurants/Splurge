@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -83,6 +84,14 @@ public class DiningOutFragment extends SuperFragment {
 		}
 	}
 
+	private void updateCost() {
+		double totalCost = 0;
+		for (FoodItem item : getSelectedFood()) {
+			totalCost += item.getPrice();
+		}
+		setTotal(String.format("Total: $%.2f", totalCost));
+	}
+
 	/**
 	 * Set listener for list entries
 	 * 
@@ -115,6 +124,11 @@ public class DiningOutFragment extends SuperFragment {
 		setDiningOutListListener((OnItemClickListener) mSuperListener);
 		setDiningOutButtonListener((OnClickListener) mSuperListener);
 		((DiningOutListListener) mSuperListener).setListened(this);
+		updateCost();
 		super.onStart();
+	}
+
+	public void setTotal(String total) {
+		((TextView) (getView().findViewById(R.id.price_sum))).setText(total);
 	}
 }
