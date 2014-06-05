@@ -124,7 +124,6 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 
 		currencyAmount = (double) food.getPrice();
 		holder.price.setText(currencyFormatter.format(currencyAmount));
-		// holder.price.setText("$" + Integer.toString(food.getPrice()));
 		try {
 			holder.cb.setChecked(food.isSelected());
 			holder.cb.setTag(food);

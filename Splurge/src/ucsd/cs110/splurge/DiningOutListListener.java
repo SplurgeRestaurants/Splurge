@@ -114,8 +114,6 @@ public class DiningOutListListener extends SuperListener implements
 	 * Go to the correct Menu, if no menu was previously chosen open a dialog
 	 */
 	public void goToFoodMenu() {
-		FoodMenuListFragment frag = new FoodMenuListFragment();
-		frag.clearChecked();
 		if (++RestaurantMainMenuFragment.backCount > 1)
 			mWrapper.getFragmentManager().popBackStack();
 		openFoodMenuDialog();

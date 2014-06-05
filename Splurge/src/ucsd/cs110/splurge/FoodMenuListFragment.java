@@ -28,7 +28,7 @@ public class FoodMenuListFragment extends SuperFragment {
 	/**
 	 * Adapter to create list entries in ListView
 	 */
-	private FoodMenuAdapter adapter;
+	private static FoodMenuAdapter adapter;
 	/**
 	 * save position of the chosen food item
 	 */
@@ -53,6 +53,7 @@ public class FoodMenuListFragment extends SuperFragment {
 		mListView = (ListView) ret.findViewById(R.id.food_list);
 		// TODO (trtucker) refer to menus by string name, get menu from model
 		FoodMenuListFragment.data = new ArrayList<>(mMenu.getFoodList());
+		clearChecked();
 		adapter = new FoodMenuAdapter(getActivity(), R.layout.menu_item,
 				FoodMenuListFragment.data);
 		mListView.setAdapter(adapter);
@@ -101,6 +102,11 @@ public class FoodMenuListFragment extends SuperFragment {
 				data.get(i).setSelected(false);
 			}
 		}
+	}
+
+	public void refresh() {
+		clearChecked();
+		adapter.notifyDataSetChanged();
 	}
 
 	/**
