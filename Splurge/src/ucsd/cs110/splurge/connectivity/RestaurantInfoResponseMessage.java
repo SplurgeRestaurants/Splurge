@@ -38,6 +38,7 @@ public class RestaurantInfoResponseMessage {
 	private static final String MENU_ITEM_NAME = "itemName";
 	private static final String MENU_ITEM_IMAGE = "itemImage";
 	private static final String MENU_ITEM_PRICE = "price";
+	private static final String MENU_ITEM_DESC = "itemDescription";
 	private static final String HOURS_DAY_NUM = "dayNum";
 	private static final String HOURS_START_TIME = "startTime";
 	private static final String HOURS_END_TIME = "endTime";
@@ -113,6 +114,7 @@ public class RestaurantInfoResponseMessage {
 						JSONObject foodJSON = menuItems.getJSONObject(itemInd);
 						FoodItem food = new FoodItem(
 								foodJSON.getString(MENU_ITEM_NAME));
+						food.setDescription(foodJSON.getString(MENU_ITEM_DESC));
 						Bitmap defaultImage = BitmapFactory.decodeResource(
 								awful.getResources(), R.drawable.mainlogo6);
 						if (foodJSON.has(MENU_ITEM_IMAGE)

@@ -56,8 +56,9 @@ public class FoodItemFragment extends SuperFragment {
 		if (origin.compareTo("Food Menu") == 0) {
 			FoodMenuListFragment frag = new FoodMenuListFragment();
 			mName.setText(frag.getFoodData().get(position).getName());
-			mDescription.setText(frag.getFoodData().get(position).getName());
 			mImage.setImageBitmap(frag.getFoodData().get(position).getImage());
+			mDescription.setText(frag.getFoodData().get(position)
+					.getDescription());
 			currencyAmount = (double) frag.getFoodData().get(position)
 					.getPrice();
 			mPrice.setText(currencyFormatter.format(currencyAmount));
