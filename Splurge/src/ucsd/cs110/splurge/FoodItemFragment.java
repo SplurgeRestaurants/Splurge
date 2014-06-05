@@ -5,10 +5,10 @@ import java.util.Locale;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -27,10 +27,6 @@ public class FoodItemFragment extends SuperFragment {
 	 * Price of the food item
 	 */
 	private TextView mPrice;
-	/**
-	 * Image of the food item
-	 */
-	private ImageView mImage;
 
 	@Override
 	/**
@@ -42,24 +38,33 @@ public class FoodItemFragment extends SuperFragment {
 		View ret = inflater.inflate(R.layout.food_item, container, false);
 		mName = (TextView) ret.findViewById(R.id.food_name);
 		mDescription = (TextView) ret.findViewById(R.id.food_description);
-		mImage = (ImageView) ret.findViewById(R.id.food_image);
 		mPrice = (TextView) ret.findViewById(R.id.food_price);
 		Intent intent = getActivity().getIntent();
 		int position = 0;
 		position = intent.getIntExtra(FoodMenuListFragment.FOOD_ITEM_POSITION,
 				position);
-		DiningOutFragment frag = new DiningOutFragment();
-		mName.setText(frag.getSelectedFood().get(position).getName());
-		mImage.setImageBitmap(frag.getSelectedFood().get(position).getImage());
-		mDescription.setText(frag.getSelectedFood().get(position).getName());
-
+		String origin = intent.getStringExtra(FoodMenuListFragment.ORIGIN);
 		NumberFormat currencyFormatter = NumberFormat
 				.getCurrencyInstance(Locale.US);
 		Double currencyAmount;
-
-		currencyAmount = (double) frag.getSelectedFood().get(position)
-				.getPrice();
-		mPrice.setText(currencyFormatter.format(currencyAmount));
+		if (origin.compareTo("Food Menu") == 0) {
+			FoodMenuListFragment frag = new FoodMenuListFragment();
+			mName.setText(frag.getFoodData().get(position).getName());
+			mDescription.setText(frag.getFoodData().get(position).getName());
+			currencyAmount = (double) frag.getFoodData().get(position)
+					.getPrice();
+			mPrice.setText(currencyFormatter.format(currencyAmount));
+		} else if (origin.compareTo("Dining Out") == 0) {
+			DiningOutFragment frag = new DiningOutFragment();
+			mName.setText(frag.getSelectedFood().get(position).getName());
+			mDescription
+					.setText(frag.getSelectedFood().get(position).getName());
+			currencyAmount = (double) frag.getSelectedFood().get(position)
+					.getPrice();
+			mPrice.setText(currencyFormatter.format(currencyAmount));
+		} else {
+			Log.e("Splurge", "Could not get food item information");
+		}
 		return ret;
 	}
 }

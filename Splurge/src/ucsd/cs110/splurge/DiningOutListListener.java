@@ -45,6 +45,7 @@ public class DiningOutListListener extends SuperListener implements
 			long id) {
 		Intent intent = new Intent();
 		intent.putExtra(FoodMenuListFragment.FOOD_ITEM_POSITION, position);
+		intent.putExtra(FoodMenuListFragment.ORIGIN, "Dining Out");
 		mWrapper.setIntent(intent);
 		mWrapper.changeFragment(new FoodItemFragment(), null);
 	}

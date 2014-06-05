@@ -36,6 +36,7 @@ public class FoodMenuListListener extends SuperListener implements
 		// TODO (trtucker) remove null value, create FoodItemListener
 		Intent intent = new Intent();
 		intent.putExtra(FoodMenuListFragment.FOOD_ITEM_POSITION, position);
+		intent.putExtra(FoodMenuListFragment.ORIGIN, "Food Menu");
 		mWrapper.setIntent(intent);
 		mWrapper.changeFragment(new FoodItemFragment(), null);
 	}

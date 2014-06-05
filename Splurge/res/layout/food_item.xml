@@ -8,13 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ucsd.cs110.splurge.FoodItemActivity$PlaceholderFragment" >
 
-    <ImageView
-        android:id="@+id/food_image"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" />
-
     <TextView
         android:id="@+id/food_price"
         android:layout_width="wrap_content"
@@ -29,7 +22,6 @@
         android:id="@+id/food_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/food_image"
         android:layout_marginTop="10dp"
         android:paddingLeft="-30dp"
         android:background="@color/transblack"
