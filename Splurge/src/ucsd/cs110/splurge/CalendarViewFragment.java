@@ -17,6 +17,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.TextView;
 
+/**
+ * Fragment displaying a calendar for selecting a date on which to make a
+ * reservation.
+ */
 public class CalendarViewFragment extends SuperFragment {
 	private Restaurant mRestaurant;
 	static Calendar month;
@@ -79,6 +83,12 @@ public class CalendarViewFragment extends SuperFragment {
 		(getView().findViewById(R.id.next)).setOnClickListener(listener);
 	}
 
+	/**
+	 * Hooks up a listener to the calendar grid.
+	 * 
+	 * @param listener
+	 *            Listener to respond to click events on the calendar grid.
+	 */
 	public void setCalendarGridListener(OnItemClickListener listener) {
 		((GridView) getView().findViewById(R.id.gridview))
 				.setOnItemClickListener(listener);

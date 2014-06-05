@@ -5,6 +5,24 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+/**
+ * Class for handling the creation of JSON queries requesting a list of
+ * available restaurants.
+ * <p>
+ * Usage of this class generally follows the followings steps:
+ * <ol>
+ * <li>Create an object of this class containing any applicable parameters
+ * (there are none).</li>
+ * <li>Pass the object to a JSONConnectionHandler, which will deal with sending
+ * it to the server.</li>
+ * <li>The JSONConnectionHandler will call <code>compileToJSON()</code> in order
+ * to extract the request.</li>
+ * </ol>
+ * </p>
+ * <p>
+ * This is the simplest implementation of the ServerMessage family.
+ * </p>
+ */
 public class RestaurantListRequestMessage extends ServerMessage {
 
 	@Override

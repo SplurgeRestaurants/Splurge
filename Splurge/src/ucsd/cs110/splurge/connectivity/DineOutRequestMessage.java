@@ -9,6 +9,10 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+/**
+ * Class for handling compilation of requests for dine-out orders into JSON
+ * strings which may be sent to the server..
+ */
 public class DineOutRequestMessage extends ServerMessage {
 
 	public static final String KIND_CARRY_OUT = "co";
@@ -31,6 +35,26 @@ public class DineOutRequestMessage extends ServerMessage {
 	private String mMealDesc;
 	private Calendar mRequestTime;
 
+	/**
+	 * Creates an object which will compile the given inputs into a suitable
+	 * JSON request.
+	 * 
+	 * @param restaurantId
+	 *            Identification number of the target restaurant.
+	 * @param requester
+	 *            Name of the person making the request.
+	 * @param phoneNum
+	 *            Number at which the requester may be contacted.
+	 * @param addy
+	 *            Address of the requester, if applicable.
+	 * @param kind
+	 *            Kind of request to be made. This should be either
+	 *            KIND_CARRY_OUT or KIND_DELIVERY.
+	 * @param requestTime
+	 *            The time at which the request should be realized.
+	 * @param meal
+	 *            Description of the meal to be requested.
+	 */
 	public DineOutRequestMessage(int restaurantId, String requester,
 			String phoneNum, String addy, String kind, Calendar requestTime,
 			String meal) {
@@ -44,6 +68,13 @@ public class DineOutRequestMessage extends ServerMessage {
 		setRequestTime(requestTime);
 	}
 
+	/**
+	 * Updates the request time to the given value. This should be the only
+	 * means by which this is done.
+	 * 
+	 * @param requestTime
+	 *            The new time to request.
+	 */
 	private void setRequestTime(Calendar requestTime) {
 		mRequestTime = requestTime;
 		try {
@@ -57,6 +88,13 @@ public class DineOutRequestMessage extends ServerMessage {
 		}
 	}
 
+	/**
+	 * Updates the meal to be requested. This should be the only means by which
+	 * this is done.
+	 * 
+	 * @param meal
+	 *            New meal to request.
+	 */
 	private void setMeal(String meal) {
 		mMealDesc = meal;
 		try {
@@ -68,6 +106,13 @@ public class DineOutRequestMessage extends ServerMessage {
 		}
 	}
 
+	/**
+	 * Updates the kind of request to make. This should be the only means by
+	 * which this is done.
+	 * 
+	 * @param kind
+	 *            The new kind of request.
+	 */
 	private void setKind(String kind) {
 		mKind = kind;
 		try {
@@ -78,6 +123,13 @@ public class DineOutRequestMessage extends ServerMessage {
 		}
 	}
 
+	/**
+	 * Updates the target restaurant. This should be the only means by which
+	 * this is done.
+	 * 
+	 * @param id
+	 *            The new identification number.
+	 */
 	private void setRestaurantId(int id) {
 		mRestId = id;
 		try {
@@ -89,6 +141,13 @@ public class DineOutRequestMessage extends ServerMessage {
 		}
 	}
 
+	/**
+	 * Updates the requester's address. This should be the only means by which
+	 * this is done.
+	 * 
+	 * @param address
+	 *            The requester's new address.
+	 */
 	private void setAddress(String address) {
 		mAddress = address;
 		try {
@@ -100,6 +159,13 @@ public class DineOutRequestMessage extends ServerMessage {
 		}
 	}
 
+	/**
+	 * Updates the requester's phone number. This should be the only means by
+	 * which this is done.
+	 * 
+	 * @param number
+	 *            The requester's new phone number.
+	 */
 	private void setPhoneNumber(String number) {
 		mPhoneNum = number;
 		try {
@@ -111,6 +177,13 @@ public class DineOutRequestMessage extends ServerMessage {
 		}
 	}
 
+	/**
+	 * Updates the requester's name. THis should be the only means by which this
+	 * is done.
+	 * 
+	 * @param name
+	 *            The requester's new name.
+	 */
 	private void setRequesterName(String name) {
 		mRequesterName = name;
 		try {

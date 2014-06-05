@@ -5,13 +5,38 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+/**
+ * Class for handling the JSON responses to a reservation request.
+ */
 public class ReservationResponseMessage {
 	private int mId;
 
+	/**
+	 * Creates a new wrapping for the identification number for the reservation
+	 * requested.
+	 * 
+	 * @param id
+	 *            The identification number of the received reservation. -1
+	 *            signifies no reservation.
+	 */
 	private ReservationResponseMessage(int id) {
 		setId(id);
 	}
 
+	/**
+	 * Inflates the given JSON string into a wrapper containing the
+	 * identification number for the received reservation.
+	 * <p>
+	 * If no reservation was received, then it is assumed that the reservation
+	 * identification number is -1. This identification number is invalid, and
+	 * should be used to signify a reservation denial.
+	 * </p>
+	 * 
+	 * @param json
+	 *            JSON string to inflate into a reservation response.
+	 * @return A wrapper containing the identification number for the
+	 *         reservation.
+	 */
 	public static ReservationResponseMessage createFromJSON(String json) {
 		JSONObject inputJSON;
 		try {
@@ -39,10 +64,21 @@ public class ReservationResponseMessage {
 		}
 	}
 
+	/**
+	 * Retrieves the identification number for the retrieved reservation.
+	 * 
+	 * @return The received identification number.
+	 */
 	public int getId() {
 		return mId;
 	}
 
+	/**
+	 * Sets the identification number being wrapped by this message class.
+	 * 
+	 * @param id
+	 *            The new identification number.
+	 */
 	private void setId(int id) {
 		mId = id;
 	}

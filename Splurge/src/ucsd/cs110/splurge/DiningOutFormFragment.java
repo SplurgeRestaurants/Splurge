@@ -107,14 +107,29 @@ public class DiningOutFormFragment extends SuperFragment {
 		super.onStart();
 	}
 
+	/**
+	 * Retrieves the name provided by the user.
+	 * 
+	 * @return The contents of the user name field.
+	 */
 	public String getFilledName() {
 		return mFormName.getText().toString();
 	}
 
+	/**
+	 * Retrieves the contact phone number provided by the user.
+	 * 
+	 * @return The number provided by the user.
+	 */
 	public String getFilledPhoneNumber() {
 		return mFormPhoneNumber.getText().toString();
 	}
 
+	/**
+	 * Retrieves the address provided by the user.
+	 * 
+	 * @return The contents of the address field.
+	 */
 	public String getFilledAddress() {
 		return mFormStreetAddress.getText().toString();
 	}
