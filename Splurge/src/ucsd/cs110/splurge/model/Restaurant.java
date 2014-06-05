@@ -49,6 +49,7 @@ public class Restaurant {
 	private String mPhoneNumber;
 	private String mStreetAddress;
 	private String mZipcode;
+	private int numberOfReservationsPerHour = 4;
 
 	/**
 	 * Creates a new restaurant with nothing but a name.
@@ -411,18 +412,21 @@ public class Restaurant {
 				.getStartTime().get(Calendar.HOUR_OF_DAY);
 		int endHour = getHoursForDay(time.get(Calendar.DAY_OF_WEEK))
 				.getEndTime().get(Calendar.HOUR_OF_DAY);
-		String[] minutes;
-		Log.e("Time", "start hour " + startHour);
-		Log.e("Time", "end hour " + endHour);
 		ArrayList<String> hours = new ArrayList<String>();
 		for (int i = startHour; i <= endHour; i++) {
 			hours.add(Integer.toString(i));
 		}
+		int count = 0;
 		for (int hour = startHour; hour <= endHour; hour++) {
-			minutes = getAvailableMinutes(time, hour);
-			if (minutes.length == 0) {
-				hours.remove(Integer.toString(hour));
+			for (int i = 0; i < sameDay.size(); i++) {
+				if (sameDay.get(i).getStartTime().get(Calendar.HOUR_OF_DAY) == hour) {
+					count++;
+				}
 			}
+			if (count == numberOfReservationsPerHour) {
+				sameDay.remove(hour);
+			}
+			count = 0;
 		}
 		Set<String> removeDuplicates = new HashSet<String>();
 		for (int i = 0; i < hours.size(); i++) {
@@ -443,35 +447,6 @@ public class Restaurant {
 		for (int i = 0; i < sort.size(); i++) {
 			ret[i] = Integer.toString(sort.get(i));
 		}
-		// String[] ret = new String[12];
-		// for (int i = 1; i <= 12; i++) {
-		// ret[i - 1] = Integer.toString(i);
-		// }
 		return ret;
-	}
-
-	public String[] getAvailableMinutes(Calendar currTime, int hour) {
-		ArrayList<String> minutes = new ArrayList<String>();
-		minutes.add("00");
-		minutes.add("15");
-		minutes.add("30");
-		minutes.add("45");
-		ArrayList<Timeslot> unavailableTimes = (ArrayList<Timeslot>) getUnavailableTimes();
-		Calendar time;
-		for (int i = 0; i < unavailableTimes.size(); i++) {
-			time = unavailableTimes.get(i).getStartTime();
-			if (time.get(Calendar.DAY_OF_YEAR) == currTime
-					.get(Calendar.DAY_OF_YEAR)) {
-				if (time.get(Calendar.HOUR_OF_DAY) == currTime
-						.get(Calendar.HOUR_OF_DAY)) {
-					minutes.remove(Integer.toString(time.get(Calendar.MINUTE)));
-				}
-			}
-		}
-		String[] displayMinutes = new String[minutes.size()];
-		for (int i = 0; i < displayMinutes.length; i++) {
-			displayMinutes[i] = minutes.get(i);
-		}
-		return displayMinutes;
 	}
 }

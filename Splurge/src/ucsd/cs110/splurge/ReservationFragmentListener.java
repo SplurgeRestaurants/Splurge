@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.NumberPicker;
-import android.widget.NumberPicker.OnValueChangeListener;
 import android.widget.Toast;
 
 /**
@@ -18,7 +17,7 @@ import android.widget.Toast;
  * 
  */
 public class ReservationFragmentListener extends SuperListener implements
-		OnClickListener, OnValueChangeListener, ReservationRequestListener {
+		OnClickListener, ReservationRequestListener {
 
 	/**
 	 * Create a new ReservationFragmentListener, designed to listen to a
@@ -35,6 +34,14 @@ public class ReservationFragmentListener extends SuperListener implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.openButton:
+			EditText partyName = (EditText) mWrapper
+					.findViewById(R.id.form_party_name);
+			String pName = partyName.getText().toString();
+			if (pName.length() < 1) {
+				Toast.makeText(mWrapper, "Missing Field(s)", Toast.LENGTH_SHORT)
+						.show();
+				return;
+			}
 			NumberPicker mPartySize = (NumberPicker) mWrapper
 					.findViewById(R.id.party_size);
 			NumberPicker hours = (NumberPicker) mWrapper
@@ -44,9 +51,6 @@ public class ReservationFragmentListener extends SuperListener implements
 			NumberPicker amPm = (NumberPicker) mWrapper.findViewById(R.id.amPm);
 			String selectedAmPm = ReservationFragment.mAmPmString[amPm
 					.getValue()];
-			EditText partyName = (EditText) mWrapper
-					.findViewById(R.id.form_party_name);
-			String pName = partyName.getText().toString();
 			int selectedHour;
 			if (selectedAmPm.compareTo("AM") == 0) {
 				selectedHour = Integer
@@ -78,49 +82,25 @@ public class ReservationFragmentListener extends SuperListener implements
 			startTime.set(Calendar.YEAR, year);
 			startTime.set(Calendar.DAY_OF_MONTH, day);
 			Log.e("Splurge", "The set date " + startTime.getTime().toString());
-			try {
-				int result = mWrapper.getModel().requestReservation(
-						getPartySize, pName, startTime, this);
-
-				startTime.set(Calendar.SECOND, 0);
-				if (result >= 0) {
-					Toast.makeText(
-							mWrapper,
-							String.format(
-									"Reservation Successful. Your id is %d.",
-									result), Toast.LENGTH_LONG).show();
-					mWrapper.changeFragment(new RestaurantMainMenuFragment(),
-							new RestaurantMainMenuListener(mWrapper));
-				} else if (result == -1) {
-					Toast.makeText(mWrapper,
-							"Reservation Unsuccessful, pick another time",
-							Toast.LENGTH_LONG).show();
-				} else if (result == -2) {
-					Log.i("Splurge", "Reservation information available later.");
-				}
-			} catch (Exception e) {
-				Toast.makeText(mWrapper, "Missing Field(s)", Toast.LENGTH_SHORT)
-						.show();
+			int result = mWrapper.getModel().requestReservation(getPartySize,
+					pName, startTime, this);
+			startTime.set(Calendar.SECOND, 0);
+			if (result >= 0) {
+				Toast.makeText(
+						mWrapper,
+						String.format("Reservation Successful. Your id is %d.",
+								result), Toast.LENGTH_LONG).show();
+				mWrapper.changeFragment(new RestaurantMainMenuFragment(),
+						new RestaurantMainMenuListener(mWrapper));
+			} else if (result == -1) {
+				Toast.makeText(mWrapper,
+						"Reservation Unsuccessful, pick another time",
+						Toast.LENGTH_LONG).show();
+			} else if (result == -2) {
+				Log.i("Splurge", "Reservation information available later.");
 			}
 			break;
 		default:
-			break;
-		}
-	}
-
-	@Override
-	public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-		switch (picker.getId()) {
-		case R.id.hour:
-			int hour = picker.getValue();
-			String[] displayMinutes = mWrapper.getModel().getRestaurant()
-					.getAvailableMinutes(CalendarViewFragment.month, hour);
-			NumberPicker mMinuteSpinner = (NumberPicker) mWrapper
-					.findViewById(R.id.minute);
-			mMinuteSpinner.setMinValue(0);
-			mMinuteSpinner.setMaxValue(0);
-			mMinuteSpinner.setDisplayedValues(displayMinutes);
-			mMinuteSpinner.setMaxValue(displayMinutes.length - 1);
 			break;
 		}
 	}
