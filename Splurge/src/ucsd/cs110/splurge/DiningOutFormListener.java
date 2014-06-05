@@ -32,7 +32,6 @@ public class DiningOutFormListener extends SuperListener implements
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.place_order_button:
-			// TODO send order request to website
 			String meal = mWrapper.getIntent().getStringExtra(
 					DiningOutListListener.OUTPUT_STRING);
 			String kind = "";

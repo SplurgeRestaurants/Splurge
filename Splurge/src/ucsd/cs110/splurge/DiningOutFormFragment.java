@@ -15,10 +15,6 @@ public class DiningOutFormFragment extends SuperFragment {
 	 */
 	private TextView mFormName;
 	/**
-	 * Input for email field
-	 */
-	private TextView mFormEmail;
-	/**
 	 * Input for phone number field
 	 */
 	private TextView mFormPhoneNumber;
@@ -57,7 +53,6 @@ public class DiningOutFormFragment extends SuperFragment {
 		super.onCreate(savedInstanceState);
 		View ret = inflater.inflate(R.layout.delivery_form, container, false);
 		mFormName = (TextView) ret.findViewById(R.id.form_name);
-		mFormEmail = (TextView) ret.findViewById(R.id.form_email);
 		mFormPhoneNumber = (TextView) ret.findViewById(R.id.form_phone_number);
 		mFormStreetAddress = (TextView) ret
 				.findViewById(R.id.form_street_address);
@@ -77,19 +72,6 @@ public class DiningOutFormFragment extends SuperFragment {
 			((View) mFormZipCode.getParent()).setVisibility(View.GONE);
 		}
 		return (ret);
-	}
-
-	/**
-	 * Get form information
-	 * 
-	 * @return Compiled form information
-	 */
-	String getForm() {
-		String ret = "";
-		ret += mFormName.getText();
-		ret += mFormEmail.getText();
-		ret += mFormPhoneNumber.getText();
-		return ret;
 	}
 
 	/**
