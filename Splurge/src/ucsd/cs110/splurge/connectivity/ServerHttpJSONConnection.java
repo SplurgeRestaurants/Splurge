@@ -48,15 +48,6 @@ public class ServerHttpJSONConnection {
 	}
 
 	/**
-	 * Closes all connections with the server.
-	 * 
-	 * @throws IOException
-	 */
-	private void closeConnection() throws IOException {
-		mServerConnection.disconnect();
-	}
-
-	/**
 	 * Sends a JSON string to the server.
 	 * 
 	 * @param json

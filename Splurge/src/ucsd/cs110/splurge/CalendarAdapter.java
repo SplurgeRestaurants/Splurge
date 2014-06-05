@@ -67,7 +67,6 @@ public class CalendarAdapter extends BaseAdapter {
 		}
 
 		dayView = (TextView) v.findViewById(R.id.date);
-		TextView dayOfTheWeek = (TextView) v.findViewById(R.id.day_of_the_week);
 
 		// disable empty days from the beginning
 		if (days[position].equals("")) {
