@@ -62,6 +62,7 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 * Listener of dine out requests to which results should be forwarded.
 	 */
 	private DineOutRequestListener mDineOutForwardListener;
+	private OnRestaurantReadyListener mReadyForwardListener;
 
 	/**
 	 * Creates a new model with empty lists and no selected restaurant.
@@ -145,9 +146,10 @@ public class RestaurantModel implements RestaurantListRequestListener,
 			OnRestaurantReadyListener listener, Context awful) {
 		RestaurantInfoAsyncTask riat = new RestaurantInfoAsyncTask(this);
 		riat.execute(mConnectionHandler, id, awful);
+		mReadyForwardListener = listener;
 		try {
 			Restaurant result = riat.get(500, TimeUnit.MILLISECONDS);
-			listener.onRestaurantReady();
+			listener = new NullOnRestaurantReadyListener();
 			return result;
 		} catch (InterruptedException | ExecutionException | TimeoutException e) {
 		}
@@ -343,7 +345,7 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	public void receiveRestaurantInfo(Restaurant restaurant) {
 		Log.i("Splurge", "Restaurant received asynchronously");
 		mCurrentRestaurant = restaurant;
-		// Restaurant is not passed along to another listener
+		mReadyForwardListener.onRestaurantReady();
 	}
 
 	/**
