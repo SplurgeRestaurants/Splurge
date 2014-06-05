@@ -41,10 +41,10 @@ public class DiningOutFormListener extends SuperListener implements
 					DiningOutListListener.DINING_OUT_TYPE)) {
 			case "Delivery":
 				kind = "d";
+				addy = mListenedTo.getFilledAddress();
 				break;
 			case "Take Out":
 				kind = "co";
-				addy = mListenedTo.getFilledAddress();
 				break;
 			default:
 				kind = "error";

@@ -1,6 +1,9 @@
 package ucsd.cs110.splurge;
 
+import java.util.LinkedList;
+
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -8,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * Class detailing a view component of the dining out sequence.
+ */
 public class DiningOutFormFragment extends SuperFragment {
 
 	/**
@@ -114,12 +120,28 @@ public class DiningOutFormFragment extends SuperFragment {
 	}
 
 	/**
-	 * Retrieves the address provided by the user.
+	 * Retrieves the address provided by the user. This combines all fields.
 	 * 
-	 * @return The contents of the address field.
+	 * @return The contents of the address fields.
 	 */
 	public String getFilledAddress() {
-		return mFormStreetAddress.getText().toString();
+		LinkedList<String> combination = new LinkedList<String>();
+		if (mFormZipCode.getText().length() > 0) {
+			combination.addFirst(mFormZipCode.getText().toString());
+		}
+		if (mFormState.getText().length() > 0) {
+			combination.addFirst(mFormState.getText().toString());
+		}
+		if (mFormCity.getText().length() > 0) {
+			combination.addFirst(mFormCity.getText().toString());
+		}
+		if (mFormAptNumber.getText().length() > 0) {
+			combination.addFirst(mFormAptNumber.getText().toString());
+		}
+		if (mFormStreetAddress.getText().length() > 0) {
+			combination.addFirst(mFormStreetAddress.getText().toString());
+		}
+		return TextUtils.join(", ", combination);
 	}
 
 	/**
