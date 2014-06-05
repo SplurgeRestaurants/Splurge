@@ -37,6 +37,7 @@ public class DiningOutFormListener extends SuperListener implements
 					DiningOutListListener.OUTPUT_STRING);
 			String kind = "";
 			String addy = "none";
+			meal += mListenedTo.getAdditionalNotes();
 			switch (mWrapper.getIntent().getStringExtra(
 					DiningOutListListener.DINING_OUT_TYPE)) {
 			case "Delivery":
@@ -57,6 +58,8 @@ public class DiningOutFormListener extends SuperListener implements
 			if (response >= 0) {
 				Toast.makeText(mWrapper, "Order Successful!", Toast.LENGTH_LONG)
 						.show();
+				mWrapper.changeFragment(new RestaurantMainMenuFragment(),
+						new RestaurantMainMenuListener(mWrapper));
 			} else if (response == -1) {
 				Toast.makeText(mWrapper, "Order Unsuccessful. Our apologies.",
 						Toast.LENGTH_LONG).show();
@@ -86,6 +89,8 @@ public class DiningOutFormListener extends SuperListener implements
 		if (id >= 0) {
 			Toast.makeText(mWrapper, "Order Successful!", Toast.LENGTH_LONG)
 					.show();
+			mWrapper.changeFragment(new RestaurantMainMenuFragment(),
+					new RestaurantMainMenuListener(mWrapper));
 		} else if (id == -1) {
 			Toast.makeText(mWrapper, "Order Unsuccessful. Our apologies.",
 					Toast.LENGTH_LONG).show();

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 /**
  * Listener class for DiningOutFragment
@@ -80,26 +81,36 @@ public class DiningOutListListener extends SuperListener implements
 	 * Go to take out form
 	 */
 	public void notifyTakeOut() {
-		Intent intent = new Intent();
-		intent.putExtra(DINING_OUT_TYPE, "Take Out");
-		intent.putExtra(OUTPUT_STRING,
-				interpretSelection(mListeningTo.getSelectedFood()));
-		mWrapper.setIntent(intent);
-		mWrapper.changeFragment(new DiningOutFormFragment(),
-				new DiningOutFormListener(mWrapper));
+		if (mListeningTo.getSelectedFood().size() > 0) {
+			Intent intent = new Intent();
+			intent.putExtra(DINING_OUT_TYPE, "Take Out");
+			intent.putExtra(OUTPUT_STRING,
+					interpretSelection(mListeningTo.getSelectedFood()));
+			mWrapper.setIntent(intent);
+			mWrapper.changeFragment(new DiningOutFormFragment(),
+					new DiningOutFormListener(mWrapper));
+		} else {
+			Toast.makeText(mWrapper, R.string.request_dineout_items,
+					Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	/**
 	 * Go to delivery form
 	 */
 	public void notifyDelivery() {
-		Intent intent = new Intent();
-		intent.putExtra(DINING_OUT_TYPE, "Delivery");
-		intent.putExtra(OUTPUT_STRING,
-				interpretSelection(mListeningTo.getSelectedFood()));
-		mWrapper.setIntent(intent);
-		mWrapper.changeFragment(new DiningOutFormFragment(),
-				new DiningOutFormListener(mWrapper));
+		if (mListeningTo.getSelectedFood().size() > 0) {
+			Intent intent = new Intent();
+			intent.putExtra(DINING_OUT_TYPE, "Delivery");
+			intent.putExtra(OUTPUT_STRING,
+					interpretSelection(mListeningTo.getSelectedFood()));
+			mWrapper.setIntent(intent);
+			mWrapper.changeFragment(new DiningOutFormFragment(),
+					new DiningOutFormListener(mWrapper));
+		} else {
+			Toast.makeText(mWrapper, R.string.request_dineout_items,
+					Toast.LENGTH_SHORT).show();
+		}
 	}
 
 	private String interpretSelection(ArrayList<FoodItem> items) {

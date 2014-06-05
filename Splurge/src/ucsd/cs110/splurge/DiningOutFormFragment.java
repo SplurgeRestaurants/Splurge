@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class DiningOutFormFragment extends SuperFragment {
@@ -41,6 +42,10 @@ public class DiningOutFormFragment extends SuperFragment {
 	 * Input for zip code field
 	 */
 	private TextView mFormZipCode;
+	/**
+	 * Input for additional notes.
+	 */
+	private EditText mFormNotes;
 
 	/**
 	 * Hide the address views if "Take Out" was selected. Populated the order
@@ -60,6 +65,7 @@ public class DiningOutFormFragment extends SuperFragment {
 		mFormCity = (TextView) ret.findViewById(R.id.form_city);
 		mFormState = (TextView) ret.findViewById(R.id.form_state);
 		mFormZipCode = (TextView) ret.findViewById(R.id.form_zip_code);
+		mFormNotes = (EditText) ret.findViewById(R.id.form_order_notes);
 		String diningOutType = getActivity().getIntent()
 				.getCharSequenceExtra(DiningOutListListener.DINING_OUT_TYPE)
 				.toString();
@@ -132,5 +138,14 @@ public class DiningOutFormFragment extends SuperFragment {
 	 */
 	public String getFilledAddress() {
 		return mFormStreetAddress.getText().toString();
+	}
+
+	/**
+	 * Retrieves the additional order notes provided by the user.
+	 * 
+	 * @return The user's additional notes.
+	 */
+	public String getAdditionalNotes() {
+		return mFormNotes.getText().toString();
 	}
 }
