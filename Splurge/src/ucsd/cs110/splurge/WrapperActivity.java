@@ -4,6 +4,7 @@ import ucsd.cs110.splurge.model.RestaurantModel;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 /**
@@ -29,14 +30,37 @@ public class WrapperActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch (item.getItemId()) {
+		case R.id.restaurant_list:
+			changeFragment(new RestaurantListFragment(),
+					new RestaurantListListener(this));
 			return true;
+		case R.id.food_menu:
+			changeFragment(new FoodMenuListFragment(),
+					new FoodMenuListListener(this));
+			return true;
+		case R.id.information:
+			changeFragment(new InformationFragment(), new InformationListener(
+					this));
+			return true;
+		case R.id.reservation:
+			changeFragment(new CalendarViewFragment(),
+					new CalenderViewFragmentListener(this));
+			return true;
+		case R.id.dining_out:
+			changeFragment(new DiningOutFragment(), new DiningOutListListener(
+					this));
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu, menu);
+		return true;
 	}
 
 	/**

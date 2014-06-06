@@ -3,9 +3,6 @@ package ucsd.cs110.splurge.model;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 import android.graphics.Bitmap;
 import android.graphics.PointF;
@@ -428,24 +425,9 @@ public class Restaurant {
 			}
 			count = 0;
 		}
-		Set<String> removeDuplicates = new HashSet<String>();
+		String ret[] = new String[hours.size()];
 		for (int i = 0; i < hours.size(); i++) {
-			if (Integer.parseInt(hours.get(i)) > 12) {
-				int newHour = Integer.parseInt(hours.get(i)) - 12;
-				hours.set(i, Integer.toString(newHour));
-			}
-		}
-		removeDuplicates.addAll(hours);
-		hours.clear();
-		hours.addAll(removeDuplicates);
-		ArrayList<Integer> sort = new ArrayList<Integer>();
-		for (int i = 0; i < hours.size(); i++) {
-			sort.add(Integer.parseInt(hours.get(i)));
-		}
-		Collections.sort(sort);
-		String ret[] = new String[sort.size()];
-		for (int i = 0; i < sort.size(); i++) {
-			ret[i] = Integer.toString(sort.get(i));
+			ret[i] = hours.get(i);
 		}
 		return ret;
 	}

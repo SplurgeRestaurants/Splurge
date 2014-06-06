@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/restaurant_list"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Restaurant List"/>
+    <item
+        android:id="@+id/food_menu"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Menu"/>
+    <item
+        android:id="@+id/information"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Information"/>
+    <item
+        android:id="@+id/reservation"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Reservation"/>
+    <item
+        android:id="@+id/dining_out"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Dining Out"/>
+
+</menu>
