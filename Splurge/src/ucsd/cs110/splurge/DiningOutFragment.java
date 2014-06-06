@@ -77,6 +77,7 @@ public class DiningOutFragment extends SuperFragment {
 	public void refresh() {
 		try {
 			adapter.notifyDataSetChanged();
+			updateCost();
 		} catch (Exception e) {
 			Toast.makeText(getWrapperActivity(), "You have no items",
 					Toast.LENGTH_LONG).show();
