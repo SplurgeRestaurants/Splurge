@@ -7,10 +7,10 @@
         android:showAsAction="never"
         android:title="Restaurant List"/>
     <item
-        android:id="@+id/food_menu"
+        android:id="@+id/main_menu"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="Menu"/>
+        android:title="Restaurant Main Menu"/>
     <item
         android:id="@+id/information"
         android:orderInCategory="100"

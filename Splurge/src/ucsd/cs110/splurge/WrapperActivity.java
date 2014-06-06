@@ -18,6 +18,7 @@ public class WrapperActivity extends Activity {
 	 * The model. Contains business logic and data as per Model-View-Controller.
 	 */
 	private RestaurantModel mModel;
+	static boolean hideMenu = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +36,9 @@ public class WrapperActivity extends Activity {
 			changeFragment(new RestaurantListFragment(),
 					new RestaurantListListener(this));
 			return true;
-		case R.id.food_menu:
-			changeFragment(new FoodMenuListFragment(),
-					new FoodMenuListListener(this));
+		case R.id.main_menu:
+			changeFragment(new RestaurantMainMenuFragment(),
+					new RestaurantMainMenuListener(this));
 			return true;
 		case R.id.information:
 			changeFragment(new InformationFragment(), new InformationListener(
@@ -58,8 +59,15 @@ public class WrapperActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onMenuOpened(int featureId, Menu menu) {
+		for (int i = 0; i < menu.size(); i++)
+			menu.getItem(i).setVisible(!hideMenu);
+		invalidateOptionsMenu();
 		return true;
 	}
 
@@ -75,6 +83,7 @@ public class WrapperActivity extends Activity {
 	 *            undefined behavior otherwise.
 	 */
 	public void changeFragment(SuperFragment f, SuperListener l) {
+		hideMenu = false;
 		f.setSuperListener(l);
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.replace(R.id.container, f);
