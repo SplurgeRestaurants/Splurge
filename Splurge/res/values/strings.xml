@@ -41,6 +41,7 @@
     <string name="person_zip_code">Zip Code</string>
     <string name="person_apt_number">Suite/Apt#</string>
     <string name="place_order">Place Order</string>
+    <string name="phone_unavailable">Sorry, but your device does not appear to support phone calls at this time.</string>
     <string name="order_summary">Order Summary</string>
     <string name="hello">Open calendar</string>
     <string name="open">Submit Reservation</string>
