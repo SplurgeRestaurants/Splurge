@@ -26,8 +26,12 @@ public class WrapperActivity extends Activity {
 		setContentView(R.layout.activity_wrapper);
 		mModel = new RestaurantModel();
 		getActionBar().hide();
-		changeFragment(new RestaurantListFragment(),
-				new RestaurantListListener(this));
+		SuperFragment f = new RestaurantListFragment();
+		SuperListener l = new RestaurantListListener(this);
+		f.setSuperListener(l);
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+		ft.replace(R.id.container, f);
+		ft.commit();
 	}
 
 	@Override
