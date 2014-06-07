@@ -97,7 +97,8 @@ public class Restaurant {
 	}
 
 	private boolean isTimeDuringClosedHours(Calendar time) {
-		return getHoursForDay(time.get(Calendar.DAY_OF_WEEK)).contains(time);
+		return !getHoursForDay(time.get(Calendar.DAY_OF_WEEK)).containsByHour(
+				time);
 	}
 
 	/**

@@ -70,8 +70,12 @@ public class Timeslot implements Comparable<Timeslot> {
 		return 0;
 	}
 
-	public boolean contains(Calendar time) {
-		return startTime.equals(time) || endTime.equals(time)
-				|| startTime.before(time) && endTime.after(time);
+	public boolean containsByHour(Calendar time) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(startTime.getTime());
+		c.set(Calendar.HOUR_OF_DAY, time.get(Calendar.HOUR_OF_DAY));
+		c.set(Calendar.MINUTE, time.get(Calendar.MINUTE));
+		return startTime.equals(c) || endTime.equals(c) || startTime.before(c)
+				&& endTime.after(c);
 	}
 }
