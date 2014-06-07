@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import ucsd.cs110.splurge.model.Timeslot;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -83,7 +84,24 @@ public class InformationFragment extends SuperFragment {
 	 * @return "Open" or "Closed"
 	 */
 	private String getRestaurantStatus() {
-		return "Now: Open";
+		Timeslot openHours = getWrapperActivity()
+				.getModel()
+				.getRestaurant()
+				.getHoursForDay(
+						Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+		Log.e("Date",
+				"Today is " + Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+		Log.e("Date",
+				"start time "
+						+ openHours.getStartTime().get(Calendar.HOUR_OF_DAY));
+		Log.e("Date",
+				"end time" + openHours.getEndTime().get(Calendar.HOUR_OF_DAY));
+		Log.e("Date", "currTime" + Calendar.getInstance().getTime());
+		if (!openHours.withinTimeslot(Calendar.getInstance())) {
+			return "Now: Open";
+		} else {
+			return "Now: Closed";
+		}
 	}
 
 	/**
