@@ -19,6 +19,7 @@ public class WrapperActivity extends Activity {
 	 */
 	private RestaurantModel mModel;
 	static boolean hideMenu = false;
+	private SuperFragment mCurrentFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class WrapperActivity extends Activity {
 		setContentView(R.layout.activity_wrapper);
 		mModel = new RestaurantModel();
 		SuperFragment f = new RestaurantListFragment();
+		mCurrentFragment = f;
 		SuperListener l = new RestaurantListListener(this);
 		f.setSuperListener(l);
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -63,16 +65,10 @@ public class WrapperActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.menu, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onMenuOpened(int featureId, Menu menu) {
-		if (menu != null) {
-			for (int i = 0; i < menu.size(); i++)
-				menu.getItem(i).setVisible(!hideMenu);
-			invalidateOptionsMenu();
+		if (mCurrentFragment instanceof RestaurantListFragment) {
+			menu.clear();
+		} else {
+			getMenuInflater().inflate(R.menu.menu, menu);
 		}
 		return true;
 	}
@@ -104,5 +100,9 @@ public class WrapperActivity extends Activity {
 	 */
 	public RestaurantModel getModel() {
 		return mModel;
+	}
+
+	public void registerFragment(SuperFragment m) {
+		mCurrentFragment = m;
 	}
 }

@@ -36,4 +36,24 @@ public abstract class SuperFragment extends Fragment {
 	public WrapperActivity getWrapperActivity() {
 		return (WrapperActivity) getActivity();
 	}
+
+	@Override
+	public void onStart() {
+		setTitle();
+		super.onStart();
+	}
+
+	@Override
+	public void onResume() {
+		// Code to ensure that options menu isn't present for the restaurant
+		// list
+		getWrapperActivity().registerFragment(this);
+		getActivity().invalidateOptionsMenu();
+		super.onResume();
+	}
+
+	public void setTitle() {
+		getActivity().setTitle(
+				getWrapperActivity().getModel().getRestaurantName());
+	}
 }
