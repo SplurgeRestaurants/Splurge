@@ -79,7 +79,7 @@ public class CalendarAdapter extends BaseAdapter {
 							.get(Calendar.MONTH)
 					&& days[position].equals(""
 							+ selectedDate.get(Calendar.DAY_OF_MONTH))) {
-				v.setBackgroundResource(R.drawable.item_background_focused);
+				v.setBackgroundResource(R.drawable.orange_border);
 			} else {
 				v.setBackgroundResource(R.drawable.list_item_background);
 			}
