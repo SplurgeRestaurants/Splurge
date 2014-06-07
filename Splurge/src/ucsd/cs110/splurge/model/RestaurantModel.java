@@ -264,7 +264,7 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 * 
 	 * @return The currently selected Restaurant.
 	 */
-	public Restaurant getRestaurant() {
+	private Restaurant getRestaurant() {
 		return mCurrentRestaurant;
 	}
 
@@ -383,6 +383,41 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 */
 	public String getRestaurantName() {
 		return getRestaurant().getName();
+	}
+
+	/**
+	 * Get the available hours for the currently selected restaurant.
+	 * 
+	 * @param time
+	 *            Calendar to get the day
+	 * @return String of available hours
+	 */
+	public String[] getAvailableHours(Calendar time) {
+		return getRestaurant().getAvailableHours(time);
+	}
+
+	/**
+	 * Gets the hours available for a given day. If hours are unavailable on
+	 * that day, then the Timeslot value will be <code>null</code>.
+	 * 
+	 * @param day
+	 *            Enum value depicting which day to check.
+	 * @return The Timeslot depicting hours for the given day, or
+	 *         <code>null</code> if closed all day.
+	 */
+	public Timeslot getHoursForDay(int day) {
+		return getRestaurant().getHoursForDay(day);
+	}
+
+	/**
+	 * Get the unavailable days for reservations
+	 * 
+	 * @param month
+	 *            The current month
+	 * @return Array of strings representing the full days
+	 */
+	public ArrayList<String> getUnavailableDays(Calendar month) {
+		return getRestaurant().getUnavailableDays(month);
 	}
 
 	@Override

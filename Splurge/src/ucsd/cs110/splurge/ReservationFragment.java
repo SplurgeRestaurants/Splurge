@@ -59,8 +59,8 @@ public class ReservationFragment extends SuperFragment {
 		mHourSpinner = (NumberPicker) ret.findViewById(R.id.hour);
 		mHourSpinner.setMinValue(0);
 		mHourSpinner.setMaxValue(0);
-		mHours = getWrapperActivity().getModel().getRestaurant()
-				.getAvailableHours(CalendarViewFragment.month);
+		mHours = getWrapperActivity().getModel().getAvailableHours(
+				CalendarViewFragment.month);
 		mHours = convertHours(mHours);
 		mHourSpinner.setDisplayedValues(mHours);
 		mHourSpinner.setMaxValue(mHours.length - 1);

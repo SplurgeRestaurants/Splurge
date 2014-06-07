@@ -3,7 +3,6 @@ package ucsd.cs110.splurge;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import ucsd.cs110.splurge.model.Restaurant;
 import ucsd.cs110.splurge.model.Timeslot;
 import android.app.Activity;
 import android.content.Context;
@@ -22,10 +21,6 @@ import android.widget.TextView;
  * reservation.
  */
 public class CalendarViewFragment extends SuperFragment {
-	/**
-	 * Reference to the current restaurant
-	 */
-	private Restaurant mRestaurant;
 	/**
 	 * Reference to the calendar
 	 */
@@ -62,8 +57,8 @@ public class CalendarViewFragment extends SuperFragment {
 		super.onCreate(savedInstanceState);
 		View ret = inflater.inflate(R.layout.calendar, container, false);
 		month = Calendar.getInstance();
-		mRestaurant = getWrapperActivity().getModel().getRestaurant();
-		mUnavailableTimes = mRestaurant.getUnavailableDays(month);
+		mUnavailableTimes = getWrapperActivity().getModel().getUnavailableDays(
+				month);
 		adapter = new CalendarAdapter(getActivity(), month);
 		GridView gridview = (GridView) ret.findViewById(R.id.gridview);
 		gridview.setAdapter(adapter);

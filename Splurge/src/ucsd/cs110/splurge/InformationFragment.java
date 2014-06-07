@@ -55,11 +55,8 @@ public class InformationFragment extends SuperFragment {
 	 */
 	private String getHours() {
 		String hour = "Hours: ";
-		Timeslot time = getWrapperActivity()
-				.getModel()
-				.getRestaurant()
-				.getHoursForDay(
-						Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+		Timeslot time = getWrapperActivity().getModel().getHoursForDay(
+				Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
 		hour += time.getStartTime().get(Calendar.HOUR);
 		if (time.getStartTime().get(Calendar.AM_PM) == 0) {
 			hour += "AM";
@@ -91,11 +88,8 @@ public class InformationFragment extends SuperFragment {
 	 * @return "Open" or "Closed"
 	 */
 	private String getRestaurantStatus() {
-		Timeslot openHours = getWrapperActivity()
-				.getModel()
-				.getRestaurant()
-				.getHoursForDay(
-						Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+		Timeslot openHours = getWrapperActivity().getModel().getHoursForDay(
+				Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
 		int endTime = openHours.getEndTime().get(Calendar.HOUR_OF_DAY);
 		int startTime = openHours.getStartTime().get(Calendar.HOUR_OF_DAY);
 		int currHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
