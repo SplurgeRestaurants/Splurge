@@ -88,8 +88,11 @@ public class ReservationFragmentListener extends SuperListener implements
 			if (result >= 0) {
 				Toast.makeText(
 						mWrapper,
-						String.format("Reservation Successful. Your id is %d.",
-								result), Toast.LENGTH_LONG).show();
+						String.format(
+								"Reservation Successful. Your id is %d.\nTo"
+										+ " Change Or Cancel Your Reservation "
+										+ "Please Call The Restaurant", result),
+						Toast.LENGTH_LONG).show();
 				mWrapper.getFragmentManager().popBackStack();
 				mWrapper.getFragmentManager().popBackStack();
 				mWrapper.changeFragment(new RestaurantMainMenuFragment(),
