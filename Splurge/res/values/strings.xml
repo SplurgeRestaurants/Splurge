@@ -45,8 +45,8 @@
     <string name="hello">Open calendar</string>
     <string name="open">Submit Reservation</string>
     <string name="order_notes">Order Notes</string>
-    <string name="party_size">Party Size</string>
-    <string name="party_name">Party Name</string>
+    <string name="party_size">Party Size:</string>
+    <string name="party_name">Party Name:</string>
     <string name="request_dineout_items">Please select items for request.</string>
 
 </resources>
