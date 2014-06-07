@@ -84,7 +84,8 @@ public class RestaurantInfoResponseMessage {
 				encaps.setZipcode(fullAddy.substring(zipStart).trim());
 				fullAddy = fullAddy.substring(0, zipStart).trim();
 				if (fullAddy.charAt(fullAddy.length() - 1) == ',')
-					fullAddy = fullAddy.substring(0, fullAddy.length() - 1);
+					fullAddy = fullAddy.substring(0,
+							Math.max(0, fullAddy.length() - 1));
 				encaps.setStreetAddress(fullAddy);
 			}
 

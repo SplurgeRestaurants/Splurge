@@ -25,7 +25,6 @@ public class WrapperActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_wrapper);
 		mModel = new RestaurantModel();
-		getActionBar().hide();
 		SuperFragment f = new RestaurantListFragment();
 		SuperListener l = new RestaurantListListener(this);
 		f.setSuperListener(l);
@@ -70,9 +69,11 @@ public class WrapperActivity extends Activity {
 
 	@Override
 	public boolean onMenuOpened(int featureId, Menu menu) {
-		for (int i = 0; i < menu.size(); i++)
-			menu.getItem(i).setVisible(!hideMenu);
-		invalidateOptionsMenu();
+		if (menu != null) {
+			for (int i = 0; i < menu.size(); i++)
+				menu.getItem(i).setVisible(!hideMenu);
+			invalidateOptionsMenu();
+		}
 		return true;
 	}
 
