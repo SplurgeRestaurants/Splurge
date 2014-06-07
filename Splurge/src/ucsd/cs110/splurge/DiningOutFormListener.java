@@ -50,6 +50,12 @@ public class DiningOutFormListener extends SuperListener implements
 				kind = "error";
 				break;
 			}
+			if (addy.length() < 1 || mListenedTo.getFilledName().length() < 1
+					|| mListenedTo.getFilledPhoneNumber().length() < 1) {
+				Toast.makeText(mWrapper, "Missing Fields", Toast.LENGTH_SHORT)
+						.show();
+				return;
+			}
 			int response = mWrapper.getModel().requestDineOut(
 					mListenedTo.getFilledName(),
 					mListenedTo.getFilledPhoneNumber(), addy, kind,
