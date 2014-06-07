@@ -163,7 +163,7 @@ public class CalendarAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		return 0;
+		return days.length;
 	}
 
 	@Override

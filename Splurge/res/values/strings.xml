@@ -49,5 +49,6 @@
     <string name="party_size">Party Size</string>
     <string name="party_name">Party Name</string>
     <string name="request_dineout_items">Please select items for request.</string>
+    <string name="notes">* For party sizes greater than 10, please call the   restaurant</string>
 
 </resources>
