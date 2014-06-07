@@ -5,13 +5,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 
 /**
  * Container class to hold restaurant name and identification number pairs. The
  * intended use for this is as a storage means permitting the app to display
  * available restaurants and select a restaurant to request from the server.
  */
-public class RestaurantListing {
+public class RestaurantListing implements Comparable<RestaurantListing> {
 
 	/**
 	 * Displayable name of the restaurant.
@@ -130,5 +131,12 @@ public class RestaurantListing {
 		return o != null
 				&& (o instanceof RestaurantListing)
 				&& ((RestaurantListing) o).getRestaurantId() == getRestaurantId();
+	}
+
+	@Override
+	public int compareTo(RestaurantListing another) {
+		Log.e("Splurge1", "does this even work");
+		return this.getRestaurantName().compareToIgnoreCase(
+				another.getRestaurantName());
 	}
 }

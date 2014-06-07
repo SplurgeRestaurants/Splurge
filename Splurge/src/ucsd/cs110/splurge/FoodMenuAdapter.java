@@ -2,6 +2,7 @@ package ucsd.cs110.splurge;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Locale;
 
 import ucsd.cs110.splurge.model.FoodItem;
@@ -51,6 +52,7 @@ public class FoodMenuAdapter extends ArrayAdapter<FoodItem> {
 		mContext = context;
 		this.foodItems = foodItems;
 		this.resource = resource;
+		Collections.sort(this.foodItems);
 	}
 
 	/**

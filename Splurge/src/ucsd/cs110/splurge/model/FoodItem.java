@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
  * Class for storing information about items of food available at a given
  * restaurant.
  */
-public class FoodItem {
+public class FoodItem implements Comparable<FoodItem> {
 
 	/**
 	 * Name of the food item in user-readable format.
@@ -145,5 +145,10 @@ public class FoodItem {
 	 */
 	public String getDescription() {
 		return mDescription;
+	}
+
+	@Override
+	public int compareTo(FoodItem another) {
+		return this.getName().compareTo(another.getName());
 	}
 }

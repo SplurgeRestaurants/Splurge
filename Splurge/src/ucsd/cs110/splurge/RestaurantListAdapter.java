@@ -1,6 +1,7 @@
 package ucsd.cs110.splurge;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import ucsd.cs110.splurge.model.RestaurantListing;
 import android.content.Context;
@@ -41,6 +42,7 @@ public class RestaurantListAdapter extends ArrayAdapter<RestaurantListing> {
 		super(context, resource, Restaurants);
 		mContext = context;
 		this.restaurants = Restaurants;
+		Collections.sort(this.restaurants);
 	}
 
 	/**
