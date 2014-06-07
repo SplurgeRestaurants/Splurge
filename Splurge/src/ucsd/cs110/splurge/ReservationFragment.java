@@ -1,5 +1,10 @@
 package ucsd.cs110.splurge;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +35,7 @@ public class ReservationFragment extends SuperFragment {
 		mHourSpinner.setMaxValue(0);
 		mHours = getWrapperActivity().getModel().getRestaurant()
 				.getAvailableHours(CalendarViewFragment.month);
+		mHours = convertHours(mHours);
 		mHourSpinner.setDisplayedValues(mHours);
 		mHourSpinner.setMaxValue(mHours.length - 1);
 		mHourSpinner.setOnLongPressUpdateInterval(100);
@@ -48,6 +54,29 @@ public class ReservationFragment extends SuperFragment {
 		mPartySize.setDisplayedValues(mPSize);
 		mPartySize.setOnLongPressUpdateInterval(100);
 		return ret;
+	}
+
+	private String[] convertHours(String[] hours) {
+		for (int i = 0; i < hours.length; i++) {
+			if (Integer.parseInt(hours[i]) > 12) {
+				hours[i] = Integer.toString(Integer.parseInt(hours[i]) - 12);
+			}
+		}
+		Set<String> removeDups = new HashSet<String>();
+		for (int i = 0; i < hours.length; i++) {
+			removeDups.add(hours[i]);
+		}
+		ArrayList<String> copy = new ArrayList<String>(removeDups);
+		ArrayList<Integer> sort = new ArrayList<Integer>();
+		for (int i = 0; i < copy.size(); i++) {
+			sort.add(Integer.parseInt(copy.get(i)));
+		}
+		Collections.sort(sort);
+		hours = new String[sort.size()];
+		for (int i = 0; i < hours.length; i++) {
+			hours[i] = Integer.toString(sort.get(i));
+		}
+		return hours;
 	}
 
 	/**
