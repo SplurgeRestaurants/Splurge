@@ -15,8 +15,8 @@ public class ReservationFragment extends SuperFragment {
 	private NumberPicker mPartySize;
 	private final int MAX_PARTY_SIZE = 10;
 	static final String[] mAmPmString = { "AM", "PM" };
-	static final String[] mHours = { "1", "2", "3", "4", "5", "6", "7", "8",
-			"9", "10", "11", "12" };
+	static String[] mHours = { "1", "2", "3", "4", "5", "6", "7", "8", "9",
+			"10", "11", "12" };
 	static final String[] mMinutes = { "00", "15", "30", "45" };
 	static final String[] mPSize = { "1", "2", "3", "4", "5", "6", "7", "8",
 			"9", "10" };
@@ -28,6 +28,8 @@ public class ReservationFragment extends SuperFragment {
 		mHourSpinner = (NumberPicker) ret.findViewById(R.id.hour);
 		mHourSpinner.setMinValue(0);
 		mHourSpinner.setMaxValue(0);
+		mHours = getWrapperActivity().getModel().getRestaurant()
+				.getAvailableHours(CalendarViewFragment.month);
 		mHourSpinner.setDisplayedValues(mHours);
 		mHourSpinner.setMaxValue(mHours.length - 1);
 		mHourSpinner.setOnLongPressUpdateInterval(100);
