@@ -69,4 +69,9 @@ public class Timeslot implements Comparable<Timeslot> {
 		}
 		return 0;
 	}
+
+	public boolean contains(Calendar time) {
+		return startTime.equals(time) || endTime.equals(time)
+				|| startTime.before(time) && endTime.after(time);
+	}
 }

@@ -96,6 +96,10 @@ public class Restaurant {
 		return false;
 	}
 
+	private boolean isTimeDuringClosedHours(Calendar time) {
+		return getHoursForDay(time.get(Calendar.DAY_OF_WEEK)).contains(time);
+	}
+
 	/**
 	 * Determines whether the given time is taken.
 	 * 
@@ -105,7 +109,7 @@ public class Restaurant {
 	 *         otherwise.
 	 */
 	public boolean isTimeUnavailable(Calendar time) {
-		return isTimeWithinReservation(time);
+		return isTimeDuringClosedHours(time) || isTimeWithinReservation(time);
 	}
 
 	/**
@@ -396,39 +400,28 @@ public class Restaurant {
 	}
 
 	public String[] getAvailableHours(Calendar time) {
-		int currDay = time.get(Calendar.DAY_OF_YEAR);
-		ArrayList<Timeslot> sameDay = new ArrayList<Timeslot>();
-		ArrayList<Timeslot> takenTimes = (ArrayList<Timeslot>) getUnavailableTimes();
-		for (int i = 0; i < takenTimes.size(); i++) {
-			if (currDay == takenTimes.get(i).getStartTime()
-					.get(Calendar.DAY_OF_YEAR)) {
-				sameDay.add(takenTimes.get(i));
-			}
-		}
 		int startHour = getHoursForDay(time.get(Calendar.DAY_OF_WEEK))
 				.getStartTime().get(Calendar.HOUR_OF_DAY);
 		int endHour = getHoursForDay(time.get(Calendar.DAY_OF_WEEK))
 				.getEndTime().get(Calendar.HOUR_OF_DAY);
 		ArrayList<String> hours = new ArrayList<String>();
 		for (int i = startHour; i <= endHour; i++) {
-			hours.add(Integer.toString(i));
-		}
-		int count = 0;
-		for (int hour = startHour; hour <= endHour; hour++) {
-			for (int i = 0; i < sameDay.size(); i++) {
-				if (sameDay.get(i).getStartTime().get(Calendar.HOUR_OF_DAY) == hour) {
-					count++;
+			Calendar c = Calendar.getInstance();
+			c.setTime(time.getTime());
+			c.set(Calendar.SECOND, 0);
+			c.set(Calendar.HOUR, i);
+			boolean addable = false;
+			for (int n : new int[] { 0, 15, 30, 45 }) {
+				c.set(Calendar.MINUTE, n);
+				if (!isTimeUnavailable(c)) {
+					addable = true;
+					break;
 				}
 			}
-			if (count == numberOfReservationsPerHour) {
-				sameDay.remove(hour);
+			if (addable) {
+				hours.add(Integer.toString(i));
 			}
-			count = 0;
 		}
-		String ret[] = new String[hours.size()];
-		for (int i = 0; i < hours.size(); i++) {
-			ret[i] = hours.get(i);
-		}
-		return ret;
+		return hours.toArray(new String[hours.size()]);
 	}
 }
