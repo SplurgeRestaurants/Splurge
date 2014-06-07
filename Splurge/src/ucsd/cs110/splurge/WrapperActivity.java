@@ -25,6 +25,7 @@ public class WrapperActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_wrapper);
 		mModel = new RestaurantModel();
+		getActionBar().hide();
 		changeFragment(new RestaurantListFragment(),
 				new RestaurantListListener(this));
 	}

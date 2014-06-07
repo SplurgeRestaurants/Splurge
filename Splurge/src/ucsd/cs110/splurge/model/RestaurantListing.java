@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
-import android.util.Log;
 
 /**
  * Container class to hold restaurant name and identification number pairs. The
@@ -135,7 +134,6 @@ public class RestaurantListing implements Comparable<RestaurantListing> {
 
 	@Override
 	public int compareTo(RestaurantListing another) {
-		Log.e("Splurge1", "does this even work");
 		return this.getRestaurantName().compareToIgnoreCase(
 				another.getRestaurantName());
 	}
