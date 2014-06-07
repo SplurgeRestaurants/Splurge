@@ -23,6 +23,9 @@ public class InformationFragment extends SuperFragment {
 	 * Address of the restaurant
 	 */
 	private TextView address;
+	/**
+	 * Current hours of the restaurant
+	 */
 	private TextView hours;
 
 	/**
@@ -45,6 +48,11 @@ public class InformationFragment extends SuperFragment {
 		return ret;
 	}
 
+	/**
+	 * Get the current hours of the restaurant
+	 * 
+	 * @return A formatted String of the open hours of the restaurant
+	 */
 	private String getHours() {
 		String hour = "Hours: ";
 		Timeslot time = getWrapperActivity()
@@ -108,7 +116,7 @@ public class InformationFragment extends SuperFragment {
 	}
 
 	/**
-	 * set listener for directions and hours button
+	 * set listener for the get directions and call phone buttons
 	 * 
 	 * @param listener
 	 *            Listener to be set

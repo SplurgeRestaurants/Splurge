@@ -33,6 +33,9 @@ public class FoodMenuListFragment extends SuperFragment {
 	 * save position of the chosen food item
 	 */
 	public static final String FOOD_ITEM_POSITION = "0";
+	/**
+	 * The fragment where the array of food items came from
+	 */
 	public static final String ORIGIN = "where it came from";
 	/**
 	 * populate with selected food items
@@ -105,6 +108,9 @@ public class FoodMenuListFragment extends SuperFragment {
 		}
 	}
 
+	/**
+	 * Refresh the listview when items are added or removed
+	 */
 	public void refresh() {
 		clearChecked();
 		adapter.notifyDataSetChanged();
@@ -141,10 +147,22 @@ public class FoodMenuListFragment extends SuperFragment {
 		super.onStart();
 	}
 
+	/**
+	 * Set the meal
+	 * 
+	 * @param meal
+	 *            Meal to be set
+	 */
 	public void setMeal(FoodMenu meal) {
 		mMenu = meal;
 	}
 
+	/**
+	 * Set the meal by the index
+	 * 
+	 * @param i
+	 *            The index of the meal
+	 */
 	public void setMealByIndex(int i) {
 		mMenu = getWrapperActivity().getModel().getFoodMenuByIndex(i);
 	}

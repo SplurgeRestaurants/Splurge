@@ -59,7 +59,6 @@ public class RestaurantListFragment extends SuperFragment implements
 	@Override
 	public void onStart() {
 		setListListener((OnItemClickListener) mSuperListener);
-		WrapperActivity.hideMenu = true;
 		super.onStart();
 	}
 

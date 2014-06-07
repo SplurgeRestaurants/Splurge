@@ -52,6 +52,9 @@ public abstract class SuperFragment extends Fragment {
 		super.onResume();
 	}
 
+	/**
+	 * Set the title of the restaurant to the action bar
+	 */
 	public void setTitle() {
 		getActivity().setTitle(
 				getWrapperActivity().getModel().getRestaurantName());

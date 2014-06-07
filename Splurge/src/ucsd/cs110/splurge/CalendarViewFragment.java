@@ -22,12 +22,33 @@ import android.widget.TextView;
  * reservation.
  */
 public class CalendarViewFragment extends SuperFragment {
+	/**
+	 * Reference to the current restaurant
+	 */
 	private Restaurant mRestaurant;
+	/**
+	 * Reference to the calendar
+	 */
 	static Calendar month;
+	/**
+	 * Reference to the adapter, to populate the grid view
+	 */
 	static CalendarAdapter adapter;
+	/**
+	 * Add items to calendar
+	 */
 	static Handler handler;
+	/**
+	 * Array of unavailable times
+	 */
 	static ArrayList<String> mUnavailableTimes;
+	/**
+	 * Array of timeslots of the unavailable times
+	 */
 	static ArrayList<Timeslot> mTakenTimes;
+	/**
+	 * String for the intent message
+	 */
 	static final String DATE = "date";
 
 	/*
@@ -53,6 +74,12 @@ public class CalendarViewFragment extends SuperFragment {
 		return ret;
 	}
 
+	/**
+	 * Refresh the calendar when the array of items has been changed
+	 * 
+	 * @param context
+	 *            Current context
+	 */
 	public static void refreshCalendar(Context context) {
 		TextView title = (TextView) ((Activity) context)
 				.findViewById(R.id.title);
@@ -63,6 +90,9 @@ public class CalendarViewFragment extends SuperFragment {
 		title.setText(android.text.format.DateFormat.format("MMMM yyyy", month));
 	}
 
+	/**
+	 * Class to update the calendar dynamically
+	 */
 	public static Runnable calendarUpdater = new Runnable() {
 
 		@Override

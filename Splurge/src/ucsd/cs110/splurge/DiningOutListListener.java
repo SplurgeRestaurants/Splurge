@@ -22,8 +22,13 @@ public class DiningOutListListener extends SuperListener implements
 	 * Chosen dining out option (Delivery or Take Out)
 	 */
 	public final static String DINING_OUT_TYPE = "dining out";
+	/**
+	 * String to send the intent of the list of food items
+	 */
 	public static final String OUTPUT_STRING = "out string";
-
+	/**
+	 * DiningOutFragment to get the selected food items
+	 */
 	private DiningOutFragment mListeningTo;
 
 	/**
@@ -50,6 +55,12 @@ public class DiningOutListListener extends SuperListener implements
 		mWrapper.changeFragment(new FoodItemFragment(), null);
 	}
 
+	/**
+	 * Set the DiningOutFragment
+	 * 
+	 * @param listened
+	 *            Fragment to be set
+	 */
 	public void setListened(DiningOutFragment listened) {
 		mListeningTo = listened;
 	}
@@ -114,6 +125,13 @@ public class DiningOutListListener extends SuperListener implements
 		}
 	}
 
+	/**
+	 * Convert food items to an array of strings
+	 * 
+	 * @param items
+	 *            Items to be converted
+	 * @return The array of converted strings
+	 */
 	private String interpretSelection(ArrayList<FoodItem> items) {
 		String ret = "";
 		for (FoodItem item : items) {

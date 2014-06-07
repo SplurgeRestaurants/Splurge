@@ -13,18 +13,44 @@ import android.view.ViewGroup;
 import android.widget.NumberPicker;
 
 public class ReservationFragment extends SuperFragment {
-
+	/**
+	 * Reference to the minute spinner
+	 */
 	private NumberPicker mMinuteSpinner;
+	/**
+	 * Reference to the hour spinner
+	 */
 	private NumberPicker mHourSpinner;
+	/**
+	 * Reference to the am/pm spinner
+	 */
 	private NumberPicker mAmPmSpinner;
+	/**
+	 * Reference to the party size spinner
+	 */
 	private NumberPicker mPartySize;
+	/**
+	 * The max party size
+	 */
 	private final int MAX_PARTY_SIZE = 10;
-	static final String[] mAmPmString = { "AM", "PM" };
-	static String[] mHours = { "1", "2", "3", "4", "5", "6", "7", "8", "9",
-			"10", "11", "12" };
-	static final String[] mMinutes = { "00", "15", "30", "45" };
-	static final String[] mPSize = { "1", "2", "3", "4", "5", "6", "7", "8",
-			"9", "10" };
+	/**
+	 * The strings AM and PM
+	 */
+	public static final String[] mAmPmString = { "AM", "PM" };
+	/**
+	 * default hours
+	 */
+	public static String[] mHours = { "1", "2", "3", "4", "5", "6", "7", "8",
+			"9", "10", "11", "12" };
+	/**
+	 * default minutes
+	 */
+	public static final String[] mMinutes = { "00", "15", "30", "45" };
+	/**
+	 * default party sizes
+	 */
+	public static final String[] mPSize = { "1", "2", "3", "4", "5", "6", "7",
+			"8", "9", "10" };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +82,13 @@ public class ReservationFragment extends SuperFragment {
 		return ret;
 	}
 
+	/**
+	 * convert 24 hours format to 12 hours format
+	 * 
+	 * @param hours
+	 *            Hours to be converted
+	 * @return Converted hours
+	 */
 	private String[] convertHours(String[] hours) {
 		for (int i = 0; i < hours.length; i++) {
 			if (Integer.parseInt(hours[i]) > 12) {

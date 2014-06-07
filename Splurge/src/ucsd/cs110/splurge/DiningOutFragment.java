@@ -66,6 +66,11 @@ public class DiningOutFragment extends SuperFragment {
 		DiningOutFragment.mSelectedFood = selected;
 	}
 
+	/**
+	 * Get the array of selected food items
+	 * 
+	 * @return Array of selected food items
+	 */
 	public ArrayList<FoodItem> getSelectedFood() {
 		return mSelectedFood;
 	}
@@ -84,12 +89,25 @@ public class DiningOutFragment extends SuperFragment {
 		}
 	}
 
+	/**
+	 * Update the total cost of the food items when more items are being added
+	 */
 	private void updateCost() {
 		double totalCost = 0;
 		for (FoodItem item : getSelectedFood()) {
 			totalCost += item.getPrice();
 		}
 		setTotal(String.format("Total: $%.2f", totalCost));
+	}
+
+	/**
+	 * Set the total price
+	 * 
+	 * @param total
+	 *            Price to be set
+	 */
+	public void setTotal(String total) {
+		((TextView) (getView().findViewById(R.id.price_sum))).setText(total);
 	}
 
 	/**
@@ -126,9 +144,5 @@ public class DiningOutFragment extends SuperFragment {
 		((DiningOutListListener) mSuperListener).setListened(this);
 		updateCost();
 		super.onStart();
-	}
-
-	public void setTotal(String total) {
-		((TextView) (getView().findViewById(R.id.price_sum))).setText(total);
 	}
 }

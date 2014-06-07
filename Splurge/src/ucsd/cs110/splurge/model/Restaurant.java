@@ -41,12 +41,22 @@ public class Restaurant {
 	 * Identification number of the restaurant.
 	 */
 	private int mId;
-
+	/**
+	 * Point refering to the location of the restaurant
+	 */
 	private PointF location;
+	/**
+	 * Phone number of the restaurant
+	 */
 	private String mPhoneNumber;
+	/**
+	 * Street address of the restaurant
+	 */
 	private String mStreetAddress;
+	/**
+	 * Zipcode of the restaurant
+	 */
 	private String mZipcode;
-	private int numberOfReservationsPerHour = 4;
 
 	/**
 	 * Creates a new restaurant with nothing but a name.
@@ -208,6 +218,14 @@ public class Restaurant {
 		}
 	}
 
+	/**
+	 * Set the open hours for each day of the week
+	 * 
+	 * @param day
+	 *            the specified day
+	 * @param ts
+	 *            The open hours
+	 */
 	public void setHoursForDay(int day, Timeslot ts) {
 		switch (day) {
 		case Calendar.SUNDAY:
@@ -345,22 +363,51 @@ public class Restaurant {
 		return mPhoneNumber;
 	}
 
+	/**
+	 * Get the Street address of the restaurant
+	 * 
+	 * @return Street Address
+	 */
 	public String getStreetAddress() {
 		return mStreetAddress;
 	}
 
+	/**
+	 * Set the street address of the restaurant
+	 * 
+	 * @param mStreetAddress
+	 *            Address to be set
+	 */
 	public void setStreetAddress(String mStreetAddress) {
 		this.mStreetAddress = mStreetAddress;
 	}
 
+	/**
+	 * Get the zipcode of the restaurant
+	 * 
+	 * @return Zipcode
+	 */
 	public String getZipcode() {
 		return mZipcode;
 	}
 
+	/**
+	 * Set the zipcode of the restaurant
+	 * 
+	 * @param mZipcode
+	 *            Zipcode to be set
+	 */
 	public void setZipcode(String mZipcode) {
 		this.mZipcode = mZipcode;
 	}
 
+	/**
+	 * Get the unavailable days for reservations
+	 * 
+	 * @param month
+	 *            The current month
+	 * @return Array of strings representing the full days
+	 */
 	public ArrayList<String> getUnavailableDays(Calendar month) {
 		int day, currMonth;
 		ArrayList<String> unavailableDays = new ArrayList<String>();
@@ -379,6 +426,13 @@ public class Restaurant {
 		return unavailableDays;
 	}
 
+	/**
+	 * Check if all the times in the day are taken
+	 * 
+	 * @param time
+	 *            Calendar to get the day chosen
+	 * @return Whenever the day is full or not
+	 */
 	public boolean isDayFull(Calendar time) {
 		int currDay = time.get(Calendar.DAY_OF_YEAR);
 		ArrayList<Timeslot> sameDay = new ArrayList<Timeslot>();
@@ -400,6 +454,13 @@ public class Restaurant {
 		return false;
 	}
 
+	/**
+	 * Get the available hours
+	 * 
+	 * @param time
+	 *            Calendar to get the day
+	 * @return String of available hours
+	 */
 	public String[] getAvailableHours(Calendar time) {
 		int startHour = getHoursForDay(time.get(Calendar.DAY_OF_WEEK))
 				.getStartTime().get(Calendar.HOUR_OF_DAY);

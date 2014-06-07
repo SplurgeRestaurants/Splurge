@@ -12,16 +12,39 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CalendarAdapter extends BaseAdapter {
-	static final int FIRST_DAY_OF_WEEK = 0; // Sunday = 0, Monday = 1
-
+	/**
+	 * Reference to the first day of the week, starting Sunday
+	 */
+	private static final int FIRST_DAY_OF_WEEK = 0;
+	/**
+	 * Reference to the current context in the application
+	 */
 	private Context mContext;
-
+	/**
+	 * Current Calendar date
+	 */
 	private java.util.Calendar month;
+	/**
+	 * Selected Calendar date
+	 */
 	private Calendar selectedDate;
+	/**
+	 * Reference to the calendar items
+	 */
 	private ArrayList<String> items;
-	// references to our items
+	/**
+	 * Array of days
+	 */
 	public String[] days;
 
+	/**
+	 * Constructor to populate the calendar grid view
+	 * 
+	 * @param c
+	 *            The current context
+	 * @param monthCalendar
+	 *            The selected calendar
+	 */
 	public CalendarAdapter(Context c, Calendar monthCalendar) {
 		month = monthCalendar;
 		selectedDate = (Calendar) monthCalendar.clone();
@@ -31,6 +54,12 @@ public class CalendarAdapter extends BaseAdapter {
 		refreshDays();
 	}
 
+	/**
+	 * Set the items for the calendar grid view
+	 * 
+	 * @param items
+	 *            Items that will be set
+	 */
 	public void setItems(ArrayList<String> items) {
 		for (int i = 0; i != items.size(); i++) {
 			if (items.get(i).length() == 1) {
@@ -40,22 +69,9 @@ public class CalendarAdapter extends BaseAdapter {
 		this.items = items;
 	}
 
-	@Override
-	public int getCount() {
-		return days.length;
-	}
-
-	@Override
-	public Object getItem(int position) {
-		return null;
-	}
-
-	@Override
-	public long getItemId(int position) {
-		return 0;
-	}
-
-	// create a new view for each item referenced by the Adapter
+	/**
+	 * create a new view for each item referenced by the Adapter
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View v = convertView;
@@ -106,6 +122,9 @@ public class CalendarAdapter extends BaseAdapter {
 		return v;
 	}
 
+	/**
+	 * Refresh the calendar
+	 */
 	public void refreshDays() {
 		// clear items
 		items.clear();
@@ -140,5 +159,20 @@ public class CalendarAdapter extends BaseAdapter {
 			days[i] = "" + dayNumber;
 			dayNumber++;
 		}
+	}
+
+	@Override
+	public int getCount() {
+		return 0;
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return null;
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return 0;
 	}
 }

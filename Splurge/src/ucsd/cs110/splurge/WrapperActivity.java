@@ -18,7 +18,9 @@ public class WrapperActivity extends Activity {
 	 * The model. Contains business logic and data as per Model-View-Controller.
 	 */
 	private RestaurantModel mModel;
-	static boolean hideMenu = false;
+	/**
+	 * Reference to the current fragment
+	 */
 	private SuperFragment mCurrentFragment;
 
 	@Override
@@ -85,7 +87,6 @@ public class WrapperActivity extends Activity {
 	 *            undefined behavior otherwise.
 	 */
 	public void changeFragment(SuperFragment f, SuperListener l) {
-		hideMenu = false;
 		f.setSuperListener(l);
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.replace(R.id.container, f);
@@ -102,6 +103,12 @@ public class WrapperActivity extends Activity {
 		return mModel;
 	}
 
+	/**
+	 * Register the current fragment
+	 * 
+	 * @param m
+	 *            Fragment to be set
+	 */
 	public void registerFragment(SuperFragment m) {
 		mCurrentFragment = m;
 	}
