@@ -90,6 +90,8 @@ public class ReservationFragmentListener extends SuperListener implements
 						mWrapper,
 						String.format("Reservation Successful. Your id is %d.",
 								result), Toast.LENGTH_LONG).show();
+				mWrapper.getFragmentManager().popBackStack();
+				mWrapper.getFragmentManager().popBackStack();
 				mWrapper.changeFragment(new RestaurantMainMenuFragment(),
 						new RestaurantMainMenuListener(mWrapper));
 			} else if (result == -1) {

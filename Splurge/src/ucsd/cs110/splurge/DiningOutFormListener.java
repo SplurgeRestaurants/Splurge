@@ -57,6 +57,9 @@ public class DiningOutFormListener extends SuperListener implements
 			if (response >= 0) {
 				Toast.makeText(mWrapper, "Order Successful!", Toast.LENGTH_LONG)
 						.show();
+				mWrapper.getFragmentManager().popBackStack();
+				mWrapper.getFragmentManager().popBackStack();
+				mWrapper.getFragmentManager().popBackStack();
 				mWrapper.changeFragment(new RestaurantMainMenuFragment(),
 						new RestaurantMainMenuListener(mWrapper));
 			} else if (response == -1) {
