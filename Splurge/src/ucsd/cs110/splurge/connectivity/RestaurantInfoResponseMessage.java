@@ -30,6 +30,7 @@ public class RestaurantInfoResponseMessage {
 	private static final String RESTAURANT_ADDRESS = "restaurantLocation";
 	private static final String RESTAURANT_MENUS = "restaurantMenu";
 	private static final String RESTAURANT_HOURS = "restaurantHours";
+	private static final String RESTAURANT_PHONE = "restaurantPhone";
 	private static final String RESTAURANT_AVAILABILITY = "reservableDays";
 	private static final String AVAILABILITY_START = "start";
 	private static final String AVAILABILITY_END = "end";
@@ -159,6 +160,10 @@ public class RestaurantInfoResponseMessage {
 					encaps.setHoursForDay(day + 1, new Timeslot(startTime,
 							endTime));
 				}
+			}
+
+			if (inputJSON.has(RESTAURANT_PHONE)) {
+				encaps.setPhoneNumber(inputJSON.getString(RESTAURANT_PHONE));
 			}
 
 			return new RestaurantInfoResponseMessage(encaps);
