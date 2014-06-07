@@ -60,6 +60,7 @@ public class RestaurantListFragment extends SuperFragment implements
 	public void onStart() {
 		setListListener((OnItemClickListener) mSuperListener);
 		WrapperActivity.hideMenu = true;
+		getActivity().setTitle(R.string.app_name);
 		super.onStart();
 	}
 
