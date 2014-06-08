@@ -66,6 +66,8 @@ public class DiningOutFormListener extends SuperListener implements
 				mWrapper.getFragmentManager().popBackStack();
 				mWrapper.getFragmentManager().popBackStack();
 				mWrapper.getFragmentManager().popBackStack();
+				DiningOutFragment frag = new DiningOutFragment();
+				frag.getSelectedFood().clear();
 				mWrapper.changeFragment(new RestaurantMainMenuFragment(),
 						new RestaurantMainMenuListener(mWrapper));
 			} else if (response == -1) {
