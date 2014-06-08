@@ -59,7 +59,7 @@ public class RestaurantListing implements Comparable<RestaurantListing> {
 	 */
 	public RestaurantListing(String name, int id, String base64, Context awful) {
 		this(name, id, BitmapFactory.decodeResource(awful.getResources(),
-				R.drawable.mainlogo6));
+				R.drawable.restaurant));
 		byte[] a = Base64.decode(base64, Base64.DEFAULT);
 		if (a.length > 0)
 			setRestaurantImage(BitmapFactory.decodeByteArray(a, 0, a.length));
