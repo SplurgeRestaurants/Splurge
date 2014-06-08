@@ -103,6 +103,9 @@ public class ReservationFragmentListener extends SuperListener implements
 						Toast.LENGTH_LONG).show();
 			} else if (result == -2) {
 				Log.i("Splurge", "Reservation information available later.");
+			} else if (result == -3) {
+				Toast.makeText(mWrapper, R.string.restaurant_closed,
+						Toast.LENGTH_SHORT).show();
 			}
 			break;
 		default:

@@ -98,7 +98,7 @@ public class Restaurant {
 	 * @return <code>true</code> if the time is within reserved space.
 	 * @see isTimeUnavailalble(Calendar)
 	 */
-	private boolean isTimeWithinReservation(Calendar time) {
+	public boolean isTimeWithinReservation(Calendar time) {
 		for (Timeslot t : mUnavailableTimes) {
 			if (t.withinTimeslot(time))
 				return true;
@@ -106,7 +106,7 @@ public class Restaurant {
 		return false;
 	}
 
-	private boolean isTimeDuringClosedHours(Calendar time) {
+	public boolean isTimeDuringClosedHours(Calendar time) {
 		return !getHoursForDay(time.get(Calendar.DAY_OF_WEEK)).containsByHour(
 				time);
 	}

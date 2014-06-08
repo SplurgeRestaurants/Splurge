@@ -173,12 +173,14 @@ public class RestaurantModel implements RestaurantListRequestListener,
 	 *            received. Note that the listener will only be notified if -2
 	 *            is returned from this method.
 	 * @return The identification number for the acquired reservation, -1 if no
-	 *         reservation was available, or -2 if the response has yet to
-	 *         arrive.
+	 *         reservation was available, -2 if the response has yet to arrive,
+	 *         or -3 if the restaurant is closed during this time.
 	 */
 	public int requestReservation(int partySize, String partyName,
 			Calendar startTime, ReservationRequestListener listener) {
-		if (mCurrentRestaurant.isTimeUnavailable(startTime))
+		if (getRestaurant().isTimeDuringClosedHours(startTime))
+			return -3;
+		if (mCurrentRestaurant.isTimeWithinReservation(startTime))
 			return -1;
 		ReservationRequestAsyncTask rrat = new ReservationRequestAsyncTask(this);
 		rrat.execute(mConnectionHandler, getRestaurant().getId(), partySize,
