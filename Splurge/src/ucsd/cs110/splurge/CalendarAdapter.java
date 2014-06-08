@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CalendarAdapter extends BaseAdapter {
-	static final int FIRST_DAY_OF_WEEK = 0; // Sunday = 0, Monday = 1
+	static final int FIRST_DAY_OF_WEEK = 0; //Sunday = 0, Monday = 1
 
 	private Context mContext;
 
