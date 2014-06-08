@@ -106,7 +106,8 @@ public class InformationFragment extends SuperFragment {
 	 * @return String of the restaurant's address
 	 */
 	private String getRestaurantAddress() {
-		return getWrapperActivity().getModel().getRestaurantStreetAddress();
+		return getWrapperActivity().getModel().getRestaurantStreetAddress()
+				+ " " + getWrapperActivity().getModel().getRestaurantZipcode();
 	}
 
 	/**
