@@ -471,7 +471,7 @@ public class Restaurant {
 			Calendar c = Calendar.getInstance();
 			c.setTime(time.getTime());
 			c.set(Calendar.SECOND, 0);
-			c.set(Calendar.HOUR, i);
+			c.set(Calendar.HOUR_OF_DAY, i);
 			boolean addable = false;
 			for (int n : new int[] { 0, 15, 30, 45 }) {
 				c.set(Calendar.MINUTE, n);
