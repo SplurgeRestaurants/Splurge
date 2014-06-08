@@ -138,14 +138,17 @@ public class ReservationFragment extends SuperFragment implements
 
 	@Override
 	public void onGlobalLayout() {
-		TextView partyText = (TextView) getView().findViewById(
-				R.id.party_size_text);
-		partyText.setY(mPartySize.getY() + mPartySize.getHeight() / 2
-				- partyText.getHeight() / 2);
-		TextView timeText = (TextView) getView().findViewById(R.id.time_text);
-		LinearLayout lay = (LinearLayout) getView().findViewById(
-				R.id.time_picker);
-		timeText.setY(lay.getY() + lay.getHeight() / 2 - timeText.getHeight()
-				/ 2);
+		if (getView() != null) {
+			TextView partyText = (TextView) getView().findViewById(
+					R.id.party_size_text);
+			partyText.setY(mPartySize.getY() + mPartySize.getHeight() / 2
+					- partyText.getHeight() / 2);
+			TextView timeText = (TextView) getView().findViewById(
+					R.id.time_text);
+			LinearLayout lay = (LinearLayout) getView().findViewById(
+					R.id.time_picker);
+			timeText.setY(lay.getY() + lay.getHeight() / 2
+					- timeText.getHeight() / 2);
+		}
 	}
 }
