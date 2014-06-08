@@ -59,6 +59,12 @@ public class RestaurantListFragment extends SuperFragment implements
 	@Override
 	public void onStart() {
 		setListListener((OnItemClickListener) mSuperListener);
+		DiningOutFragment frag = new DiningOutFragment();
+		try {
+			frag.getSelectedFood().clear();
+		} catch (Exception e) {
+
+		}
 		super.onStart();
 	}
 

@@ -47,12 +47,6 @@ public class RestaurantMainMenuFragment extends SuperFragment {
 	public void onStart() {
 		setMainMenuListener((OnClickListener) mSuperListener);
 		backCount = 0;
-		DiningOutFragment frag = new DiningOutFragment();
-		try {
-			frag.getSelectedFood().clear();
-		} catch (Exception e) {
-
-		}
 		super.onStart();
 	}
 }
