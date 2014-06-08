@@ -117,8 +117,14 @@ public class RestaurantInfoResponseMessage {
 						FoodItem food = new FoodItem(
 								foodJSON.getString(MENU_ITEM_NAME));
 						food.setDescription(foodJSON.getString(MENU_ITEM_DESC));
-						Bitmap defaultImage = BitmapFactory.decodeResource(
-								awful.getResources(), R.drawable.mainlogo6);
+						Bitmap defaultImage = null;
+						if (buildMenu.getMenuName().equals("Beverage")) {
+							defaultImage = BitmapFactory.decodeResource(
+									awful.getResources(), R.drawable.beverage);
+						} else {
+							defaultImage = BitmapFactory.decodeResource(
+									awful.getResources(), R.drawable.food_item);
+						}
 						if (foodJSON.has(MENU_ITEM_IMAGE)
 								&& foodJSON.getString(MENU_ITEM_IMAGE).length() > 0) {
 							byte[] decodedImage = Base64.decode(
