@@ -10,9 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 
-public class ReservationFragment extends SuperFragment {
+public class ReservationFragment extends SuperFragment implements
+		OnGlobalLayoutListener {
 	/**
 	 * Reference to the minute spinner
 	 */
@@ -79,6 +83,7 @@ public class ReservationFragment extends SuperFragment {
 		mPartySize.setMaxValue(MAX_PARTY_SIZE - 1);
 		mPartySize.setDisplayedValues(mPSize);
 		mPartySize.setOnLongPressUpdateInterval(100);
+		ret.getViewTreeObserver().addOnGlobalLayoutListener(this);
 		return ret;
 	}
 
@@ -129,5 +134,18 @@ public class ReservationFragment extends SuperFragment {
 	public void onStart() {
 		setReservationListener((OnClickListener) mSuperListener);
 		super.onStart();
+	}
+
+	@Override
+	public void onGlobalLayout() {
+		TextView partyText = (TextView) getView().findViewById(
+				R.id.party_size_text);
+		partyText.setY(mPartySize.getY() + mPartySize.getHeight() / 2
+				- partyText.getHeight() / 2);
+		TextView timeText = (TextView) getView().findViewById(R.id.time_text);
+		LinearLayout lay = (LinearLayout) getView().findViewById(
+				R.id.time_picker);
+		timeText.setY(lay.getY() + lay.getHeight() / 2 - timeText.getHeight()
+				/ 2);
 	}
 }

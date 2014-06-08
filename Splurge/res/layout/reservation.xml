@@ -1,127 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background_main"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:paddingBottom="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp" >
+
+    <TextView
+        android:id="@+id/party_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/form_party_name"
+        android:layout_alignParentLeft="true"
+        android:text="@string/party_name"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/form_party_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/party_name"
+        android:layout_weight="1"
+        android:ems="10"
+        android:singleLine="true" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/party_size_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/party_size"
+        android:textSize="20sp" />
+
+    <NumberPicker
+        android:id="@+id/party_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/form_party_name"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:id="@+id/time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/time_picker"
+        android:layout_alignParentLeft="true"
+        android:text="Time:"
+        android:textSize="20sp" />
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_margin="5dp"
-        android:layout_weight="7"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:padding="30dp"
-        android:paddingBottom="10dp" >
+        android:id="@+id/time_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/party_size"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <NumberPicker
+            android:id="@+id/hour"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp" >
-
-            <TextView
-                android:id="@+id/party_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/party_name"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/form_party_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:singleLine="true"
-                android:ems="10" >
-
-                <requestFocus />
-            </EditText>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="30dp"
-                android:text="@string/party_size"
-                android:textSize="20sp" />
-
-            <NumberPicker
-                android:id="@+id/party_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
         <TextView
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text=":"
+            android:textColor="@color/blue"
+            android:textSize="25dp" />
+
+        <NumberPicker
+            android:id="@+id/minute"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time:"
-            android:layout_marginBottom="5dp"
-            android:textSize="20sp" />
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="right" />
 
-        <LinearLayout
-            android:id="@+id/time_picker"
-            android:layout_width="fill_parent"
+        <NumberPicker
+            android:id="@+id/amPm"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal" >
-
-            <NumberPicker
-                android:id="@+id/hour"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="true"
-                android:focusableInTouchMode="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text=":"
-                android:textColor="@color/blue"
-                android:textSize="25dp" />
-
-            <NumberPicker
-                android:id="@+id/minute"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="right" />
-
-            <NumberPicker
-                android:id="@+id/amPm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true" />
-        </LinearLayout>
-
+            android:layout_marginLeft="5dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/openButton"
         android:text="@string/notes" />
 
     <Button
-        android:id="@+id/openButton"
-        android:layout_width="150dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="1"
+        android:id="@id/openButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/button_regular"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="@string/open"
         android:textColor="@color/white" />
 
-</LinearLayout>
+</RelativeLayout>
