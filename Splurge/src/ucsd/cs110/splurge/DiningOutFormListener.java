@@ -6,6 +6,7 @@ import ucsd.cs110.splurge.connectivity.tasks.DineOutRequestListener;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -42,6 +43,14 @@ public class DiningOutFormListener extends SuperListener implements
 			case "Delivery":
 				kind = "d";
 				addy = mListenedTo.getFilledAddress();
+				TextView address = (TextView) mWrapper
+						.findViewById(R.id.form_street_address);
+				if (addy.length() < 1
+						|| address.getText().toString().length() < 1) {
+					Toast.makeText(mWrapper, "Missing Fields",
+							Toast.LENGTH_SHORT).show();
+					return;
+				}
 				break;
 			case "Take Out":
 				kind = "co";
@@ -50,7 +59,7 @@ public class DiningOutFormListener extends SuperListener implements
 				kind = "error";
 				break;
 			}
-			if (addy.length() < 1 || mListenedTo.getFilledName().length() < 1
+			if (mListenedTo.getFilledName().length() < 1
 					|| mListenedTo.getFilledPhoneNumber().length() < 1) {
 				Toast.makeText(mWrapper, "Missing Fields", Toast.LENGTH_SHORT)
 						.show();
