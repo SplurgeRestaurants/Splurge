@@ -19,13 +19,14 @@
             android:id="@+id/status"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Now: Open"
+            android:text="Currently: Open"
             android:textSize="20sp" />
         
         <TextView 
             android:id="@+id/hours"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:textSize="20sp"/>
 
         <TextView
@@ -33,6 +34,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:layout_marginTop="5dp"
             android:textSize="20sp" />
 
         <TextView
@@ -40,6 +42,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:layout_marginTop="5dp"
             android:textSize="20sp" />
     </LinearLayout>
 

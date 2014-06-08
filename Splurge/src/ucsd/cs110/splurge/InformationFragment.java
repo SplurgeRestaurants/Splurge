@@ -43,8 +43,8 @@ public class InformationFragment extends SuperFragment {
 		hours = (TextView) ret.findViewById(R.id.hours);
 		hours.setText(getHours());
 		status.setText(getRestaurantStatus());
-		address.setText(getRestaurantAddress());
-		phoneNumber.setText(getPhoneNumber());
+		address.setText("Address: " + getRestaurantAddress());
+		phoneNumber.setText("Phone: " + getPhoneNumber());
 		return ret;
 	}
 
@@ -94,9 +94,9 @@ public class InformationFragment extends SuperFragment {
 		int startTime = openHours.getStartTime().get(Calendar.HOUR_OF_DAY);
 		int currHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 		if (currHour > startTime && currHour < endTime) {
-			return "Now: Open";
+			return "Currently: Open";
 		} else {
-			return "Now: Closed";
+			return "Currently: Closed";
 		}
 	}
 
