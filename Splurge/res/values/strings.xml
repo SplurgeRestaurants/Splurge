@@ -32,6 +32,7 @@
     <string name="waiters">Waiters</string>
     <string name="title_activity_delivery_form_fragment">DeliveryFormFragment</string>
     <string name="hello_world">Hello world!</string>
+    <string name="reservations_full">We are sorry, but all reservations for that time are taken.</string>
     <string name="restaurant_closed">We are sorry, but the restaurant is closed at that time.</string>
     <string name="person_name">Name</string>
     <string name="person_email">Email</string>

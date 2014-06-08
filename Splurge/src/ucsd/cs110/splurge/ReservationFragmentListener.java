@@ -103,8 +103,7 @@ public class ReservationFragmentListener extends SuperListener implements
 				mWrapper.changeFragment(new RestaurantMainMenuFragment(),
 						new RestaurantMainMenuListener(mWrapper));
 			} else if (result == -1) {
-				Toast.makeText(mWrapper,
-						"Reservation Unsuccessful, pick another time",
+				Toast.makeText(mWrapper, R.string.reservations_full,
 						Toast.LENGTH_LONG).show();
 			} else if (result == -2) {
 				Log.i("Splurge", "Reservation information available later.");
@@ -129,8 +128,7 @@ public class ReservationFragmentListener extends SuperListener implements
 					new RestaurantMainMenuListener(mWrapper));
 		}
 		if (id == -1) {
-			Toast.makeText(mWrapper,
-					"Reservation Unsuccessful, pick another time",
+			Toast.makeText(mWrapper, R.string.reservations_full,
 					Toast.LENGTH_LONG).show();
 		}
 	}
