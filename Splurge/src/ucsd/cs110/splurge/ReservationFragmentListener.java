@@ -55,10 +55,15 @@ public class ReservationFragmentListener extends SuperListener implements
 			if (selectedAmPm.compareTo("AM") == 0) {
 				selectedHour = Integer
 						.parseInt(ReservationFragment.mHours[hours.getValue()]);
+				if (selectedHour == 12) {
+					selectedHour = 0;
+				}
 			} else {
 				selectedHour = Integer
 						.parseInt(ReservationFragment.mHours[hours.getValue()]);
-				selectedHour += 12;
+				if (selectedHour != 12) {
+					selectedHour += 12;
+				}
 			}
 			int selectedMinute = Integer
 					.parseInt(ReservationFragment.mMinutes[minutes.getValue()]);
